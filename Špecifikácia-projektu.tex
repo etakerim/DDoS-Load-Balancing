@@ -1,0 +1,164 @@
+\documentclass[11pt, a4paper]{article}
+
+\usepackage[slovak,english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{csquotes}
+
+\usepackage[style=iso-numeric,backend=biber]{biblatex}
+\addbibresource{references.bib}
+\AtBeginBibliography{\small}
+
+\geometry{
+	a4paper,
+	margin=2.5cm,
+	top=2cm,
+	bottom=2cm
+}
+
+\begin{document}
+\begin{titlepage}
+    \hspace{0pt}
+    \centering
+    \vfill
+    \large Princípy informačnej bezpečnosti \\
+    \vspace{0.4cm}
+    \Large Špecifikácia projektu \\
+    \vspace{1cm}
+    \Large \textbf{Zvýšenie odolnosti webových aplikácií proti útokom typu DDoS, 
+          \\za pomoci horizontálneho škálovania  \\}
+    \vspace{2.5cm}
+    \normalsize Miroslav Hájek \\[0.2cm]
+	Akademický rok: 2020 / 2021 \\[0.1cm]
+	Fakulta informatiky a informačných technológií, \\
+	Slovenská technická univerzita v Bratislave
+    \vfill
+\end{titlepage}
+
+%\pagenumbering{gobble}
+%\tableofcontents
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\section*{Vymedzenie predmetnej domény}
+
+\subsubsection*{Útoky odmietnutia služby}
+Pozornosť projektu bude sústredená hlavne na aspekt dostupnosti ako jeden z kľúčových prvkov 
+informačnej bezpečnosti. Pozrieme sa na hrozbu útokov typu odmietnutia služby (Denial of Service) zadelených 
+podľa vektorov útoku. Určite neprehliadneme ani ich distribuovanú realizáciu prostredníctvom 
+botnetov, nakoľko oplývajú potenciálne významnou ničivou silou v kybernetickom priestore. Preskúmame 
+stratégie predchádzania voči vyskytujúcim sa rizikám príkladmi vhodnej konfigurácie infraštruktúry. Následne 
+objasníme spôsoby odhalenia útokov monitorovaním kľúčových metrík cez Zabbix a dekompozíciou záznamov z 
+logov. 
+
+\subsubsection*{Ochrana a redundancia aplikačných serverov}
+Popísaná prevencia bude spočívať v predstavení odlišných techník obrany proti škodlivo nadmernej sieťovej 
+premávke na rôznych vrstvách sieťového modelu RM OSI. Pre úplnosť letmo spomenieme tiež ochranu aktívnymi 
+sieťovými prvkami. Prioritne sa však budeme venovať vyvažovaniu záťaže (Load balancing) medzi viaceré redundantné servery s horizontálne škálovanou webovou aplikáciou spojeného s využitím rate limiting. Pričom cieľom bude dosiahnuť vyššiu spoľahlivosť a odolnosť proti výpadkom (Failover). 
+
+Na aplikačnej vrstve porovnáme starší prístup vyvažovania záťaže cez DNS záznamy a súčasné obľúbené 
+open-source softvérové riešenia reverznej proxy a load balancera: HAProxy a NGINX. Pri simultánnej prevádzke 
+viacerých inštancií aplikácie vzniká problém so zachovaním perzistentných relácií (s cookies). V náväznosti na to, popíšeme rozdiely medzi dostupnými algoritmami vyvažovania záťaže a v situáciach s bezstavovým a stavovým spojením.
+
+\subsubsection*{Riadenie prístupu na stroje za reverznou proxy}
+Okrem pohľadu na nasadenú webovú aplikáciou predstavujúcu dopytovanú službu ako celok je nutné
+brať na zreteľ ochranu jednotlivých serverov, ktoré využívame na zabezpečenie kontinuálnej dostupnosti.
+Pozrieme sa na riadenie administrátorského prístupu cez ACL podporeného voľbou 
+silných hesiel a znemožnením ich skúšania útočníkom alebo zavedením TLS. Zároveň je potrebné poohliadať
+sa na nebezpečie plynúce z prílišnej transparentnosti ohľadom používaných systémov, ktoré môžu vynášať hlavičky protokolu HTTP a uľahčiť tým nájdenie zraniteľností hackerom.
+
+\section*{Tématické rozčlenenie problematiky}
+Zo zamerania vyplývajú nasledujúce tématické sekcie, s ktorými je asociovaná príslušná nosná terminológia, techniky, nástroje, perspektívne na prejednanie v projekte:
+
+\subsubsection*{1. Dostupnosť ako bezpečnostný atribút}
+Význam elementu dostupnosti informácií ako piliera 
+informačnej bezpečnosti (CIA triáda). Motivácia a príležitosti na kybernetický útok DDoS z kriminalistického hľadiska. Objasnenie výberu často vytipovaných obetí. Zdroje: \cite{availability}, \cite{why-attack}.
+
+\subsubsection*{2. Anatómia útokov Denial of Service}
+Najčastejšie cielené vektory útoku pre hrozbu odmietnutia 
+služby: zahltenie linky, zaplnenie stavových tabuliek, vyčerpanie výpočtových zdrojov. Formy realizácie 
+najmä v podobe botnetov ovládaných cez C\&C. Taxonómia DDoS útokov rozlíšených do troch hlavných 
+kategórii s analýzou konkrétnych zraniteľností: veľkoobjemové (volumetrické) útoky s 
+podskupinou amplifikačných reflexívnych útokov, protokolové a aplikačné útoky. Početnosť výskytov takýchto 
+hrozieb v nedávnom období a rola aktívnych sieťových zariadení v usmernení nadmernej premávky: black hole filtering, IP black lists, NAT s ACL. Zdroje: \cite{ddos-anatomy-2004}, 
+\cite{botnets}, \cite{radware-ddos}, \cite{enisa-ddos}, \cite{ddos-attacks}, \cite{csirt-ddos}.
+
+\subsubsection*{3. Škálovanie webových aplikácií}
+Princíp a dopad horizontálneho a vertikálneho škálovania 
+aplikácie dostupnej cez počítačovú sieť. Pri vertikálnom škálovaní si budeme všímať výsledky navýšenia
+počtu procesov alebo vlákien u Dispatcher-Worker modelu. Horizontálnym škálovaním vytvoríme
+symetrizáciou zátaže pomedzi viaceré inštancie. Podľa schopností vrstiev sieťového modelu rozlišujeme 
+agregáciu liniek (\emph{bonding, trunking}) na spojovej vrstve (L2), viaccestné smerovanie protokolom ECMP 
+(\emph{Equal-cost multi-path routing})  na sieťovej vrstve (L3) a reverznú proxy na nadviazanie spojení na 
+transportnej (L4 - protokol TCP) a aplikačnej vrstve (L7 - protokol HTTP). Doplníme 
+prístupom riešiacim load balancing DNS záznamami (nástroje: \emph{dnsmasq}, 
+\emph{bind9}). Zdroje: \cite{link-trunking}, \cite{RFC2991}, \cite{RFC2992}, \cite{server-load-balancing}, 
+\cite{load-balance-in-distributed-system}.
+
+\subsubsection*{4. Algoritmy vyvažovania záťaže}
+Požiadavky prichádzajúce na proxy server musia byť v 
+distribuovanom prostredí pridelené na práve jeden cieľový webový server, ktorý ich vybaví a vráti odpoveď.
+Podľa nárokov na výkon a správanie sa jednotlivých komponentov systému existujú viaceré stratégie výberu 
+destinácie. Rozlišujeme medzi technikami statického a dynamického vyvažovania záťaže. Medzi statické 
+algoritmy patria \emph{náhodné pridelenie}, \emph{round-robin}, \emph{najmenej pripojení} a ich vážené 
+varianty, \emph{konzistentné hašovanie} IP adresy zdroja alebo URI cieľa. Dynamické stratégie pridávajú 
+komplexnosť v tom, že uzol rozdeľujúci požiadavky musí pravidelne zbierať údaje o celkovom stave ním 
+spravovaných serverov. Majorita webstránok musí uchovávať stav v cookies a load balancer sa musí tomu podriadiť: riešením sú tzv. \emph{sticky sessions}. Zdroje: \cite{load-balance-algo}, 
+\cite{algorithm-performance}, \cite{sticky-session}.
+
+\subsubsection*{5. Softvérové nástroje na vyvažovanie záťaže}
+Porovnáme funkčné, výkonnostné a bezpečnostné 
+možnosti dvoch populárnych load balancerov HAProxy a NGINX. Predvedieme ukážky ich základnej konfigurácie
+a efekt rôznych algoritmov na vyvažovanie horizontálne škálovanej aplikácie, ktorá využíva webový server NGINX. Pôjde jednak o jednoduchú vlastnú webstránku galérie so statickým obsahom, ktorá bude
+v ďalšom porovnávaní rozšírená o dynamickú časť v jazyku PHP (cez FPM), s prihlasovaním na personalizovaný výber fotografií na titulnej stránke. Pri nastavovaní load balancerov proti najčastejším DDoS útokom sa tiež oprieme o odporúčania od tvorcov týchto nástrojov na prevenciu spoliehajúcu sa predovšetkým na limitovaní počtu aktívnych spojení alebo frekvencie požiadaviek na jedného klienta cez algoritmus \emph{leaky bucket} a podobne. Zdroje: \cite{nginx-http-balancer}, \cite{nginx-cookbook}, 
+\cite{haproxy-docs}, \cite{haproxy-ddos}, \cite{haproxy-ddos-L7}, \cite{haproxy-php-fpm}, 
+\cite{nginx-ddos-protection}, \cite{haproxy-rate-limiting}.
+
+\subsubsection*{6. Vysoká dostupnosť služieb}
+Nasadením load balancera síce dosiahneme redundanciu pre webový 
+server, ale vyrobili sme centrálny bod zlyhania, ktorý eliminujeme duplikáciou \emph{HAProxy} do klastra
+na dvoch strojoch v konfigurácii Active-Passive nástrojom \emph{Keepalived}. Dosiahne toho priradením jednej 
+virtuálnej IP adresy pre klaster a prepnutím na zálohu (Failover) po signalizovaní BFD (Bidirectional 
+Forwarding Detection) prostredníctvom protokolu VRRP (Virtual Router Redundancy Protocol). Zdroje: 
+\cite{keepalived-docs}.
+
+\subsubsection*{7. Ochrana webových serverov}
+Protokol HTTP dokáže v hlavičkách odpovedí (Forwarded, Server, 
+atď.) odkryť vlastnosti používaných systémov a dokonca adresy serverov skrytých za reverznou proxy. Tým 
+môže odhaliť útočníkovi priamy prístup na jednotlivé servery alebo koncové body, ak nie sú chránené napr. 
+ACL. Zabezpečenie spojenia s aplikáciou s TLS vložením X.509 certifikátov a proces prihlasovania do 
+systému cez HTTP(S). Zdroje: \cite{csirt-hardening}, \cite{csirt-web-checklist}, \cite{RFC2616}, 
+\cite{http-headers}
+
+\subsubsection*{8. Monitorovanie webovej aplikácie}
+Sledovanie stavu sieťovej premávky ako sú vyťaženosť linky, 
+nadviazané spojenia a ich časová distribúcia a tiež kontrolovanie utilizácie výpočtových zdrojov, ktoré 
+zabezpečujú dostupnosť služby. Reaktívna analýza útokov z loggov load balancera a webového servera v Common
+Logfile format. Automatizácia upozornení na prípadné hrozby v monitorovacom nástroji Zabbix integrovanom
+rozšíreniami s demonštrovanými load balancermi. Preskúmanie najdôležitejších metrík, z tých ktoré sú k 
+dispozícii a kontrola ich vývoja počas DoS. Zdroje: \cite{common-log}, \cite{haproxy-logging}, \cite{nginx-zabbix}, \cite{haproxy-zabbix}
+
+\subsubsection*{9. Simulácia útokov a záťažové testy}
+Výsledky záťažových testov vlastnej webovej aplikácie 
+spustenej v Docker kontajneroch cez \emph{docker compose}  a na fyzických zariadeniach Raspeberry Pi (2x Pi 3B, 1x Pi 2B). Účinky existujúcich nástrojov na stress testing: \emph{ab, t50, thc-ssl-dos, 
+SlowHTTPTest, High Orbit Ion Cannon}, ale aj vlastnými viacvláknovými skriptami na UDP flood, SYN flood, Slow Loris. Pokus o vydávanie sa za rôzne počítače technikou IP Spoofing. Vyhodnotenie dopadov pre rôzny počet bežiacich inštancií web servera, počet workerov a nastavenia load balancingu.
+
+\section*{Časový plán čiastkových cieľov}
+
+\begin{itemize}
+\item 4. týždeň: Pripravená testovacia architektúra pre load balancing a vysokú dostupnosť v Docker 
+kontaineroch a na Raspberry Pi, spolu so statickou web stránkou a rozpracovaným prihlasovaním.
+Sprevádzkovaný Zabbix s rozšíreniami pre HAProxy a NGINX.
+
+\item 8.týždeň: Zrealizované vybrané DoS útoky a záťažové testy zvolenými nástrojmi aj vlastnými skriptami a 
+kvantifikované výsledky. Na teoretickej úrovni rozobrané nosné témy práce, okrem sekcií: škálovanie webových 
+aplikácii, monitoring aplikácie a implementácia TLS a ACL pre web servery, dopad stavových spojení na load 
+balancing
+\end{itemize}
+
+%\nocite{*}
+\printbibliography[title={Zoznam relevantných zdrojov pre rešerš}]
+
+\end{document}
