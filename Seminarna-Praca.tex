@@ -1,0 +1,93 @@
+\documentclass[11pt, a4paper]{article}
+
+\usepackage[slovak]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{csquotes}
+
+\usepackage[style=iso-authoryear,backend=biber]{biblatex}
+\addbibresource{references.bib}
+\AtBeginBibliography{\small}
+
+\geometry{
+	a4paper,
+	margin=2.5cm,
+	top=2cm,
+	bottom=2cm
+}
+
+\begin{document}
+\begin{titlepage}
+    \hspace{0pt}
+    \centering
+    \vfill
+    \large Princípy informačnej bezpečnosti \\
+    \vspace{0.4cm}
+    \vspace{1cm}
+    \Large \textbf{ Zvýšenie odolnosti webových aplikácií proti útokom typu DDoS, 
+          \\za pomoci horizontálneho škálovania  \\}
+    \vspace{2.5cm}
+    \normalsize Miroslav Hájek \\[0.2cm]
+	Akademický rok: 2020 / 2021 \\[0.1cm]
+	Fakulta informatiky a informačných technológií, \\
+	Slovenská technická univerzita v Bratislave
+    \vfill
+\end{titlepage}
+
+
+
+\pagenumbering{gobble}
+\tableofcontents
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\section{Dostupnosť ako bezpečnostný atribút}
+
+
+\section{Anatómia útokov Denial of Service}
+
+
+\section{Možnosti škálovania webových aplikácií}
+
+\section{Algoritmy vyvažovania záťaže}
+
+
+\section{Vysoká dostupnosť load balancera}
+
+
+\section{Ochrana webových serverov}
+
+\subsection{Hlavičky protokolu HTTP}
+
+
+\subsection{Access Control List}
+
+\subsection{TLS a X.509 certifikáty}
+
+
+\section{Softvérové nástroje na vyvažovanie záťaže}
+
+\subsection{HAProxy}
+
+\subsection{Nginx}
+
+\subsection{Dispatcher Worker model}
+
+
+\section{Monitorovanie webovej aplikácie}
+
+
+\subsection{Dôležité metriky}
+
+\subsection{Syslog a Common Logfile Format}
+
+\subsection{Nástroj Zabbix na monitorovanie HAProxy, Nginx}
+
+\section{Simulácie útokov a záťažové testy}
+
+
+\printbibliography[title={Literatúra}]
+
+\end{document}
