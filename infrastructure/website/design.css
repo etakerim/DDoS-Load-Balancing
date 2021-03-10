@@ -1,0 +1,99 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    background-color: #02ad60;
+    width: 75%;
+    margin: 0 auto;
+    font-family: Open Sans, sans-serif; 
+}
+
+ul {
+    list-style-type: none;
+    overflow: hidden;
+    background-color: #333;
+    text-transform: uppercase;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 1em 3em;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: rgb(23, 103, 150);
+}
+
+.title {
+    background-color: rgb(16, 73, 54);
+}
+
+.main {
+    background-color: #eee;
+    color: #333;
+    padding: 1em 0em;
+}
+
+h1 {
+    padding: 0.5em 0em 2em 0em;
+    color: #dddddd;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 3em;
+    padding: 1.5em;
+}
+
+h2 {
+    font-size: 1em;
+    text-align: center;
+    padding: 1em;
+}
+
+p {
+    margin: 1em 5em;
+    line-height: 1.8em;
+    margin: 1em;
+    padding: 1em 7em;
+    text-align: justify;
+}
+
+.gallery {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+img {
+    width: 20%;
+    margin: 1em;
+}
+
+b {
+    font-style: italic;
+    font-weight: 600;
+}
+
+hr {
+    height: 2.5em;
+    background-color: #333;
+    margin: 2em 0em;
+}
+
+img:hover {
+    border: 5px solid rgb(23, 103, 150);
+    cursor: pointer;
+}
+
+img:active {
+    border: 5px solid rgb(253, 164, 0);
+    cursor: progress;
+}
