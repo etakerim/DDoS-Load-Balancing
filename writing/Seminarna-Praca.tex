@@ -1,4 +1,4 @@
-\documentclass[11pt, a4paper]{article}
+\documentclass[12pt, a4paper]{article}
 
 \usepackage[slovak]{babel}
 \usepackage[utf8]{inputenc}
@@ -7,7 +7,7 @@
 \usepackage{hyperref}
 \usepackage{csquotes}
 
-\usepackage[style=iso-authoryear,backend=biber]{biblatex}
+\usepackage[style=iso-numeric,backend=biber]{biblatex}
 \addbibresource{references.bib}
 \AtBeginBibliography{\small}
 
@@ -26,7 +26,7 @@
     \large Princípy informačnej bezpečnosti \\
     \vspace{0.4cm}
     \vspace{1cm}
-    \Large \textbf{ Zvýšenie odolnosti webových aplikácií proti útokom typu DDoS, 
+    \large \textbf{Zvýšenie odolnosti webových aplikácií proti útokom typu DDoS, 
           \\za pomoci horizontálneho škálovania  \\}
     \vspace{2.5cm}
     \normalsize Miroslav Hájek \\[0.2cm]
@@ -37,19 +37,183 @@
 \end{titlepage}
 
 
-
 \pagenumbering{gobble}
 \tableofcontents
+\newpage
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
 \section{Dostupnosť ako bezpečnostný atribút}
+Zabezpečenie nepretržitého prístupu k webovým službám je očakávanou a takmer nevyhnutnou požiadavkou pre 
+akýkoľvek významnejší informačný systém. Predstavuje neoddeliteľnú súčasť obrazu o spoľahlivosti 
+ich prevádzkovateľov pôsobiacich vo virtuálnom priestore internetu. Aspekt dostupnosti sa prejavuje tým,
+že údaje sú k dispozícii pre autorizovaných používateľov okamžite a bez nečakaných obmedzení. Odlišná 
+interpretácia definuje pojem dostupnosti ako ochranu proti zlomyseľnému zatajovaniu informácií. Spoločným 
+menovateľom pre oba tieto pohľady je dôraz na všadeprítomnosť služby v ľubovoľnom čase potreby. Taký stav
+je vskutku ideálny, ale je možné sa mu aspoň priblížiť predovšetkým identifikáciou bodov zlyhania alebo 
+miest prieniku a ich následným systematickým eliminovaním.
+
+Pre bezpečné nakladanie s informáciami nestačí samotná dostupnosť, ale zároveň je potrebné pri návrhu a 
+prevádzke systémov myslieť aj na dôvernosť a integritu údajov. Spolu tvoria tradičný model informačnej 
+bezpečnosti označovaný ako tzv. \emph{CIA triáda} (Confidentiality, Integrity, Availablity), ktorý sa často 
+spolieha na vyváženosť a rovnocennosť týchto troch prvkov \cite{availability}. Nutno poznamenať, 
+že to úplne neplatí, pretože nežiadaným znemožnením prístupu k zdrojom sa ich neporušenosť a zabezpečenosť 
+proti neoprávnenému prezeraniu, či úprave, stáva bezpredmetná. O dostupnosť sa teda opierajú všetky ďalšie
+bezpečnostné predpoklady, ktoré má systém napĺňať.
+
+\subsection{Kľúčový zabezpečovatelia dostupnosti}
+Komunikačné technológie často tvoria chrbtovú kosť väčšiny moderných biznisov pričom ich hlavnou úlohou je 
+sprostredkovanie informácií naprieč spoločnosťou a podieľajú sa na riadení podnikových procesov. Okrem 
+ľudského kapitálu sa beh digitálnej organizácie spolieha spravidla na tri prvky: \emph{softvér, hardvér a 
+počítačovú sieť} \cite{availability}. 
+
+\paragraph{Softvér:}
+Softvér je najkritickejším komponentom spomedzi vymenovaných, pretože na základe príkazov v kóde programov 
+je ovládaný hardvér a sieťové zariadenia. Všetky potenciálne útoky a ich dopady musia byť riešené primárne 
+na úrovni softvéru. Na napadnutie sú využívané zraniteľnosti v ovládacích a regulačných mechanizmoch 
+systému, sprístupnené prelomením nedostatočne zabezpečeného verejného rozhrania služieb. Najčastejším cieľom 
+útočníka je dosiahnutie kontroly nad zariadením alebo vyvolaním chaosu vo fungovaní prevádzky. 
+ 
+Zlyhanie programového vybavenia nemusí byť iba v dôsledku nepriaznivých vonkajších vplyvov, ale tiež sa 
+prejavujú chyby spôsobené nekorektným návrhom alebo implementáciou systému s odchýlkami od
+požadovaného správania, majúce nepriaznivý vplyv napríklad na dostupnosť konkrétnej stránky. Tieto chyby sú 
+vnesené neúmyselne najčastejšie programátorom. Počas behu aplikácie môžu nastať zlyhania operačného 
+prostredia zapríčinené nedostatkom pamäte pri alokácii, zaplneniu diskového úložiska alebo uviaznutím 
+systému. 
+
+\paragraph{Hardvér:}
+Naproti tomu poruchy hardvéru bývajú zriedkavejšie, ale o to podstatne fatálnejšie pre celkový chod, keď
+nie je ich výpadok adresovaný redundanciou komponentov. Prinavrátenie do behu znamená výmenu zariadenia za 
+iné prevádzkyschopné, či už dočasnou úpravou fyzickej infraštruktúry alebo neodkladnou montážou náhrady. 
+Duplikáciou napr. diskov cez RAID dosiahneme síce vyššiu dostupnosť ale za cenu integrity z dôvodu zdvojením 
+dát \cite{availability}, preto je vždy potrebné mať na pamäti vyváženosť bezpečnostných vlastností navzájom.
+
+\paragraph{Sieť:}
+Obmedzením počítačových sietí je ich priepustnosť podmienená šírkou prenosového pásma a réžiou 
+spotrebovanou na obsluhu zvolených komunikačných protokolov. Problémy nastávajú v situáciach, kedy prichádza
+k zahlteniu na sieťovej linke. Pri normálnom chode rešpektujú uzly v sieti signalizáciu zaznačenú do 
+paketov a prispôsobia rýchlosť vysielania, čím sa za istý čas uľaví náporu. Útočník, ktorý chce saturovať 
+serverové pripojenie to  pochopiteľne nerešpektuje a preto by sa nadmerná premávka mala presmerovať a 
+filtrovať. Smerovač podporujúci prenosové rýchlosti do 100 Mbit/s určite spôsobí straty paketov a zvýšené 
+oneskorenie pri záťaži 1 Gbit/s Okrem spustenia čo najväčšieho toku paketov do siete sa dajú zneužiť napr. 
+synchronizačné očakávania komunikácie, konkrétne stavový automat protokolu TCP.
+
+\subsection{Dôvody viktimizácie prevádzkovateľov}
+Nedostupnosť služieb máva za následok, buď priame škody v podobe finančných strát alebo vplýva na 
+pošramotenie nadobudnutej reputácie u klientov, ktorý si zlyhanie môže spájať so stratou spoľahlivosťou a 
+dôveryhodnosti služby. Čím väčší poskytovateľ a používanejšia webová stránka, tým rozsiahlejšie sú 
+potenciálne dopady pri vyradení z prevádzky. Zároveň dochádza k adekvátnemu navýšeniu zriadenej odolnosti 
+investovanej do predchádzania a aktívnej defenzívy proti útokom.  
+
+Motivácie a dôvody stojace za aktivitami úmyselne narúšajúcimi dostupnosť zvolených obetí v podobe
+webových aplikácií sa líšia od prípadu k prípadu, ale rámcovo je ich možné zhrnúť do nasledujúcich
+skupín \cite{why-attack} \cite{ddos-attacks}:
+\begin{itemize}
+\itemsep0em 
+\item \emph{Kapitálové zisky} - nadobudnutie finančnej odplaty od objednávateľa alebo nekalé snahy o 
+potopenie konkurencie v ekonomickej súťaži predstavuje hnací faktor pre útočníkov. Hlavným zámerom je
+lepšie peňažné zabezpečenie sa nehľadiac na prostriedky vynaložené na ten účel. Úspešná realizácia vyžaduje 
+značné technické zručnosti, pretože firmám, ktoré sú hlavných cieľom ide o veľa.
+\item \emph{Pomsta} - prevažne frustrovaný jednotlivci sa snažia o odplatu za vnímanú nespravodlivosť, 
+ktorú podľa nich prevádzkovateľ pácha.
+\item \emph{Ideologické a politické presvedčenie} - útočník sa snaží dať hlasno najavo svoj nesúhlas s 
+ideovo protichodnými názormi a postojmi znefunkčnením alebo poškodením platformy prostredníctvom ktorej 
+oponent pôsobí alebo šíri svoj svetonázor. V súčastnosti je to jeden z najčastejších motívov za útokmi na 
+zneprístupnenie služby. Takáto forma útokov sa označuje tiež za hacktivizmus, ktorého prívrženci hájia 
+slobodu slova a právo na súkromie proti nadmernému sledovaniu. 
+\item \emph{Demonštrácia schopností} - ide o experimentálne útoky so zámerom vyskúšať si nové techniky
+alebo predviesť svoje kompetencie. 
+\item\emph{Kybernetický terorizmus} - útočník je súčasťou vojenskej alebo teroristickej operácie s cieľom
+poškodenia nepriateľovi.
+\end{itemize} 
+
+Výber primeranej obete má taktiež svoj podiel na úspešnosti škodlivého zásahu útočníka do prevádzky,
+pretože ten sa výrazne nelíši od konvenčného zločinu. Medzi obvykle spomínané zdôvodnenia páchania 
+kriminality zo sociologickej perspektívy patrí kriminologická teória známa pod názvom 
+\emph{teória rutinných aktivít}. Poskytuje predpoklady, aké  musí daný subjekt spĺňať nato, aby bol 
+zasiahnutý. Vyslovuje, že zločin sa udeje vtedy, keď motivovaný útočník, so sklonmi na páchanie trestnej 
+činnosti, príde do stretu s objektom ponechaného bez prítomnosti schopného strážcu \cite{cohen-felson}.
+Pokiaľ sú vytvorené priaznivé okolnosti na prelomenie sa do systému, napríklad predvoleným prepustením všetkej sieťovej premávky je veľká šanca, že motivovaný útočník sa bude snažiť o zneužitie a jednoduchšie
+je mu umožnené zhodiť tento systém. Na druhej stane pri absencii jediné kritéria, buď znižuje šance na
+viktimizáciu alebo ich úplne vylúči.
+
+Podľa \emph{teórie racionálneho jednania} koná pritom útočník racionálne, hoc sa jedná o obmedzenú 
+rozumnosť a síce z uhľa pohľadu delikventa ide o cieľavedomé rozhodnutie, kde pozitívny obnos prevažuje
+nad možnými rizikami uskutočnenia. Opačná situácia vie odradiť značné množstvo potenciálnych útočníkov.
+
+Vhodnosť zamerania sa na zvolenú infraštruktúru pre potenciálneho páchateľa vyjadrujú kritéria \emph{VIVA}.
+(Value, Inetria, Visibility, Accesibility) \cite{why-attack}. V kontexte útokov odmietnutia služby sa pod 
+\emph{hodnotou} rozumie dôležitosť rozbitia cieľa pre útočníka, presnejšie či daný internetový portál alebo 
+herný server dosahuje dostatočné zisky, aby ich odstavením spôsobil dostatočnú škodu. \emph{Zotrvačnosťou} 
+sa myslí odpor infraštruktúry voči útoku. Služby s veľkou zotrvačnosťou sú schopné ustáť väčší nápor v 
+prípade napadnutia. \emph{Viditeľnosť} predstavuje rozsah v akom je webstránka verejne dostupná a známa 
+širšiemu publiku. \emph{Prístupnosť} značí jednoduchosť v dosiahnutí vytýčeného sieťových uzlov, ktoré majú 
+predstavovať obeť, použitou taktikou útoku bez povšimnutia. Rovnako tak sa spája so schopnosťou nezanechať 
+stopy na mieste činu následkom neprítomnosti mechanizmu monitorovania a detekcie narušenia.
+
+
+Heretik - profilácia útočníka\cite{heretik}
+Aké sú dôsledky postihy za ich konanie podľa zákona?\cite{trestny-zakon}
+
+Z why-attck pridaj do motivácií časté tipy obetí podľa kategórie.\cite{why-attack}
+
+nasledujú peniaze od veľkých firiem a čo sa im oplatí (DNS závislé), botnet ako produkt
+
+
+
 
 
 \section{Anatómia útokov Denial of Service}
+2-3str.
+IRC, Botnet a Taxonómia útokov, Slide 3
 
+Ako sa majú potenciálne obete chrániť – Viacvrstvové fyzické zabezpečenie pevností ako paralela k virtuálnemu (Steny, Brány, Zámky a dvere, Svetlá) – Viacero línií obrany
+
+Na zamedzenie 
+podobných praktík sa vo všeobecnosti zvykne uplatňovať metóda viacerých línií obrany, ktoré sa osvedčili už 
+za dávnych čias pri fyzickej obrane pevností. Pri vtedy praktikovaných technikách sú patrné mnohé podobnosti 
+so súčasnou ochranou webových aplikácií.
+
+Bezpečné prostredie má ľudí a aktíva chrániť pred ujmou a stratou. Staroveké civilizácie si na ten účel 
+stavali obranné pevnosti, ktoré mali poskytnúť ochranu pre veci vnútri nich. Už Mykénska civilizácia 
+uplatňovala štyri zóny fyzickej obrany pred nepriateľom \cite{physical-security}. Prvou líniou obrany
+bola priekopa alebo rieka, za ktorou sa v druhej línii nachádzala obvodový múr. Menšia vnútorná stena
+obkolesovala svätostánky a palác. Posledná najvnútornejšia obranná stena stála pred pokladom v kráľovskej 
+štvrti. 
+
+Blackhole je priekopa, Firewall je brána s ACL
+Prostredie Internetu a prvky jeho návrhu, ktoré nenahrávahú bezpečnosti ako baked-in konceptu
+Ako sa majú potenciálne obete chrániť – Viacvrstvové fyzické zabezpečenie pevností ako paralela k virtuálnemu (Steny, Brány, Zámky a dvere, Svetlá) – Vicerero línií obrany
+Hra na mačku a myš a teória bigger garden hose (spomenutie aké ujmy spôsobili vybrané útoky)
+Architektúra  a opis botnetov (ich vznik história – hra na prebratie kanálov) – agent-handler, IRC , web based – Mirai analysis
+Fázy útoku a opis použitých techník na ich realizáciu (automatické, semi-auto, manuálne)
+- širi sa ako červ, skrýva sa podobne ako vírusy
+- nábor / verbovanie – techniky skenovania potenciálnych hostiteľov a zranitelností 
+-  obsadenie (exploit) a nakazenie – typy rozširovania nákazy (centralized, back-chaining, auto)
+-  koordinácia útoku a typy útokov
+	podvrhnutie ip adresy
+	dynamika útoku
+	filtrovateľné/nefiltrovateľné
+	- Net bandwitdh (TCP protokolové zraniteľnosti SYN, UDP, ICMP flood)
+	- App attack (HTTP flood, DrDoS – Distributed reflector attack -DNS, NTP)
+- Štatistiky obľúbených útokov za 2019 od ENISA
+- typy obrany –
+	preventívna (záplaty, firewall, IDS, Resource accounting/multiplication)
+	reaktívna (Pattern vs Anonomaly detection)
 
 \section{Škálovanie webových aplikácií}
+Definuj verikálne a horizontálne škálovanie
+IEEE802.3az, LACP - Trunking a konfigurácia na cisco switch
+RFC2991 - ECMP smerovanie v OSPFv2 a výber vhodných next hops a problémy s rôznymi trasami
+router ospf 1
+maximum-paths 2
+RFC2827 – Network Ingress filtering – Unicast Reverse Path Forwarding Strict/Loose a FIB (CAM)
+cisco sonfig 
+RTBH – Remotely triggered black hole with iBGP peer trigger
+RFC 3022 – NAT a firewall – routing, load balancing ( Network Address Port Translation(NAPT)) – Popis vytvorenia spojenia v stavovej tabuľke a ak nemá unbound asociáciu tak je zahodený.
+
+- attack response strategy – agent identif., rate limiting, filtering (ingress/egreess/black-hole), reconfig of toplogy
+Reverzná proxy – pool serverov, DNS A záznamy (ukážka BIND konfigurácie bez PTR)
 
 \subsection{Agregácia liniek}
 
@@ -58,6 +222,9 @@
 \subsection{Algoritmy vyvažovania záťaže}
 
 \subsection{Vysoká dostupnosť služieb}
+Opísať rozdiel medzi základnou dostupnosťou a vysokou dostupnosťou – zdroj 1
+Protokol VRRP – mechanizmus fungovania, virtálna ip adresa – paket traces
+Keepalived konfigurácia dvoch Linux zariadení s failover
 
 \subsection{Softvérové nástroje na vyvažovanie záťaže}
 
@@ -87,7 +254,27 @@
 \subsection{Zabbix}
 
 \section{Simulácie útokov a záťažové testy}
+Docker-compose: útoky ---> Haproxy/Nginx ---> 1-4x Apache Web site
+iftop, iperf -s, iperf -i 1 -c 192.168.1.99
 
+Typy útokov (UDP flood, SYN Flood, Slow Loris so spoofed IP)
+Meniť počet horizontálych inštancií
+Meniť počet workerov
+
+Pridaj do zabbixu ostatné hosty – monitoring na Apache a Haproxy,
+Sleduj network traffic na eth0 pri záplave
+Sleduj počet spojení pri load balancingu
+\begin{verbatim}
+ab -n 100 -c 10 http://192.168.100.82/
+
+t50 192.168.100.82 -S
+hping 192.168.100.82 --udp -p 80 --flood  // hping 192.168.100.82 --syn -p 8090 -a 192.168.1.1
+
+slowhttptest -c 1000 -H -g -o my_header_stats -i 10 -r 200 -t GET -u https://192.168.100.82/ -x 24 -p 10
+thc-ssl-dos 192.168.100.82 80 --accept
+
+wireshark
+\end{verbatim}
 
 \printbibliography[title={Literatúra}]
 

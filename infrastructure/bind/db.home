@@ -1,0 +1,14 @@
+$TTL    86400
+@       IN      SOA     ns.home. root.home. (
+                              1         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                          86400 )       ; Negative Cache TTL
+
+@           IN      NS      ns.home.
+ns          IN      A       192.168.1.1
+
+website     IN      A       192.168.1.1
+            IN      A       192.168.1.2
+            IN      A       192.168.1.3

@@ -1,0 +1,7 @@
+// apt install bind9 && systemctl start bind9
+// /etc/resolv.conf - Set client DNS server
+
+zone "home" { 
+    type master; 
+    file "/etc/bind/db.home"; 
+};
