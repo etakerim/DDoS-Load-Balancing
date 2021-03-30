@@ -1,0 +1,62 @@
+pi@malina:~ $ ip route
+default via 192.168.100.1 dev wlan0 proto dhcp src 192.168.100.36 metric 303 
+192.168.0.0/24 dev eth0 proto dhcp scope link src 192.168.0.2 metric 202 
+192.168.100.0/24 dev wlan0 proto dhcp scope link src 192.168.100.36 metric 303
+
+pi@raspberrypi:~ $ ip route
+default via 192.168.100.1 dev wlan0 proto dhcp src 192.168.100.15 metric 303 
+192.168.0.0/24 dev eth0 proto dhcp scope link src 192.168.0.3 metric 202 
+192.168.100.0/24 dev wlan0 proto dhcp scope link src 192.168.100.15 metric 303 
+
+pi@RPi2B:~ $ ip route
+default via 192.168.100.1 dev wlan0 proto dhcp src 192.168.100.26 metric 303 
+192.168.0.0/24 dev eth0 proto dhcp scope link src 192.168.0.4 metric 202 
+192.168.100.0/24 dev wlan0 proto dhcp scope link src 192.168.100.26 metric 303
+
+ ip route
+192.168.0.0/24 dev enp3s0 proto kernel scope link src 192.168.0.5 metric 100 
+
+iperf -i 1 -c 192.168.0.2
+iperf -s
+Bandwidth: 94.2 Mbit/sec
+
+hping 192.168.0.2 --udp --flood    ----> vnstat --traffic
+736735 packets sampled in 5 seconds
+Traffic average for eth0
+      rx           54,22 Mbit/s           147345 packets/s
+      tx             0,86 kbit/s          1 packets/s
+      
+hping 192.168.0.2 --icmp --flood    ----> vnstat --traffic
+640086 packets sampled in 5 seconds
+Traffic average for eth0
+      rx           45,07 Mbit/s           122483 packets/s
+      tx            2,21 Mbit/s           5534 packets/s
+      
+sudo hping 192.168.0.2 --icmp --flood --spoof 192.168.0.20
+717771 packets sampled in 5 seconds
+Traffic average for eth0
+      rx           52,83 Mbit/s           143533 packets/s
+      tx            0,32 kbit/s           0 packets/s
+      
+sudo hping 192.168.0.2 --icmp --flood --spoof 192.168.0.3
+640086 packets sampled in 5 seconds
+Traffic average for eth0
+      rx           45,46 Mbit/s           123540 packets/s
+      tx            2,20 Mbit/s           5498 packets/s
+      
+sudo hping 192.168.0.2 --syn --flood --destport 8080
+sudo ip link set dev wlan0 down
+
+Rôzne load balancing stratégie:
+    Počet uzlov (1, 2, 3) pri každom
+    ab -n 10 -c 1 http://192.168.0.2:8080/
+    ab -n 100 -c 10 http://192.168.0.2:8080/
+    ab -n 1000 -c 100 http://192.168.0.2:8080/
+    ab -n 10000 -c 1000 http://192.168.0.2:8080/
+
+    
+Výstupy - matica následnosti plánovania
+        - vývoj aktívnych spojení
+        - vývoj časovaní
+        - z access logov (počet pripojení po sekundách pre daný server)
+        

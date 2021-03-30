@@ -94,80 +94,142 @@ spotrebovanou na obsluhu zvolených komunikačných protokolov. Problémy nastá
 k zahlteniu na sieťovej linke. Pri normálnom chode rešpektujú uzly v sieti signalizáciu zaznačenú do 
 paketov a prispôsobia rýchlosť vysielania, čím sa za istý čas uľaví náporu. Útočník, ktorý chce saturovať 
 serverové pripojenie to  pochopiteľne nerešpektuje a preto by sa nadmerná premávka mala presmerovať a 
-filtrovať. Smerovač podporujúci prenosové rýchlosti do 100 Mbit/s určite spôsobí straty paketov a zvýšené 
-oneskorenie pri záťaži 1 Gbit/s Okrem spustenia čo najväčšieho toku paketov do siete sa dajú zneužiť napr. 
-synchronizačné očakávania komunikácie, konkrétne stavový automat protokolu TCP.
+filtrovať. Smerovač určite spôsobí straty paketov a zvýšené oneskorenie vystavený niekoľkonásobnej záťaži 
+než podporuje. Okrem spustenia čo najväčšieho toku paketov do siete sa dajú zneužiť synchronizačné 
+očakávania komunikácie, konkrétne stavový automat protokolu TCP.
 
 \subsection{Dôvody viktimizácie prevádzkovateľov}
 Nedostupnosť služieb máva za následok, buď priame škody v podobe finančných strát alebo vplýva na 
-pošramotenie nadobudnutej reputácie u klientov, ktorý si zlyhanie môže spájať so stratou spoľahlivosťou a 
+pošramotenie nadobudnutej reputácie u klientov, ktorí si zlyhanie môžu spájať so stratou spoľahlivosti a 
 dôveryhodnosti služby. Čím väčší poskytovateľ a používanejšia webová stránka, tým rozsiahlejšie sú 
-potenciálne dopady pri vyradení z prevádzky. Zároveň dochádza k adekvátnemu navýšeniu zriadenej odolnosti 
-investovanej do predchádzania a aktívnej defenzívy proti útokom.  
+potenciálne dopady pri neočakávanej vyradení z prevádzky. Zároveň dochádza k adekvátnemu navýšeniu 
+zriadenej odolnosti investovanej do predchádzania a aktívnej defenzívy proti útokom.  
 
 Motivácie a dôvody stojace za aktivitami úmyselne narúšajúcimi dostupnosť zvolených obetí v podobe
-webových aplikácií sa líšia od prípadu k prípadu, ale rámcovo je ich možné zhrnúť do nasledujúcich
-skupín \cite{why-attack} \cite{ddos-attacks}:
+webových aplikácií sa líšia od prípadu k prípadu, ale dajú sa zhrnúť do nasledujúcich kategórií 
+\cite{why-attack} \cite{ddos-attacks}:
 \begin{itemize}
 \itemsep0em 
 \item \emph{Kapitálové zisky} - nadobudnutie finančnej odplaty od objednávateľa alebo nekalé snahy o 
-potopenie konkurencie v ekonomickej súťaži predstavuje hnací faktor pre útočníkov. Hlavným zámerom je
-lepšie peňažné zabezpečenie sa nehľadiac na prostriedky vynaložené na ten účel. Úspešná realizácia vyžaduje 
-značné technické zručnosti, pretože firmám, ktoré sú hlavných cieľom ide o veľa.
-\item \emph{Pomsta} - prevažne frustrovaný jednotlivci sa snažia o odplatu za vnímanú nespravodlivosť, 
-ktorú podľa nich prevádzkovateľ pácha.
+potopenie konkurencie v ekonomickej súťaži predstavuje významný hnací faktor pre útočníkov. 
+Hlavným zámerom je lepšie peňažné zabezpečenie sa nehľadiac na prostriedky vynaložené na ten účel. 
+Úspešná realizácia vyžaduje značné technické zručnosti, pretože firmám, ktoré sú hlavných cieľom,
+ide o veľa. 
+
+Zvykne sa jednať sa o komerčné webstránky alebo služby finančných inštitúcií (HSBC, BTC a 
+Ethereum burzy), servery a sieťové zariadenia poskytovateľov webhostingu alebo internetového pripojenia 
+(Deutsche Telekom, OVH, Dyn), herné servery (Steam, Blizzard, EA Sports), emailové servery (Eir).
+\cite{why-attack}
+
+\item \emph{Pomsta} - ide o prevažne frustrovaných jednotlivcov snažiacich sa o odplatu za vnímanú 
+nespravodlivosť, ktorú podľa nich prevádzkovateľ pácha. Počas operácie Payback z roku 2010 bola odplatou
+hackerskej skupiny Anonymous za útok na stránky s torentami a pirátskym softvérom na organizácie
+na ochranu autorských práv. V decembri zhodili stránky MasterCard, Visa, Paypal a
+iných, ktoré vydržiavali donácie organizácii Wikileaks, pretože publikovala prísne tajné informácie
+americkej vlády.
+
 \item \emph{Ideologické a politické presvedčenie} - útočník sa snaží dať hlasno najavo svoj nesúhlas s 
 ideovo protichodnými názormi a postojmi znefunkčnením alebo poškodením platformy prostredníctvom ktorej 
-oponent pôsobí alebo šíri svoj svetonázor. V súčastnosti je to jeden z najčastejších motívov za útokmi na 
-zneprístupnenie služby. Takáto forma útokov sa označuje tiež za hacktivizmus, ktorého prívrženci hájia 
-slobodu slova a právo na súkromie proti nadmernému sledovaniu. 
-\item \emph{Demonštrácia schopností} - ide o experimentálne útoky so zámerom vyskúšať si nové techniky
-alebo predviesť svoje kompetencie. 
+oponent pôsobí alebo šíri svoj svetonázor. Takáto forma útokov sa označuje tiež za hacktivizmus, ktorého 
+prívrženci hájia slobodu slova a právo na súkromie proti nadmernému sledovaniu. Pre predstavu napádaných 
+webstránok boli prominentné útoky roku 2016 cielené na skupiny ako Black Lives Matter, Ku Klux Klan, 
+Wikileaks, oboch prezidentských kandidátov v USA, taliansku a írsku vládu alebo európsku komisiu. 
+\cite{why-attack}
+
+\item \emph{Demonštrácia schopností} - ide o experimentálne útoky so zámerom hackera vyskúšať si nové techniky alebo predviesť svoje kompetencie. 
 \item\emph{Kybernetický terorizmus} - útočník je súčasťou vojenskej alebo teroristickej operácie s cieľom
 poškodenia nepriateľovi.
-\end{itemize} 
+\end{itemize}
 
 Výber primeranej obete má taktiež svoj podiel na úspešnosti škodlivého zásahu útočníka do prevádzky,
 pretože ten sa výrazne nelíši od konvenčného zločinu. Medzi obvykle spomínané zdôvodnenia páchania 
 kriminality zo sociologickej perspektívy patrí kriminologická teória známa pod názvom 
-\emph{teória rutinných aktivít}. Poskytuje predpoklady, aké  musí daný subjekt spĺňať nato, aby bol 
+\emph{teória rutinných aktivít}. Poskytuje predpoklady, aké musí daný subjekt spĺňať nato, aby bol 
 zasiahnutý. Vyslovuje, že zločin sa udeje vtedy, keď motivovaný útočník, so sklonmi na páchanie trestnej 
 činnosti, príde do stretu s objektom ponechaného bez prítomnosti schopného strážcu \cite{cohen-felson}.
-Pokiaľ sú vytvorené priaznivé okolnosti na prelomenie sa do systému, napríklad predvoleným prepustením všetkej sieťovej premávky je veľká šanca, že motivovaný útočník sa bude snažiť o zneužitie a jednoduchšie
-je mu umožnené zhodiť tento systém. Na druhej stane pri absencii jediné kritéria, buď znižuje šance na
-viktimizáciu alebo ich úplne vylúči.
 
-Podľa \emph{teórie racionálneho jednania} koná pritom útočník racionálne, hoc sa jedná o obmedzenú 
-rozumnosť a síce z uhľa pohľadu delikventa ide o cieľavedomé rozhodnutie, kde pozitívny obnos prevažuje
-nad možnými rizikami uskutočnenia. Opačná situácia vie odradiť značné množstvo potenciálnych útočníkov.
+Pokiaľ sú vytvorené priaznivé okolnosti na prelomenie do systému, napríklad predvoleným prepustením 
+všetkej sieťovej premávky je veľká šanca, že motivovaný útočník sa bude snažiť o zneužitie a jednoduchšie
+je mu umožnené zhodiť tento systém. Na druhej stane pri absencii jediného kritéria, sa buď znižujú šance na
+viktimizáciu alebo úplne vylúči. Takáto situácia vie odradiť značné množstvo potenciálnych útočníkov.
+Podľa \emph{teórie racionálneho jednania} koná útočník pri zvažovaní realizácie svojho činu racionálne,
+hoc sa jedná o obmedzenú rozumnosť a síce z uhľa pohľadu delikventa ide o cieľavedomé rozhodnutie, kde 
+pozitívny obnos prevažuje nad možnými rizikami uskutočnenia.
 
-Vhodnosť zamerania sa na zvolenú infraštruktúru pre potenciálneho páchateľa vyjadrujú kritéria \emph{VIVA}.
-(Value, Inetria, Visibility, Accesibility) \cite{why-attack}. V kontexte útokov odmietnutia služby sa pod 
-\emph{hodnotou} rozumie dôležitosť rozbitia cieľa pre útočníka, presnejšie či daný internetový portál alebo 
-herný server dosahuje dostatočné zisky, aby ich odstavením spôsobil dostatočnú škodu. \emph{Zotrvačnosťou} 
-sa myslí odpor infraštruktúry voči útoku. Služby s veľkou zotrvačnosťou sú schopné ustáť väčší nápor v 
-prípade napadnutia. \emph{Viditeľnosť} predstavuje rozsah v akom je webstránka verejne dostupná a známa 
-širšiemu publiku. \emph{Prístupnosť} značí jednoduchosť v dosiahnutí vytýčeného sieťových uzlov, ktoré majú 
-predstavovať obeť, použitou taktikou útoku bez povšimnutia. Rovnako tak sa spája so schopnosťou nezanechať 
-stopy na mieste činu následkom neprítomnosti mechanizmu monitorovania a detekcie narušenia.
+Vhodnosť zamerania sa na zvolenú infraštruktúru pre potenciálneho páchateľa je zachytiteľné kritériami 
+\emph{VIVA} (Value, Inetria, Visibility, Accesibility) \cite{why-attack}. V kontexte útokov odmietnutia 
+služby sa pod \emph{hodnotou} rozumie dôležitosť rozbitia cieľa pre útočníka, presnejšie či daný internetový 
+portál alebo herný server dosahuje dostatočné zisky, aby ich odstavením spôsobil dostatočnú škodu. 
+\emph{Zotrvačnosťou} sa myslí odpor, ktorý kladie infraštruktúra voči útoku rozličnými bezpečnostnými 
+mechanizmami. Medzi priamočiare praktiky patrí udržiavanie aktualizovanému systému so zaplátanými 
+zraniteľnosťami alebo obmedzením počtu dopytov z jednej adresy. Služby s veľkou zotrvačnosťou sú schopné 
+ustáť väčší nápor v prípade napadnutia. \emph{Viditeľnosť} predstavuje rozsah v akom je webstránka verejne 
+dostupná a známa širšiemu publiku. \emph{Prístupnosť} značí jednoduchosť v dosiahnutí vytýčeného sieťových 
+uzlov, ktoré majú predstavovať obeť, použitou taktikou útoku bez povšimnutia. Rovnako sa spája so 
+schopnosťou nezanechať stopy na mieste činu následkom neprítomnosti mechanizmu monitorovania a detekcie 
+narušenia. 
 
+Relatívne vysokou hodnotou, viditeľnosťou a prístupnosťou a nízkou zotrvačnosťou sa cieľ stáva 
+exponovanejší a tým žiadanejší pre útočníka na odstavenie. Oproti klasickému zločinu, kedy býva nutná 
+prítomnosť páchateľa a obeta na jednom mieste, kyberzločin dovoľuje útočníkovi pôsobiť cez internet takmer 
+od hocikadiaľ a maskovať sa proti odhaleniu pomocou prostredníkov ako sú na pohľad neškodné servery na 
+komunikáciu s infikovanými zariadeniami alebo anonymizačnými protokolmi, napríklad Tor.
 
-Heretik - profilácia útočníka\cite{heretik}
-Aké sú dôsledky postihy za ich konanie podľa zákona?\cite{trestny-zakon}
+Pokiaľ by nejestvovali indivíduá so zámerom druhému spôsobiť ujmu vyplývajúcu z nastolených motivačných
+faktorov nebolo by ani potrebné sa výrazne zaoberať zvyšovaním odolnosti informačných služieb, či brániť
+voči kriminalite ako takej. Určité vzorce ľudského správania naznačujú, že je prakticky nemožné sa pred 
+týmito spoločenskými javmi vyhraniť. Človek má tendenciu sa asimilovať v sociálnej skupine a preberať prvky 
+jej správania \cite{heretik}. Základné sociálne jednotky ako rodina, vrstovníci alebo osoby rovnakého
+statusu v spoločnosti môžu mať pozitívny vplyv na inhibíciu antisociálneho správania, či naopak majú
+za následok normalizáciu všeobecnejšie neakceptovaných noriem v dôsledku sociálneho tlaku skupiny.
+Naopak, prílišné dovoľujúce prostredie počas personálneho vývinu má za potenciálny následok osvojenie si 
+negatívnych vzorov správania, pretože chýbajú podmieňujúce zážitky, ktoré by korektne usmernili ponímanie 
+vážnosti nesprávnych činov. Vyrastanie v neláskyplnom prostredí s prejavmi menejcennosti môže 
+neskôr viesť k tomu, že delikventov teší širší záujem o ich záporné činy, tým že boli konečne povšimnutý a 
+uznaný vo svojej aktivite. Vyjadrujú tak nadobudnutú nevraživosť a konajú na protest proti 
+reštriktívnym orgánom verejnej moci a ponímanej nespravodlivosti.
 
-Z why-attck pridaj do motivácií časté tipy obetí podľa kategórie.\cite{why-attack}
+Teória diferenciálnej asociácie tvrdí, že v spoločnosti existujú paralelne tak 
+prosociálne, ako aj asociálne normy, postoje a spôsoby správania \cite{heretik}, čím sa vysvetľujú 
+trestné činy dostatočne zabezpečených jedincov strednej vrstvy. Dochádza u nich k stotožňovaniu sa s 
+antisociálnymi prístupmi na ceste za osobným úspechom. Zároveň páchatelia podvedome zľahčujú následky 
+sociálneho zlyhania v spojitosti s stanovenými antikriminálnymi normami. V snahu neutralizovať svoje
+konanie popierajú zodpovednosti skrývaním sa za bezvýchodiskovosť situácie, neuznávajú význam obete 
+prenášajúc naň vinu a ohraďujú sa konaním v záujme vyššieho princípu. Na základe téorie etiketovania
+je delikvencia len momentálny stav osobnosti, ktorý pramálo súvisí s psychickými vlastnosťami a správaním.
+Z množstva sociálno-psychologických postulátov je zrejmé, že separátne nedokážu jednoznačne predpovedať 
+exaktnú profiláciu hľadaného delikventa, ale poskytujú komplexnejší obraz o tom, aké pohnútky ich môžu viesť
+k zdanlivo neočakávaného činu na konkrétnej obeti.
 
-nasledujú peniaze od veľkých firiem a čo sa im oplatí (DNS závislé), botnet ako produkt
+Predpokladom na spáchanie kybernetického zločinu sústrediac sa na snahu o eliminovanie dostupnosti
+sú okrem úvodných pohnútok aj určité technické zručnosti útočníka. Keď chce byť pracovník slobodný od 
+nadriadených a má, hoc aj nedopatrením, záznam v registri trestov je prinútený aj z dôvodu vlastnej 
+otáznejšej zamestnateľnosti uchýliť sa niekedy k predávaniu alebo prenajímaniu strojov, ktoré sa mu podarí 
+kompromitovať, pre niekoho kto má záujem učiniť veľkoplošný útok a vedú ho možno dôvody uvedenej skorej.
+Časom to hacker berie ako formu biznisu, síce ilegálneho, ale dokáže mu zarobiť uspokojivý obnos 
+\cite{infiltrating-botnet}. Využívané programy sú vymieňané alebo predávané sprostredkovane cez fóra,
+sú reklamované a tamojšími administrátormi overované podobne ako komerčný softvér. Na fórach prebiehajú
+diskusie a návody k schodným spôsobom ako si dostupný malvér sprevádzkovať a upraviť podľa potreby.
 
-
-
-
+Vykonanie útoku so zámerom obmedziť dostupnosť cudzieho systém je podľa platnej legislatívnej úpravy 
+na Slovensku trestným činom podľa \emph{§247a Trestného zákona} a obdoby sú zavedené v právnych poriadkov aj
+iných krajín (napr. v USA - Computer Fraud and Abuse Act a 18 U.S.C. § 1030, v Nemecku - Strafgesetzbuch: 
+§303b  Computersabotage). Činnosť neoprávneného zásahu do počítačového systému spadá v podstate do rovnakej 
+oblasti ako poškodenie cudzieho majetku s trestami odňatia slobody pri preukázaní, od šiestich mesiacov až 
+po 10 rokov podľa závažnosti\cite{trestny-zakon}. 
 
 \section{Anatómia útokov Denial of Service}
-2-3str.
+
+
+
+4-7str.
 IRC, Botnet a Taxonómia útokov, Slide 3
 
 Ako sa majú potenciálne obete chrániť – Viacvrstvové fyzické zabezpečenie pevností ako paralela k virtuálnemu (Steny, Brány, Zámky a dvere, Svetlá) – Viacero línií obrany
+
+
+ nasledujú peniaze od veľkých firiem a čo sa im oplatí (DNS závislé), botnet ako 
+produkt (zdroj 3)
 
 Na zamedzenie 
 podobných praktík sa vo všeobecnosti zvykne uplatňovať metóda viacerých línií obrany, ktoré sa osvedčili už 
@@ -202,6 +264,7 @@ Fázy útoku a opis použitých techník na ich realizáciu (automatické, semi-
 	reaktívna (Pattern vs Anonomaly detection)
 
 \section{Škálovanie webových aplikácií}
+7 - 13str.
 Definuj verikálne a horizontálne škálovanie
 IEEE802.3az, LACP - Trunking a konfigurácia na cisco switch
 RFC2991 - ECMP smerovanie v OSPFv2 a výber vhodných next hops a problémy s rôznymi trasami
@@ -255,19 +318,29 @@ Keepalived konfigurácia dvoch Linux zariadení s failover
 
 \section{Simulácie útokov a záťažové testy}
 Docker-compose: útoky ---> Haproxy/Nginx ---> 1-4x Apache Web site
-iftop, iperf -s, iperf -i 1 -c 192.168.1.99
 
 Typy útokov (UDP flood, SYN Flood, Slow Loris so spoofed IP)
 Meniť počet horizontálych inštancií
 Meniť počet workerov
 
-Pridaj do zabbixu ostatné hosty – monitoring na Apache a Haproxy,
-Sleduj network traffic na eth0 pri záplave
+Pridaj do zabbixu ostatné hosty
+Monitoring na 
+	- Apache (Access Log, Error log)
+	- Haproxy (HAlog, https://www.haproxy.com/blog/introduction-to-haproxy-logging/)
+	- NGINX z logov (https://docs.nginx.com/nginx/admin-guide/monitoring/logging/)
+Sleduj network traffic na eth0 pri záplave:  vnstat, zabbix
 Sleduj počet spojení pri load balancingu
+
+
+Dnes - dokončenie 1. sekcie do 14:00
+a úvod do DDoS útokov + PSI
+Sobota - PSI, dokončiť 2 sekciu
+Nedeľa - polka tretej sekcie, odstovať záťažové testy a zozbierať logy z apache, haproxy a nginx
+po ab, slowhttptest
+logy z vnstat a wireshark po hping flood (udp, icmp, syn) a vlastnom skripte - aj pc server
 \begin{verbatim}
 ab -n 100 -c 10 http://192.168.100.82/
 
-t50 192.168.100.82 -S
 hping 192.168.100.82 --udp -p 80 --flood  // hping 192.168.100.82 --syn -p 8090 -a 192.168.1.1
 
 slowhttptest -c 1000 -H -g -o my_header_stats -i 10 -r 200 -t GET -u https://192.168.100.82/ -x 24 -p 10
