@@ -6,10 +6,18 @@
 \usepackage{geometry}
 \usepackage{hyperref}
 \usepackage{csquotes}
+\usepackage{listings}
 
 \usepackage[style=iso-numeric,backend=biber]{biblatex}
 \addbibresource{references.bib}
 \AtBeginBibliography{\small}
+\lstset{
+	language=bash,
+	basicstyle=\ttfamily\footnotesize, 
+	extendedchars=true, 
+	texcl=true,
+	breaklines=true
+}
 
 \geometry{
 	a4paper,
@@ -17,6 +25,8 @@
 	top=2cm,
 	bottom=2cm
 }
+
+\lstset{inputencoding=utf8,texcl=true}
 
 \begin{document}
 \begin{titlepage}
@@ -63,9 +73,9 @@ bezpečnostné predpoklady, ktoré má systém napĺňať.
 
 \subsection{Kľúčový zabezpečovatelia dostupnosti}
 Komunikačné technológie často tvoria chrbtovú kosť väčšiny moderných biznisov pričom ich hlavnou úlohou je 
-sprostredkovanie informácií naprieč spoločnosťou a podieľajú sa na riadení podnikových procesov. Okrem 
-ľudského kapitálu sa beh digitálnej organizácie spolieha spravidla na tri prvky: \emph{softvér, hardvér a 
-počítačovú sieť} \cite{availability}. 
+sprostredkovanie informácií naprieč organizáciou a podieľajú sa na riadení podnikových procesov. Okrem 
+ľudského kapitálu sa spolieha na tri kľúčové prvky: \emph{softvér, hardvér a počítačovú sieť} 
+\cite{availability}. 
 
 \paragraph{Softvér:}
 Softvér je najkritickejším komponentom spomedzi vymenovaných, pretože na základe príkazov v kóde programov 
@@ -82,28 +92,32 @@ prostredia zapríčinené nedostatkom pamäte pri alokácii, zaplneniu diskovéh
 systému. 
 
 \paragraph{Hardvér:}
-Naproti tomu poruchy hardvéru bývajú zriedkavejšie, ale o to podstatne fatálnejšie pre celkový chod, keď
-nie je ich výpadok adresovaný redundanciou komponentov. Prinavrátenie do behu znamená výmenu zariadenia za 
-iné prevádzkyschopné, či už dočasnou úpravou fyzickej infraštruktúry alebo neodkladnou montážou náhrady. 
-Duplikáciou napr. diskov cez RAID dosiahneme síce vyššiu dostupnosť ale za cenu integrity z dôvodu zdvojením 
-dát \cite{availability}, preto je vždy potrebné mať na pamäti vyváženosť bezpečnostných vlastností navzájom.
+Poruchy hardvéru bývajú zriedkavejšie, ale o to podstatne fatálnejšie pre celkový chod, keď
+výpadok nie je adresovaný redundanciou komponentov. Prinavrátenie do funkčného stavu znamená výmenu
+zariadenia za iné prevádzkyschopné, či už dočasnou úpravou fyzickej infraštruktúry alebo neodkladnou 
+montážou náhrady. Duplikáciou napr. diskov cez RAID dosiahneme síce vyššiu dostupnosť ale za cenu integrity 
+z dôvodu zdvojením dát \cite{availability}, preto je vždy potrebné mať na pamäti vyváženosť bezpečnostných 
+vlastností navzájom.
 
 \paragraph{Sieť:}
 Obmedzením počítačových sietí je ich priepustnosť podmienená šírkou prenosového pásma a réžiou 
-spotrebovanou na obsluhu zvolených komunikačných protokolov. Problémy nastávajú v situáciach, kedy prichádza
-k zahlteniu na sieťovej linke. Pri normálnom chode rešpektujú uzly v sieti signalizáciu zaznačenú do 
+spotrebovanou na obsluhu zvolených komunikačných protokolov. Problémy nastávajú v situáciach, kedy vznikne 
+zahlteniu na sieťovej linke. Za normálnych okolností rešpektujú uzly v sieti signalizáciu zaznačenú do 
 paketov a prispôsobia rýchlosť vysielania, čím sa za istý čas uľaví náporu. Útočník, ktorý chce saturovať 
 serverové pripojenie to  pochopiteľne nerešpektuje a preto by sa nadmerná premávka mala presmerovať a 
-filtrovať. Smerovač určite spôsobí straty paketov a zvýšené oneskorenie vystavený niekoľkonásobnej záťaži 
-než podporuje. Okrem spustenia čo najväčšieho toku paketov do siete sa dajú zneužiť synchronizačné 
-očakávania komunikácie, konkrétne stavový automat protokolu TCP.
+filtrovať. Pokiaľ bude smerovač vystavený niekoľkonásobnej záťaži než je schopný podporovať určite spôsobí 
+straty paketov a zvýšenú latenciu. Okrem spustenia čo najväčšieho toku paketov do siete sa zneužívajú aj
+synchronizačné očakávania komunikácie, konkrétne napríklad stavový automat protokolu TCP.
 
 \subsection{Dôvody viktimizácie prevádzkovateľov}
 Nedostupnosť služieb máva za následok, buď priame škody v podobe finančných strát alebo vplýva na 
 pošramotenie nadobudnutej reputácie u klientov, ktorí si zlyhanie môžu spájať so stratou spoľahlivosti a 
-dôveryhodnosti služby. Čím väčší poskytovateľ a používanejšia webová stránka, tým rozsiahlejšie sú 
-potenciálne dopady pri neočakávanej vyradení z prevádzky. Zároveň dochádza k adekvátnemu navýšeniu 
-zriadenej odolnosti investovanej do predchádzania a aktívnej defenzívy proti útokom.  
+dôveryhodnosti služby. Poškodenie reputácie sa radí so 47\% medzi najväčšie obavy firiem počas 
+kybernetického útoku \cite{radware-ddos}. Ďalšími zreteľmi starostí sú potenciálna strata ziskov s 21\%, 
+obmedzená dostupnosť s 12\% a zníženie produktivity počas útoku na 7\%. Čím väčší poskytovateľ a 
+používanejšia webová stránka, tým rozsiahlejšie sú potenciálne dopady pri neočakávanej vyradení z prevádzky. 
+Zároveň dochádza k adekvátnemu navýšeniu zriadenej odolnosti investovanej do predchádzania a aktívnej 
+defenzívy proti útokom. 
 
 Motivácie a dôvody stojace za aktivitami úmyselne narúšajúcimi dostupnosť zvolených obetí v podobe
 webových aplikácií sa líšia od prípadu k prípadu, ale dajú sa zhrnúť do nasledujúcich kategórií 
@@ -112,19 +126,19 @@ webových aplikácií sa líšia od prípadu k prípadu, ale dajú sa zhrnúť d
 \itemsep0em 
 \item \emph{Kapitálové zisky} - nadobudnutie finančnej odplaty od objednávateľa alebo nekalé snahy o 
 potopenie konkurencie v ekonomickej súťaži predstavuje významný hnací faktor pre útočníkov. 
-Hlavným zámerom je lepšie peňažné zabezpečenie sa nehľadiac na prostriedky vynaložené na ten účel. 
+Hlavným zámerom je lepšie peňažné zabezpečenie sa nehľadiac na taktiky vynaložené na tento účel. 
 Úspešná realizácia vyžaduje značné technické zručnosti, pretože firmám, ktoré sú hlavných cieľom,
 ide o veľa. 
 
-Zvykne sa jednať sa o komerčné webstránky alebo služby finančných inštitúcií (HSBC, BTC a 
-Ethereum burzy), servery a sieťové zariadenia poskytovateľov webhostingu alebo internetového pripojenia 
-(Deutsche Telekom, OVH, Dyn), herné servery (Steam, Blizzard, EA Sports), emailové servery (Eir).
-\cite{why-attack}
+Zvykne sa dotýkať komerčných webstránok alebo služieb finančných inštitúcií (zaznamenané útoky na HSBC, 
+BTC a  Ethereum burzy), serverov a sieťových zariadení poskytovateľov webhostingu alebo internetového 
+pripojenia (Deutsche Telekom, OVH, Dyn), herných serverov (Steam, Blizzard, EA Sports), emailových serverov 
+(Eir). \cite{why-attack}
 
-\item \emph{Pomsta} - ide o prevažne frustrovaných jednotlivcov snažiacich sa o odplatu za vnímanú 
-nespravodlivosť, ktorú podľa nich prevádzkovateľ pácha. Počas operácie Payback z roku 2010 bola odplatou
-hackerskej skupiny Anonymous za útok na stránky s torentami a pirátskym softvérom na organizácie
-na ochranu autorských práv. V decembri zhodili stránky MasterCard, Visa, Paypal a
+\item \emph{Pomsta} - prevažne frustrovaný jednotlivci snažiaci sa o odplatu za vnímanú 
+nespravodlivosť, ktorú podľa nich prevádzkovateľ pácha. Počas operácie Payback z roku 2010 bol odplatou
+hackerskej skupiny Anonymous, za blokovanie stránok s torentami a pirátskym softvérom, útok odoprenia 
+služieb na organizácie chrániace autorské práva. V decembri zhodili stránky MasterCard, Visa, Paypal a 
 iných, ktoré vydržiavali donácie organizácii Wikileaks, pretože publikovala prísne tajné informácie
 americkej vlády.
 
@@ -136,11 +150,14 @@ webstránok boli prominentné útoky roku 2016 cielené na skupiny ako Black Liv
 Wikileaks, oboch prezidentských kandidátov v USA, taliansku a írsku vládu alebo európsku komisiu. 
 \cite{why-attack}
 
-\item \emph{Demonštrácia schopností} - ide o experimentálne útoky so zámerom hackera vyskúšať si nové techniky alebo predviesť svoje kompetencie. 
+\item \emph{Demonštrácia schopností} - ide o experimentálne útoky so zámerom hackera vyskúšať si nové 
+techniky alebo predviesť svoje kompetencie.
+ 
 \item\emph{Kybernetický terorizmus} - útočník je súčasťou vojenskej alebo teroristickej operácie s cieľom
-poškodenia nepriateľovi.
+poškodenia nepriateľovi. Kritická infraštruktúra štátu prestavuje najčastejšie zasahovaný cieľ.
 \end{itemize}
 
+\subsubsection{Teória rutinných aktivít}
 Výber primeranej obete má taktiež svoj podiel na úspešnosti škodlivého zásahu útočníka do prevádzky,
 pretože ten sa výrazne nelíši od konvenčného zločinu. Medzi obvykle spomínané zdôvodnenia páchania 
 kriminality zo sociologickej perspektívy patrí kriminologická teória známa pod názvom 
@@ -164,17 +181,18 @@ portál alebo herný server dosahuje dostatočné zisky, aby ich odstavením sp�
 mechanizmami. Medzi priamočiare praktiky patrí udržiavanie aktualizovanému systému so zaplátanými 
 zraniteľnosťami alebo obmedzením počtu dopytov z jednej adresy. Služby s veľkou zotrvačnosťou sú schopné 
 ustáť väčší nápor v prípade napadnutia. \emph{Viditeľnosť} predstavuje rozsah v akom je webstránka verejne 
-dostupná a známa širšiemu publiku. \emph{Prístupnosť} značí jednoduchosť v dosiahnutí vytýčeného sieťových 
+dostupná a známa širšiemu publiku. \emph{Prístupnosť} značí jednoduchosť v dosiahnutí vytýčených sieťových 
 uzlov, ktoré majú predstavovať obeť, použitou taktikou útoku bez povšimnutia. Rovnako sa spája so 
 schopnosťou nezanechať stopy na mieste činu následkom neprítomnosti mechanizmu monitorovania a detekcie 
 narušenia. 
 
 Relatívne vysokou hodnotou, viditeľnosťou a prístupnosťou a nízkou zotrvačnosťou sa cieľ stáva 
 exponovanejší a tým žiadanejší pre útočníka na odstavenie. Oproti klasickému zločinu, kedy býva nutná 
-prítomnosť páchateľa a obeta na jednom mieste, kyberzločin dovoľuje útočníkovi pôsobiť cez internet takmer 
+prítomnosť páchateľa a obete na jednom mieste, kyberzločin dovoľuje útočníkovi pôsobiť cez internet takmer 
 od hocikadiaľ a maskovať sa proti odhaleniu pomocou prostredníkov ako sú na pohľad neškodné servery na 
 komunikáciu s infikovanými zariadeniami alebo anonymizačnými protokolmi, napríklad Tor.
 
+\subsubsection{Psychologická predeterminácia útočníka}
 Pokiaľ by nejestvovali indivíduá so zámerom druhému spôsobiť ujmu vyplývajúcu z nastolených motivačných
 faktorov nebolo by ani potrebné sa výrazne zaoberať zvyšovaním odolnosti informačných služieb, či brániť
 voči kriminalite ako takej. Určité vzorce ľudského správania naznačujú, že je prakticky nemožné sa pred 
@@ -195,46 +213,251 @@ trestné činy dostatočne zabezpečených jedincov strednej vrstvy. Dochádza u
 antisociálnymi prístupmi na ceste za osobným úspechom. Zároveň páchatelia podvedome zľahčujú následky 
 sociálneho zlyhania v spojitosti s stanovenými antikriminálnymi normami. V snahu neutralizovať svoje
 konanie popierajú zodpovednosti skrývaním sa za bezvýchodiskovosť situácie, neuznávajú význam obete 
-prenášajúc naň vinu a ohraďujú sa konaním v záujme vyššieho princípu. Na základe téorie etiketovania
+prenášajúc naň vinu a ohraďujú sa konaním v záujme vyššieho princípu. Na základe teórie etiketovania
 je delikvencia len momentálny stav osobnosti, ktorý pramálo súvisí s psychickými vlastnosťami a správaním.
 Z množstva sociálno-psychologických postulátov je zrejmé, že separátne nedokážu jednoznačne predpovedať 
 exaktnú profiláciu hľadaného delikventa, ale poskytujú komplexnejší obraz o tom, aké pohnútky ich môžu viesť
 k zdanlivo neočakávaného činu na konkrétnej obeti.
 
 Predpokladom na spáchanie kybernetického zločinu sústrediac sa na snahu o eliminovanie dostupnosti
-sú okrem úvodných pohnútok aj určité technické zručnosti útočníka. Keď chce byť pracovník slobodný od 
-nadriadených a má, hoc aj nedopatrením, záznam v registri trestov je prinútený aj z dôvodu vlastnej 
-otáznejšej zamestnateľnosti uchýliť sa niekedy k predávaniu alebo prenajímaniu strojov, ktoré sa mu podarí 
-kompromitovať, pre niekoho kto má záujem učiniť veľkoplošný útok a vedú ho možno dôvody uvedenej skorej.
-Časom to hacker berie ako formu biznisu, síce ilegálneho, ale dokáže mu zarobiť uspokojivý obnos 
+sú okrem úvodných pohnútok aj isté technické zručnosti útočníka. Keď chce byť pracovník slobodný od 
+nadriadených a má, hoc aj nedopatrením, záznam v registri trestov, je niekedy motivovaný vlastnou 
+otáznejšou zamestnateľnosťou sa uchýliť k predávaniu alebo prenajímaniu strojov, ktoré sa mu podarí 
+kompromitovať, pre niekoho kto má záujem učiniť veľkoplošný útok a vedú ho k tomu zrejme dôvody uvedenej 
+skorej. Časom to hacker berie ako formu ilegálneho biznisu a dokáže si zarobiť uspokojivý obnos 
 \cite{infiltrating-botnet}. Využívané programy sú vymieňané alebo predávané sprostredkovane cez fóra,
-sú reklamované a tamojšími administrátormi overované podobne ako komerčný softvér. Na fórach prebiehajú
-diskusie a návody k schodným spôsobom ako si dostupný malvér sprevádzkovať a upraviť podľa potreby.
+sú reklamované a tamojšími administrátormi overované podobne ako bežný komerčný softvér. Na fórach 
+prebiehajú diskusie a objavujú sa návody k schodným spôsobom ako si dostupný malvér sprevádzkovať 
+a upraviť podľa potreby.
 
 Vykonanie útoku so zámerom obmedziť dostupnosť cudzieho systém je podľa platnej legislatívnej úpravy 
-na Slovensku trestným činom podľa \emph{§247a Trestného zákona} a obdoby sú zavedené v právnych poriadkov aj
-iných krajín (napr. v USA - Computer Fraud and Abuse Act a 18 U.S.C. § 1030, v Nemecku - Strafgesetzbuch: 
-§303b  Computersabotage). Činnosť neoprávneného zásahu do počítačového systému spadá v podstate do rovnakej 
-oblasti ako poškodenie cudzieho majetku s trestami odňatia slobody pri preukázaní, od šiestich mesiacov až 
-po 10 rokov podľa závažnosti\cite{trestny-zakon}. 
-
+na Slovensku trestným činom podľa \emph{§247a Trestného zákona} a obdoby sú zavedené takisto v iných 
+právnych poriadkoch (napr. v USA - Computer Fraud and Abuse Act a 18 U.S.C. § 1030, v Nemecku - 
+Strafgesetzbuch: §303b  Computersabotage). Činnosť neoprávneného zásahu do počítačového systému spadá v 
+podstate do rovnakej oblasti ako poškodenie cudzieho majetku s trestami odňatia slobody pri preukázaní, od 
+šiestich mesiacov až po 10 rokov podľa závažnosti\cite{trestny-zakon}. 
+\newpage
 \section{Anatómia útokov Denial of Service}
+Internet predstavuje prostredie sprístupňujúce na jednej strane ohromnú kvantitu služieb, ale zároveň 
+sprostredkúva útočníkom širokú paletu nástrojov umožňujúcich ich odstavenie. Útoky odoprenia služby
+- \emph{Denial of Service (DoS)} - spôsobujú nežiaduci zásah do schopnosti legitímneho 
+používateľa na prístup k zdrojom dostupných v počítačovej sieti. Zneprístupnenie sa realizuje vyčerpaním šírky pásma linky alebo systémových prostriedkov obete, či už CPU, operačnej pamäti alebo priepustnosti 
+vstupno-výstupných operácií \cite{ddos-attacks}. Pokiaľ sa na útoku podieľa značný počet zariadení označuje 
+sa ako distribuovaný DoS skrátene DDoS. 
 
+Útoky typu DDoS sú na internete obrovským problémom napriek snahe výskumníkov vyvíjať neustále lepšie 
+metódy obrany v reakcii na stále sofistikovanejšie modifikácie techník útokov. V architektúre internetu 
+prevládajú prvky so zameraním skôr na efektivitu a spoľahlivosť prenosu paketov medzi koncovými uzlami, než 
+na silné zabezpečenie detailnou kontrolou prenášaného toku. Z distribuovanej povahy a autonómie 
+administrácie nezávislých samostatných sietí, z ktorých je Internet zložený, a ktoré si riadi 
+do veľkej miery každý poskytovateľ pripojenia zvlášť, by bola na systematické celoplošné politiky nevyhnutná 
+ťažko dosiahnuteľná širšia dohoda. Zároveň platí, že akokoľvek je cieľový systém ochránený stále závisí od 
+úrovne zabezpečenia ostatných uzlov v sieti. Okrem rôznorodého vynútenia pravidiel je ďalším predpokladom na 
+degradáciu služieb obmedzené výpočtové zdroje každej entity na trase, hlavne ide o limitované kapacity 
+vyrovnávacích pamätí.
 
+Myšlienka uskutočnenia DoS útoku je pomerne priamočiara. Pokiaľ útočník disponuje väčšou celkovou rýchlosťou 
+pripojenia, je schopný preťažiť linku obete a tým spomaliť spracovanie oprávnených požiadaviek. Prenesene sa 
+uplatňuje zásada, že silnejší pri súboji vyhráva. Strana disponujúca lepším pripojením spravidla predurčí 
+stav dostupnosti služby v kritických momentoch. Spustenie útoku iba z jedného akokoľvek výkonného stroja
+je pre útočníkov nevýhodné, pretože zmarenie zlovoľnej činnosti spočíva jednoducho vo vyčítaní adresy 
+pôvodcu odchytávaním premávky, jeho následne zablokovanie a pridanie na čierne zoznamy. 
 
-4-7str.
-IRC, Botnet a Taxonómia útokov, Slide 3
+\subsection{Botnet}
+Centralizované prevedenie útoku odoprenia služby je z dnešného pohľadu nepriechodné. Najčastejšie sa preto 
+na znefunkčnenie služby uplatňuje taktika ovládnutia rozsiahlej skupiny zraniteľných počítačov, ktoré dokáže 
+útočník ovládať na diaľku a nasadiť do želanej ofenzívy. Napadnuté zariadenia ani ich užívatelia 
+častokrát netušia, že sa stali súčasťou takéhoto zoskupenia, ktoré sa označuje ako \emph{botnet}. 
+Počítač slúžiaci útočníkovi na naplnenie nekalých úmyslov vzdialeným vykonaných povelov je tzv. \emph{bot}, 
+\emph{zombie}, či \emph{dron}. Boti sa správajú ako hybrid viacerých kybernetických hrozieb s pridanou 
+hodnotou komunikačného  kanála so schopnosťou koordinácie cez ovládacie miesta. Šíria sa podobne červom, 
+skrývajú sa pred detekciou ako vírusy a obsahujú útočne metódy toolkitov \cite{zombie-roundup}. Vlastník 
+armády botov je tzv. \emph{botmaster} alebo \emph{pastier - herder}. Neprávom nadobudnuté výpočtové 
+prostriedky riadi prostredníctvom command and control (C\&C) infraštruktúry.
 
-Ako sa majú potenciálne obete chrániť – Viacvrstvové fyzické zabezpečenie pevností ako paralela k virtuálnemu (Steny, Brány, Zámky a dvere, Svetlá) – Viacero línií obrany
+\subsubsection{Komunikácia s botmi}
+DDoS útočné siete používajú spravidla tri typy architektúry: \emph{Agent-Handler}, \emph{Internet Relay Chat 
+(IRC)} a \emph{webovú architektúru} \cite{ddos-attacks} \cite{botnets}. Model Agent-Handler pozostáva z 
+klientov - útočníkov, ktorí sa pripájajú na tzv. handler so zaneseným softvérovým vybavení na zisťovanie 
+stavu a koordináciu agentov. Umiestňuje sa spravidla do zariadení s veľkým objemom sieťovej premávky a ich 
+strategický výber umožňuje výrazne kamuflovať podozrivú komunikáciu. Terminológia \emph{handler} a 
+\emph{agent} sa zvykne zamieňať s \emph{master} a \emph{démon}. 
 
+Medzičlánkom preposielania povelov od botmasterov sa rovnako môže stať verejný IRC server. Vtedy sa jedná o 
+architektúru založenú na protokole Internet Relay Chat. Pôvodný účel využitia botov spočíval pri
+asistencii moderovania rušných četových miestností IRC kanálov \cite{zombie-roundup}. Jedným z prvých bol 
+bot Eggdrop napísaný už v roku 1993. V tom čase začali vznikať boti so zámerom útočiť na ostatných 
+používateľov a IRC servery. Dovoľovali útočníkovi ukrytie sa za aktivity bota alebo dokonca za botov na 
+viacerých počítačoch, ktorý neboli k útočníkom priamo vystopovateľný. Tým bolo umožnené napádať čím ďalej 
+väčšie ciele. 
 
- nasledujú peniaze od veľkých firiem a čo sa im oplatí (DNS závislé), botnet ako 
-produkt (zdroj 3)
+Agenti sa po pridaní k botnetu ohlásia na dezignovaný IRC kanál a ďalej prijímajú a posielajú správy 
+cezeň. Tento spôsob je lákavý pre jednoduchosť komunikácie v podobe krátkych textových správ príkazov a 
+dostatočnú anonymitu bez silnej autentifikácie. Útočník nemusí udržiavať zoznam dostupných agentov, keďže po 
+prihlásení sa na server vie zobraziť všetkých podriadených botov. Pre zložitejšie odhalenie napomáha 
+využitie známych portov pre IRC (6667/TCP), pomerne veľká prevádzka na známych IRC serveroch a technika 
+\enquote{preskakovania medzi kanálmi} (channel hoping), kedy botmaster využíva zvolený IRC kanál iba na 
+krátke obdobie.
 
-Na zamedzenie 
-podobných praktík sa vo všeobecnosti zvykne uplatňovať metóda viacerých línií obrany, ktoré sa osvedčili už 
-za dávnych čias pri fyzickej obrane pevností. Pri vtedy praktikovaných technikách sú patrné mnohé podobnosti 
-so súčasnou ochranou webových aplikácií.
+Najpoužívanejším modelom je síce pre svoju flexibilitu IRC forma komunikácie, ale v posledných rokoch sa 
+objavujú botnety založené na webových aplikáciach. Boty posielajú webovému serveru pravidelne informácie o 
+svojom stave. Ovládané sú cez komplexné PHP skripty a komunikácia s agentami dokáže byť šifrovaná cez TLS a 
+skrývať sa za bežnú webovú prevádzku na portoch 80/TCP, 443/TCP a tým odolávať tým bežným sieťovým filtrom. 
+Narozdiel od IRC spočíva ich nesporná výhoda v nemožnosti únosu botnetu od svojho pôvodného tvorcu únosom 
+četovej miestnosti.
+
+\subsubsection{Šírenie replikáciou škodlivého kódu}
+Nehľadiac na výber spôsobu komunikácie agentov so svojim command and control uzlom, musí ich sieť byť 
+dostatočne rozsiahla na to, aby spôsobila znateľnejší dopadu na webové služby. Zároveň by mala disponovať 
+metódami vlastnej replikácie sa na priľahlé napadnuteľné počítače. Priebeh rozširovania vplyvu botnetu
+nad zväčšujúcou sa skupinou hostiteľov sa odohráva v postupných fázach. 
+
+V prvom rade musí dôjsť k objaveniu zraniteľných hostov, potenciálnych budúcich botov. Útočník si
+môže vytipovať vhodnú známu obeť a pokúsiť sa o prevzatie kontroly manuálne, systematickým skúšaním
+prelomenia známych zraniteľností konkrétneho systému. Automatizované skripty, ktoré sú umiestňované do už 
+nakazených počítačov sa nepotrebujú vopred špecificky zacieliť, ale dokážu si poskladať zoznam IP adries, 
+ktoré bude postupne navštevovať a preverovať preddefinované nezaplátané bezpečnostné diery. 
+
+Skenovanie môže prebiehať \textbf{náhodne} \cite{ddos-anatomy-2004}, kedy každý kompromitovaný uzol v sieti 
+generuje postupnosť ľubovoľných IP adries. Technika je použiteľná iba pri IPv4, pretože pri hustote 
+rozloženia obsadených IPv6 adries by bol tento postup výrazne neefektívny. Náhodné skúšanie hostov
+vytvára veľký objem podozrivej sieťovej premávky smerovanej akiste medzi vzdialenými sieťami, 
+ktoré normálne nekomunikujú, čím sa zvyšuje šanca na odhalenie takejto aktivity. Keďže nedochádza 
+pri skenovaní k synchronizácii medzi infikovanými počítačmi rastie množstvo duplicitných dopytov
+na rovnaký už preverený koncový uzol s ich zväčšujúcim sa počtom.
+
+Obdržaním zoznamu počítačov (\textbf{hitlist}) s ľahko prelomiteľnou obranou dokáže botnet usmerniť svoje 
+šírenie. Známym vyhľadávačom verejných adries IoT zariadení s konektivitou k Internetu a prehľadom
+známych bezpečnostných dier je \verb|shodan.io|. Kolíziam sondovania sa zabraňuje prerozdelením celého 
+hitlistu na menšie časti, čím sa zabezpečí, že každý agent overí stroje z presne určeného rozsahu. Nevýhoda 
+spočíva v nutnom zostavení celého zoznamu predtým než dôjde k samotnému rozširovaniu útočnej siete. Dôležité 
+je zvolenie vhodnej veľkosti jeho dielov na preposielanie. Ak je zoznam rozsiahly tvorí sa značná sieťová 
+premávka, krátky zoznam zapríčiní malú finálnu populáciu agentov. 
+
+\textbf{Topologické skenovanie} nasleduje prirodzene vznikajúce komunikácie objavujúce v sieti, aby
+sa dosiahlo presnejšie splynutie s bežným tokom paketov. Nakazený hostiteľ v podobe webového servera 
+pošle do prehliadača klientov škodlivý kód a za správnych okolností sa ten dokáže dostať na iné webové
+servere, ktoré klient prezerá. Spoliehaním sa na správanie používateľov sa výrazne znižuje rýchlosť a 
+úplnosť ovládnutia vyhovujúcich obetí a útočník nedokáže šírenie počítačového červa regulovať.
+
+Predošlé varianty skenovania je užitočné upraviť na prehľadávanie cieľov \textbf{v lokálnej podsieti}, 
+čím sa dajú nakaziť náchylné počítače za firewallom a agent pritom neprezrádza svoju lokáciu využívaním
+nadmernej intersieťovej výmeny správ.   
+
+Nachádzanie vektorov prieniku počas prechádzania zoznamom adries je uskutočňované, buď horizontálne,
+napríklad preverovaním rovnakého otvoreného portu, či mierenej zraniteľnosti naprieč všetkými cieľmi, alebo
+sa koná vertikálne a síce testovaním širokého spektra malvérom pribalených utilít snažiac sa vniknúť
+dnu hocako. S vykonávaním vybranej metódy pomalým tempom má útočník príležitosť zostať nebadaný po dlhšiu
+dobu a ponúka sa mu čas na preverenie možností získania kontroly nad systémom. Po fázach náboru a 
+vykoristení nového bota sa naň prenáša škodlivý kód pochádzajúci z centrálneho úložiska (červ 1i0n) alebo
+sa siahne zo zariadenia, ktoré bol pôvodcom nákazy v predošlom kroku, tzv. \enquote{back-chaining} (červy
+Morris, Ramen) \cite{ddos-anatomy-2004}. 
+
+\subsection{Klasifikácia typov DDoS útokov}
+Útok odoprenia služby závisí od schopnosti čo najväčšej alebo špeciálne zameranej sieťovej 
+premávky, aby informačná služba neakceptovala požiadavky legitímnych žiadateľov. Odohráva sa
+privlastnenie si celej vyhradenej linky alebo výpočtového výkonu prevádzkovateľa útočníkom. 
+Ak je vyústením prevalcovanie serverovej infraštruktúry obete nedokonalosťou zabezpečovacích 
+mechanizmov dochádza k zrušeniu dostupnosti s následkami už uvedenými. Aby sme porozumeli metódam 
+efektívnej obrany je nevyhnutné zatriediť a kategorizovať objavujúce sa
+hrozby, s ktorými sa ciele DDoS útoku vedia stretnúť. V literatúre existujú rozličné taxonómie po
+nímajúce problematiku z rôznych uhlov pohľadu \cite{ddos-attacks} \cite{botnets} \cite{ddos-anatomy-2004} 
+\cite{csirt-ddos}. Nastolené hierarchie budú zúžitkované a skombinované do jednotnejšieho prehľadu.
+
+Základné rozdelenie DDoS útokov spočíva v identifikácii ich primárneho vektora. Webová aplikácia
+býva zneprístupnená, buď vyčerpaním šírky prenosového pásma hrubou silou záplavy paketov, alebo
+vyplytvaním systémových prostriedkov sémantickým útokom zneužitia synchronizačných predpokladov 
+komunikačného protokolu.
+
+\textbf{Volumetrické útoky} (veľkoobjemové útoky) saturujú kapacitu linky rozmanitou plejádou nálože. 
+Spoločným menovateľom je technika flooding (záplava). Populárnou formou útoku je posielanie UDP datagramov 
+na náhodné porty s úmyslom zapríčiniť overovanie, či sú porty otvorené a spôsobiť reakciu 
+servera signalizačnými správami ICMP Destination port unreachable. So snahou donútiť systém, aby sa venoval 
+predovšetkým záškodníckym spávam útočníka, pracuje tiež záplava paketmi ICMP Echo Request (Ping) 
+s následnou odpoveďou ICMP Echo Reply. Na VoIP služby je účinným SIP Flood, ktorý zaplaví SIP proxy s
+falošnými správami pre začatie hovoru SIP INVITE \cite{botnets}. Webový aplikačný server je možné zahltiť 
+záplavou HTTP(S) požiadaviek GET alebo POST na náhodné alebo existujúce URI webstránky. Dopytovanie sa na 
+neexistujúcu cestu okamžite vráti stavový kód rádu 400 pre  chybu klienta, ale rovnako sa bude server 
+musieť zaoberať spracovaním takejto požiadavky, len sa stáva jednoduchšie pozorovateľnou z prístupových 
+logov. 
+
+\textbf{Protokolové útoky} sa priživujú na zraniteľnosti v návrhu komunikačného protokolu na transportnej
+až aplikačnej vrstve OSI, ktoré spoliehajú na priebežné ukladanie stavových informácii o naviazaných
+reláciach. Rozšírené sú taktiky na zneužitie časovače stavového automatu protokolu TCP a príznakov v TCP 
+segmentoch, ktorými sa odosielateľ a prijímateľ dohadujú na priebehu výmeny správ. 
+
+Počas TCP SYN Flood je doručené také množstvo podnetov na otvorenie spojenia segmentami s príznakom SYN, 
+ktoré vyústi v zaplnenie pamäte vyhradenie na uchovávanie aktívnych relácii. Server je povinný pri 
+zahajovaní TCP spojenia cez 3-way handshake a obdržaní SYN odoslať SYN+ACK a počkať stanovenú dobu. Timeout 
+býva dostatočný na to, aby dokázal útočník ponechať tabuľku relácií zaplnenú iba svojimi podvratnými 
+požiadavkami. Schodnou ochranou je zavedenie tzv. TCP Cookie. Systém po prijatí TCP SYN odošle TCP SYN+ACK a 
+nevytvorí v pamäti žiadnu reláciu \cite{csirt-ddos}. Po prijatí právoplatnej odpovede TCP ACK sa spätne dopočíta TCP sekvencia paketov a až vtedy sa zaháji spojenie. 
+
+TCP RST útok sa zameriava na rušenie nadviazaných spojení medzi serverom a klientmi, kedy však je
+nutné poznať zdrojovú IP adresu klienta, pretože útočník háda začiatkom konverzácie náhodne započaté 
+sekvenčné čísla. Ak uspeje preberie reláciu a zruší ju. Za bežných okolností je také niečo ťažko 
+spáchateľné, lebo TCP spojenia zvyknú mať krátke trvanie a vznikajú ad-hoc.
+
+Nastavením príznaku PSH je serveru nanútené okamžité vyprázdnenie vyrovnávanie pamäte klientovi
+a odoslanie potvrdzujúcej správy ACK. Pri enormnej hromade takýchto výziev nebude schopný server
+vybavovať ďalšie požiadavky, čím dôjde k zrušeniu dostupnosti webových a podobných služieb poskytovaných
+z daného bodu.
+
+Zlomyseľným zásahom do riadenia toku TCP spojenia predchádzajúceho zahlteniam, presnejšie vyžiadaním a 
+udržiavaním nulovej veľkosti okna príjemcu, sa vie útočník obsadiť všetky dostupné spojenia v tabuľke
+spojení a tým znemožniť nadviazanie komunikácie so serverom ostatným. Určenie veľmi malej nenulovej
+veľkosti okna spôsobí rozdrobenie odpovedí na veľmi malé fragmenty. Prevenciou býva zapojenie Nagelovho
+algoritmu (RFC 896) do TCP implementácie, ktorého úlohou je zamedziť veľkej réžii pri posielaní 
+miniatúrneho payloadu.
+
+Na relačnej vrstve modelu OSI je vďačným protokolom na útoky spotrebujúce značný výpočtový výkon Secure
+Sockets Layer (SSL/TLS). Keďže majorita webových aplikácií v súčastnosti používa HTTPS ako zlatý štandard
+je dôležité si uvedomiť, že proces šifrovania spolu s réžiou pri výmene kľúčov v SSL handshaku predstavuje 
+pre server násobnú náročnosť oproti klientovi. Znovu sa naskýta prostý útok záplavou iniciácií TLS spojenia
+alebo opätovné dohodnutie SSL komunikácie (renegotiation), ktorá zvykne zahŕňať zmenu parametrov šifrovania
+alebo vyžiadanie certifikátu servera. Riešením je blokovanie takýchto požiadaviek alebo \enquote{SSL 
+offloading} do špecializovaného hardvéru \cite{csirt-ddos}.
+
+Spotrebovanie všetkých ponúkaných spojení HTTP protokolu aplikáciou webového servera sú preferované
+tzv. \enquote{low and slow} útokmi. Agent sa maskuje akoby za veľmi pomalú rýchlosť pripojenia,
+no v skutočnosti zámerne rozdrobuje svoj dopyt na krátke fragmenty a posiela ich s významným oneskorením,
+ale tak aby držal spojenie otvorené čo najdlhšie. Dôvody existujúcich obmedzení tkvejú v maximálnom počte 
+súborových deskriptorov procesu alebo únosnej hladine bežiacich procesov. Zástupcom tejto skupiny
+útokov je Slowloris a R-U-Dead-Yet? (RUDY). Z dôvodu nízkej generovanej premávky, čo je vlastne úplným
+protipólom k záplavám paketmi, prechádza pomerne ľahko bez povšimnutia, pretože nemá dopad na iné
+atribúty systému.
+
+Rovnako ako botnety slúžia na zitenzívnenie devastačného prúdu paketov, tak môžu nepriamo zapájať 
+do útoku aj malvérom nenakazené počítače technikami odrazu a zosilnenia. Útoky s odrazom (RDoS a DRDoS) 
+zapríčiňujú poslanie paketov s podvrhnutou zdrojovou adresou cieľa útoku záchytným bodom (pivotom).
+V domnienke správnosti pôvodcu správy sa odpoveď doručí v konečnom dôsledku na obeť. Samo o sebe to nemá až 
+taký význam, okrem odklonenia nevyhnutného prúdu odpovedí od skutočných spúšťačov požiadaviek na tretie
+strany. Nastavením cieľovej IP adresy na broadcastovú adresu lokálnej podsiete (L2 alebo L3 OSI) sa
+útok zosilní, pričom zasiahne všetky počítače v spoločnom broadcastovom segmente siete. Tiež je priechodné 
+odrazenie útoku od viacerých reflektorov. Na týchto princípoch fungujú útoky Smurf a Fraggle.
+
+Domain Name System (DNS) amplifikačné útoky využívajú podstatu odrazeného útoku, ale obsahujú obohatenie
+zaručeného nárastu veľkosti DNS odpovede voči dopytu. Faktor zväčšenia DNS query response sa pohybuje
+od 1,1 pri jednom A zázname (example.net), 2,75 v prípade troch AAAA záznamoch (youtube.com) alebo 
+dokonca 3,5 (yahoo.com) pri siedmich štvor-áčkových záznamoch. Protokol DNSSEC ponúka
+cez otvorené rekurzívne resolvery až 30-násobnú amplifikáciu \cite{csirt-ddos}, 
+z dôvodu početnosti vrátených NS záznamov a digitálnych podpisov v DS a RRSIG záznamoch. 
+Uvedenými príkazmi sme objavili odpoveď s 24-násobným zväčšením a podobne iné domény dosahovali
+amplifikácie bežne v rozsahu 13 - 18-krát:
+\begin{lstlisting}
+dig +dnssec +trace opendns.com
+dig +dnssec @b.root-servers.net opendns.com
+\end{lstlisting}
+
+Pravidelne vydávaný prehľad a trendy kybernetických hrozieb vydávanej európskou inštitúciou ENISA
+poznamenávajú, že takmer 80\% všetkých DDoS útokov v treťom kvartáli 2019 boli SYN záplavy 
+\cite{enisa-ddos}. 
+
+% Doplň
+
+\subsection{Ochrana spevnením sieťovej ochrany}
+Na zamedzenie podobných praktík sa vo všeobecnosti zvykne uplatňovať metóda viacerých línií obrany, 
+ktoré sa osvedčili už za dávnych čias pri fyzickej obrane pevností. Pri vtedy praktikovaných technikách sú patrné mnohé podobnosti so súčasnou ochranou webových aplikácií.
 
 Bezpečné prostredie má ľudí a aktíva chrániť pred ujmou a stratou. Staroveké civilizácie si na ten účel 
 stavali obranné pevnosti, ktoré mali poskytnúť ochranu pre veci vnútri nich. Už Mykénska civilizácia 
@@ -243,76 +466,122 @@ bola priekopa alebo rieka, za ktorou sa v druhej línii nachádzala obvodový m�
 obkolesovala svätostánky a palác. Posledná najvnútornejšia obranná stena stála pred pokladom v kráľovskej 
 štvrti. 
 
-Blackhole je priekopa, Firewall je brána s ACL
-Prostredie Internetu a prvky jeho návrhu, ktoré nenahrávahú bezpečnosti ako baked-in konceptu
-Ako sa majú potenciálne obete chrániť – Viacvrstvové fyzické zabezpečenie pevností ako paralela k virtuálnemu (Steny, Brány, Zámky a dvere, Svetlá) – Vicerero línií obrany
-Hra na mačku a myš a teória bigger garden hose (spomenutie aké ujmy spôsobili vybrané útoky)
-Architektúra  a opis botnetov (ich vznik história – hra na prebratie kanálov) – agent-handler, IRC , web based – Mirai analysis
-Fázy útoku a opis použitých techník na ich realizáciu (automatické, semi-auto, manuálne)
-- širi sa ako červ, skrýva sa podobne ako vírusy
-- nábor / verbovanie – techniky skenovania potenciálnych hostiteľov a zranitelností 
--  obsadenie (exploit) a nakazenie – typy rozširovania nákazy (centralized, back-chaining, auto)
--  koordinácia útoku a typy útokov
-	podvrhnutie ip adresy
-	dynamika útoku
-	filtrovateľné/nefiltrovateľné
-	- Net bandwitdh (TCP protokolové zraniteľnosti SYN, UDP, ICMP flood)
-	- App attack (HTTP flood, DrDoS – Distributed reflector attack -DNS, NTP)
-- Štatistiky obľúbených útokov za 2019 od ENISA
-- typy obrany –
-	preventívna (záplaty, firewall, IDS, Resource accounting/multiplication)
-	reaktívna (Pattern vs Anonomaly detection)
+%Blackhole je priekopa, Firewall je brána s ACL
+
+% - typy obrany –
+% preventívna (záplaty, firewall, IDS, Resource accounting/multiplication)
+% reaktívna (Pattern vs Anonomaly detection)
+
+Zníženie záťaže na systémové zdroje pridelené na tvorbu paketov odpovede je dosiahnuteľné cez 
+\emph{rate limiting}. Linux oplýva vrámci \emph{procfs} (\verb|/proc/sys/net/ipv4/|)\footnote{\url{https://man7.org/linux/man-pages/man7/icmp.7.html}} premennými na obmedzenie rýchlosti pri 
+odpovedaní maskou zvolenými ICMP správami \verb|icmp_ratelimit|, \verb|icmp_ratemask| a 
+\verb|icmp_echo_ignore_broadcasts|. Takisto sa odporúča ponechať pravidlá firewallu na najmenšej
+úrovni priepustnosti smerom dnu za každých okolností iba vo forme white-listu.
+Ak napríklad webová aplikácia beží na porte HTTPS/443 a administrácia vstupuje na server cez SSH/22 zo 
+stáleho rozsahu adries intranetu, môže jednoduchá konfigurácia firewallu vyzerá nasledovne 
+\cite{csirt-hardening}:
+\begin{lstlisting}[language=bash]
+# Pravidlá pre povolenie prichádzajúcej komunikácie cez SSH, HTTPS
+iptables --append INPUT --protocol tcp --dport 443 --jump ACCEPT
+iptables --append INPUT --protocol tcp --dport 22 \ 
+         --source 192.168.0.0/24 --jump ACCEPT
+
+# Politiky reťazí pravidiel sú zahodiť všetko okrem odchádzajúcich paketov
+iptables --policy INPUT DROP
+iptables --policy FORWARD DROP
+iptables --policy OUTPUT ACCEPT
+\end{lstlisting}
+
+Cisco smerovače umožňujú zoznamom prístupových oprávnení úplne zakázať alebo spomaliť preposielanie, či tvorbu paketov ICMP destination unreachable na zamedzenie útoku UDP flood:\footnote{\url{https://www.ciscopress.com/articles/article.asp?p=345618&seqNum=5}}
+\begin{lstlisting}
+# Odmedzenie rýchlosti posielania ICMP unreachable na 1000 ms
+ip icmp rate-limit unreachable 1000
+
+# Zakázanie akejkoľvek ICMP unreachable premávky
+access-list 100 deny icmp any any unreachable
+
+# Vypnutie odpovedí smerovača s ICMP unreachable na zvolenom rozhraní
+interface GigabitEthernet0/0
+> no ip unreachables
+\end{lstlisting}
+
+Na zabránenie slučky paketov smerujúcej naspäť pôvodcovi sa zvykne pri záplavových útokoch vložiť do paketu 
+sfalšovaná zdrojová adresa. Metóda známa ako \textbf{IP spoofing}. Vychádza s potreby útočníka zostať
+v anonymite a prípadne zmiasť bezpečnostnú ofenzívu vzbudením dojmu, že nadmerná premávka pochádza od
+rozptýlených podnecovateľov. Ukradnuté zdrojové adresy sa pre navodenie dôveryhodnosti vyberajú
+z rozsahu verejne smerovateľných IP adries (riadiac sa RFC 1918, 3330). Privátne adresy sa totiž 
+štandardne zahadzujú na smerovačoch registrovaním príslušných ACL pravidiel \footnote{\url{https://www.cisco.com/c/en/us/support/docs/ip/access-lists/43920-iacl.html}}. V skrátenej ukážke zastavenia 
+zakázaných rozsahov a prepustenia ostatného. 
+\begin{lstlisting}
+access-list 110 deny ip host 0.0.0.0 any
+access-list 110 deny ip 10.0.0.0 0.255.255.255 any
+access-list 110 deny ip 127.0.0.0 0.255.255.255 any
+access-list 110 deny ip 172.16.0.0 0.15.255.255 any
+access-list 110 deny ip 192.168.0.0 0.0.255.255 any
+access-list 110 permit ip any any
+\end{lstlisting}
+
+Podvrhnuté IP adresy sa rozlišujú podľa techniky ich selekcie. Najmenej sofistikovaný postup spočíva vo 
+vygenerovaní náhodného 32-bitového čísla, ktoré bude predstavovať spoofovanú zdrojovú adresu. 
+Prostredníctvom zapojenia ingress a egress filtrovania alebo filtrovanie podľa reverznej cesty sú
+poskytovatelia pripojenia schopný zabrzdiť škodlivú premávky takmer v zárodku. Vymyslená IP adresa nesmie 
+byť úplne svojvoľná, ale pochádzať z platných podsieti, pre ktoré router má záznam v smerovacej tabuľke 
+alebo sa môže nachádzať niekde po ceste k obeti. U reflektorových útokov alebo v situáciach, kedy si
+útočník praje, aby bol vinený za iniciátora určitý počítač. Naproti bežnej predstavy prevláda snaha
+o zúžitkovanie validných zdrojových adries botov, tam kde sa to dá. \cite{ddos-anatomy-2004}.
+
+% Ingress/Egress
+% Popis skriptu cez raw sockety
+
+% black hole filtering na iBGP
+% RFC2827 – Network Ingress filtering – Unicast Reverse Path Forwarding Strict/Loose a FIB (CAM) 
+% RTBH – Remotely triggered black hole with iBGP peer trigger
+
+% zaterasenie, zapchantie, prebytočné
+% Zajtra do 11:00
+% Router(config-if)# no ip directed-broadcast
+\newpage
 
 \section{Škálovanie webových aplikácií}
-7 - 13str.
-Definuj verikálne a horizontálne škálovanie
-IEEE802.3az, LACP - Trunking a konfigurácia na cisco switch
-RFC2991 - ECMP smerovanie v OSPFv2 a výber vhodných next hops a problémy s rôznymi trasami
-router ospf 1
-maximum-paths 2
-RFC2827 – Network Ingress filtering – Unicast Reverse Path Forwarding Strict/Loose a FIB (CAM)
-cisco sonfig 
-RTBH – Remotely triggered black hole with iBGP peer trigger
-RFC 3022 – NAT a firewall – routing, load balancing ( Network Address Port Translation(NAPT)) – Popis vytvorenia spojenia v stavovej tabuľke a ak nemá unbound asociáciu tak je zahodený.
-
-- attack response strategy – agent identif., rate limiting, filtering (ingress/egreess/black-hole), reconfig of toplogy
-Reverzná proxy – pool serverov, DNS A záznamy (ukážka BIND konfigurácie bez PTR)
+% Definuj verikálne a horizontálne škálovanie
 
 \subsection{Agregácia liniek}
+% EEE802.3az, LACP - Trunking a konfigurácia na cisco switch
 
-\subsection{Smerovanie zamedzujúce nadmernej sieťovej premávke}
+\subsection{Viaccestné smerovanie}
+% RFC2991 - ECMP smerovanie v OSPFv2 a výber vhodných next hops a problémy s rôznymi trasami
+% router ospf 1
+% maximum-paths 2
 
 \subsection{Algoritmy vyvažovania záťaže}
+% Load balancing algoritm comparaison
 
 \subsection{Vysoká dostupnosť služieb}
-Opísať rozdiel medzi základnou dostupnosťou a vysokou dostupnosťou – zdroj 1
-Protokol VRRP – mechanizmus fungovania, virtálna ip adresa – paket traces
-Keepalived konfigurácia dvoch Linux zariadení s failover
+% Opísať rozdiel medzi základnou dostupnosťou a vysokou dostupnosťou – zdroj 1
+% Protokol VRRP – mechanizmus fungovania, virtálna ip adresa – paket traces
+% Keepalived konfigurácia dvoch Linux zariadení s failover
 
 \subsection{Softvérové nástroje na vyvažovanie záťaže}
+% Reverzná proxy – pool serverov, DNS A záznamy (ukážka BIND konfigurácie bez PTR)
 
 \subsubsection{HAProxy}
 
 \subsubsection{Nginx}
 
-\subsubsection{Dispatcher Worker model}
 
+%\section{Ochrana webových serverov}
 
-\section{Ochrana webových serverov}
+%\subsection{Hlavičky protokolu HTTP}
 
-\subsection{Hlavičky protokolu HTTP}
+%\subsection{Access Control List}
 
-\subsection{Access Control List}
-
-\subsection{TLS a X.509 certifikáty}
-
+%\subsection{TLS a X.509 certifikáty}
 
 
 \section{Monitorovanie webovej aplikácie}
 
 \subsection{Metriky}
-
-\subsection{Syslog a Common Logfile Format}
+% Syslog a Common Logfile Format
 
 \subsection{Zabbix}
 
@@ -331,23 +600,17 @@ Monitoring na
 Sleduj network traffic na eth0 pri záplave:  vnstat, zabbix
 Sleduj počet spojení pri load balancingu
 
-
-Dnes - dokončenie 1. sekcie do 14:00
-a úvod do DDoS útokov + PSI
-Sobota - PSI, dokončiť 2 sekciu
-Nedeľa - polka tretej sekcie, odstovať záťažové testy a zozbierať logy z apache, haproxy a nginx
-po ab, slowhttptest
-logy z vnstat a wireshark po hping flood (udp, icmp, syn) a vlastnom skripte - aj pc server
-\begin{verbatim}
+\begin{lstlisting}
 ab -n 100 -c 10 http://192.168.100.82/
-
-hping 192.168.100.82 --udp -p 80 --flood  // hping 192.168.100.82 --syn -p 8090 -a 192.168.1.1
+hping 192.168.0.2 --udp -p 80 --flood  
+hping 192.168.0.2 --syn -p 80 --spoof 192.168.1.1
 
 slowhttptest -c 1000 -H -g -o my_header_stats -i 10 -r 200 -t GET -u https://192.168.100.82/ -x 24 -p 10
 thc-ssl-dos 192.168.100.82 80 --accept
+slowhttptest -u http://192.168.0.2/ -c 100
 
 wireshark
-\end{verbatim}
+\end{lstlisting}
 
 \printbibliography[title={Literatúra}]
 
