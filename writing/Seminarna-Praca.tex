@@ -7,6 +7,8 @@
 \usepackage{hyperref}
 \usepackage{csquotes}
 \usepackage{listings}
+\usepackage{setspace}
+\setstretch{1.25}
 
 \usepackage[style=iso-numeric,backend=biber]{biblatex}
 \addbibresource{references.bib}
@@ -22,8 +24,8 @@
 \geometry{
 	a4paper,
 	margin=2.5cm,
-	top=2cm,
-	bottom=2cm
+	top=2.5cm,
+	bottom=2.5cm
 }
 
 \lstset{inputencoding=utf8,texcl=true}
@@ -189,42 +191,29 @@ narušenia.
 Relatívne vysokou hodnotou, viditeľnosťou a prístupnosťou a nízkou zotrvačnosťou sa cieľ stáva 
 exponovanejší a tým žiadanejší pre útočníka na odstavenie. Oproti klasickému zločinu, kedy býva nutná 
 prítomnosť páchateľa a obete na jednom mieste, kyberzločin dovoľuje útočníkovi pôsobiť cez internet takmer 
-od hocikadiaľ a maskovať sa proti odhaleniu pomocou prostredníkov ako sú na pohľad neškodné servery na 
-komunikáciu s infikovanými zariadeniami alebo anonymizačnými protokolmi, napríklad Tor.
+od hocikadiaľ a maskovať sa proti odhaleniu.
 
 \subsubsection{Psychologická predeterminácia útočníka}
 Pokiaľ by nejestvovali indivíduá so zámerom druhému spôsobiť ujmu vyplývajúcu z nastolených motivačných
 faktorov nebolo by ani potrebné sa výrazne zaoberať zvyšovaním odolnosti informačných služieb, či brániť
 voči kriminalite ako takej. Určité vzorce ľudského správania naznačujú, že je prakticky nemožné sa pred 
-týmito spoločenskými javmi vyhraniť. Človek má tendenciu sa asimilovať v sociálnej skupine a preberať prvky 
-jej správania \cite{heretik}. Základné sociálne jednotky ako rodina, vrstovníci alebo osoby rovnakého
-statusu v spoločnosti môžu mať pozitívny vplyv na inhibíciu antisociálneho správania, či naopak majú
-za následok normalizáciu všeobecnejšie neakceptovaných noriem v dôsledku sociálneho tlaku skupiny.
-Naopak, prílišné dovoľujúce prostredie počas personálneho vývinu má za potenciálny následok osvojenie si 
-negatívnych vzorov správania, pretože chýbajú podmieňujúce zážitky, ktoré by korektne usmernili ponímanie 
-vážnosti nesprávnych činov. Vyrastanie v neláskyplnom prostredí s prejavmi menejcennosti môže 
-neskôr viesť k tomu, že delikventov teší širší záujem o ich záporné činy, tým že boli konečne povšimnutý a 
-uznaný vo svojej aktivite. Vyjadrujú tak nadobudnutú nevraživosť a konajú na protest proti 
-reštriktívnym orgánom verejnej moci a ponímanej nespravodlivosti.
+týmito spoločenskými javmi vyhraniť.
 
-Teória diferenciálnej asociácie tvrdí, že v spoločnosti existujú paralelne tak 
-prosociálne, ako aj asociálne normy, postoje a spôsoby správania \cite{heretik}, čím sa vysvetľujú 
-trestné činy dostatočne zabezpečených jedincov strednej vrstvy. Dochádza u nich k stotožňovaniu sa s 
-antisociálnymi prístupmi na ceste za osobným úspechom. Zároveň páchatelia podvedome zľahčujú následky 
-sociálneho zlyhania v spojitosti s stanovenými antikriminálnymi normami. V snahu neutralizovať svoje
-konanie popierajú zodpovednosti skrývaním sa za bezvýchodiskovosť situácie, neuznávajú význam obete 
-prenášajúc naň vinu a ohraďujú sa konaním v záujme vyššieho princípu. Na základe teórie etiketovania
-je delikvencia len momentálny stav osobnosti, ktorý pramálo súvisí s psychickými vlastnosťami a správaním.
-Z množstva sociálno-psychologických postulátov je zrejmé, že separátne nedokážu jednoznačne predpovedať 
-exaktnú profiláciu hľadaného delikventa, ale poskytujú komplexnejší obraz o tom, aké pohnútky ich môžu viesť
-k zdanlivo neočakávaného činu na konkrétnej obeti.
+Teória diferenciálnej asociácie tvrdí, že v spoločnosti existujú paralelne tak prosociálne, ako aj asociálne 
+normy, postoje a spôsoby správania \cite{heretik}, čím sa vysvetľujú trestné činy dostatočne zabezpečených 
+jedincov strednej vrstvy. Dochádza u nich k stotožňovaniu sa s antisociálnymi prístupmi na ceste za osobným 
+úspechom. Zároveň páchatelia podvedome zľahčujú následky  sociálneho zlyhania v spojitosti s stanovenými 
+antikriminálnymi normami. V snahu neutralizovať svoje konanie popierajú zodpovednosti skrývaním sa za 
+bezvýchodiskovosť situácie, neuznávajú význam obete  prenášajúc naň vinu a ohraďujú sa konaním v záujme 
+vyššieho princípu. Na základe teórie etiketovania je delikvencia len momentálny stav osobnosti, ktorý 
+pramálo súvisí s psychickými vlastnosťami a správaním.
 
 Predpokladom na spáchanie kybernetického zločinu sústrediac sa na snahu o eliminovanie dostupnosti
 sú okrem úvodných pohnútok aj isté technické zručnosti útočníka. Keď chce byť pracovník slobodný od 
 nadriadených a má, hoc aj nedopatrením, záznam v registri trestov, je niekedy motivovaný vlastnou 
 otáznejšou zamestnateľnosťou sa uchýliť k predávaniu alebo prenajímaniu strojov, ktoré sa mu podarí 
 kompromitovať, pre niekoho kto má záujem učiniť veľkoplošný útok a vedú ho k tomu zrejme dôvody uvedenej 
-skorej. Časom to hacker berie ako formu ilegálneho biznisu a dokáže si zarobiť uspokojivý obnos 
+skorej. Hacker si časom  vybuduje ilegálny biznis, ktorým si dokáže zarobiť uspokojivý obnos 
 \cite{infiltrating-botnet}. Využívané programy sú vymieňané alebo predávané sprostredkovane cez fóra,
 sú reklamované a tamojšími administrátormi overované podobne ako bežný komerčný softvér. Na fórach 
 prebiehajú diskusie a objavujú sa návody k schodným spôsobom ako si dostupný malvér sprevádzkovať 
@@ -235,8 +224,8 @@ na Slovensku trestným činom podľa \emph{§247a Trestného zákona} a obdoby s
 právnych poriadkoch (napr. v USA - Computer Fraud and Abuse Act a 18 U.S.C. § 1030, v Nemecku - 
 Strafgesetzbuch: §303b  Computersabotage). Činnosť neoprávneného zásahu do počítačového systému spadá v 
 podstate do rovnakej oblasti ako poškodenie cudzieho majetku s trestami odňatia slobody pri preukázaní, od 
-šiestich mesiacov až po 10 rokov podľa závažnosti\cite{trestny-zakon}. 
-\newpage
+šiestich mesiacov až po 10 rokov podľa závažnosti \cite{trestny-zakon}. 
+
 \section{Anatómia útokov Denial of Service}
 Internet predstavuje prostredie sprístupňujúce na jednej strane ohromnú kvantitu služieb, ale zároveň 
 sprostredkúva útočníkom širokú paletu nástrojov umožňujúcich ich odstavenie. Útoky odoprenia služby
@@ -449,31 +438,124 @@ dig +dnssec +trace opendns.com
 dig +dnssec @b.root-servers.net opendns.com
 \end{lstlisting}
 
-Pravidelne vydávaný prehľad a trendy kybernetických hrozieb vydávanej európskou inštitúciou ENISA
-poznamenávajú, že takmer 80\% všetkých DDoS útokov v treťom kvartáli 2019 boli SYN záplavy 
-\cite{enisa-ddos}. 
-
-% Doplň
+Každoročný prehľad v trendoch kybernetických hrozieb publikovaných európskou inštitúciou ENISA
+konštatuje, že takmer 80\% všetkých DDoS útokov v treťom kvartáli 2019 boli TCP SYN záplavy 
+\cite{enisa-ddos}, stávajúc sa najpopulárnejším typom útoku spolu s DNS odrazenou amplifikáciou. 
+V apríli 2019 bol zaznamenaný SYN Flood útok s prietokom až 580 miliónov paketov za sekundu. Vyskytujú
+sa hlavne multivektorové útoky, čím je ich zdolanie komplexnejšie. Zároveň dominovali útoky kratšie
+ako 10 minút, ktorých bolo 84\% zo zaznamenaných. Celkovo došlo k nárastu v počte nahlásených útokov
+o 241\% oproti rovnakom období predošlého roku. \cite{enisa-ddos}.
 
 \subsection{Ochrana spevnením sieťovej ochrany}
-Na zamedzenie podobných praktík sa vo všeobecnosti zvykne uplatňovať metóda viacerých línií obrany, 
-ktoré sa osvedčili už za dávnych čias pri fyzickej obrane pevností. Pri vtedy praktikovaných technikách sú patrné mnohé podobnosti so súčasnou ochranou webových aplikácií.
+Obranné mechanizmy na úspešné zvládnutie útokov odoprenia služby rozlišujeme primárne podľa
+úrovne aktivity reakcie na \textbf{proaktívne} a \textbf{reaktívne} stratégie
+\cite{ddos-anatomy-2004}.
+
+\textbf{Prevenciou} sa zabezpečuje systém proti prieniku formou priebežného monitorovania, 
+pravidelným sťahovaním a inštaláciou bezpečnostných záplat. Súčasne sa prezentujú
+bezpečnostné politiky organizácie a inkluzívne sa ráta sa s klasickými vektormi 
+zneužívaných častými druhmi DDoS útokov a premýšľa sa adekvátne minimalizovanie dopadu
+hrozieb s nimi spojenými. Prakticky osvedčenými technikami sú účtovanie zdrojov pre každú
+IP adresu pristupujúcu k službe, limitovaním pridelenia zvládnuteľného počtu
+spojení a určenie maximálnej frekvencie odpovedí servera, alebo znásobenie zdrojov 
+systému duplikáciou na viaceré nadbytočné zariadenia a vyvažovanie záťaže medzi nimi.
+
+\textbf{Reaktívne spôsoby} sa usilujú o zmiernenie útoku počas jeho konania. Pre automatizované
+riadenie defenzívy by mali byť obranné prvky detekcie útoku odlíšením od typickej sieťovej 
+premávky s ohľadom na odstránenie vlastnej chybovosti pri idenfikácii falošných poplachov
+a prehliadnutí škodlivých činností. Zisťovanie prítomnosti pokusov na odoprenie služieb
+sa sleduje rozpoznávaním podozrivých vzorov podľa analýzy predošlých útokov alebo
+pozorovanie anomálií v komunikácií, na všímanie si je strážny element sústredený alebo
+sa natrénuje na bežnej premávke a spustí varovanie po prekročení prahových hodnôt.
+
+Pri oboch stratégiach je ideálne aplikovať taktiku viacerých línií obrany, ktoré sa osvedčili už 
+za dávnych  čias pri fyzickej obrane pevností. Pri porovnávaní sú patrné mnohé podobnosti so
+súčasnou ochranou sieťovej  infraštruktúry a webových aplikácií.
 
 Bezpečné prostredie má ľudí a aktíva chrániť pred ujmou a stratou. Staroveké civilizácie si na ten účel 
 stavali obranné pevnosti, ktoré mali poskytnúť ochranu pre veci vnútri nich. Už Mykénska civilizácia 
 uplatňovala štyri zóny fyzickej obrany pred nepriateľom \cite{physical-security}. Prvou líniou obrany
-bola priekopa alebo rieka, za ktorou sa v druhej línii nachádzala obvodový múr. Menšia vnútorná stena
-obkolesovala svätostánky a palác. Posledná najvnútornejšia obranná stena stála pred pokladom v kráľovskej 
-štvrti. 
+bola priekopa alebo rieka s premosteniami, za ktorých paralelu je možné vo virtuálnom svete považovať
+BGP (Border Gateway Protocol) čierne diery (RTBH) reaktívne chrániace 
+autonómny systém (AS) ako celok. Za priekopou sa v druhej línii nachádzal obvodový múr a vstupné brány so 
+sieťových ekvivalentom snáď v Ingress, Egress a ACL filtrovaní premávky na smerovačoch alebo 
+zapojením systémom detekcie a prevencie narušenia - IDS a IPS). Vnútri pevností obkolesovala menšia vnútorná 
+stena svätostánky a palác, čo sa dá pripodobniť k firewall pravidlám operačného systému, na ktorom služba 
+beží. Posledná  najvnútornejšia obranná stena stála pred pokladom v kráľovskej štvrti. Táto úroveň sa dá 
+stotožniť s bezpečnostnými mechanizmami webového servera v podobe Web Application Firewall (WAF) aj ako 
+modulov. Konkrétne do Apache sú zakomponované ModSecurity a ModEvasive.
 
-%Blackhole je priekopa, Firewall je brána s ACL
+Pozorujeme, že smerom ďalej do centra chráneného webového  servera, tým dokážeme odolávať efektívnejšie 
+rozsiahlejším útokom, keďže spravidla chrbticová sieť disponuje najsilnejšími prostriedkami, ale na druhej 
+strane sa jej problémy pôsobiace nižšie po prúde až v takej miere nedotýkajú.
 
-% - typy obrany –
-% preventívna (záplaty, firewall, IDS, Resource accounting/multiplication)
-% reaktívna (Pattern vs Anonomaly detection)
+\subsubsection{Remotely Triggered Black Hole} 
+Nežiadúcu premávku je teda vhodné zlikvidovať na okraji 
+autonómneho systému vzdialene spustiteľnou čiernou dierou (RTBH). Nahlásením zdrojov alebo 
+častejšie cieľa útoku vie správca siete vložiť do spúšťacieho smerovača statickú cestu na virtuálne 
+rozhranie \emph{Null}, ktoré spôsobí zahodenie paketov (RFC 5635). Postihnutá služba bude síce odrezaná 
+od Internetu,  čiže útočník dosiahne zamedzenie dostupnosti pre ostatných používateľov, ale zmiernia sa 
+negatívne dopady na zvyšnú infraštruktúru. Na edge routeroch sa musí vopred nakonfigurovať statická cesta 
+pre ďalší skok stanovený za black hole a zakázanie pre ňu odpovede o nedosiahnutí cieľa cez ICMP:
+\begin{lstlisting}
+ip route 192.0.2.1 255.255.255.255 Null0
+interface Null0 
+    no ip unreachables
+\end{lstlisting}
+Na trigger smerovači sa musí aktivovať BGP politika na presmerovanie cesty k obeti 
+po obdržaní cesty so spúšťacou značkou (v príklade je ňou \verb|tag 66|) a povolenie distribúcie
+statickej cesty pre iBGP peerov a nepropagovanie mimo autonómneho systému \cite{cisco-rtbh}:
+\begin{lstlisting}
+route-map blackhole
+    match tag 66
+    set ip next-hop 192.0.2.1
+    set origin igp
+    set community no-export
+router bgp 65535
+    redistribute static route-map blackhole
+\end{lstlisting}
+Poskytovateľ pripojenia má potom možnosť iniciovať zablokovanie premávky na obeť známej IP adresy
+cez pravidlo na spúšťacom smerovači, ktoré všade presmeruje v tomto príklade \verb|172.5.23.1| značkou
+66 na ďalší skok \verb|192.0.2.1| predstavujúci čiernu dieru. Uvedená statická cesta musí byť po skončení
+odobratá zo spúšťacieho routera, ktorý rozpošle BGP route withdrawal svojim iBGP peerom:
+\begin{lstlisting}
+ip route 172.5.23.1 255.255.255.255 Null0 tag 66
+\end{lstlisting}
 
+\subsubsection{IP Spoofing}
+Na zabránenie spätnej väzby paketov vracajúcej sa naspäť botom útočníka, sa zvykne pri záplavových útokoch vložiť do paketu sfalšovaná zdrojová adresa. Vychádza z potreby 
+útočníka zostať v anonymite a prípadne zmiasť bezpečnostnú obranu vzbudením dojmu, že nadmerná premávka 
+pochádza od rozptýlených podnecovateľov. Prostredníctvom zapojenia Ingress a Egress filtrovania alebo sú
+poskytovatelia pripojenia schopný zabrzdiť škodlivú premávky takmer v zárodku. Ukradnuté zdrojové adresy sa 
+pre navodenie dôveryhodnosti vyberajú z rozsahu verejne smerovateľných IP adries (RFC 1918, RFC 3330). 
+Privátne adresy sa totiž  štandardne zahadzujú na smerovačoch registrovaním príslušných ACL pravidiel ako 
+realizácia \textbf{Egress filtrovania} Skrátená ukážka odhodí pakety z jedného súkromného rozsahov a 
+prepustí ostatné \cite{cisco-spoofing-rules}: 
+\begin{lstlisting}
+access-list 110 deny ip 192.168.0.0 0.0.255.255 any
+access-list 110 permit ip any any
+\end{lstlisting}
+
+Podvrhnuté IP adresy sa rozlišujú podľa techniky ich selekcie. Najmenej sofistikovaný postup spočíva vo 
+vygenerovaní náhodného 32-bitového čísla, ktoré bude predstavovať spoofovanú zdrojovú adresu. 
+Vymyslená IP adresa nesmie byť úplne svojvoľná, ale pochádzať z platných podsieti, pre ktoré router má 
+záznam v smerovacej tabuľke alebo sa môže nachádzať niekde po ceste k obeti. \textbf{Ingress filtrovanie}
+(RFC 2827) totiž povoľuje v striktnom režime smerovať iba pakety, pre ktoré existuje vo FIB (Forwarding 
+information base) tabuľke mapovanie reverznej cesty (Reverse Path Forwarding) cez rovnaké rozhranie. Ak 
+nedokáže byť zabezpečené symetrické  smerovanie potom \enquote{loose} mód dovoľuje akceptovať spätnú cestu 
+cez ľubovoľné rozhranie smerovača:
+\begin{lstlisting}
+ip verify unicast reverse-path list           # Strict mode
+ip verify unicast source reachable-via any    # Loose mode
+\end{lstlisting}
+U reflektorových útokov alebo v situáciach, kedy si útočník praje, aby bol vinený za iniciátora určitý 
+počítač. Naproti bežnej predstavy prevláda snaha o zúžitkovanie validných zdrojových adries botov, tam kde 
+je to uskutočniteľné \cite{ddos-anatomy-2004}.
+
+\subsubsection{Firewall}
 Zníženie záťaže na systémové zdroje pridelené na tvorbu paketov odpovede je dosiahnuteľné cez 
-\emph{rate limiting}. Linux oplýva vrámci \emph{procfs} (\verb|/proc/sys/net/ipv4/|)\footnote{\url{https://man7.org/linux/man-pages/man7/icmp.7.html}} premennými na obmedzenie rýchlosti pri 
+\emph{rate limiting}. Linux oplýva vrámci \emph{procfs} (\verb|/proc/sys/net/ipv4/|)\footnote{\url{https://
+man7.org/linux/man-pages/man7/icmp.7.html}} premennými na obmedzenie rýchlosti pri 
 odpovedaní maskou zvolenými ICMP správami \verb|icmp_ratelimit|, \verb|icmp_ratemask| a 
 \verb|icmp_echo_ignore_broadcasts|. Takisto sa odporúča ponechať pravidlá firewallu na najmenšej
 úrovni priepustnosti smerom dnu za každých okolností iba vo forme white-listu.
@@ -485,73 +567,39 @@ stáleho rozsahu adries intranetu, môže jednoduchá konfigurácia firewallu vy
 iptables --append INPUT --protocol tcp --dport 443 --jump ACCEPT
 iptables --append INPUT --protocol tcp --dport 22 \ 
          --source 192.168.0.0/24 --jump ACCEPT
-
 # Politiky reťazí pravidiel sú zahodiť všetko okrem odchádzajúcich paketov
 iptables --policy INPUT DROP
 iptables --policy FORWARD DROP
 iptables --policy OUTPUT ACCEPT
 \end{lstlisting}
 
-Cisco smerovače umožňujú zoznamom prístupových oprávnení úplne zakázať alebo spomaliť preposielanie, či tvorbu paketov ICMP destination unreachable na zamedzenie útoku UDP flood:\footnote{\url{https://www.ciscopress.com/articles/article.asp?p=345618&seqNum=5}}
+Cisco smerovače umožňujú zoznamom prístupových oprávnení úplne zakázať alebo spomaliť preposielanie, či 
+tvorbu paketov ICMP destination unreachable na zamedzenie útoku UDP flood:\footnote{\url{https://
+www.ciscopress.com/articles/article.asp?p=345618&seqNum=5}}
 \begin{lstlisting}
 # Odmedzenie rýchlosti posielania ICMP unreachable na 1000 ms
 ip icmp rate-limit unreachable 1000
-
 # Zakázanie akejkoľvek ICMP unreachable premávky
 access-list 100 deny icmp any any unreachable
-
-# Vypnutie odpovedí smerovača s ICMP unreachable na zvolenom rozhraní
-interface GigabitEthernet0/0
-> no ip unreachables
 \end{lstlisting}
-
-Na zabránenie slučky paketov smerujúcej naspäť pôvodcovi sa zvykne pri záplavových útokoch vložiť do paketu 
-sfalšovaná zdrojová adresa. Metóda známa ako \textbf{IP spoofing}. Vychádza s potreby útočníka zostať
-v anonymite a prípadne zmiasť bezpečnostnú ofenzívu vzbudením dojmu, že nadmerná premávka pochádza od
-rozptýlených podnecovateľov. Ukradnuté zdrojové adresy sa pre navodenie dôveryhodnosti vyberajú
-z rozsahu verejne smerovateľných IP adries (riadiac sa RFC 1918, 3330). Privátne adresy sa totiž 
-štandardne zahadzujú na smerovačoch registrovaním príslušných ACL pravidiel \footnote{\url{https://www.cisco.com/c/en/us/support/docs/ip/access-lists/43920-iacl.html}}. V skrátenej ukážke zastavenia 
-zakázaných rozsahov a prepustenia ostatného. 
-\begin{lstlisting}
-access-list 110 deny ip host 0.0.0.0 any
-access-list 110 deny ip 10.0.0.0 0.255.255.255 any
-access-list 110 deny ip 127.0.0.0 0.255.255.255 any
-access-list 110 deny ip 172.16.0.0 0.15.255.255 any
-access-list 110 deny ip 192.168.0.0 0.0.255.255 any
-access-list 110 permit ip any any
-\end{lstlisting}
-
-Podvrhnuté IP adresy sa rozlišujú podľa techniky ich selekcie. Najmenej sofistikovaný postup spočíva vo 
-vygenerovaní náhodného 32-bitového čísla, ktoré bude predstavovať spoofovanú zdrojovú adresu. 
-Prostredníctvom zapojenia ingress a egress filtrovania alebo filtrovanie podľa reverznej cesty sú
-poskytovatelia pripojenia schopný zabrzdiť škodlivú premávky takmer v zárodku. Vymyslená IP adresa nesmie 
-byť úplne svojvoľná, ale pochádzať z platných podsieti, pre ktoré router má záznam v smerovacej tabuľke 
-alebo sa môže nachádzať niekde po ceste k obeti. U reflektorových útokov alebo v situáciach, kedy si
-útočník praje, aby bol vinený za iniciátora určitý počítač. Naproti bežnej predstavy prevláda snaha
-o zúžitkovanie validných zdrojových adries botov, tam kde sa to dá. \cite{ddos-anatomy-2004}.
-
-% Ingress/Egress
-% Popis skriptu cez raw sockety
-
-% black hole filtering na iBGP
-% RFC2827 – Network Ingress filtering – Unicast Reverse Path Forwarding Strict/Loose a FIB (CAM) 
-% RTBH – Remotely triggered black hole with iBGP peer trigger
-
-% zaterasenie, zapchantie, prebytočné
-% Zajtra do 11:00
-% Router(config-if)# no ip directed-broadcast
-\newpage
 
 \section{Škálovanie webových aplikácií}
 % Definuj verikálne a horizontálne škálovanie
 
-\subsection{Agregácia liniek}
-% EEE802.3az, LACP - Trunking a konfigurácia na cisco switch
+\subsection{Redundancia na linkovej a sieťovej vrstve}
+\paragraph{Agregácia liniek}
+% IEEE802.3az, LACP - Trunking a konfigurácia na cisco switch
 
-\subsection{Viaccestné smerovanie}
+\paragraph{Viaccestné smerovanie}
 % RFC2991 - ECMP smerovanie v OSPFv2 a výber vhodných next hops a problémy s rôznymi trasami
 % router ospf 1
 % maximum-paths 2
+
+\subsection{Reverzné proxy na vyvažovanie záťaže}
+% Reverzná proxy – pool serverov, DNS A záznamy (ukážka BIND konfigurácie bez PTR)
+\subsubsection{HAProxy}
+
+\subsubsection{Nginx}
 
 \subsection{Algoritmy vyvažovania záťaže}
 % Load balancing algoritm comparaison
@@ -561,56 +609,42 @@ o zúžitkovanie validných zdrojových adries botov, tam kde sa to dá. \cite{d
 % Protokol VRRP – mechanizmus fungovania, virtálna ip adresa – paket traces
 % Keepalived konfigurácia dvoch Linux zariadení s failover
 
-\subsection{Softvérové nástroje na vyvažovanie záťaže}
-% Reverzná proxy – pool serverov, DNS A záznamy (ukážka BIND konfigurácie bez PTR)
-
-\subsubsection{HAProxy}
-
-\subsubsection{Nginx}
-
-
-%\section{Ochrana webových serverov}
-
-%\subsection{Hlavičky protokolu HTTP}
-
-%\subsection{Access Control List}
-
-%\subsection{TLS a X.509 certifikáty}
-
-
 \section{Monitorovanie webovej aplikácie}
+
+\subsection{HTTP hlavičky}
 
 \subsection{Metriky}
 % Syslog a Common Logfile Format
 
 \subsection{Zabbix}
 
-\section{Simulácie útokov a záťažové testy}
-Docker-compose: útoky ---> Haproxy/Nginx ---> 1-4x Apache Web site
+\subsection{Simulácie útokov a záťažové testy}
+% Popis skriptu cez raw sockety
+% Docker-compose: útoky ---> Haproxy/Nginx ---> 1-4x Apache Web site
 
-Typy útokov (UDP flood, SYN Flood, Slow Loris so spoofed IP)
-Meniť počet horizontálych inštancií
-Meniť počet workerov
+% Typy útokov (UDP flood, SYN Flood, Slow Loris so spoofed IP)
+% Meniť počet horizontálych inštancií
+% Meniť počet workerov
 
-Pridaj do zabbixu ostatné hosty
-Monitoring na 
-	- Apache (Access Log, Error log)
-	- Haproxy (HAlog, https://www.haproxy.com/blog/introduction-to-haproxy-logging/)
-	- NGINX z logov (https://docs.nginx.com/nginx/admin-guide/monitoring/logging/)
-Sleduj network traffic na eth0 pri záplave:  vnstat, zabbix
-Sleduj počet spojení pri load balancingu
+% Pridaj do zabbixu ostatné hosty
+% Monitoring na 
+%	- Apache (Access Log, Error log)
+%	- Haproxy (HAlog, https://www.haproxy.com/blog/introduction-to-haproxy-logging/)
+%	- NGINX z logov (https://docs.nginx.com/nginx/admin-guide/monitoring/logging/)
+%Sleduj network traffic na eth0 pri záplave:  vnstat, zabbix
+%Sleduj počet spojení pri load balancingu
 
-\begin{lstlisting}
-ab -n 100 -c 10 http://192.168.100.82/
-hping 192.168.0.2 --udp -p 80 --flood  
-hping 192.168.0.2 --syn -p 80 --spoof 192.168.1.1
+%\begin{lstlisting}
+%ab -n 100 -c 10 http://192.168.100.82/
+%hping 192.168.0.2 --udp -p 80 --flood  
+%hping 192.168.0.2 --syn -p 80 --spoof 192.168.1.1
 
-slowhttptest -c 1000 -H -g -o my_header_stats -i 10 -r 200 -t GET -u https://192.168.100.82/ -x 24 -p 10
-thc-ssl-dos 192.168.100.82 80 --accept
-slowhttptest -u http://192.168.0.2/ -c 100
+%slowhttptest -c 1000 -H -g -o my_header_stats -i 10 -r 200 -t GET -u https://192.168.100.82/ -x 24 -p 10
+%thc-ssl-dos 192.168.100.82 80 --accept
+%slowhttptest -u http://192.168.0.2/ -c 100
 
-wireshark
-\end{lstlisting}
+%wireshark
+%\end{lstlisting}
 
 \printbibliography[title={Literatúra}]
 
