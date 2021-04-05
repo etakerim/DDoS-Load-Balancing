@@ -349,14 +349,13 @@ privlastnenie si celej vyhradenej linky alebo výpočtového výkonu prevádzkov
 Ak je vyústením prevalcovanie serverovej infraštruktúry obete nedokonalosťou zabezpečovacích 
 mechanizmov dochádza k zrušeniu dostupnosti s následkami už uvedenými. Aby sme porozumeli metódam 
 efektívnej obrany je nevyhnutné zatriediť a kategorizovať objavujúce sa
-hrozby, s ktorými sa ciele DDoS útoku vedia stretnúť. V literatúre existujú rozličné taxonómie po
-nímajúce problematiku z rôznych uhlov pohľadu \cite{ddos-attacks} \cite{botnets} \cite{ddos-anatomy-2004} 
-\cite{csirt-ddos}. Nastolené hierarchie budú zúžitkované a skombinované do jednotnejšieho prehľadu.
+hrozby, s ktorými sa ciele DDoS útoku vedia stretnúť. V literatúre existujú rozličné taxonómie 
+separujúce problematiku z rôznych uhlov pohľadu \cite{ddos-attacks} \cite{botnets} \cite{ddos-anatomy-2004} 
+\cite{csirt-ddos}.
 
 Základné rozdelenie DDoS útokov spočíva v identifikácii ich primárneho vektora. Webová aplikácia
 býva zneprístupnená, buď vyčerpaním šírky prenosového pásma hrubou silou záplavy paketov, alebo
-vyplytvaním systémových prostriedkov sémantickým útokom zneužitia synchronizačných predpokladov 
-komunikačného protokolu.
+vyplytvaním systémových prostriedkov sémantickým útokom na komunikačný protokol.
 
 \textbf{Volumetrické útoky} (veľkoobjemové útoky) saturujú kapacitu linky rozmanitou plejádou nálože. 
 Spoločným menovateľom je technika flooding (záplava). Populárnou formou útoku je posielanie UDP datagramov 
@@ -400,7 +399,7 @@ algoritmu (RFC 896) do TCP implementácie, ktorého úlohou je zamedziť veľkej
 miniatúrneho payloadu.
 
 Na relačnej vrstve modelu OSI je vďačným protokolom na útoky spotrebujúce značný výpočtový výkon Secure
-Sockets Layer (SSL/TLS). Keďže majorita webových aplikácií v súčastnosti používa HTTPS ako zlatý štandard
+Sockets Layer (SSL/TLS). Keďže majorita webových aplikácií v súčastnosti používa HTTPS
 je dôležité si uvedomiť, že proces šifrovania spolu s réžiou pri výmene kľúčov v SSL handshaku predstavuje 
 pre server násobnú náročnosť oproti klientovi. Znovu sa naskýta prostý útok záplavou iniciácií TLS spojenia
 alebo opätovné dohodnutie SSL komunikácie (renegotiation), ktorá zvykne zahŕňať zmenu parametrov šifrovania
@@ -410,11 +409,10 @@ offloading} do špecializovaného hardvéru \cite{csirt-ddos}.
 Spotrebovanie všetkých ponúkaných spojení HTTP protokolu aplikáciou webového servera sú preferované
 tzv. \enquote{low and slow} útokmi. Agent sa maskuje akoby za veľmi pomalú rýchlosť pripojenia,
 no v skutočnosti zámerne rozdrobuje svoj dopyt na krátke fragmenty a posiela ich s významným oneskorením,
-ale tak aby držal spojenie otvorené čo najdlhšie. Dôvody existujúcich obmedzení tkvejú v maximálnom počte 
+aby držal spojenie otvorené čo najdlhšie. Dôvody existujúcich obmedzení tkvejú v maximálnom počte 
 súborových deskriptorov procesu alebo únosnej hladine bežiacich procesov. Zástupcom tejto skupiny
-útokov je Slowloris a R-U-Dead-Yet? (RUDY). Z dôvodu nízkej generovanej premávky, čo je vlastne úplným
-protipólom k záplavám paketmi, prechádza pomerne ľahko bez povšimnutia, pretože nemá dopad na iné
-atribúty systému.
+útokov je Slowloris a R-U-Dead-Yet? (RUDY). Z dôvodu malej generovanej premávky, prechádza pomerne ľahko 
+bez povšimnutia, pretože nemá dopad na iné atribúty systému.
 
 Rovnako ako botnety slúžia na zitenzívnenie devastačného prúdu paketov, tak môžu nepriamo zapájať 
 do útoku aj malvérom nenakazené počítače technikami odrazu a zosilnenia. Útoky s odrazom (RDoS a DRDoS) 
@@ -448,42 +446,41 @@ o 241\% oproti rovnakom období predošlého roku. \cite{enisa-ddos}.
 
 \subsection{Ochrana spevnením sieťovej ochrany}
 Obranné mechanizmy na úspešné zvládnutie útokov odoprenia služby rozlišujeme primárne podľa
-úrovne aktivity reakcie na \textbf{proaktívne} a \textbf{reaktívne} stratégie
+úrovne pripravenosti reakcie na \textbf{proaktívne} a \textbf{reaktívne} stratégie
 \cite{ddos-anatomy-2004}.
 
-\textbf{Prevenciou} sa zabezpečuje systém proti prieniku formou priebežného monitorovania, 
-pravidelným sťahovaním a inštaláciou bezpečnostných záplat. Súčasne sa prezentujú
-bezpečnostné politiky organizácie a inkluzívne sa ráta sa s klasickými vektormi 
-zneužívaných častými druhmi DDoS útokov a premýšľa sa adekvátne minimalizovanie dopadu
-hrozieb s nimi spojenými. Prakticky osvedčenými technikami sú účtovanie zdrojov pre každú
-IP adresu pristupujúcu k službe, limitovaním pridelenia zvládnuteľného počtu
-spojení a určenie maximálnej frekvencie odpovedí servera, alebo znásobenie zdrojov 
-systému duplikáciou na viaceré nadbytočné zariadenia a vyvažovanie záťaže medzi nimi.
+\textbf{Prevenciou} sa zabezpečuje systém proti prieniku priebežným monitorovaním
+a pravidelným sťahovaním a inštaláciou bezpečnostných záplat. Súčasne sa budujú
+bezpečnostné politiky organizácie, ktoré rátajú s klasickými vektormi DDoS útokov a premýšľa sa 
+nad adekvátnym minimalizovaním dopadu hrozieb s nimi spojenými. Prakticky osvedčenými 
+riešeniami sú \enquote{resource accounting}, čiže účtovanie a limitovanie počtu vyhradených spojení 
+pre každú IP adresu pristupujúcu k službe pri maximálnej frekvencii odpovedí od servera, alebo sa využíva 
+\enquote{resource muliplication}, kedy sú zdroje systému duplikované na viaceré zariadenia a prichádzajúca 
+záťaže je vyvažovaná medzi nimi.
 
 \textbf{Reaktívne spôsoby} sa usilujú o zmiernenie útoku počas jeho konania. Pre automatizované
-riadenie defenzívy by mali byť obranné prvky detekcie útoku odlíšením od typickej sieťovej 
-premávky s ohľadom na odstránenie vlastnej chybovosti pri idenfikácii falošných poplachov
+riadenie defenzívy by mali byť obranné prvky schopné detekcie útoku odlíšením od typickej sieťovej 
+premávky s ohľadom na odstránenie vlastnej chybovosti pri identifikácii falošných poplachov
 a prehliadnutí škodlivých činností. Zisťovanie prítomnosti pokusov na odoprenie služieb
 sa sleduje rozpoznávaním podozrivých vzorov podľa analýzy predošlých útokov alebo
-pozorovanie anomálií v komunikácií, na všímanie si je strážny element sústredený alebo
+pozorovanie anomálií v komunikácií. Strážny komponent je sústredený na preddefinované scenáre alebo
 sa natrénuje na bežnej premávke a spustí varovanie po prekročení prahových hodnôt.
 
-Pri oboch stratégiach je ideálne aplikovať taktiku viacerých línií obrany, ktoré sa osvedčili už 
-za dávnych  čias pri fyzickej obrane pevností. Pri porovnávaní sú patrné mnohé podobnosti so
-súčasnou ochranou sieťovej  infraštruktúry a webových aplikácií.
+Pri oboch stratégiách je ideálne aplikovať taktiku viacerých línií obrany, ktoré sa osvedčili už 
+za dávnych  čias pri fyzickej obrane pevností. Bezpečné prostredie má ľudí a aktíva chrániť pred ujmou a 
+stratou. Staroveké civilizácie si na ten účel stavali obranné pevnosti, ktoré mali poskytnúť ochranu pre 
+veci vnútri nich. Už Mykénska civilizácia uplatňovala štyri zóny fyzickej obrany pred nepriateľom 
+\cite{physical-security}. 
 
-Bezpečné prostredie má ľudí a aktíva chrániť pred ujmou a stratou. Staroveké civilizácie si na ten účel 
-stavali obranné pevnosti, ktoré mali poskytnúť ochranu pre veci vnútri nich. Už Mykénska civilizácia 
-uplatňovala štyri zóny fyzickej obrany pred nepriateľom \cite{physical-security}. Prvou líniou obrany
-bola priekopa alebo rieka s premosteniami, za ktorých paralelu je možné vo virtuálnom svete považovať
-BGP (Border Gateway Protocol) čierne diery (RTBH) reaktívne chrániace 
-autonómny systém (AS) ako celok. Za priekopou sa v druhej línii nachádzal obvodový múr a vstupné brány so 
-sieťových ekvivalentom snáď v Ingress, Egress a ACL filtrovaní premávky na smerovačoch alebo 
-zapojením systémom detekcie a prevencie narušenia - IDS a IPS). Vnútri pevností obkolesovala menšia vnútorná 
+Prvou líniou obrany bola priekopa alebo rieka s premosteniami, za ktorých paralelu je možné vo virtuálnom 
+svete považovať vzdialene spustiteľné čierne diery (RTBH) reaktívne chrániace autonómny systém (AS) 
+regionálne (AS) alebo vcelku. Za priekopou sa v druhej línii nachádzal obvodový múr a vstupné brány, kde je 
+sieťových ekvivalentom snáď Ingress, Egress a ACL filtrovanie premávky na smerovačoch alebo 
+zapojením systémov detekcie a prevencie narušenia - IDS a IPS. Vnútri pevností obkolesovala menšia vnútorná 
 stena svätostánky a palác, čo sa dá pripodobniť k firewall pravidlám operačného systému, na ktorom služba 
-beží. Posledná  najvnútornejšia obranná stena stála pred pokladom v kráľovskej štvrti. Táto úroveň sa dá 
-stotožniť s bezpečnostnými mechanizmami webového servera v podobe Web Application Firewall (WAF) aj ako 
-modulov. Konkrétne do Apache sú zakomponované ModSecurity a ModEvasive.
+beží. Posledná najvnútornejšia obranná stena stála pred pokladom v kráľovskej štvrti. Táto úroveň sa dá 
+stotožniť s bezpečnostnými mechanizmami webového servera v podobe Web Application Firewall (WAF) a podobných
+modulov ako existujú pre Apache s ModSecurity a ModEvasive.
 
 Pozorujeme, že smerom ďalej do centra chráneného webového  servera, tým dokážeme odolávať efektívnejšie 
 rozsiahlejším útokom, keďže spravidla chrbticová sieť disponuje najsilnejšími prostriedkami, ale na druhej 
@@ -496,15 +493,16 @@ autonómneho systému vzdialene spustiteľnou čiernou dierou (RTBH). Nahlásen�
 rozhranie \emph{Null}, ktoré spôsobí zahodenie paketov (RFC 5635). Postihnutá služba bude síce odrezaná 
 od Internetu,  čiže útočník dosiahne zamedzenie dostupnosti pre ostatných používateľov, ale zmiernia sa 
 negatívne dopady na zvyšnú infraštruktúru. Na edge routeroch sa musí vopred nakonfigurovať statická cesta 
-pre ďalší skok stanovený za black hole a zakázanie pre ňu odpovede o nedosiahnutí cieľa cez ICMP:
+pre ďalší skok stanovený za black hole a zakázať preň odpovedanie o nedosiahnutí cieľa cez ICMP:
 \begin{lstlisting}
 ip route 192.0.2.1 255.255.255.255 Null0
 interface Null0 
     no ip unreachables
 \end{lstlisting}
 Na trigger smerovači sa musí aktivovať BGP politika na presmerovanie cesty k obeti 
-po obdržaní cesty so spúšťacou značkou (v príklade je ňou \verb|tag 66|) a povolenie distribúcie
-statickej cesty pre iBGP peerov a nepropagovanie mimo autonómneho systému \cite{cisco-rtbh}:
+po obdržaní vloženej statickej cesty so spúšťacou značkou (tagom) a povolenie jej distribúcie
+medzi iBGP peerov a zároveň nepropagovanie mimo autonómneho systému \cite{cisco-rtbh}:
+\newpage
 \begin{lstlisting}
 route-map blackhole
     match tag 66
@@ -515,18 +513,20 @@ router bgp 65535
     redistribute static route-map blackhole
 \end{lstlisting}
 Poskytovateľ pripojenia má potom možnosť iniciovať zablokovanie premávky na obeť známej IP adresy
-cez pravidlo na spúšťacom smerovači, ktoré všade presmeruje v tomto príklade \verb|172.5.23.1| značkou
-66 na ďalší skok \verb|192.0.2.1| predstavujúci čiernu dieru. Uvedená statická cesta musí byť po skončení
-odobratá zo spúšťacieho routera, ktorý rozpošle BGP route withdrawal svojim iBGP peerom:
+cez pravidlo na spúšťacom smerovači, ktoré všade presmeruje, v tomto príklade, adresu \verb|172.5.23.1| 
+značkou 66 na ďalší skok \verb|192.0.2.1| predstavujúci čiernu dieru. Uvedená statická cesta musí byť 
+po skončení odobratá zo spúšťacieho routera, ktorý rozpošle BGP route withdrawal svojim iBGP peerom:
 \begin{lstlisting}
 ip route 172.5.23.1 255.255.255.255 Null0 tag 66
 \end{lstlisting}
 
 \subsubsection{IP Spoofing}
-Na zabránenie spätnej väzby paketov vracajúcej sa naspäť botom útočníka, sa zvykne pri záplavových útokoch vložiť do paketu sfalšovaná zdrojová adresa. Vychádza z potreby 
-útočníka zostať v anonymite a prípadne zmiasť bezpečnostnú obranu vzbudením dojmu, že nadmerná premávka 
-pochádza od rozptýlených podnecovateľov. Prostredníctvom zapojenia Ingress a Egress filtrovania alebo sú
-poskytovatelia pripojenia schopný zabrzdiť škodlivú premávky takmer v zárodku. Ukradnuté zdrojové adresy sa 
+Na zabránenie spätnej väzby paketov vracajúcej sa naspäť botom útočníka, zvykne pri záplavových útokoch 
+vložiť do paketu sfalšovanú zdrojová adresa. Vychádza z potreby útočníka zostať v anonymite a prípadne 
+zmiasť bezpečnostnú obranu vzbudením dojmu, že nadmerná premávka pochádza od rozptýlených podnecovateľov. 
+Spoofing sa hodí u reflektorových útokov alebo v situáciach, kedy si útočník praje, aby bol vinený za 
+iniciátora určitý počítač. Prostredníctvom zapojenia Ingress a Egress filtrovania sú poskytovatelia 
+pripojenia na trase schopný zabrzdiť škodlivú premávky takmer v zárodku. Ukradnuté zdrojové adresy sa 
 pre navodenie dôveryhodnosti vyberajú z rozsahu verejne smerovateľných IP adries (RFC 1918, RFC 3330). 
 Privátne adresy sa totiž  štandardne zahadzujú na smerovačoch registrovaním príslušných ACL pravidiel ako 
 realizácia \textbf{Egress filtrovania} Skrátená ukážka odhodí pakety z jedného súkromného rozsahov a 
@@ -548,21 +548,20 @@ cez ľubovoľné rozhranie smerovača:
 ip verify unicast reverse-path list           # Strict mode
 ip verify unicast source reachable-via any    # Loose mode
 \end{lstlisting}
-U reflektorových útokov alebo v situáciach, kedy si útočník praje, aby bol vinený za iniciátora určitý 
-počítač. Naproti bežnej predstavy prevláda snaha o zúžitkovanie validných zdrojových adries botov, tam kde 
+Naproti bežnej predstavy prevláda snaha o zúžitkovanie validných zdrojových adries botov, tam kde 
 je to uskutočniteľné \cite{ddos-anatomy-2004}.
 
-\subsubsection{Firewall}
+\subsubsection{Rate limiting a Firewall na Linuxe}
 Zníženie záťaže na systémové zdroje pridelené na tvorbu paketov odpovede je dosiahnuteľné cez 
-\emph{rate limiting}. Linux oplýva vrámci \emph{procfs} (\verb|/proc/sys/net/ipv4/|)\footnote{\url{https://
-man7.org/linux/man-pages/man7/icmp.7.html}} premennými na obmedzenie rýchlosti pri 
-odpovedaní maskou zvolenými ICMP správami \verb|icmp_ratelimit|, \verb|icmp_ratemask| a 
-\verb|icmp_echo_ignore_broadcasts|. Takisto sa odporúča ponechať pravidlá firewallu na najmenšej
-úrovni priepustnosti smerom dnu za každých okolností iba vo forme white-listu.
+\emph{rate limiting}. Linux oplýva vrámci \emph{procfs} (\verb|/proc/sys/net/ipv4/|) premennými na 
+obmedzenie rýchlosti pri odpovedaní maskou zvolenými ICMP správami \verb|icmp_ratelimit|, 
+\verb|icmp_ratemask| a \verb|icmp_echo_ignore_broadcasts|\footnote{\url{https://
+man7.org/linux/man-pages/man7/icmp.7.html}}. Takisto sa odporúča ponechať pravidlá firewallu na najmenšej
+úrovni priepustnosti smerom dnu za každých okolností ako whitelist.
 Ak napríklad webová aplikácia beží na porte HTTPS/443 a administrácia vstupuje na server cez SSH/22 zo 
 stáleho rozsahu adries intranetu, môže jednoduchá konfigurácia firewallu vyzerá nasledovne 
 \cite{csirt-hardening}:
-\begin{lstlisting}[language=bash]
+\begin{lstlisting}
 # Pravidlá pre povolenie prichádzajúcej komunikácie cez SSH, HTTPS
 iptables --append INPUT --protocol tcp --dport 443 --jump ACCEPT
 iptables --append INPUT --protocol tcp --dport 22 \ 
@@ -573,41 +572,130 @@ iptables --policy FORWARD DROP
 iptables --policy OUTPUT ACCEPT
 \end{lstlisting}
 
-Cisco smerovače umožňujú zoznamom prístupových oprávnení úplne zakázať alebo spomaliť preposielanie, či 
-tvorbu paketov ICMP destination unreachable na zamedzenie útoku UDP flood:\footnote{\url{https://
-www.ciscopress.com/articles/article.asp?p=345618&seqNum=5}}
+\section{Škálovanie webových aplikácií}
+Rozvrhnutie architektúry na nasadenie webovej aplikácie, ktorá ustojí legitímnu premávku, ale tiež 
+škodlivo nadmerný prúd vykonštruovaných požiadaviek, vyžaduje balans medzi sústredením prostriedkov na 
+jednom mieste do homogénneho monolitu a ich parcelovaním znásobením počtu inštancií. Návrhár musí 
+nájsť kompromis medzi obstaraním silnejšieho počítača alebo viacerých počítačov. Priklonenie 
+sa k vybranej alternatíve predurčí budúce komplikácie pre rozšírenie platformy hosťujúcej webovú 
+službu. 
+
+\textbf{Vertikálne škálovanie} spočíva v navyšovaní výpočtovej sily stroja pridaním, urýchlením 
+alebo zväčšením kapacity hardvérových komponentov - procesora, pamätí, diskového poľa, či sieťovej karty - 
+utesňujúc vzájomnú väzbu dielcov a očakávajúc ich nevyhnutnú vzájomnú kompatibilitu. Uľahčuje sa tým
+údržba a kontrola systému, zachovanie konzistentnosti dát bez nutnosti navyše častí na
+zabezpečenie ich integrity. Zároveň sa to odráža na nižšej energetickej spotrebe voči 
+mnohým spoločne rovnako výkonným duplikátom. Všetko za cenu o poznanie vyšších obstarávacích nákladov tohto 
+kompaktného balíka s výhľadom na obmedzení rozsah pre upgrade, vytvárajúc jediný bod zlyhania pre prípadný 
+celkový výpadok poskytovanej aplikácie.
+
+\textbf{Horizontálne škálovanie} je naproti vertikálnemu oveľa odolnejšie proti zlyhaniu, keďže sa spolieha 
+na viacero paralelne bežiacich zariadení. Komponenty sú lacnejšie a jednoduchšie na upgrade, 
+pretože pádom systému servera nepostihneme dostupnosť služby ako takej. Nevyhnutnosťou je spravidla 
+zosieťovanie a distribúcia záťaže úloh pomedzi uzly, čím sa zvyšuje oneskorenie a závislosť na externých 
+činiteľov a od prepájacích prvkoch.
+
+\subsection{Redundancia nižších vrstvách RM OSI}
+Odolnosť sieťovej infraštruktúry proti poruchám a výpadkom prepínačov alebo smerovačov, s vedľajším
+rovnako dôležitým efektom navýšenia dátového prietoku komunikačných spojov, sa utužuje protokolmi
+agregácie liniek na spojovej vrstve (L2) a viaccestným smerovaním na sieťovej vrstve (L3) 
+
+\textbf{Agregácia liniek} dostáva opodstatnenie v situáciach, kedy nestačí prenosová rýchlosť
+jediného sieťového rozhrania a je nevýhodné, či dokonca nemožné vymeniť sieťovú kartu.
+Vtedy sa oplatí zoskupiť niekoľko fyzických rozhraní do jedného logického linku (technika 
+nazývaná ako \enquote{trunking} alebo \enquote{bonding}). Navyšovanie prenosových rýchlostí
+medzi generáciami technológii na fyzickej vrstve môže takto prebiehať lineárne. Ak je vyžadovaný
+GigabitEthernet (1 Gbit/s), ale nie je k dispozícii, dokáže Trunked Fast Ethernet
+zabezpečiť rýchlosti 200 - 800 Mbit/s, v porovnaní s obyčajným 100 Mbit/s Fast Ethernet. 
+Rámce sú striedavo posielané aktívnymi redundantnými linkami vrámci zhluku, čím
+sa zabezpečí zvýšená dostupnosť a symetrizácia záťaže na participujúcich portoch.
+
+Link Aggregation Control Protocol (LACP), ktorý je súčasťou štandardu IEEE 802.3ad, dovoľuje sieťovému 
+zariadeniu vyjednanie automatické združenia liniek výmenou LACP paketov medzi partnermi.
+Priebežnými keepalive správami kontroluje LACP priechodnosť spoju pre zamedzenie straty paketov
+poslaním do nefunkčnej linky a overuje chyby spôsobené nesprávnym fyzickým zapojením prevedením
+\enquote{loopback links} alebo \enquote{split-trunk} vznikajúci prekrížením kabeláže. V Mikrotik
+router OS sa pre zhluk liniek pomenuje nové zdieľané logické rozhranie, ktorému sa následne
+priradí IP adresa\footnote{\url{https://help.mikrotik.com/docs/display/ROS/Bonding}}.
+V Cisco IOS sa najprv nastaví kanál do ktorého sú pridané porty\footnote{\url{https://www.cisco.com/c/en/us/td/docs/ios/12_2sb/feature/guide/gigeth.html}}.
 \begin{lstlisting}
-# Odmedzenie rýchlosti posielania ICMP unreachable na 1000 ms
-ip icmp rate-limit unreachable 1000
-# Zakázanie akejkoľvek ICMP unreachable premávky
-access-list 100 deny icmp any any unreachable
+# Mikrotik - určenie rozhraní na agregáciu liniek s LACP a zdieľanie IP adresy
+interface bonding add name=trunk1 mode=802.3ad slaves=ether1,ether2
+ip address add address=192.168.0.1/24 interface=trunk1
+# Cisco - pridanie rozhraní do skupiny kanálov č.1 so zvolenou IP adresou
+interface port-channel 1
+   ip address 192.168.0.1 255.255.255.0
+interface range g2/0/0-1
+   no ip address
+   channel-group 1 mode active
 \end{lstlisting}
 
-\section{Škálovanie webových aplikácií}
-% Definuj verikálne a horizontálne škálovanie
+\textbf{Viaccestné smerovanie} pridáva spoľahlivosti tam, odkiaľ vedú do cieľovej destinácie aspoň
+dve trasy. Equal-cost multi-path routing (RFC 2991) je stratégia smerovania, kedy sa striedavo posielajú 
+pakety cez viaceré ďalšími skokmi s rovnako dobrými metrikami cesty. V praxi je tento prístup málo 
+uplatňovaný pre komplikácie viažuce sa k dynamickému výberu spomedzi dostupných smerov pre rovnomerné 
+rozloženie záťaže. Rozličné spojenia tiež zvyknú mať rôzne veľkosti MTU (maximum transmission unit) a 
+variabilné oneskorenia vedúce k zbytočnému preusporiadaniu paketov správy mimo poradia. Pri použití mnohých
+alternatívnych preskakujúcich ciest dochádza k strate paketov. 
 
-\subsection{Redundancia na linkovej a sieťovej vrstve}
-\paragraph{Agregácia liniek}
-% IEEE802.3az, LACP - Trunking a konfigurácia na cisco switch
+Existujú však postupy, ktoré majú zmierniť popísané negatíva výberu pre next-hop, ale vyžadujú udržovanie si 
+stavu prebiehajúcich tokov alebo zvýšené výpočtové nároky pre voľbu next-hop. \emph{Modulo-N Hash} 
+presmeruje paket na cestu podľa identifikátora toku z hlavičky paketu (najčastejšie zdrojová a cieľová 
+adresa) modulo počtu dostupných uvažovaných skokov. Ak dôjde k zmene musí sa upraviť $(N-1)/N$ tokov
+ \cite{RFC2991}. \emph{Hash-Threshold} rovnomerne mapuje uzly do výstupu hašovacej funkcie a podľa 
+porovnania hašu identifikátoru toku s hranicami oblasti je zvolený next-hop. Pri zmenách sa upravuje cesta 
+štvrtine až polovici tokov. \emph{Highest Random Weight} počíta hash zakaždým zároveň s hlavičky paketu a
+kľúča pre next-hop a zvolí next-hop s najvyšším výsledným číslom. Za väčšej časovej náročnosti
+mení pri pridaní alebo odobratí cesty smer už len $1/N$ tokov. Cisco router využívajúci na smerovanie
+OSPFv2 uplatní ECMP jednoduchým nastavením\footnote{\url{https://www.techrepublic.com/article/how-to-configure-equal-cost-multi-path-in-ospf/}}:
+\begin{lstlisting}
+router ospf 1
+maximum-paths 2
+\end{lstlisting}
 
-\paragraph{Viaccestné smerovanie}
-% RFC2991 - ECMP smerovanie v OSPFv2 a výber vhodných next hops a problémy s rôznymi trasami
-% router ospf 1
-% maximum-paths 2
+\subsection{Vysoká dostupnosť klastra}
+%%%%%
+% RFC2338
+% Opísať rozdiel medzi základnou dostupnosťou a vysokou dostupnosťou – zdroj 1
+% Protokol VRRP – mechanizmus fungovania, virtálna ip adresa – paket traces
+% active-active/active-passive
+% Keepalived konfigurácia dvoch Linux zariadení s failover
+%3.Netlink Interface: Sets and removes VRRP virtual IPs on network interfaces.
+%4.Multicast: VRRP advertisements are sent to the reserved VRRP MULTICAST group (224.0.0.18).
+%\cite{keepalived-docs}
+% SMTP monitorovanie
+
+% IGMPv3 224.0.0.18 Join / Leave Group
+% ARP Gratious
+% VRRP Anouncement
+
+\begin{lstlisting}
+vrrp_instance malina {          # VRRP inštancia
+    state MASTER|BACKUP         # štandardný stav inštancie
+    interface eth0              # sieťové rozhranie
+    virtual_router_id 1         # VRRP router id pre inštanciu
+    priority 100|90             # priorita VRRP routera
+    advert_int 1                # advertisement interval v sekundách
+    virtual_ipaddress { 192.168.0.50 } # VRRP virtuálna IP adresa
+}
+\end{lstlisting}
 
 \subsection{Reverzné proxy na vyvažovanie záťaže}
-% Reverzná proxy – pool serverov, DNS A záznamy (ukážka BIND konfigurácie bez PTR)
+% DNS A záznamy (BIND config)
+% Reverzná proxy – pool serverov
 \subsubsection{HAProxy}
 
 \subsubsection{Nginx}
 
 \subsection{Algoritmy vyvažovania záťaže}
-% Load balancing algoritm comparaison
+% Load balancing algoritm comparaison (http://www.linuxvirtualserver.org/docs/scheduling.html)
+% Round Robin
+% Weighted Round Robin 
+% Least Connection
+% Weighted Least Connection
+% Destination Hashing
+% Source Hashing
 
-\subsection{Vysoká dostupnosť služieb}
-% Opísať rozdiel medzi základnou dostupnosťou a vysokou dostupnosťou – zdroj 1
-% Protokol VRRP – mechanizmus fungovania, virtálna ip adresa – paket traces
-% Keepalived konfigurácia dvoch Linux zariadení s failover
 
 \section{Monitorovanie webovej aplikácie}
 

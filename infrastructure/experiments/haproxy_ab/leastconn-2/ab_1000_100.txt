@@ -1,0 +1,43 @@
+This is ApacheBench, Version 2.3 <$Revision: 1879490 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 192.168.0.2 (be patient)
+
+
+Server Software:        PIB
+Server Hostname:        192.168.0.2
+Server Port:            8080
+
+Document Path:          /
+Document Length:        2768 bytes
+
+Concurrency Level:      100
+Time taken for tests:   1.660 seconds
+Complete requests:      1000
+Failed requests:        997
+   (Connect: 0, Receive: 0, Length: 997, Exceptions: 0)
+Total transferred:      2880596 bytes
+HTML transferred:       2698596 bytes
+Requests per second:    602.39 [#/sec] (mean)
+Time per request:       166.005 [ms] (mean)
+Time per request:       1.660 [ms] (mean, across all concurrent requests)
+Transfer rate:          1694.57 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    1   2.1      1      12
+Processing:    11  154 101.1    165     783
+Waiting:       10  154 101.1    165     782
+Total:         11  155 101.5    167     787
+
+Percentage of the requests served within a certain time (ms)
+  50%    167
+  66%    193
+  75%    214
+  80%    228
+  90%    270
+  95%    313
+  98%    402
+  99%    464
+ 100%    787 (longest request)

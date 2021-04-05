@@ -1,0 +1,762 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{availability}{article}{}
+      \name{author}{2}{}{%
+        {{hash=60d13c527f645f839295f5cb6d9ae819}{%
+           family={Mir},
+           familyi={M\bibinitperiod},
+           given={Suhail},
+           giveni={S\bibinitperiod}}}%
+        {{hash=bbbbff91e3ae2fd26dcb776cf61aea40}{%
+           family={Quadri},
+           familyi={Q\bibinitperiod},
+           given={Syed},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{687a9145b5f459f9c7f1d15c31f98c61}
+      \strng{fullhash}{687a9145b5f459f9c7f1d15c31f98c61}
+      \strng{bibnamehash}{687a9145b5f459f9c7f1d15c31f98c61}
+      \strng{authorbibnamehash}{687a9145b5f459f9c7f1d15c31f98c61}
+      \strng{authornamehash}{687a9145b5f459f9c7f1d15c31f98c61}
+      \strng{authorfullhash}{687a9145b5f459f9c7f1d15c31f98c61}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Information Security}
+      \field{month}{01}
+      \field{title}{Information Availability: An Insight into the Most Important Attribute of Information 		Security}
+      \field{volume}{07}
+      \field{year}{2016}
+      \field{pages}{185\bibrangedash 194}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.4236/jis.2016.73014
+      \endverb
+    \endentry
+    \entry{why-attack}{article}{}
+      \name{author}{5}{}{%
+        {{hash=f57bc0758a729fb68423cca4e03c4ea7}{%
+           family={Abhishta},
+           familyi={A\bibinitperiod},
+           given={Abhishta},
+           giveni={A\bibinitperiod}}}%
+        {{hash=2bb1145e7107dfa287a9eb9f5da18879}{%
+           family={Heeswijk},
+           familyi={H\bibinitperiod},
+           given={Wouter},
+           giveni={W\bibinitperiod},
+           prefix={van},
+           prefixi={v\bibinitperiod}}}%
+        {{hash=6df3e0d15a3982608aa6cd4fcd1cfb3b}{%
+           family={Junger},
+           familyi={J\bibinitperiod},
+           given={Marianne},
+           giveni={M\bibinitperiod}}}%
+        {{hash=177b43c1be85cb5ca8cf66dc8086510e}{%
+           family={Nieuwenhuis},
+           familyi={N\bibinitperiod},
+           given={Bart},
+           giveni={B\bibinitperiod}}}%
+        {{hash=a8abf6429ff2cc98cde7c436276685b2}{%
+           family={Joosten},
+           familyi={J\bibinitperiod},
+           given={Reinoud},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{b3fb7f0595e78ed3ea6ed9cd89d944c8}
+      \strng{fullhash}{b3fb7f0595e78ed3ea6ed9cd89d944c8}
+      \strng{bibnamehash}{b3fb7f0595e78ed3ea6ed9cd89d944c8}
+      \strng{authorbibnamehash}{b3fb7f0595e78ed3ea6ed9cd89d944c8}
+      \strng{authornamehash}{b3fb7f0595e78ed3ea6ed9cd89d944c8}
+      \strng{authorfullhash}{b3fb7f0595e78ed3ea6ed9cd89d944c8}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Wireless Mobile Networks}
+      \field{month}{06}
+      \field{title}{Why would we get attacked? An analysis of attacker's aims behind DDoS attacks}
+      \field{volume}{11}
+      \field{year}{2020}
+      \field{pages}{3\bibrangedash 22}
+      \range{pages}{20}
+      \verb{doi}
+      \verb 10.22667/JOWUA.2020.06.30.003
+      \endverb
+    \endentry
+    \entry{ddos-anatomy-2004}{article}{}
+      \name{author}{2}{}{%
+        {{hash=03b7274a86dbf5ea13d3abde794916cb}{%
+           family={Mirkovic},
+           familyi={M\bibinitperiod},
+           given={Jelena},
+           giveni={J\bibinitperiod}}}%
+        {{hash=25f473290c8bb7bab58c095d52a08e35}{%
+           family={Reiher},
+           familyi={R\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{f5796d14d67b354af582fd1be8f17fa2}
+      \strng{fullhash}{f5796d14d67b354af582fd1be8f17fa2}
+      \strng{bibnamehash}{f5796d14d67b354af582fd1be8f17fa2}
+      \strng{authorbibnamehash}{f5796d14d67b354af582fd1be8f17fa2}
+      \strng{authornamehash}{f5796d14d67b354af582fd1be8f17fa2}
+      \strng{authorfullhash}{f5796d14d67b354af582fd1be8f17fa2}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{ACM SIGCOMM Computer Communication Review}
+      \field{number}{2}
+      \field{title}{A taxonomy of DDoS attack and DDoS defense mechanisms}
+      \field{volume}{34}
+      \field{year}{2004}
+      \field{pages}{39\bibrangedash 53}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1145/997150.997156
+      \endverb
+    \endentry
+    \entry{botnets}{article}{}
+      \name{author}{5}{}{%
+        {{hash=52cce56d5eeaca1cd68d3a38b1c9015d}{%
+           family={Alomari},
+           familyi={A\bibinitperiod},
+           given={Esraa},
+           giveni={E\bibinitperiod}}}%
+        {{hash=fc398e03865b95d6fa56f4e0eaf16bce}{%
+           family={Manickam},
+           familyi={M\bibinitperiod},
+           given={Selvakumar},
+           giveni={S\bibinitperiod}}}%
+        {{hash=edddd4a6cbb967768c24b5c39a7f5086}{%
+           family={B.\bibnamedelimi Gupta},
+           familyi={B\bibinitperiod\bibinitdelim G\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+        {{hash=def2da19ac072f629f49607a2eb0a8d7}{%
+           family={Karuppayah},
+           familyi={K\bibinitperiod},
+           given={Shankar},
+           giveni={S\bibinitperiod}}}%
+        {{hash=219c7293f26d19b98e50afe5c6010dbb}{%
+           family={Alfaris},
+           familyi={A\bibinitperiod},
+           given={Rafeef},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{03293075c66902c6f93b54c1a4008308}
+      \strng{fullhash}{03293075c66902c6f93b54c1a4008308}
+      \strng{bibnamehash}{03293075c66902c6f93b54c1a4008308}
+      \strng{authorbibnamehash}{03293075c66902c6f93b54c1a4008308}
+      \strng{authornamehash}{03293075c66902c6f93b54c1a4008308}
+      \strng{authorfullhash}{03293075c66902c6f93b54c1a4008308}
+      \field{sortinit}{4}
+      \field{sortinithash}{e071e0bcb44634fab398d68ad04e69f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{International Journal of Computer Applications}
+      \field{number}{7}
+      \field{title}{Botnet-based Distributed Denial of Service (DDoS) Attacks on Web Servers: Classification and Art}
+      \field{volume}{49}
+      \field{year}{2012}
+      \field{pages}{24\bibrangedash 32}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.5120/7640-0724
+      \endverb
+    \endentry
+    \entry{radware-ddos}{book}{}
+      \list{publisher}{1}{%
+        {Radware}%
+      }
+      \field{sortinit}{5}
+      \field{sortinithash}{5dd416adbafacc8226114bc0202d5fdd}
+      \field{labeltitlesource}{title}
+      \field{note}{\url{https://www.radware.com/getattachment/Security/Research/702/Radware_DDoS_Handbook_2015.pdf.aspx}}
+      \field{title}{DDoS Handbook: The Ultimate Guide to Everything You Need to Know about DDoS Attacks}
+      \field{year}{2016}
+    \endentry
+    \entry{enisa-ddos}{article}{}
+      \field{sortinit}{6}
+      \field{sortinithash}{7851c86048328b027313775d8fbd2131}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{ENISA}
+      \field{note}{\url{https://www.enisa.europa.eu/publications/enisa-threat-landscape-2020-distributed-denial-of-service}}
+      \field{title}{ENISA Threat Landscape 2020 - Distributed denial of service}
+      \field{year}{2020}
+    \endentry
+    \entry{ddos-attacks}{article}{}
+      \name{author}{3}{}{%
+        {{hash=3016b6685607b997b9d2f9fbea7bfe44}{%
+           family={Prasad},
+           familyi={P\bibinitperiod},
+           given={K.Munivara},
+           giveni={K\bibinitperiod}}}%
+        {{hash=6cf875db14d3265470ac3da92d0ee6d2}{%
+           family={Reddy},
+           familyi={R\bibinitperiod},
+           given={A.Rama\bibnamedelima Mohan},
+           giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=76d69084f24ea8682aeb1c4c199e4e65}{%
+           family={Rao},
+           familyi={R\bibinitperiod},
+           given={K.Venugopal},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{a1c4714ab7a6f500408234dd03ecc156}
+      \strng{fullhash}{a1c4714ab7a6f500408234dd03ecc156}
+      \strng{bibnamehash}{a1c4714ab7a6f500408234dd03ecc156}
+      \strng{authorbibnamehash}{a1c4714ab7a6f500408234dd03ecc156}
+      \strng{authornamehash}{a1c4714ab7a6f500408234dd03ecc156}
+      \strng{authorfullhash}{a1c4714ab7a6f500408234dd03ecc156}
+      \field{sortinit}{7}
+      \field{sortinithash}{f615fb9c6fba11c6f962fb3fd599810e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0975-4172}
+      \field{issue}{7}
+      \field{journaltitle}{Global Journal of Computer Science and Technology (GJCST)}
+      \field{note}{\url{https://core.ac.uk/reader/231149430}}
+      \field{title}{DoS and DDoS Attacks: Defense, Detection and Traceback Mechanisms -A Survey}
+      \field{volume}{14}
+      \field{year}{2014}
+    \endentry
+    \entry{csirt-ddos}{misc}{}
+      \list{publisher}{1}{%
+        {CSIRT.SK}%
+      }
+      \field{sortinit}{8}
+      \field{sortinithash}{1b24cab5087933ef0826a7cd3b99e994}
+      \field{labeltitlesource}{title}
+      \field{note}{\url{https://www.csirt.gov.sk/doc/DDoS_CSIRT.pdf}}
+      \field{title}{Ochrana pred útokmi {DDoS} ({Príručka} administrátora)}
+      \field{year}{2013}
+    \endentry
+    \entry{link-trunking}{misc}{}
+      \field{sortinit}{9}
+      \field{sortinithash}{54047ffb55bdefa0694bbd554c1b11a0}
+      \field{labeltitlesource}{title}
+      \field{note}{\url{https://grouper.ieee.org/groups/802/3/trunk_study/tutorial/index.html}}
+      \field{title}{IEEE 802.3: Tutorial on Link Aggregation and Trunking}
+      \field{year}{1997}
+    \endentry
+    \entry{RFC2991}{report}{}
+      \name{author}{2}{}{%
+        {{hash=17891135d24a876ded74ba1c453faf54}{%
+           family={Thaler},
+           familyi={T\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+        {{hash=e16272a97c5a06e83c50acee029b32fb}{%
+           family={Hopps},
+           familyi={H\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {RFC Editor}%
+      }
+      \list{publisher}{1}{%
+        {RFC Editor}%
+      }
+      \strng{namehash}{ed06ede43e6773c9c46b3b0648c6c8a6}
+      \strng{fullhash}{ed06ede43e6773c9c46b3b0648c6c8a6}
+      \strng{bibnamehash}{ed06ede43e6773c9c46b3b0648c6c8a6}
+      \strng{authorbibnamehash}{ed06ede43e6773c9c46b3b0648c6c8a6}
+      \strng{authornamehash}{ed06ede43e6773c9c46b3b0648c6c8a6}
+      \strng{authorfullhash}{ed06ede43e6773c9c46b3b0648c6c8a6}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Internet Requests for Comments}
+      \field{issn}{2070-1721}
+      \field{month}{11}
+      \field{note}{\url{http://www.rfc-editor.org/rfc/rfc2991.txt}}
+      \field{number}{2991}
+      \field{title}{Multipath Issues in Unicast and Multicast Next-Hop Selection}
+      \field{type}{RFC}
+      \field{year}{2000}
+    \endentry
+    \entry{RFC2992}{report}{}
+      \name{author}{1}{}{%
+        {{hash=e16272a97c5a06e83c50acee029b32fb}{%
+           family={Hopps},
+           familyi={H\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {RFC Editor}%
+      }
+      \list{publisher}{1}{%
+        {RFC Editor}%
+      }
+      \strng{namehash}{e16272a97c5a06e83c50acee029b32fb}
+      \strng{fullhash}{e16272a97c5a06e83c50acee029b32fb}
+      \strng{bibnamehash}{e16272a97c5a06e83c50acee029b32fb}
+      \strng{authorbibnamehash}{e16272a97c5a06e83c50acee029b32fb}
+      \strng{authornamehash}{e16272a97c5a06e83c50acee029b32fb}
+      \strng{authorfullhash}{e16272a97c5a06e83c50acee029b32fb}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Internet Requests for Comments}
+      \field{issn}{2070-1721}
+      \field{month}{11}
+      \field{note}{\url{http://www.rfc-editor.org/rfc/rfc2992.txt}}
+      \field{number}{2992}
+      \field{title}{Analysis of an Equal-Cost Multi-Path Algorithm}
+      \field{type}{RFC}
+      \field{year}{2000}
+    \endentry
+    \entry{server-load-balancing}{book}{}
+      \name{author}{1}{}{%
+        {{hash=01e7f4d1909cf337f9c18ed98bac50e6}{%
+           family={Bourke},
+           familyi={B\bibinitperiod},
+           given={Tony},
+           giveni={T\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {O'Reilly}%
+      }
+      \strng{namehash}{01e7f4d1909cf337f9c18ed98bac50e6}
+      \strng{fullhash}{01e7f4d1909cf337f9c18ed98bac50e6}
+      \strng{bibnamehash}{01e7f4d1909cf337f9c18ed98bac50e6}
+      \strng{authorbibnamehash}{01e7f4d1909cf337f9c18ed98bac50e6}
+      \strng{authornamehash}{01e7f4d1909cf337f9c18ed98bac50e6}
+      \strng{authorfullhash}{01e7f4d1909cf337f9c18ed98bac50e6}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Server load balancing}
+      \field{year}{2001}
+    \endentry
+    \entry{load-balance-in-distributed-system}{article}{}
+      \name{author}{5}{}{%
+        {{hash=e1bf0309e5d76090464098c2a4edba6b}{%
+           family={Soundarabai},
+           familyi={S\bibinitperiod},
+           given={Paulsingh},
+           giveni={P\bibinitperiod}}}%
+        {{hash=c56aca0bdad8d5ceb586e93a5ce3b2ec}{%
+           family={Sandhya},
+           familyi={S\bibinitperiod},
+           given={Rani},
+           giveni={R\bibinitperiod}}}%
+        {{hash=ecee44e03305405f0f8dba0a212b270f}{%
+           family={Sahai},
+           familyi={S\bibinitperiod},
+           given={Ritesh},
+           giveni={R\bibinitperiod}}}%
+        {{hash=df4e5b2763712b35cd7efb40e5960216}{%
+           family={K\bibnamedelima R},
+           familyi={K\bibinitperiod\bibinitdelim R\bibinitperiod},
+           given={Venugopal},
+           giveni={V\bibinitperiod}}}%
+        {{hash=d4428b9822e567c5a4d131e7eac7d487}{%
+           family={Patnaik},
+           familyi={P\bibinitperiod},
+           given={Lalit},
+           giveni={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{d01a3e5dc30f51c15d5e6937438430ce}
+      \strng{fullhash}{d01a3e5dc30f51c15d5e6937438430ce}
+      \strng{bibnamehash}{d01a3e5dc30f51c15d5e6937438430ce}
+      \strng{authorbibnamehash}{d01a3e5dc30f51c15d5e6937438430ce}
+      \strng{authornamehash}{d01a3e5dc30f51c15d5e6937438430ce}
+      \strng{authorfullhash}{d01a3e5dc30f51c15d5e6937438430ce}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{12}
+      \field{title}{COMPARATIVE STUDY ON LOAD BALANCING TECHNIQUES IN DISTRIBUTED SYSTEMS}
+      \field{volume}{6}
+      \field{year}{2012}
+    \endentry
+    \entry{load-balance-algo}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=ffe37700a42bc42a31e0e77c76bf24ef}{%
+           family={Mcheick},
+           familyi={M\bibinitperiod},
+           given={Hamid},
+           giveni={H\bibinitperiod}}}%
+        {{hash=3ac3f3545a89bd1e5f17f2acb7f5e846}{%
+           family={Alardawy},
+           familyi={A\bibinitperiod},
+           given={Zaid},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=e4eaac0db1d9043c80cb53d5bc15b3ca}{%
+           family={Lakiss},
+           familyi={L\bibinitperiod},
+           given={Abbass},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{42dcea2de877d560b86a25d372f961cb}
+      \strng{fullhash}{42dcea2de877d560b86a25d372f961cb}
+      \strng{bibnamehash}{42dcea2de877d560b86a25d372f961cb}
+      \strng{authorbibnamehash}{42dcea2de877d560b86a25d372f961cb}
+      \strng{authornamehash}{42dcea2de877d560b86a25d372f961cb}
+      \strng{authorfullhash}{42dcea2de877d560b86a25d372f961cb}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Proceedings - 2011 9th International Conference on Software Engineering Research, Management 	and Applications, SERA 2011}
+      \field{month}{09}
+      \field{title}{Evaluation of Load Balance Algorithms}
+      \field{year}{2011}
+      \field{pages}{104\bibrangedash 109}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/SERA.2011.46
+      \endverb
+    \endentry
+    \entry{algorithm-performance}{article}{}
+      \name{author}{5}{}{%
+        {{hash=fea3df88931991a35dfe82bb659c8d5f}{%
+           family={Roy},
+           familyi={R\bibinitperiod},
+           given={Saumendu},
+           giveni={S\bibinitperiod}}}%
+        {{hash=c958791559cbc69051c7701c174cbb7f}{%
+           family={Hossaina},
+           familyi={H\bibinitperiod},
+           given={Dr.\bibnamedelimi Md.\bibnamedelimi Alam},
+           giveni={D\bibinitperiod\bibinitdelim M\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=c8be7feacbc0ba253d82f02a113d63c2}{%
+           family={Sen},
+           familyi={S\bibinitperiod},
+           given={Sujit\bibnamedelima Kumar},
+           giveni={S\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+        {{hash=f3335261bfd539abbb5f62b32c13ca13}{%
+           family={Hossain},
+           familyi={H\bibinitperiod},
+           given={Nazmul},
+           giveni={N\bibinitperiod}}}%
+        {{hash=cc9e8a538da8930387a1c78d87223208}{%
+           family={Asif},
+           familyi={A\bibinitperiod},
+           given={Md.\bibnamedelimi Rashid\bibnamedelima Al},
+           giveni={M\bibinitperiod\bibinitdelim R\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{7e8bb63d4b13180783767c0d5627518d}
+      \strng{fullhash}{7e8bb63d4b13180783767c0d5627518d}
+      \strng{bibnamehash}{7e8bb63d4b13180783767c0d5627518d}
+      \strng{authorbibnamehash}{7e8bb63d4b13180783767c0d5627518d}
+      \strng{authornamehash}{7e8bb63d4b13180783767c0d5627518d}
+      \strng{authorfullhash}{7e8bb63d4b13180783767c0d5627518d}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0975-4172}
+      \field{issue}{1}
+      \field{journaltitle}{Global Journal of Computer Science and Technology}
+      \field{title}{Measuring the Performance on Load Balancing Algorithms}
+      \field{volume}{19}
+      \field{year}{2019}
+    \endentry
+    \entry{sticky-session}{misc}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labeltitlesource}{title}
+      \field{note}{\url{https://www.imperva.com/learn/availability/sticky-session-persistence-and-cookies/}}
+      \field{title}{Sticky Session}
+      \field{year}{2020}
+    \endentry
+    \entry{nginx-http-balancer}{misc}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labeltitlesource}{title}
+      \field{note}{\url{https://docs.nginx.com/nginx/admin-guide/load-balancer/}}
+      \field{title}{NGINX Load Balancer Guide}
+      \field{year}{2021}
+    \endentry
+    \entry{nginx-cookbook}{inbook}{}
+      \name{author}{1}{}{%
+        {{hash=18f36971768c27f4856415b845a45c6f}{%
+           family={DeJonghe},
+           familyi={D\bibinitperiod},
+           given={Derek},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {O'Reilly}%
+      }
+      \strng{namehash}{18f36971768c27f4856415b845a45c6f}
+      \strng{fullhash}{18f36971768c27f4856415b845a45c6f}
+      \strng{bibnamehash}{18f36971768c27f4856415b845a45c6f}
+      \strng{authorbibnamehash}{18f36971768c27f4856415b845a45c6f}
+      \strng{authornamehash}{18f36971768c27f4856415b845a45c6f}
+      \strng{authorfullhash}{18f36971768c27f4856415b845a45c6f}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{booktitle}{NGINX cookbook: advanced recipes for high performance load balancing}
+      \field{year}{2019}
+      \field{pages}{9\bibrangedash 25}
+      \range{pages}{17}
+    \endentry
+    \entry{haproxy-docs}{misc}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labeltitlesource}{title}
+      \field{note}{\url{http://cbonte.github.io/haproxy-dconv/}}
+      \field{title}{HAProxy documentation}
+      \field{year}{2021}
+    \endentry
+    \entry{haproxy-ddos}{article}{}
+      \name{author}{1}{}{%
+        {{hash=6036b42c2a35240ca0ac5aae3def4ec9}{%
+           family={Assmann},
+           familyi={A\bibinitperiod},
+           given={Baptiste},
+           giveni={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{6036b42c2a35240ca0ac5aae3def4ec9}
+      \strng{fullhash}{6036b42c2a35240ca0ac5aae3def4ec9}
+      \strng{bibnamehash}{6036b42c2a35240ca0ac5aae3def4ec9}
+      \strng{authorbibnamehash}{6036b42c2a35240ca0ac5aae3def4ec9}
+      \strng{authornamehash}{6036b42c2a35240ca0ac5aae3def4ec9}
+      \strng{authorfullhash}{6036b42c2a35240ca0ac5aae3def4ec9}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{HAProxy Blog}
+      \field{note}{\url{https://www.haproxy.com/blog/use-a-load-balancer-as-a-first-row-of-defense-against-ddos/}}
+      \field{title}{Use a Load Balancer as a First Row of Defense Against DDOS}
+      \field{year}{2012}
+    \endentry
+    \entry{haproxy-ddos-L7}{article}{}
+      \name{author}{1}{}{%
+        {{hash=9c02bd36dae747623f20e6eb6254e8a2}{%
+           family={Lavole},
+           familyi={L\bibinitperiod},
+           given={Chad},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{9c02bd36dae747623f20e6eb6254e8a2}
+      \strng{fullhash}{9c02bd36dae747623f20e6eb6254e8a2}
+      \strng{bibnamehash}{9c02bd36dae747623f20e6eb6254e8a2}
+      \strng{authorbibnamehash}{9c02bd36dae747623f20e6eb6254e8a2}
+      \strng{authornamehash}{9c02bd36dae747623f20e6eb6254e8a2}
+      \strng{authorfullhash}{9c02bd36dae747623f20e6eb6254e8a2}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{HAProxy Blog}
+      \field{note}{\url{https://www.haproxy.com/blog/application-layer-ddos-attack-protection-with-haproxy/}}
+      \field{title}{Application-Layer DDoS Attack Protection with HAProxy}
+      \field{year}{2018}
+    \endentry
+    \entry{nginx-ddos-protection}{misc}{}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labeltitlesource}{title}
+      \field{note}{\url{https://www.nginx.com/blog/mitigating-ddos-attacks-with-nginx-and-nginx-plus/}}
+      \field{title}{Mitigating DDoS Attacks with NGINX and NGINX Plus}
+      \field{year}{2015}
+    \endentry
+    \entry{haproxy-rate-limiting}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=a016393c28e884b9000af39cb9eb28ce}{%
+           family={Ramirez},
+           familyi={R\bibinitperiod},
+           given={Nick},
+           giveni={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{a016393c28e884b9000af39cb9eb28ce}
+      \strng{fullhash}{a016393c28e884b9000af39cb9eb28ce}
+      \strng{bibnamehash}{a016393c28e884b9000af39cb9eb28ce}
+      \strng{authorbibnamehash}{a016393c28e884b9000af39cb9eb28ce}
+      \strng{authornamehash}{a016393c28e884b9000af39cb9eb28ce}
+      \strng{authorfullhash}{a016393c28e884b9000af39cb9eb28ce}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{\url{https://www.haproxy.com/blog/four-examples-of-haproxy-rate-limiting/}}
+      \field{title}{HAProxy Rate Limiting: Four Examples}
+      \field{year}{2019}
+    \endentry
+    \entry{keepalived-docs}{misc}{}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labeltitlesource}{title}
+      \field{note}{\url{https://keepalived.readthedocs.io/en/latest/}}
+      \field{title}{Keepalived User Guide}
+      \field{year}{2021}
+    \endentry
+    \entry{csirt-hardening}{misc}{}
+      \list{publisher}{1}{%
+        {CSIRT.SK}%
+      }
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labeltitlesource}{title}
+      \field{note}{\url{https://www.csirt.gov.sk/doc/Hardened_v1.pdf}}
+      \field{title}{Linux Hardening ({Príručka} administrátora)}
+      \field{year}{2013}
+    \endentry
+    \entry{csirt-web-checklist}{misc}{}
+      \list{publisher}{1}{%
+        {CSIRT.SK}%
+      }
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labeltitlesource}{title}
+      \field{note}{\url{https://www.csirt.gov.sk/doc/Checklist2.0.pdf}}
+      \field{title}{Kontrolný zoznam pre bezpečnosť webových aplikácií}
+      \field{year}{2020}
+    \endentry
+    \entry{RFC2616}{report}{}
+      \name{author}{7}{}{%
+        {{hash=489e3655cdca151facfb40953b9759f8}{%
+           family={Fielding},
+           familyi={F\bibinitperiod},
+           given={Roy\bibnamedelima T.},
+           giveni={R\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+        {{hash=e31bab10d7dedf28512d03f9b626071f}{%
+           family={Gettys},
+           familyi={G\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod}}}%
+        {{hash=3e41c386f4e55fb47491ac84292b7c8d}{%
+           family={Mogul},
+           familyi={M\bibinitperiod},
+           given={Jeffrey\bibnamedelima C.},
+           giveni={J\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=88ad07f2f374db0b1bdc93a441332303}{%
+           family={Nielsen},
+           familyi={N\bibinitperiod},
+           given={Henrik\bibnamedelima Frystyk},
+           giveni={H\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=572fa1885b6150573a5367aa6b1642a9}{%
+           family={Masinter},
+           familyi={M\bibinitperiod},
+           given={Larry},
+           giveni={L\bibinitperiod}}}%
+        {{hash=8dd2a216676f13eb6fe2a82f00021125}{%
+           family={Leach},
+           familyi={L\bibinitperiod},
+           given={Paul\bibnamedelima J.},
+           giveni={P\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=d469e0df304c98f67b55d087ea6187a1}{%
+           family={Berners-Lee},
+           familyi={B\bibinithyphendelim L\bibinitperiod},
+           given={Tim},
+           giveni={T\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {RFC Editor}%
+      }
+      \strng{namehash}{58a1376e8145c282c374ed0c9d2a133b}
+      \strng{fullhash}{58a1376e8145c282c374ed0c9d2a133b}
+      \strng{bibnamehash}{58a1376e8145c282c374ed0c9d2a133b}
+      \strng{authorbibnamehash}{58a1376e8145c282c374ed0c9d2a133b}
+      \strng{authornamehash}{58a1376e8145c282c374ed0c9d2a133b}
+      \strng{authorfullhash}{58a1376e8145c282c374ed0c9d2a133b}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Internet Requests for Comments}
+      \field{issn}{2070-1721}
+      \field{month}{6}
+      \field{note}{\url{http://www.rfc-editor.org/rfc/rfc2616.txt}}
+      \field{number}{2616}
+      \field{title}{Hypertext Transfer Protocol -- HTTP/1.1}
+      \field{type}{RFC}
+      \field{year}{1999}
+    \endentry
+    \entry{http-headers}{misc}{}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{MDN}
+      \field{note}{\url{https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers}}
+      \field{title}{HTTP headers reference}
+      \field{year}{2021}
+    \endentry
+    \entry{common-log}{misc}{}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Apache}
+      \field{note}{\url{https://httpd.apache.org/docs/trunk/logs.html}}
+      \field{title}{Log Files}
+      \field{year}{2021}
+    \endentry
+    \entry{haproxy-logging}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=dacdd0926f0cfa631423ef33adf7aa75}{%
+           family={Mhedhbi},
+           familyi={M\bibinitperiod},
+           given={Moemen},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{dacdd0926f0cfa631423ef33adf7aa75}
+      \strng{fullhash}{dacdd0926f0cfa631423ef33adf7aa75}
+      \strng{bibnamehash}{dacdd0926f0cfa631423ef33adf7aa75}
+      \strng{authorbibnamehash}{dacdd0926f0cfa631423ef33adf7aa75}
+      \strng{authornamehash}{dacdd0926f0cfa631423ef33adf7aa75}
+      \strng{authorfullhash}{dacdd0926f0cfa631423ef33adf7aa75}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{HAProxy Blog}
+      \field{note}{\url{https://www.haproxy.com/blog/introduction-to-haproxy-logging/}}
+      \field{title}{Introduction to HAProxy Logging}
+      \field{year}{2019}
+    \endentry
+    \entry{nginx-zabbix}{misc}{}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labeltitlesource}{title}
+      \field{note}{\url{https://www.zabbix.com/integrations/nginx}}
+      \field{title}{Zabbix Nginx integration}
+      \field{year}{2021}
+    \endentry
+    \entry{haproxy-zabbix}{misc}{}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labeltitlesource}{title}
+      \field{note}{\url{https://www.zabbix.com/integrations/haproxy}}
+      \field{title}{Zabbix HAProxy integration}
+      \field{year}{2021}
+    \endentry
+  \enddatalist
+  \missing{haproxy-php-fpm}
+\endrefsection
+\endinput
+

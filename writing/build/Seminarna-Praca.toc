@@ -1,0 +1,86 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\babel@toc {slovak}{}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1}Dostupnosť ako bezpečnostný atribút}{1}{section.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.1}Kľúčový zabezpečovatelia dostupnosti}{1}{subsection.1.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{Softvér:}{1}{section*.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{Hardvér:}{2}{section*.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{Sieť:}{2}{section*.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.2}Dôvody viktimizácie prevádzkovateľov}{2}{subsection.1.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {1.2.1}Teória rutinných aktivít}{3}{subsubsection.1.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {1.2.2}Psychologická predeterminácia útočníka}{4}{subsubsection.1.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2}Anatómia útokov Denial of Service}{5}{section.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.1}Botnet}{6}{subsection.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {2.1.1}Komunikácia s botmi}{6}{subsubsection.2.1.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {2.1.2}Šírenie replikáciou škodlivého kódu}{7}{subsubsection.2.1.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.2}Klasifikácia typov DDoS útokov}{8}{subsection.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.3}Ochrana spevnením sieťovej ochrany}{11}{subsection.2.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {2.3.1}Remotely Triggered Black Hole}{12}{subsubsection.2.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {2.3.2}IP Spoofing}{13}{subsubsection.2.3.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {2.3.3}Rate limiting a Firewall na Linuxe}{14}{subsubsection.2.3.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3}Škálovanie webových aplikácií}{14}{section.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1}Redundancia nižších vrstvách RM OSI}{15}{subsection.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2}Vysoká dostupnosť klastra}{16}{subsection.3.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.3}Reverzné proxy na vyvažovanie záťaže}{17}{subsection.3.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {3.3.1}HAProxy}{17}{subsubsection.3.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {3.3.2}Nginx}{17}{subsubsection.3.3.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.4}Algoritmy vyvažovania záťaže}{17}{subsection.3.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4}Monitorovanie webovej aplikácie}{17}{section.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.1}HTTP hlavičky}{17}{subsection.4.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2}Metriky}{17}{subsection.4.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.3}Zabbix}{17}{subsection.4.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.4}Simulácie útokov a záťažové testy}{17}{subsection.4.4}%
+\babel@toc {slovak}{}
+\babel@toc {slovak}{}
+\babel@toc {slovak}{}
+\babel@toc {slovak}{}
+\babel@toc {slovak}{}
+\babel@toc {slovak}{}
+\babel@toc {slovak}{}
+\babel@toc {slovak}{}
+\babel@toc {slovak}{}
+\babel@toc {slovak}{}
+\babel@toc {slovak}{}
+\babel@toc {slovak}{}
+\babel@toc {slovak}{}
+\babel@toc {slovak}{}
+\babel@toc {slovak}{}
+\babel@toc {slovak}{}
+\babel@toc {slovak}{}
+\babel@toc {slovak}{}
+\babel@toc {slovak}{}
+\babel@toc {slovak}{}
+\babel@toc {slovak}{}
+\babel@toc {slovak}{}
+\babel@toc {slovak}{}
+\babel@toc {slovak}{}
+\babel@toc {slovak}{}
+\babel@toc {slovak}{}

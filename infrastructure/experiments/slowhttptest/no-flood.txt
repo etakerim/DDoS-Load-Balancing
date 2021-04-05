@@ -1,0 +1,12 @@
+[1617635556.842186] 64 bytes from 192.168.0.2: icmp_seq=1 ttl=64 time=0.903 ms
+[1617635557.850948] 64 bytes from 192.168.0.2: icmp_seq=2 ttl=64 time=1.03 ms
+[1617635558.852214] 64 bytes from 192.168.0.2: icmp_seq=3 ttl=64 time=1.01 ms
+[1617635559.853476] 64 bytes from 192.168.0.2: icmp_seq=4 ttl=64 time=1.01 ms
+[1617635560.854735] 64 bytes from 192.168.0.2: icmp_seq=5 ttl=64 time=1.01 ms
+[1617635561.855973] 64 bytes from 192.168.0.2: icmp_seq=6 ttl=64 time=1.00 ms
+[1617635562.857184] 64 bytes from 192.168.0.2: icmp_seq=7 ttl=64 time=0.990 ms
+[1617635563.858359] 64 bytes from 192.168.0.2: icmp_seq=8 ttl=64 time=0.962 ms
+[1617635564.859597] 64 bytes from 192.168.0.2: icmp_seq=9 ttl=64 time=1.03 ms
+[1617635627.664123] 64 bytes from 192.168.0.2: icmp_seq=71 ttl=64 time=0.876 ms
+[1617635628.665338] 64 bytes from 192.168.0.2: icmp_seq=72 ttl=64 time=0.952 ms
+[1617635629.666486] 64 bytes from 192.168.0.2: icmp_seq=73 ttl=64 time=0.940 ms 
