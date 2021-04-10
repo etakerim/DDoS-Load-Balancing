@@ -57,8 +57,8 @@
       \list{publisher}{1}{%
         {Radware}%
       }
-      \field{sortinit}{4}
-      \field{sortinithash}{e071e0bcb44634fab398d68ad04e69f4}
+      \field{sortinit}{5}
+      \field{sortinithash}{5dd416adbafacc8226114bc0202d5fdd}
       \field{labeltitlesource}{title}
       \field{note}{\url{https://www.radware.com/getattachment/Security/Research/702/Radware_DDoS_Handbook_2015.pdf.aspx}}
       \field{title}{DDoS Handbook: The Ultimate Guide to Everything You Need to Know about DDoS Attacks}
@@ -100,8 +100,8 @@
       \strng{authorbibnamehash}{b3fb7f0595e78ed3ea6ed9cd89d944c8}
       \strng{authornamehash}{b3fb7f0595e78ed3ea6ed9cd89d944c8}
       \strng{authorfullhash}{b3fb7f0595e78ed3ea6ed9cd89d944c8}
-      \field{sortinit}{5}
-      \field{sortinithash}{5dd416adbafacc8226114bc0202d5fdd}
+      \field{sortinit}{6}
+      \field{sortinithash}{7851c86048328b027313775d8fbd2131}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Journal of Wireless Mobile Networks}
@@ -139,8 +139,8 @@
       \strng{authorbibnamehash}{a1c4714ab7a6f500408234dd03ecc156}
       \strng{authornamehash}{a1c4714ab7a6f500408234dd03ecc156}
       \strng{authorfullhash}{a1c4714ab7a6f500408234dd03ecc156}
-      \field{sortinit}{6}
-      \field{sortinithash}{7851c86048328b027313775d8fbd2131}
+      \field{sortinit}{7}
+      \field{sortinithash}{f615fb9c6fba11c6f962fb3fd599810e}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{issn}{0975-4172}
@@ -170,8 +170,8 @@
       \strng{authorbibnamehash}{838b4ce498521507a531c305f8fea7f9}
       \strng{authornamehash}{838b4ce498521507a531c305f8fea7f9}
       \strng{authorfullhash}{838b4ce498521507a531c305f8fea7f9}
-      \field{sortinit}{9}
-      \field{sortinithash}{54047ffb55bdefa0694bbd554c1b11a0}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{American Sociological Review}
@@ -334,8 +334,8 @@
       \strng{authorbibnamehash}{f5796d14d67b354af582fd1be8f17fa2}
       \strng{authornamehash}{f5796d14d67b354af582fd1be8f17fa2}
       \strng{authorfullhash}{f5796d14d67b354af582fd1be8f17fa2}
-      \field{sortinit}{1}
-      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{ACM SIGCOMM Computer Communication Review}
@@ -361,42 +361,50 @@
       \field{year}{2013}
     \endentry
     \entry{enisa-ddos}{article}{}
-      \field{sortinit}{2}
-      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
       \field{labeltitlesource}{title}
       \field{journaltitle}{ENISA}
       \field{note}{\url{https://www.enisa.europa.eu/publications/enisa-threat-landscape-2020-distributed-denial-of-service}}
       \field{title}{ENISA Threat Landscape 2020 - Distributed denial of service}
       \field{year}{2020}
     \endentry
-    \entry{physical-security}{article}{}
-      \name{author}{1}{}{%
-        {{hash=6fbc1a6e15512ff5c6276fe511dbc04b}{%
-           family={Lee},
-           familyi={L\bibinitperiod},
-           given={Seungmug\bibnamedelima (Zech)},
-           giveni={S\bibinitperiod\bibinitdelim (\bibinitperiod}}}%
+    \entry{RFC5635}{report}{}
+      \name{author}{2}{}{%
+        {{hash=3fcb8af957941857f7d87594b2b073cd}{%
+           family={Kumari},
+           familyi={K\bibinitperiod},
+           given={W.},
+           giveni={W\bibinitperiod}}}%
+        {{hash=3d0127bafa55fe91a18e8aef70f30f4f}{%
+           family={McPherson},
+           familyi={M\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
       }
-      \strng{namehash}{6fbc1a6e15512ff5c6276fe511dbc04b}
-      \strng{fullhash}{6fbc1a6e15512ff5c6276fe511dbc04b}
-      \strng{bibnamehash}{6fbc1a6e15512ff5c6276fe511dbc04b}
-      \strng{authorbibnamehash}{6fbc1a6e15512ff5c6276fe511dbc04b}
-      \strng{authornamehash}{6fbc1a6e15512ff5c6276fe511dbc04b}
-      \strng{authorfullhash}{6fbc1a6e15512ff5c6276fe511dbc04b}
+      \list{institution}{1}{%
+        {RFC Editor}%
+      }
+      \list{publisher}{1}{%
+        {RFC Editor}%
+      }
+      \strng{namehash}{cea634d1eefcff178cbbd731c0519c4e}
+      \strng{fullhash}{cea634d1eefcff178cbbd731c0519c4e}
+      \strng{bibnamehash}{cea634d1eefcff178cbbd731c0519c4e}
+      \strng{authorbibnamehash}{cea634d1eefcff178cbbd731c0519c4e}
+      \strng{authornamehash}{cea634d1eefcff178cbbd731c0519c4e}
+      \strng{authorfullhash}{cea634d1eefcff178cbbd731c0519c4e}
       \field{sortinit}{3}
       \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{issue}{1}
-      \field{journaltitle}{International journal of cyber criminology}
-      \field{title}{A Basic Principle of Physical Security and Its Link to Cybersecurity}
-      \field{volume}{14}
-      \field{year}{2020}
-      \field{pages}{203\bibrangedash 219}
-      \range{pages}{17}
-      \verb{doi}
-      \verb 10.5281/zenodo.3749780
-      \endverb
+      \field{howpublished}{Internet Requests for Comments}
+      \field{issn}{2070-1721}
+      \field{month}{8}
+      \field{number}{5635}
+      \field{title}{Remote Triggered Black Hole Filtering with Unicast Reverse Path Forwarding (uRPF)}
+      \field{type}{RFC}
+      \field{year}{2009}
     \endentry
     \entry{cisco-rtbh}{misc}{}
       \list{publisher}{1}{%
@@ -468,6 +476,92 @@
       \field{title}{Multipath Issues in Unicast and Multicast Next-Hop Selection}
       \field{type}{RFC}
       \field{year}{2000}
+    \endentry
+    \entry{RFC2338}{report}{}
+      \name{author}{9}{}{%
+        {{hash=2e452c7f86648ad63e9f91dd9fc98249}{%
+           family={Knight},
+           familyi={K\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=1070f3fc102ca4673b8332b777f5c0f0}{%
+           family={Weaver},
+           familyi={W\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+        {{hash=81683932f9bd1b512410e7e6186cc1ea}{%
+           family={Whipple},
+           familyi={W\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+        {{hash=091b569d1602b59ab4ba7f6d43d81aba}{%
+           family={Hinden},
+           familyi={H\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+        {{hash=7cae79eaf5a4a509784d3c62785c78b4}{%
+           family={Mitzel},
+           familyi={M\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+        {{hash=c67c9576c06534f305ff02071c8701e9}{%
+           family={Hunt},
+           familyi={H\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=18e74bed103afa7f515415e089d31815}{%
+           family={Higginson},
+           familyi={H\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=e1b9d56972cfe87e1fbe5b9d9ee2f605}{%
+           family={Shand},
+           familyi={S\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=221920706e5a77c2ca21835d740fa5bb}{%
+           family={Lindem},
+           familyi={L\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {RFC Editor}%
+      }
+      \list{publisher}{1}{%
+        {RFC Editor}%
+      }
+      \strng{namehash}{ce53d860cee99adc00ca9ccd5a4eb994}
+      \strng{fullhash}{ce53d860cee99adc00ca9ccd5a4eb994}
+      \strng{bibnamehash}{ce53d860cee99adc00ca9ccd5a4eb994}
+      \strng{authorbibnamehash}{ce53d860cee99adc00ca9ccd5a4eb994}
+      \strng{authornamehash}{ce53d860cee99adc00ca9ccd5a4eb994}
+      \strng{authorfullhash}{ce53d860cee99adc00ca9ccd5a4eb994}
+      \field{sortinit}{4}
+      \field{sortinithash}{e071e0bcb44634fab398d68ad04e69f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Internet Requests for Comments}
+      \field{issn}{2070-1721}
+      \field{month}{4}
+      \field{number}{2338}
+      \field{title}{Virtual Router Redundancy Protocol}
+      \field{type}{RFC}
+      \field{year}{1998}
+      \verb{urlraw}
+      \verb http://www.rfc-editor.org/rfc/rfc2338.txt
+      \endverb
+      \verb{url}
+      \verb http://www.rfc-editor.org/rfc/rfc2338.txt
+      \endverb
+    \endentry
+    \entry{keepalived-docs}{misc}{}
+      \field{sortinit}{4}
+      \field{sortinithash}{e071e0bcb44634fab398d68ad04e69f4}
+      \field{labeltitlesource}{title}
+      \field{note}{\url{https://keepalived.readthedocs.io/en/latest/}}
+      \field{title}{Keepalived User Guide}
+      \field{year}{2021}
     \endentry
   \enddatalist
 \endrefsection

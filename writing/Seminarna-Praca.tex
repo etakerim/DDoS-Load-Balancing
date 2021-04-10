@@ -4,11 +4,19 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{geometry}
+\usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{csquotes}
 \usepackage{listings}
 \usepackage{setspace}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{multirow}
+\usepackage{subcaption}
+\usepackage{fancyvrb}
 \setstretch{1.25}
+\newsavebox\shield
+\renewcommand{\lstlistingname}{Kód}
 
 \usepackage[style=iso-numeric,backend=biber]{biblatex}
 \addbibresource{references.bib}
@@ -18,7 +26,9 @@
 	basicstyle=\ttfamily\footnotesize, 
 	extendedchars=true, 
 	texcl=true,
-	breaklines=true
+	inputencoding=utf8,
+	breaklines=true,
+	frame=single
 }
 
 \geometry{
@@ -27,8 +37,6 @@
 	top=2.5cm,
 	bottom=2.5cm
 }
-
-\lstset{inputencoding=utf8,texcl=true}
 
 \begin{document}
 \begin{titlepage}
@@ -59,11 +67,11 @@
 Zabezpečenie nepretržitého prístupu k webovým službám je očakávanou a takmer nevyhnutnou požiadavkou pre 
 akýkoľvek významnejší informačný systém. Predstavuje neoddeliteľnú súčasť obrazu o spoľahlivosti 
 ich prevádzkovateľov pôsobiacich vo virtuálnom priestore internetu. Aspekt dostupnosti sa prejavuje tým,
-že údaje sú k dispozícii pre autorizovaných používateľov okamžite a bez nečakaných obmedzení. Odlišná 
-interpretácia definuje pojem dostupnosti ako ochranu proti zlomyseľnému zatajovaniu informácií. Spoločným 
-menovateľom pre oba tieto pohľady je dôraz na všadeprítomnosť služby v ľubovoľnom čase potreby. Taký stav
-je vskutku ideálny, ale je možné sa mu aspoň priblížiť predovšetkým identifikáciou bodov zlyhania alebo 
-miest prieniku a ich následným systematickým eliminovaním.
+že údaje sú k dispozícii pre autorizovaných používateľov okamžite a bez nečakaných obmedzení   
+ \cite{availability}. Odlišná interpretácia definuje pojem dostupnosti ako ochranu proti zlomyseľnému 
+zatajovaniu informácií. Spoločným menovateľom pre oba tieto pohľady je dôraz na všadeprítomnosť služby v 
+ľubovoľnom čase potreby. Taký stav je vskutku ideálny, ale je možné sa mu aspoň priblížiť predovšetkým 
+identifikáciou bodov zlyhania alebo miest prieniku a ich následným systematickým eliminovaním.
 
 Pre bezpečné nakladanie s informáciami nestačí samotná dostupnosť, ale zároveň je potrebné pri návrhu a 
 prevádzke systémov myslieť aj na dôvernosť a integritu údajov. Spolu tvoria tradičný model informačnej 
@@ -76,22 +84,21 @@ bezpečnostné predpoklady, ktoré má systém napĺňať.
 \subsection{Kľúčový zabezpečovatelia dostupnosti}
 Komunikačné technológie často tvoria chrbtovú kosť väčšiny moderných biznisov pričom ich hlavnou úlohou je 
 sprostredkovanie informácií naprieč organizáciou a podieľajú sa na riadení podnikových procesov. Okrem 
-ľudského kapitálu sa spolieha na tri kľúčové prvky: \emph{softvér, hardvér a počítačovú sieť} 
-\cite{availability}. 
+ľudského kapitálu sa spoliehajú na tri kľúčové prvky: \emph{softvér, hardvér a počítačovú sieť} 
+\cite{availability}:
 
 \paragraph{Softvér:}
 Softvér je najkritickejším komponentom spomedzi vymenovaných, pretože na základe príkazov v kóde programov 
 je ovládaný hardvér a sieťové zariadenia. Všetky potenciálne útoky a ich dopady musia byť riešené primárne 
-na úrovni softvéru. Na napadnutie sú využívané zraniteľnosti v ovládacích a regulačných mechanizmoch 
-systému, sprístupnené prelomením nedostatočne zabezpečeného verejného rozhrania služieb. Najčastejším cieľom 
-útočníka je dosiahnutie kontroly nad zariadením alebo vyvolaním chaosu vo fungovaní prevádzky. 
+na úrovni softvéru. Na napadnutie sú využívané zraniteľnosti systému, sprístupnené prelomením nedostatočne 
+zabezpečeného verejného rozhrania služieb. Najčastejším cieľom útočníkov je dosiahnutie kontroly nad 
+zariadením alebo vyvolaním chaosu vo fungovaní prevádzky. 
  
 Zlyhanie programového vybavenia nemusí byť iba v dôsledku nepriaznivých vonkajších vplyvov, ale tiež sa 
 prejavujú chyby spôsobené nekorektným návrhom alebo implementáciou systému s odchýlkami od
-požadovaného správania, majúce nepriaznivý vplyv napríklad na dostupnosť konkrétnej stránky. Tieto chyby sú 
-vnesené neúmyselne najčastejšie programátorom. Počas behu aplikácie môžu nastať zlyhania operačného 
-prostredia zapríčinené nedostatkom pamäte pri alokácii, zaplneniu diskového úložiska alebo uviaznutím 
-systému. 
+požadovaného správania. Tieto chyby sú  vnesené neúmyselne najčastejšie programátorom. Počas behu aplikácie 
+môžu nastať zlyhania operačného prostredia zapríčinené nedostatkom pamäte pri alokácii, zaplneniu diskového 
+úložiska alebo uviaznutím systému. 
 
 \paragraph{Hardvér:}
 Poruchy hardvéru bývajú zriedkavejšie, ale o to podstatne fatálnejšie pre celkový chod, keď
@@ -103,13 +110,12 @@ vlastností navzájom.
 
 \paragraph{Sieť:}
 Obmedzením počítačových sietí je ich priepustnosť podmienená šírkou prenosového pásma a réžiou 
-spotrebovanou na obsluhu zvolených komunikačných protokolov. Problémy nastávajú v situáciach, kedy vznikne 
-zahlteniu na sieťovej linke. Za normálnych okolností rešpektujú uzly v sieti signalizáciu zaznačenú do 
-paketov a prispôsobia rýchlosť vysielania, čím sa za istý čas uľaví náporu. Útočník, ktorý chce saturovať 
+spotrebovanou na obsluhu zvolených komunikačných protokolov. Problémy nastávajú v situáciach, kedy sa 
+zahltí sieťová linka. Za normálnych okolností rešpektujú uzly v sieti signalizáciu zaznačenú do 
+paketov a prispôsobia rýchlosť vysielania, čím sa po istom čase uľaví náporu. Útočník, ktorý chce saturovať 
 serverové pripojenie to  pochopiteľne nerešpektuje a preto by sa nadmerná premávka mala presmerovať a 
-filtrovať. Pokiaľ bude smerovač vystavený niekoľkonásobnej záťaži než je schopný podporovať určite spôsobí 
-straty paketov a zvýšenú latenciu. Okrem spustenia čo najväčšieho toku paketov do siete sa zneužívajú aj
-synchronizačné očakávania komunikácie, konkrétne napríklad stavový automat protokolu TCP.
+filtrovať. Pokiaľ bude smerovač vystavený niekoľkonásobnej záťaži než je schopný podporovať, určite vyvolá 
+straty paketov a zvýšenú latenciu.
 
 \subsection{Dôvody viktimizácie prevádzkovateľov}
 Nedostupnosť služieb máva za následok, buď priame škody v podobe finančných strát alebo vplýva na 
@@ -117,25 +123,23 @@ pošramotenie nadobudnutej reputácie u klientov, ktorí si zlyhanie môžu spá
 dôveryhodnosti služby. Poškodenie reputácie sa radí so 47\% medzi najväčšie obavy firiem počas 
 kybernetického útoku \cite{radware-ddos}. Ďalšími zreteľmi starostí sú potenciálna strata ziskov s 21\%, 
 obmedzená dostupnosť s 12\% a zníženie produktivity počas útoku na 7\%. Čím väčší poskytovateľ a 
-používanejšia webová stránka, tým rozsiahlejšie sú potenciálne dopady pri neočakávanej vyradení z prevádzky. 
+používanejšia webová stránka, tým rozsiahlejšie sú potenciálne dopady pri neočakávanom vyradení z prevádzky. 
 Zároveň dochádza k adekvátnemu navýšeniu zriadenej odolnosti investovanej do predchádzania a aktívnej 
 defenzívy proti útokom. 
 
 Motivácie a dôvody stojace za aktivitami úmyselne narúšajúcimi dostupnosť zvolených obetí v podobe
-webových aplikácií sa líšia od prípadu k prípadu, ale dajú sa zhrnúť do nasledujúcich kategórií 
+webových aplikácií sa líšia od prípadu k prípadu, ale sú zhrnuteľné do nasledujúcich okruhov 
 \cite{why-attack} \cite{ddos-attacks}:
 \begin{itemize}
 \itemsep0em 
 \item \emph{Kapitálové zisky} - nadobudnutie finančnej odplaty od objednávateľa alebo nekalé snahy o 
-potopenie konkurencie v ekonomickej súťaži predstavuje významný hnací faktor pre útočníkov. 
+potopenie konkurencie v ekonomickej súťaži predstavujú významný hnací faktor pre útočníkov. 
 Hlavným zámerom je lepšie peňažné zabezpečenie sa nehľadiac na taktiky vynaložené na tento účel. 
 Úspešná realizácia vyžaduje značné technické zručnosti, pretože firmám, ktoré sú hlavných cieľom,
-ide o veľa. 
-
-Zvykne sa dotýkať komerčných webstránok alebo služieb finančných inštitúcií (zaznamenané útoky na HSBC, 
-BTC a  Ethereum burzy), serverov a sieťových zariadení poskytovateľov webhostingu alebo internetového 
-pripojenia (Deutsche Telekom, OVH, Dyn), herných serverov (Steam, Blizzard, EA Sports), emailových serverov 
-(Eir). \cite{why-attack}
+ide o veľa. Zvykne sa dotýkať komerčných webstránok alebo služieb finančných inštitúcií (zaznamenané útoky 
+na HSBC, BTC a Ethereum burzy), serverov a sieťových zariadení poskytovateľov webhostingu alebo 
+internetového pripojenia (Deutsche Telekom, OVH, Dyn) alebo serverov herných spoločností (Steam, Blizzard, 
+EA Sports) \cite{why-attack}
 
 \item \emph{Pomsta} - prevažne frustrovaný jednotlivci snažiaci sa o odplatu za vnímanú 
 nespravodlivosť, ktorú podľa nich prevádzkovateľ pácha. Počas operácie Payback z roku 2010 bol odplatou
@@ -163,35 +167,34 @@ poškodenia nepriateľovi. Kritická infraštruktúra štátu prestavuje najčas
 Výber primeranej obete má taktiež svoj podiel na úspešnosti škodlivého zásahu útočníka do prevádzky,
 pretože ten sa výrazne nelíši od konvenčného zločinu. Medzi obvykle spomínané zdôvodnenia páchania 
 kriminality zo sociologickej perspektívy patrí kriminologická teória známa pod názvom 
-\emph{teória rutinných aktivít}. Poskytuje predpoklady, aké musí daný subjekt spĺňať nato, aby bol 
+\emph{teória rutinných aktivít}. Vysvetľuje predpoklady, aké musí daný subjekt spĺňať nato, aby bol 
 zasiahnutý. Vyslovuje, že zločin sa udeje vtedy, keď motivovaný útočník, so sklonmi na páchanie trestnej 
 činnosti, príde do stretu s objektom ponechaného bez prítomnosti schopného strážcu \cite{cohen-felson}.
 
-Pokiaľ sú vytvorené priaznivé okolnosti na prelomenie do systému, napríklad predvoleným prepustením 
-všetkej sieťovej premávky je veľká šanca, že motivovaný útočník sa bude snažiť o zneužitie a jednoduchšie
-je mu umožnené zhodiť tento systém. Na druhej stane pri absencii jediného kritéria, sa buď znižujú šance na
-viktimizáciu alebo úplne vylúči. Takáto situácia vie odradiť značné množstvo potenciálnych útočníkov.
-Podľa \emph{teórie racionálneho jednania} koná útočník pri zvažovaní realizácie svojho činu racionálne,
-hoc sa jedná o obmedzenú rozumnosť a síce z uhľa pohľadu delikventa ide o cieľavedomé rozhodnutie, kde 
-pozitívny obnos prevažuje nad možnými rizikami uskutočnenia.
+Pokiaľ sú vytvorené priaznivé okolnosti na prelomenie do systému je veľká šanca, že sa motivovaný útočník 
+bude snažiť o zneužitie bezpečnostnej diery. Na druhej stane pri absencii jediného kritéria, sa buď 
+znižujú šance na viktimizáciu alebo sa úplne vylúčia. Podľa \emph{teórie racionálneho jednania} koná 
+útočník pri zvažovaní realizácie svojho činu racionálne, hoc sa jedná o obmedzenú rozumnosť a síce z uhľa 
+pohľadu delikventa ide o cieľavedomé rozhodnutie, kde pozitívny obnos prevažuje nad možnými rizikami 
+uskutočnenia.
 
 Vhodnosť zamerania sa na zvolenú infraštruktúru pre potenciálneho páchateľa je zachytiteľné kritériami 
 \emph{VIVA} (Value, Inetria, Visibility, Accesibility) \cite{why-attack}. V kontexte útokov odmietnutia 
-služby sa pod \emph{hodnotou} rozumie dôležitosť rozbitia cieľa pre útočníka, presnejšie či daný internetový 
-portál alebo herný server dosahuje dostatočné zisky, aby ich odstavením spôsobil dostatočnú škodu. 
+služby sa pod \emph{hodnotou} rozumie dôležitosť rozbitia cieľa pre útočníka, teda či daný internetový 
+portál alebo herný server dosahuje dostatočné zisky, aby ich odstavením bola spôsobená dostatočná škoda. 
 \emph{Zotrvačnosťou} sa myslí odpor, ktorý kladie infraštruktúra voči útoku rozličnými bezpečnostnými 
 mechanizmami. Medzi priamočiare praktiky patrí udržiavanie aktualizovanému systému so zaplátanými 
 zraniteľnosťami alebo obmedzením počtu dopytov z jednej adresy. Služby s veľkou zotrvačnosťou sú schopné 
-ustáť väčší nápor v prípade napadnutia. \emph{Viditeľnosť} predstavuje rozsah v akom je webstránka verejne 
-dostupná a známa širšiemu publiku. \emph{Prístupnosť} značí jednoduchosť v dosiahnutí vytýčených sieťových 
+ustáť väčší nápor v prípade napadnutia. \emph{Viditeľnosť} predstavuje rozsah verejnej prístupnosti a 
+známosti webstránky. \emph{Prístupnosť} značí jednoduchosť v dosiahnutí vytýčených sieťových 
 uzlov, ktoré majú predstavovať obeť, použitou taktikou útoku bez povšimnutia. Rovnako sa spája so 
 schopnosťou nezanechať stopy na mieste činu následkom neprítomnosti mechanizmu monitorovania a detekcie 
 narušenia. 
 
 Relatívne vysokou hodnotou, viditeľnosťou a prístupnosťou a nízkou zotrvačnosťou sa cieľ stáva 
-exponovanejší a tým žiadanejší pre útočníka na odstavenie. Oproti klasickému zločinu, kedy býva nutná 
+exponovanejší a tým žiadanejší pre útočníka. Oproti klasickému zločinu, kedy býva nutná 
 prítomnosť páchateľa a obete na jednom mieste, kyberzločin dovoľuje útočníkovi pôsobiť cez internet takmer 
-od hocikadiaľ a maskovať sa proti odhaleniu.
+od hocikiaľ a maskovať sa proti odhaleniu.
 
 \subsubsection{Psychologická predeterminácia útočníka}
 Pokiaľ by nejestvovali indivíduá so zámerom druhému spôsobiť ujmu vyplývajúcu z nastolených motivačných
@@ -208,18 +211,16 @@ bezvýchodiskovosť situácie, neuznávajú význam obete  prenášajúc naň vi
 vyššieho princípu. Na základe teórie etiketovania je delikvencia len momentálny stav osobnosti, ktorý 
 pramálo súvisí s psychickými vlastnosťami a správaním.
 
-Predpokladom na spáchanie kybernetického zločinu sústrediac sa na snahu o eliminovanie dostupnosti
-sú okrem úvodných pohnútok aj isté technické zručnosti útočníka. Keď chce byť pracovník slobodný od 
-nadriadených a má, hoc aj nedopatrením, záznam v registri trestov, je niekedy motivovaný vlastnou 
-otáznejšou zamestnateľnosťou sa uchýliť k predávaniu alebo prenajímaniu strojov, ktoré sa mu podarí 
-kompromitovať, pre niekoho kto má záujem učiniť veľkoplošný útok a vedú ho k tomu zrejme dôvody uvedenej 
-skorej. Hacker si časom  vybuduje ilegálny biznis, ktorým si dokáže zarobiť uspokojivý obnos 
-\cite{infiltrating-botnet}. Využívané programy sú vymieňané alebo predávané sprostredkovane cez fóra,
-sú reklamované a tamojšími administrátormi overované podobne ako bežný komerčný softvér. Na fórach 
-prebiehajú diskusie a objavujú sa návody k schodným spôsobom ako si dostupný malvér sprevádzkovať 
-a upraviť podľa potreby.
+Predpokladom na spáchanie kybernetického zločinu sú okrem úvodných pohnútok aj požadované technické 
+zručnosti útočníka. Ak pracuje človek radšej sám na seba, a hoc aj nedopatrením má záznam v registri 
+trestov, je niekedy motivovaný vlastnou otáznejšou minulosťou voči bežným klientom sa uchýliť k predávaniu 
+alebo prenajímaniu kompromitovaných strojov. Hacker si časom vybuduje ilegálny biznis, ktorým si dokáže 
+zarobiť uspokojivý obnos \cite{infiltrating-botnet}. Využívané programy sú vymieňané alebo predávané 
+sprostredkovane cez fóra, sú reklamované a tamojšími administrátormi overované podobne ako bežný komerčný 
+softvér. Na fórach  prebiehajú diskusie a objavujú sa návody k schodným spôsobom ako si dostupný malvér 
+sprevádzkovať a upraviť podľa potreby.
 
-Vykonanie útoku so zámerom obmedziť dostupnosť cudzieho systém je podľa platnej legislatívnej úpravy 
+Vykonanie útoku so zámerom obmedziť dostupnosť cudzieho systému je podľa platnej legislatívnej úpravy 
 na Slovensku trestným činom podľa \emph{§247a Trestného zákona} a obdoby sú zavedené takisto v iných 
 právnych poriadkoch (napr. v USA - Computer Fraud and Abuse Act a 18 U.S.C. § 1030, v Nemecku - 
 Strafgesetzbuch: §303b  Computersabotage). Činnosť neoprávneného zásahu do počítačového systému spadá v 
@@ -230,19 +231,20 @@ podstate do rovnakej oblasti ako poškodenie cudzieho majetku s trestami odňati
 Internet predstavuje prostredie sprístupňujúce na jednej strane ohromnú kvantitu služieb, ale zároveň 
 sprostredkúva útočníkom širokú paletu nástrojov umožňujúcich ich odstavenie. Útoky odoprenia služby
 - \emph{Denial of Service (DoS)} - spôsobujú nežiaduci zásah do schopnosti legitímneho 
-používateľa na prístup k zdrojom dostupných v počítačovej sieti. Zneprístupnenie sa realizuje vyčerpaním šírky pásma linky alebo systémových prostriedkov obete, či už CPU, operačnej pamäti alebo priepustnosti 
+používateľa na prístup k zdrojom dostupných v počítačovej sieti. Zneprístupnenie sa realizuje vyčerpaním 
+šírky pásma linky alebo systémových prostriedkov obete, či už CPU, operačnej pamäti alebo priepustnosti 
 vstupno-výstupných operácií \cite{ddos-attacks}. Pokiaľ sa na útoku podieľa značný počet zariadení označuje 
 sa ako distribuovaný DoS skrátene DDoS. 
 
-Útoky typu DDoS sú na internete obrovským problémom napriek snahe výskumníkov vyvíjať neustále lepšie 
+Útoky typu DDoS sú na internete obrovským problémom, napriek snahe vyvíjať neustále lepšie 
 metódy obrany v reakcii na stále sofistikovanejšie modifikácie techník útokov. V architektúre internetu 
 prevládajú prvky so zameraním skôr na efektivitu a spoľahlivosť prenosu paketov medzi koncovými uzlami, než 
 na silné zabezpečenie detailnou kontrolou prenášaného toku. Z distribuovanej povahy a autonómie 
 administrácie nezávislých samostatných sietí, z ktorých je Internet zložený, a ktoré si riadi 
 do veľkej miery každý poskytovateľ pripojenia zvlášť, by bola na systematické celoplošné politiky nevyhnutná 
 ťažko dosiahnuteľná širšia dohoda. Zároveň platí, že akokoľvek je cieľový systém ochránený stále závisí od 
-úrovne zabezpečenia ostatných uzlov v sieti. Okrem rôznorodého vynútenia pravidiel je ďalším predpokladom na 
-degradáciu služieb obmedzené výpočtové zdroje každej entity na trase, hlavne ide o limitované kapacity 
+úrovne zabezpečenia ostatných uzlov v sieti. Okrem rôznorodého vynútenia pravidiel sú ďalšími predpokladmi 
+na degradáciu služieb obmedzené výpočtové zdroje každej entity na trase, hlavne limitované kapacity 
 vyrovnávacích pamätí.
 
 Myšlienka uskutočnenia DoS útoku je pomerne priamočiara. Pokiaľ útočník disponuje väčšou celkovou rýchlosťou 
@@ -261,8 +263,8 @@ Počítač slúžiaci útočníkovi na naplnenie nekalých úmyslov vzdialeným 
 \emph{zombie}, či \emph{dron}. Boti sa správajú ako hybrid viacerých kybernetických hrozieb s pridanou 
 hodnotou komunikačného  kanála so schopnosťou koordinácie cez ovládacie miesta. Šíria sa podobne červom, 
 skrývajú sa pred detekciou ako vírusy a obsahujú útočne metódy toolkitov \cite{zombie-roundup}. Vlastník 
-armády botov je tzv. \emph{botmaster} alebo \emph{pastier - herder}. Neprávom nadobudnuté výpočtové 
-prostriedky riadi prostredníctvom command and control (C\&C) infraštruktúry.
+armády botov je tzv. \emph{botmaster}. Neprávom nadobudnuté výpočtové prostriedky riadi prostredníctvom 
+command and control (C\&C) infraštruktúry.
 
 \subsubsection{Komunikácia s botmi}
 DDoS útočné siete používajú spravidla tri typy architektúry: \emph{Agent-Handler}, \emph{Internet Relay Chat 
@@ -466,43 +468,22 @@ sa sleduje rozpoznávaním podozrivých vzorov podľa analýzy predošlých úto
 pozorovanie anomálií v komunikácií. Strážny komponent je sústredený na preddefinované scenáre alebo
 sa natrénuje na bežnej premávke a spustí varovanie po prekročení prahových hodnôt.
 
-Pri oboch stratégiách je ideálne aplikovať taktiku viacerých línií obrany, ktoré sa osvedčili už 
-za dávnych  čias pri fyzickej obrane pevností. Bezpečné prostredie má ľudí a aktíva chrániť pred ujmou a 
-stratou. Staroveké civilizácie si na ten účel stavali obranné pevnosti, ktoré mali poskytnúť ochranu pre 
-veci vnútri nich. Už Mykénska civilizácia uplatňovala štyri zóny fyzickej obrany pred nepriateľom 
-\cite{physical-security}. 
-
-Prvou líniou obrany bola priekopa alebo rieka s premosteniami, za ktorých paralelu je možné vo virtuálnom 
-svete považovať vzdialene spustiteľné čierne diery (RTBH) reaktívne chrániace autonómny systém (AS) 
-regionálne (AS) alebo vcelku. Za priekopou sa v druhej línii nachádzal obvodový múr a vstupné brány, kde je 
-sieťových ekvivalentom snáď Ingress, Egress a ACL filtrovanie premávky na smerovačoch alebo 
-zapojením systémov detekcie a prevencie narušenia - IDS a IPS. Vnútri pevností obkolesovala menšia vnútorná 
-stena svätostánky a palác, čo sa dá pripodobniť k firewall pravidlám operačného systému, na ktorom služba 
-beží. Posledná najvnútornejšia obranná stena stála pred pokladom v kráľovskej štvrti. Táto úroveň sa dá 
-stotožniť s bezpečnostnými mechanizmami webového servera v podobe Web Application Firewall (WAF) a podobných
-modulov ako existujú pre Apache s ModSecurity a ModEvasive.
-
-Pozorujeme, že smerom ďalej do centra chráneného webového  servera, tým dokážeme odolávať efektívnejšie 
-rozsiahlejším útokom, keďže spravidla chrbticová sieť disponuje najsilnejšími prostriedkami, ale na druhej 
-strane sa jej problémy pôsobiace nižšie po prúde až v takej miere nedotýkajú.
-
 \subsubsection{Remotely Triggered Black Hole} 
-Nežiadúcu premávku je teda vhodné zlikvidovať na okraji 
-autonómneho systému vzdialene spustiteľnou čiernou dierou (RTBH). Nahlásením zdrojov alebo 
-častejšie cieľa útoku vie správca siete vložiť do spúšťacieho smerovača statickú cestu na virtuálne 
-rozhranie \emph{Null}, ktoré spôsobí zahodenie paketov (RFC 5635). Postihnutá služba bude síce odrezaná 
-od Internetu,  čiže útočník dosiahne zamedzenie dostupnosti pre ostatných používateľov, ale zmiernia sa 
-negatívne dopady na zvyšnú infraštruktúru. Na edge routeroch sa musí vopred nakonfigurovať statická cesta 
-pre ďalší skok stanovený za black hole a zakázať preň odpovedanie o nedosiahnutí cieľa cez ICMP:
+Nežiadúcu premávku je vhodné zlikvidovať na okraji autonómneho systému vzdialene spustiteľnou čiernou dierou 
+(RTBH). Nahlásením zdrojov alebo  častejšie cieľa útoku vie správca siete vložiť do spúšťacieho smerovača 
+statickú cestu na virtuálne rozhranie \emph{Null}, ktoré spôsobí zahodenie paketov \cite{RFC5635}. 
+Postihnutá služba bude síce odrezaná od Internetu, čiže útočník odoprie dostupnosť pre ostatných 
+používateľov, ale zmiernia sa negatívne dopady na zvyšnú infraštruktúru. Na edge routeroch sa musí vopred 
+nakonfigurovať statická cesta pre ďalší skok stanovený za black hole a zakázať preň odpovedanie o 
+nedosiahnutí cieľa cez ICMP:
 \begin{lstlisting}
 ip route 192.0.2.1 255.255.255.255 Null0
-interface Null0 
-    no ip unreachables
+interface Null0: no ip unreachables
 \end{lstlisting}
 Na trigger smerovači sa musí aktivovať BGP politika na presmerovanie cesty k obeti 
 po obdržaní vloženej statickej cesty so spúšťacou značkou (tagom) a povolenie jej distribúcie
 medzi iBGP peerov a zároveň nepropagovanie mimo autonómneho systému \cite{cisco-rtbh}:
-\newpage
+
 \begin{lstlisting}
 route-map blackhole
     match tag 66
@@ -512,10 +493,8 @@ route-map blackhole
 router bgp 65535
     redistribute static route-map blackhole
 \end{lstlisting}
-Poskytovateľ pripojenia má potom možnosť iniciovať zablokovanie premávky na obeť známej IP adresy
-cez pravidlo na spúšťacom smerovači, ktoré všade presmeruje, v tomto príklade, adresu \verb|172.5.23.1| 
-značkou 66 na ďalší skok \verb|192.0.2.1| predstavujúci čiernu dieru. Uvedená statická cesta musí byť 
-po skončení odobratá zo spúšťacieho routera, ktorý rozpošle BGP route withdrawal svojim iBGP peerom:
+Poskytovateľ pripojenia môže na podnet zablokovať premávku na obeť známej IP adresy
+cez pravidlo na spúšťacom routeri. Uvedená statická cesta musí byť po skončení odobratá zo spúšťacieho routera, ktorý rozpošle BGP route withdrawal svojim iBGP peerom:
 \begin{lstlisting}
 ip route 172.5.23.1 255.255.255.255 Null0 tag 66
 \end{lstlisting}
@@ -595,34 +574,29 @@ pretože pádom systému servera nepostihneme dostupnosť služby ako takej. Nev
 zosieťovanie a distribúcia záťaže úloh pomedzi uzly, čím sa zvyšuje oneskorenie a závislosť na externých 
 činiteľov a od prepájacích prvkoch.
 
-\subsection{Redundancia nižších vrstvách RM OSI}
-Odolnosť sieťovej infraštruktúry proti poruchám a výpadkom prepínačov alebo smerovačov, s vedľajším
+\subsection{Redundancia nižších vrstiev RM OSI}
+Odolnosť sieťovej infraštruktúry proti poruchám a výpadkom aktívnych sieťových prvkov, s vedľajším
 rovnako dôležitým efektom navýšenia dátového prietoku komunikačných spojov, sa utužuje protokolmi
-agregácie liniek na spojovej vrstve (L2) a viaccestným smerovaním na sieťovej vrstve (L3) 
+agregácie liniek na spojovej vrstve, viaccestným smerovaním na sieťovej vrstve a
+virtuálnym smerovačom (IPVS) na transportnej vrstve.
 
-\textbf{Agregácia liniek} dostáva opodstatnenie v situáciach, kedy nestačí prenosová rýchlosť
-jediného sieťového rozhrania a je nevýhodné, či dokonca nemožné vymeniť sieťovú kartu.
-Vtedy sa oplatí zoskupiť niekoľko fyzických rozhraní do jedného logického linku (technika 
-nazývaná ako \enquote{trunking} alebo \enquote{bonding}). Navyšovanie prenosových rýchlostí
+\paragraph{Agregácia liniek} sa uplatňuje pokiaľ nestačí maximálna prenosová rýchlosť
+samotného jedného sieťového rozhrania a je nevýhodné, či dokonca nemožné vymeniť sieťovú kartu.
+Vtedy sa oplatí zoskupiť niekoľko fyzických rozhraní do jedného logického linku, spôsob nazývaný
+ako \enquote{trunking} alebo \enquote{bonding}. Navyšovanie prenosových rýchlostí
 medzi generáciami technológii na fyzickej vrstve môže takto prebiehať lineárne. Ak je vyžadovaný
 GigabitEthernet (1 Gbit/s), ale nie je k dispozícii, dokáže Trunked Fast Ethernet
 zabezpečiť rýchlosti 200 - 800 Mbit/s, v porovnaní s obyčajným 100 Mbit/s Fast Ethernet. 
 Rámce sú striedavo posielané aktívnymi redundantnými linkami vrámci zhluku, čím
 sa zabezpečí zvýšená dostupnosť a symetrizácia záťaže na participujúcich portoch.
 
-Link Aggregation Control Protocol (LACP), ktorý je súčasťou štandardu IEEE 802.3ad, dovoľuje sieťovému 
-zariadeniu vyjednanie automatické združenia liniek výmenou LACP paketov medzi partnermi.
+\emph{Link Aggregation Control Protocol} (LACP), ktorý je súčasťou štandardu IEEE 802.3ad, dovoľuje 
+sieťovému zariadeniu vyjednanie automatického združenia liniek výmenou LACP paketov medzi partnermi.
 Priebežnými keepalive správami kontroluje LACP priechodnosť spoju pre zamedzenie straty paketov
-poslaním do nefunkčnej linky a overuje chyby spôsobené nesprávnym fyzickým zapojením prevedením
-\enquote{loopback links} alebo \enquote{split-trunk} vznikajúci prekrížením kabeláže. V Mikrotik
-router OS sa pre zhluk liniek pomenuje nové zdieľané logické rozhranie, ktorému sa následne
-priradí IP adresa\footnote{\url{https://help.mikrotik.com/docs/display/ROS/Bonding}}.
-V Cisco IOS sa najprv nastaví kanál do ktorého sú pridané porty\footnote{\url{https://www.cisco.com/c/en/us/td/docs/ios/12_2sb/feature/guide/gigeth.html}}.
+v nefunkčnej linke a overuje chyby spôsobené nesprávnym fyzickým zapojením vznikajúcim prekrížením 
+kabeláže: \enquote{loopback links} alebo \enquote{split-trunk}. Prakticky sa na smerovači nastaví kanál do 
+ktorého sú pridané porty\footnote{\url{https://www.cisco.com/c/en/us/td/docs/ios/12_2sb/feature/guide/gigeth.html}}.
 \begin{lstlisting}
-# Mikrotik - určenie rozhraní na agregáciu liniek s LACP a zdieľanie IP adresy
-interface bonding add name=trunk1 mode=802.3ad slaves=ether1,ether2
-ip address add address=192.168.0.1/24 interface=trunk1
-# Cisco - pridanie rozhraní do skupiny kanálov č.1 so zvolenou IP adresou
 interface port-channel 1
    ip address 192.168.0.1 255.255.255.0
 interface range g2/0/0-1
@@ -630,62 +604,63 @@ interface range g2/0/0-1
    channel-group 1 mode active
 \end{lstlisting}
 
-\textbf{Viaccestné smerovanie} pridáva spoľahlivosti tam, odkiaľ vedú do cieľovej destinácie aspoň
-dve trasy. Equal-cost multi-path routing (RFC 2991) je stratégia smerovania, kedy sa striedavo posielajú 
-pakety cez viaceré ďalšími skokmi s rovnako dobrými metrikami cesty. V praxi je tento prístup málo 
-uplatňovaný pre komplikácie viažuce sa k dynamickému výberu spomedzi dostupných smerov pre rovnomerné 
-rozloženie záťaže. Rozličné spojenia tiež zvyknú mať rôzne veľkosti MTU (maximum transmission unit) a 
-variabilné oneskorenia vedúce k zbytočnému preusporiadaniu paketov správy mimo poradia. Pri použití mnohých
-alternatívnych preskakujúcich ciest dochádza k strate paketov. 
+\paragraph{Viaccestné smerovanie} pridáva spoľahlivosť v miestach, kde vedú do cieľovej destinácie aspoň
+dve trasy. \emph{Equal-cost multi-path routing} (ECMP) je stratégia smerovania, kedy sa striedavo posielajú 
+pakety cez viaceré ďalšie skoky s rovnako dobrými metrikami cesty. V praxi je tento prístup málo 
+uplatňovaný pre komplikácie viažuce sa k dynamickému výberu spomedzi dostupných smerov na rovnomerné 
+rozloženie záťaže \cite{RFC2991}. Rozličné spojenia tiež zvyknú mať rôzne veľkosti MTU (maximum transmission 
+unit) a variabilné oneskorenia vedúce k zbytočnému preusporiadaniu paketov správy mimo poradia. Pri použití 
+mnohých alternatívnych preskakujúcich ciest môže dochádzať k strate paketov. 
 
-Existujú však postupy, ktoré majú zmierniť popísané negatíva výberu pre next-hop, ale vyžadujú udržovanie si 
+Zmiernenie popísaných negatív výberu pre next-hop, ale vyžaduje udržovanie si 
 stavu prebiehajúcich tokov alebo zvýšené výpočtové nároky pre voľbu next-hop. \emph{Modulo-N Hash} 
 presmeruje paket na cestu podľa identifikátora toku z hlavičky paketu (najčastejšie zdrojová a cieľová 
-adresa) modulo počtu dostupných uvažovaných skokov. Ak dôjde k zmene musí sa upraviť $(N-1)/N$ tokov
+adresa) modulo počet dostupných skokov. Ak dôjde k zmene musí sa upraviť $(N-1)/N$ tokov
  \cite{RFC2991}. \emph{Hash-Threshold} rovnomerne mapuje uzly do výstupu hašovacej funkcie a podľa 
 porovnania hašu identifikátoru toku s hranicami oblasti je zvolený next-hop. Pri zmenách sa upravuje cesta 
-štvrtine až polovici tokov. \emph{Highest Random Weight} počíta hash zakaždým zároveň s hlavičky paketu a
-kľúča pre next-hop a zvolí next-hop s najvyšším výsledným číslom. Za väčšej časovej náročnosti
-mení pri pridaní alebo odobratí cesty smer už len $1/N$ tokov. Cisco router využívajúci na smerovanie
+štvrtine až polovici tokov. \emph{Highest Random Weight} počíta hash zakaždým zároveň z hlavičky paketu a
+kľúča pre next-hop. Zvolí sa ďalší skok s najvyšším výsledným číslom. Za väčšej časovej náročnosti
+sa mení pri pridaní alebo odobratí cesty, smer už len $1/N$ tokov. Cisco router využívajúci na smerovanie
 OSPFv2 uplatní ECMP jednoduchým nastavením\footnote{\url{https://www.techrepublic.com/article/how-to-configure-equal-cost-multi-path-in-ospf/}}:
 \begin{lstlisting}
 router ospf 1
 maximum-paths 2
 \end{lstlisting}
 
-\subsection{Vysoká dostupnosť klastra}
-%%%%%
-% RFC2338
-% Opísať rozdiel medzi základnou dostupnosťou a vysokou dostupnosťou – zdroj 1
-% Protokol VRRP – mechanizmus fungovania, virtálna ip adresa – paket traces
-% active-active/active-passive
-% Keepalived konfigurácia dvoch Linux zariadení s failover
-%3.Netlink Interface: Sets and removes VRRP virtual IPs on network interfaces.
-%4.Multicast: VRRP advertisements are sent to the reserved VRRP MULTICAST group (224.0.0.18).
-%\cite{keepalived-docs}
-% SMTP monitorovanie
+\paragraph{Virtuálny smerovač} zamedzuje oknám v obsluhe IP adresného priestoru udržiavaním viruálnej 
+IP adresy, pre ktorú eviduje redundantné aplikačné servery na zabezpečenie vysokej dostupnosti služby. 
+Narozdiel od konceptu základnej dostupnosti, kedy sa vyvinie systém spĺňajúci len nevyhnutné funkčné 
+požiadavky, prináša vysoká dostupnosť znásobenie počtu komponentov, aby v prípade údržby, chyby alebo 
+zlyhania komponentu mohol zaujať miesto obsluhy úloh náhradný prvok. 
 
-% IGMPv3 224.0.0.18 Join / Leave Group
-% ARP Gratious
-% VRRP Anouncement
+Odstránenie jediného bodu zlyhania nadobúda dve podoby konfiguráciami \emph{Active/Standby} a
+\emph{Active/Active} \cite{availability}. Odlišujú sa v móde prevádzky záložného riešenia, 
+ktoré je buď nečinnou kópiou (Standby) v \enquote{Cold} alebo \enquote{Hot} režime, preberajúce 
+zodpovednosť za spracovanie požiadaviek, iba ak toho hlavný člen nie je schopný, alebo 
+sa neplytvá žiadnymi zdrojmi a záloha je operatívna (Active) zároveň s primárnou infraštruktúrou. 
+Kontinuálna dostupnosť zachádza ešte ďalej so snahou zamaskovať akékoľvek časové prestoje spojené s 
+poruchou, či už zámernou krátkodobou vznikajúcou pri údržbe alebo vážnejšou zapríčinenou útokom.
 
+\emph{Virtual Router Redundancy Protocol} (VRRP) umožňuje súhru viacerých uzlov pôsobiacich ako VRRP 
+smerovače tvoriace jeden virtuálny router. Spoločne si volia zariadenie zodpovedné za zdieľanú vysoko 
+dostupnú IP adresu. Zariadenie vrámci klastera v roli master má najvyššiu prioritu a v pravidelných 
+intervaloch (najčastejšie 1 - 5 sekúnd) vysiela obežníkové správy \emph{VRRP Advertisiment} na multicastovú 
+adresu 224.0.0.18 \cite{RFC2338}, na ktorú sú prihlásené cez protokol IGMP všetky uzly v klasteri. Po 
+inicializácií je hlavný uzol povinný oznámiť všetkým zariadeniam v LAN cez Gratious ARP správu zmena 
+vlastníka IP adresy na svoju MAC adresu. Po výpadku, kedy nebol zachytený Advertisiment približne viac ako 
+trojnásobok intervalu, nastupuje backup uzol s najbližšou nižšou prioritou a cez Gratious ARP prehodí IP 
+adresu na seba. Keepalived je softvérový balík využívajúci Linux Virtual Server kernel modul umožňujúc 
+nastaviť dynamický failover virtuálneho smerovača s VRRP \cite{keepalived-docs}:
 \begin{lstlisting}
-vrrp_instance malina {          # VRRP inštancia
-    state MASTER|BACKUP         # štandardný stav inštancie
-    interface eth0              # sieťové rozhranie
-    virtual_router_id 1         # VRRP router id pre inštanciu
-    priority 100|90             # priorita VRRP routera
-    advert_int 1                # advertisement interval v sekundách
+vrrp_instance malina {       # VRRP inštancia
+    state MASTER             # štandardný stav inštancie MASTER / BACKUP
+    interface eth0           # sieťové rozhranie
+    virtual_router_id 1      # VRRP router id pre inštanciu
+    priority 100             # priorita VRRP routera 0 - 255
+    advert_int 1             # advertisement interval v sekundách
     virtual_ipaddress { 192.168.0.50 } # VRRP virtuálna IP adresa
 }
 \end{lstlisting}
-
-\subsection{Reverzné proxy na vyvažovanie záťaže}
-% DNS A záznamy (BIND config)
-% Reverzná proxy – pool serverov
-\subsubsection{HAProxy}
-
-\subsubsection{Nginx}
 
 \subsection{Algoritmy vyvažovania záťaže}
 % Load balancing algoritm comparaison (http://www.linuxvirtualserver.org/docs/scheduling.html)
@@ -695,44 +670,643 @@ vrrp_instance malina {          # VRRP inštancia
 % Weighted Least Connection
 % Destination Hashing
 % Source Hashing
+Load balancing” means an even distribution of the total
+load amongst all serving entities Load balancing is very essential in distributed
+computing systems to improve the quality of service by
+managing customer loads that are changing over time. The
+request demands of incoming requests are optimally
+distributed among available system resources to avoid
+resource bottlenecks as well as to fully utilize available
+resources [5]. Load balancing also provides horizontal
+scaling e.g., adding computing resources in order to address
+increased loads.
+
+Styčný bod pre vybavenie žiadostí webových klientov je load balancer, ktorý sa snaží rovnomerne 
+prerozdeliť záťaž medzi skupinu serverov, ale celý systém sa stáva náchylným na jeho zlyhanie.
+Zdvojením load balancera do uzlov spolupracujúcich v klasteri je omnoho jednoduchšie poskytovať
+vysokú dostupnosť bez obáv o náhlu indispozíciu člena zoskupenia. 
+
+\subsection{Reverzné proxy na vyvažovanie záťaže}
+Reverzný proxy server je prostredníkom medzi klientami a veľmi sa pripodobňuje princípu obyčajného proxy servera, snažiacimi sa pristupovať k službe, ktorá
+býva rozložená na viacerých serveroch.
+
+ cat /proc/sys/net/ipv4/icmp_ratelimit  1000  
+cat /proc/sys/net/ipv4/icmp_ratemask  6168 
+cat /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts 1
+
+
+% Úloha Reverzná proxy – pool serverov
+% DNS A záznamy (BIND config)
+% Load Balancer (13)
+	% Static Load Balancing Techniques
+		% Random Allocation  (rand
+		% Round-Robin Allocation
+		% Weighted Round-Robin Allocation
+	% Dynamic Load balancing Techniques
+		% Policies in Dynamic Load Balancing Algorithms
+		% Queue Based Dynamic Load Balancing Technique
+	% COMPARATIVE MEASURES
+		% Overhead Associated
+		% Fault Tolerant
+		% Reliability
+		% Stability
+		% Centralized or Decentralized
+		% Adaptability
+		% Cooperative
+		% Process Migration
+		% Resource Utilization
+		% Response time
+ 	% Static Vs Dynamic Techniques
+ 	% Haproxy (19): 
+ 		% algorithm (42) - roundrobin, static-rr, leastconn, first, source, uri, url_param, random, hdr
+	% Nginx: algorithm - roundrobin, least_conn, ip_hash, hash, random (nie je odporúčaná)
+	% /etc/sysctl.conf (20):
+		% # Protection SYN flood
+		% net.ipv4.tcp_syncookies = 1
+		% net.ipv4.conf.all.rp_filter = 1
+		% net.ipv4.tcp_max_syn_backlog = 1024
+	% timeout http-request 5s (408 status)
+	
+
+% Limiting the number of connections per users
+\begin{lstlisting}
+# Table definition
+stick-table type ip size 100k expire 30s store conn_cur
+# Allow clean known IPs to bypass the filter
+tcp-request connection accept if { src -f /etc/haproxy/whitelist.lst }
+# Shut the new connection as long as the client has already 10 opened
+tcp-request connection reject if { src_conn_cur ge 10 }
+tcp-request connection track-sc1 src
+
+
+backend per_ip_rates
+    stick-table type ip size 1m expire 10m store http_req_rate(10s)
+frontend fe_mywebsite
+    bind *:80
+    http-request track-sc0 src table per_ip_rates if METH_POST
+    http-request deny deny_status 429 if { sc_http_req_rate(0) gt 100 }   % Limiting Request Rates
+    http-request silent-drop if { sc_http_req_rate(0) gt 100 }
+
+    timeout tarpit 5s   # abusers
+    http-request tarpit if { sc_http_req_rate(0) gt 100 }
+
+	timeout http-request 5s
+	option http-buffer-request
+	
+	# Using ACLs to Block Requests
+    http-request deny if HTTP_1.0
+    http-request deny if { req.hdr(user-agent) -i -m sub curl }
+    http-request deny if { req.hdr(user-agent) -i -m sub -f /etc/hapee-1.8/badagents.acl }
+    http-request deny unless { req.hdr(user-agent) -m found }
+
+	# Blacklist and Gray list
+	http-request deny if { src -f /etc/hapee-1.8/blacklist.acl }
+	http-request deny if { src -f /etc/hapee-1.8/greylist.acl } { sc_http_req_rate(0) gt 5 }
+
+    tcp-request content reject if { sc_conn_cur(0) gt 1 } || { sc_conn_rate(0) gt 5 }
+\end{lstlisting}
+% Limiting the connection rate per user
+\begin{lstlisting}
+# Table definition
+stick-table type ip size 100k expire 30s store conn_rate(3s)
+# Shut the new connection as long as the client has already 10 opened
+tcp-request connection reject if { src_conn_rate ge 10 }
+\end{lstlisting}
+% Limiting the HTTP request rate
+\begin{lstlisting}
+# Table definition
+f: 
+# Use General Purpose Couter (gpc) 0 in SC1 as a global abuse counter
+# Monitors the number of request sent by an IP over a period of 10 seconds
+stick-table type ip size 1m expire 10s store gpc0,http_req_rate(10s)
+tcp-request connection track-sc1 src
+tcp-request connection reject if { src_get_gpc0 gt 0 }
+b:
+# If the source IP sent 10 or more http request over the defined period,
+# flag the IP as abuser on the frontend
+acl abuse src_http_req_rate(ft_web) ge 10
+acl flag_abuser src_inc_gpc0(ft_web)
+tcp-request content reject if abuse flag_abuser
+\end{lstlisting}
+% Zdroj :21
+
+ 
+% https://www.nginx.com/blog/mitigating-ddos-attacks-with-nginx-and-nginx-plus/ (23)
+% Limiting the Rate of Requests
+\begin{lstlisting}
+limit_req_zone $binary_remote_addr zone=one:10m rate=30r/m;
+server {
+    # ...
+    location /login.html {
+        limit_req zone=one;
+    # ...
+    }
+}
+\end{lstlisting}
+% Limiting the Number of Connections
+\begin{lstlisting}
+limit_conn_zone $binary_remote_addr zone=addr:10m;
+server {
+    # ...
+    location /store/ {
+        limit_conn addr 10;
+        # ...
+    }
+}
+\end{lstlisting}
+% Closing slow connections
+\begin{lstlisting}
+server {
+    client_body_timeout 5s;
+    client_header_timeout 5s;
+    # ...
+}
+\end{lstlisting}
+% Deny list IP
+\begin{lstlisting}
+location / {
+    deny 123.123.123.0/28;
+}
+\end{lstlisting}
+% Allow list IP
+\begin{lstlisting}
+location / {
+    allow 192.168.1.0/24;
+    deny all;
+}
+\end{lstlisting}
+
+% Porovnanie HAProxy a Nginx - základný config 
+% Pridanie sekcii konfigurácie a syntax side by side
+
+\noindent\begin{minipage}{.48\textwidth}
+\begin{lstlisting}[caption=BIND9 nastavenie DNS zóny .home]
+zone "home" {
+    type master;
+    file "/etc/bind/db.home";
+}
+\end{lstlisting}
+\end{minipage}\hfill
+\begin{minipage}{.48\textwidth}
+\begin{lstlisting}[caption=Priradenie troch DNS A záznamov pre doménu website.home]
+website  IN  A  192.168.0.2
+         IN  A  192.168.0.3
+         IN  A  192.168.0.4
+\end{lstlisting}
+\end{minipage}
+
+\noindent\begin{minipage}{.48\textwidth}
+\begin{lstlisting}[caption=HAProxy základná kostra nastavení]
+global
+   log /dev/log local0
+   chroot /var/lib/haproxy
+
+defaults
+  log global
+  option httplog  # tcplog
+  mode http       # tcp
+\end{lstlisting}
+\end{minipage}\hfill
+\begin{minipage}{.48\textwidth}
+\begin{lstlisting}[caption=NGINX základná kostra nastavení]
+worker_processes auto;
+events {
+   worker_connections 1024;
+}
+http {  # stream
+  access_log /var/log/access.log;
+  error_log /var/log/error.log;
+}
+\end{lstlisting}
+\end{minipage}
+
+\noindent\begin{minipage}{.48\textwidth}
+\begin{lstlisting}[caption=HAProxy: preposielanie požiadavok na pool serverov za reverznou proxy]
+frontend web
+    bind *:80
+    option forwardfor
+    default_backend webservers
+\end{lstlisting}
+\end{minipage}\hfill
+\begin{minipage}{.48\textwidth}
+\begin{lstlisting}[caption=NGINX: preposielanie požiadavok na pool serverov za reverznou proxy]
+server {
+   listen 80;
+   server_name _;
+   location / { 
+     proxy_pass http://website;
+     proxy_set_header Forwarded 
+           $proxy_add_forwarded;
+   }
+}
+\end{lstlisting}
+\end{minipage}
+
+
+\noindent\begin{minipage}{.48\textwidth}
+\begin{lstlisting}[caption=HAProxy:  vyvažovanie záťaže najmenej spojení na trojicu HTTP serverov]
+backend webservers
+    balance leastconn
+    server A 192.168.0.2:80
+    server B 192.168.0.3:80
+    server C 192.168.0.4:80
+\end{lstlisting}
+\end{minipage}\hfill
+\begin{minipage}{.48\textwidth}
+\begin{lstlisting}[caption=NGINX: vyvažovanie záťaže najmenej spojení na trojicu HTTP serverov] ]
+proxy_http_version 1.1;
+upstream website {
+    least_conn;
+    server 192.168.0.2:80;
+    server 192.168.0.3:80;
+    server 192.168.0.4:80;
+}
+\end{lstlisting}
+\end{minipage}
+
 
 
 \section{Monitorovanie webovej aplikácie}
 
+\begin{minipage}{.4\textwidth}
+\begin{lstlisting}
+<Location "/server-status">
+    SetHandler server-status
+    Require ip 127.0.0.1
+</Location>
+\end{lstlisting}
+\end{minipage}\newline
+
+
+\begin{minipage}{.3\textwidth}
+\centering
+\begin{lstlisting}
+frontend stats
+    bind *:8404
+    stats enable
+    stats uri /stats
+    stats refresh 10s
+\end{lstlisting}
+\end{minipage}\hfill
+\begin{minipage}{.35\textwidth}
+\centering
+\begin{lstlisting}
+location = /basic_status {
+    stub_status; 
+    allow 127.0.0.1;
+    deny all;
+}
+\end{lstlisting}
+\end{minipage}
+
 \subsection{HTTP hlavičky}
+% Zamedzenie zobrazenia http hlavičiek o infraštruktúre (CSIRT-checklist)
+\begin{lstlisting}
+<IfModule security2_module>
+    SecRuleEngine on
+    ServerTokens Min
+    SecServerSignature "PIB FIIT STU"
+</IfModule>
+\end{lstlisting}
+% pozri procfs
+% syn cookies do ddos časti
 
 \subsection{Metriky}
 % Syslog a Common Logfile Format
+\footnote{\url{https://www.haproxy.com/blog/introduction-to-haproxy-logging/}}
+\footnote{\url{https://docs.nginx.com/nginx/admin-guide/monitoring/logging/}}
+\begin{lstlisting}
+# Common Log Format
+192.168.0.2 - - [05/Apr/2021 13:45:20 +0200] "GET / HTTP/1.1" 200 1254
+
+# Apache Custom Log
+website.home:80 192.168.0.2 - - [05/Apr/2021 13:45:20.814 +0200] "GET / HTTP/1.1" 200 351 1254 "-"
+"Mozilla/5.0"
+
+LogFormat "%v:%p %h %l %u %{%d/%b/%Y %T}t.%{msec_frac}t %{%z}t %D \"%r\" %>s %I %O \"%{Referer}i\" \"%{User-Agent}i\"" custom
+<VirtualHost *:80>
+   DocumentRoot /var/www/html
+   CustomLog ${APACHE_LOG_DIR}/access.log custom
+</VirtualHost>
+
+
+# Nginx Custom TCP Log
+192.168.0.5 [05/Apr/2021:16:35:30 +0200] TCP 200 465 308 20.960 
+
+# Nginx Custom HTTP Log
+192.168.0.5 05/Apr/2021:13:32:15 +0200 "GET / HTTP/1.1" 200 192.168.0.3:80 1294 0.000 0.040 0.040
+
+log_format fmt '$remote_addr $time_local "$request" $status $upstream_addr $upstream_bytes_received $upstream_connect_time $upstream_header_time $upstream_response_time';
+
+log_format fmt '$remote_addr [$time_local] $protocol $status $bytes_sent $bytes_received $session_time';
+
+# HAProxy Log
+haproxy[2550]: 192.168.0.5:45152 [28/Mar/2021:18:07:58.798] web webservers/A 0/0/5/23/29 200 2862 - - ---- 9/9/8/8/0 0/0 "GET / HTTP/1.1"
+\end{lstlisting}
+
 
 \subsection{Zabbix}
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}[t]{.48\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/zabbix-host-config.png}
+	\end{subfigure}
+	\begin{subfigure}[t]{.48\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/zabbix-problems.png}
+	\end{subfigure}
+\end{figure}
 
-\subsection{Simulácie útokov a záťažové testy}
-% Popis skriptu cez raw sockety
-% Docker-compose: útoky ---> Haproxy/Nginx ---> 1-4x Apache Web site
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}[t]{.48\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/zabbix-dashboard.png}
+	\end{subfigure}
+	\begin{subfigure}[t]{.48\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/zabbix-eth.png}
+	\end{subfigure}
+\end{figure}
 
-% Typy útokov (UDP flood, SYN Flood, Slow Loris so spoofed IP)
-% Meniť počet horizontálych inštancií
-% Meniť počet workerov
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}[t]{\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/zabbix-hosts.png}
+	\end{subfigure}
+	\vspace{0.5em}
+	\begin{subfigure}[t]{\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/host-config.png}
+	\end{subfigure}
+	\vspace{0.5em}
+	\begin{subfigure}[t]{\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/zabbix-templates.png}
+	\end{subfigure}
+	\vspace{0.5em}
+	\begin{subfigure}[t]{\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/zabbix-macros.png}
+	\end{subfigure}
+\end{figure}
 
-% Pridaj do zabbixu ostatné hosty
-% Monitoring na 
-%	- Apache (Access Log, Error log)
-%	- Haproxy (HAlog, https://www.haproxy.com/blog/introduction-to-haproxy-logging/)
-%	- NGINX z logov (https://docs.nginx.com/nginx/admin-guide/monitoring/logging/)
-%Sleduj network traffic na eth0 pri záplave:  vnstat, zabbix
-%Sleduj počet spojení pri load balancingu
+\section{Simulácie útokov a záťažové testy}
 
-%\begin{lstlisting}
-%ab -n 100 -c 10 http://192.168.100.82/
-%hping 192.168.0.2 --udp -p 80 --flood  
-%hping 192.168.0.2 --syn -p 80 --spoof 192.168.1.1
+\subsection{Sieť na experimenty}
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}[t]{.48\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/topology.png}
+  		\caption{Logická topológia}
+	\end{subfigure}
+	\begin{subfigure}[t]{.48\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/net.JPG}
+  		\caption{Fyzická topológia}
+	\end{subfigure}
+	\caption{Topológia izolovanej siete na experimenty}
+\end{figure}
 
-%slowhttptest -c 1000 -H -g -o my_header_stats -i 10 -r 200 -t GET -u https://192.168.100.82/ -x 24 -p 10
-%thc-ssl-dos 192.168.100.82 80 --accept
-%slowhttptest -u http://192.168.0.2/ -c 100
+\subsection{HPING na DoS útoky záplavou}
+\begin{lstlisting}
+hping 192.168.0.2 --udp --flood
+hping 192.168.0.2 --icmp --flood  
+hping 192.168.0.2 --syn --flood --destport 80
+vnstat --traffic
+\end{lstlisting}
+\begin{table}[h]
+\def\arraystretch{1.4}%
+\begin{tabular}{|r|r|r|r|r|}
+\hline
+           & RX {[}Mbit/s{]} & TX {[}Mbit/s{]} & RX {[}pakety/s{]} & TX {[}pakety/s{]} \\ \hline
+UDP Flood  & 54,22           & 0,001           & 147345            & 1                 \\ \hline
+ICMP Flood & 45,07           & 2,21            & 122483            & 5534              \\ \hline
+SYN Flood  & 45,09           & 2,87            & 122539            & 5118              \\ \hline
+Slowloris  & 0,14            & 0,13            & 175               & 170               \\ \hline
+\end{tabular}
+\caption{Dosiahnutá sila útokov s hping odmerané spriemerovaním 5 sekúnd premávky s vnstat na serveri na
+sieťovej linke s reálnou šírkou pásma 94.2 Mbit/s}
+\end{table}
+Na náhodné porty 93 paketov/s, nevráti žiadne pakety pri spoofed ip (nevie cez arp nájsť cieľ)
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}[t]{.32\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/normal-latency.png}
+	\end{subfigure}
+	\begin{subfigure}[t]{.32\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/UDP-flood-graph.png}
+	\end{subfigure}
+	\begin{subfigure}[t]{.32\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/SYN-flood-graph.png}
+	\end{subfigure}
+\end{figure}
 
-%wireshark
-%\end{lstlisting}
+\subsection{Analýza prevedenia DoS útoku záplavou}
+\begin{lstlisting}
+int s = socket(AF_INET, SOCK_RAW, IPPROTO_RAW);
+strcpy(ifr.ifr_name, "enp3s0"); 
+ioctl(s, SIOCGIFINDEX, &ifr);
+setsockopt(s, SOL_SOCKET, SO_BINDTODEVICE, &ifr);
+setsockopt(s, IPPROTO_IP, IP_HDRINCL, (char *)&one, sizeof(one));
+\end{lstlisting}
+\begin{lstlisting}
+in_addr_t ip_random(in_addr_t net, int cidr)
+{
+    in_addr_t net_mask = (~0 << (32 - cidr));
+    in_addr_t host_mask = ~net_mask;
+    in_addr_t target_host = 0;
+    if (host_mask != 0) target_host = rand() % host_mask;
+    return htonl((ntohl(net) & net_mask) | target_host);
+}
+\end{lstlisting}
+\begin{lstlisting}
+int s = socket(AF_INET, SOCK_STREAM, 0);
+connect(s, (struct sockaddr *)&victim, sizeof(victim))
+snprintf(buffer, LEN, "GET /?%d HTTP/1.1\r\n", randint(0, 1000));
+send(s, buffer, strlen(buffer), 0);
+\end{lstlisting}
+\begin{lstlisting}
+for (int i = 0; i < CNT; i++) {
+    snprintf(buffer, BUF_LEN, "X-a: %d\r\n", randint(1, 50000));
+    send(sockets[i], buffer, strlen(buffer), 0);
+}
+sleep(10);
+\end{lstlisting}
+
+\subsection{ApacheBench záťažové testy na load balancer}
+\begin{lrbox}{\shield}
+\verb|ab -n 1000 -c 100 http://192.168.0.2/|
+\end{lrbox}
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}[t]{.48\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/haproxy_ab_1000_100_requests.png}
+	\end{subfigure}
+	\begin{subfigure}[t]{.48\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/nginx_ab_1000_100_requests.png}
+	\end{subfigure}
+	\caption{Počet spracovaných požiadaviek za sekundu pre algoritmy vyvažovania 
+	záťaže podľa ApacheBench: \usebox{\shield}}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}[t]{.48\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/haproxy_ab_1000_100_duration.png}
+	\end{subfigure}
+	\begin{subfigure}[t]{.48\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/nginx_ab_1000_100_duration.png}
+	\end{subfigure}
+	\caption{
+		Priemerné trvanie požiadaviek pre algoritmy vyvažovania záťaže 
+		podľa ApacheBench: \usebox{\shield}}
+\end{figure}
+
+\begin{lrbox}{\shield}
+\verb|ab -n 10 -c 1 http://192.168.0.2/|
+\end{lrbox}
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}[t]{.25\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/10-uzly-2.png}
+	\end{subfigure}
+	\begin{subfigure}[t]{.25\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/10-uzly-3.png}
+	\end{subfigure}
+	\caption{Markovove reťazce plánovania pridelenia uzlov na obsluhu požiadaviek
+	pri Round Robin aj Least Connections: \usebox{\shield}}
+\end{figure}
+
+\begin{lrbox}{\shield}
+\verb|ab -n 10000 -c 1000 http://192.168.0.2/|
+\end{lrbox}
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}[t]{.48\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/10000-2-RR.png}
+  		\caption{Round Robin}
+	\end{subfigure}
+	\begin{subfigure}[t]{.48\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/10000-2-LC.png}
+  		\caption{Least Connections}
+	\end{subfigure}
+	\caption{Markovove reťazce plánovania pridelenia uzlov na obsluhu požiadaviek
+	pri 2 koncových uzloch: \usebox{\shield}
+	}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}[t]{.48\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/10000-3-RR.png}
+  		\caption{Round Robin}
+	\end{subfigure}
+	\begin{subfigure}[t]{.48\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/10000-3-LC.png}
+  		\caption{Least Connections}
+	\end{subfigure}
+	\caption{Markovove reťazce plánovania pridelenia uzlov na obsluhu požiadaviek
+	pri 3 koncových uzloch: \usebox{\shield}
+	}
+\end{figure}
+
+
+\subsection{Slowhttptest Slowloris útok na load balancer}
+\begin{lrbox}{\shield}
+\verb|slowhttptest -H -c 1000 -i 10 -r 50 -l 180 -g -o stat -u http://192.168.0.2/|
+\end{lrbox}
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}[t]{.48\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/Apache-slowhttptest-1s.png}
+	\end{subfigure}
+	\begin{subfigure}[t]{.48\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/Apache-slowhttptest-30s.png}
+	\end{subfigure}
+	\caption{Reakcia webového servera Apache na útok SlowLoris pri zmenách Keepalive timeout
+	na spojenie: \\ \usebox{\shield}}
+\end{figure}
+\begin{lstlisting}
+  Timeout 300
+  KeepAlive On
+  MaxKeepAliveRequests 100
+  KeepAliveTimeout 5
+\end{lstlisting}
+
+\begin{lrbox}{\shield}
+\verb|slowhttptest -H -c 10000 -i 10 -r 200 -l 240 -g -o stat -u http://192.168.0.2/|
+\end{lrbox}
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}[t]{.48\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/Haproxy-1-http.png}
+	\end{subfigure}
+	\begin{subfigure}[t]{.48\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/Nginx-1-http.png}
+	\end{subfigure}
+	\caption{Porovnanie účinkov útoku Slowloris na počet aktívnych spojení a dostupnosť služby
+	pri L7 load balancingu na HAProxy a NGINX:\\ 		
+	\usebox{\shield}}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}[t]{.32\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/haproxy-1-tcp.png}
+	\end{subfigure}
+	\begin{subfigure}[t]{.32\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/haproxy-2-tcp.png}
+	\end{subfigure}
+	\begin{subfigure}[t]{.32\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/haproxy-3-tcp.png}
+	\end{subfigure}
+	\begin{subfigure}[t]{.32\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/nginx-1-tcp.png}
+	\end{subfigure}
+	\begin{subfigure}[t]{.32\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/nginx-2-tcp.png}
+	\end{subfigure}
+	\begin{subfigure}[t]{.32\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/nginx-3-tcp.png}
+	\end{subfigure}
+\end{figure}
+
+\section{Záver}
+% Pokrytie témy:
+	% analýza možností využitia loadbalancera (haproxy, nginx,...)
+	% loadbalancer vs. stateless/statefull spojenia
+	% zabezpečenie loadbalancera voči známym typom útokov,
+	% zamedzenie inventarizácii architektúry (čo prezradia HTTP hlavičky?)
+	% možnosti monitoringu loadbalancera (štatistiky, analýza logov, existencia rozšírení do monitorovacích 		systémov Zabbix)
+	% vykonanie záťažových testov(ab,...), vyhodnotenie nameraných hodnôt a efektu horizontálneho škálovania
+
 
 \printbibliography[title={Literatúra}]
 

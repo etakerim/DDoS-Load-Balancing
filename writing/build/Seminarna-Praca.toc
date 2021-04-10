@@ -29,37 +29,47 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.3}Ochrana spevnením sieťovej ochrany}{11}{subsection.2.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.3.1}Remotely Triggered Black Hole}{12}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.1}Remotely Triggered Black Hole}{11}{subsubsection.2.3.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.3.2}IP Spoofing}{13}{subsubsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.2}IP Spoofing}{12}{subsubsection.2.3.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.3.3}Rate limiting a Firewall na Linuxe}{14}{subsubsection.2.3.3}%
+\contentsline {subsubsection}{\numberline {2.3.3}Rate limiting a Firewall na Linuxe}{13}{subsubsection.2.3.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3}Škálovanie webových aplikácií}{14}{section.3}%
+\contentsline {section}{\numberline {3}Škálovanie webových aplikácií}{13}{section.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1}Redundancia nižších vrstvách RM OSI}{15}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.1}Redundancia nižších vrstiev RM OSI}{14}{subsection.3.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2}Vysoká dostupnosť klastra}{16}{subsection.3.2}%
+\contentsline {paragraph}{Agregácia liniek}{14}{section*.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3}Reverzné proxy na vyvažovanie záťaže}{17}{subsection.3.3}%
+\contentsline {paragraph}{Viaccestné smerovanie}{15}{section*.6}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.3.1}HAProxy}{17}{subsubsection.3.3.1}%
+\contentsline {paragraph}{Virtuálny smerovač}{15}{section*.7}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.3.2}Nginx}{17}{subsubsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.2}Algoritmy vyvažovania záťaže}{16}{subsection.3.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.4}Algoritmy vyvažovania záťaže}{17}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.3}Reverzné proxy na vyvažovanie záťaže}{16}{subsection.3.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4}Monitorovanie webovej aplikácie}{17}{section.4}%
+\contentsline {section}{\numberline {4}Monitorovanie webovej aplikácie}{20}{section.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1}HTTP hlavičky}{17}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.1}HTTP hlavičky}{20}{subsection.4.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2}Metriky}{17}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.2}Metriky}{20}{subsection.4.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3}Zabbix}{17}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.3}Zabbix}{21}{subsection.4.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.4}Simulácie útokov a záťažové testy}{17}{subsection.4.4}%
-\babel@toc {slovak}{}
-\babel@toc {slovak}{}
+\contentsline {section}{\numberline {5}Simulácie útokov a záťažové testy}{22}{section.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.1}Sieť na experimenty}{22}{subsection.5.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.2}HPING na DoS útoky záplavou}{22}{subsection.5.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.3}Analýza prevedenia DoS útoku záplavou}{22}{subsection.5.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.4}ApacheBench záťažové testy na load balancer}{24}{subsection.5.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.5}Slowhttptest Slowloris útok na load balancer}{24}{subsection.5.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6}Záver}{27}{section.6}%
 \babel@toc {slovak}{}
 \babel@toc {slovak}{}
 \babel@toc {slovak}{}

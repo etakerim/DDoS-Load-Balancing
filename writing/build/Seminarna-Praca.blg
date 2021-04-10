@@ -1,16 +1,18 @@
 [0] Config.pm:312> INFO - This is Biber 2.15
 [0] Config.pm:315> INFO - Logfile is 'build/Seminarna-Praca.blg'
-[99] biber:330> INFO - === Po apr  5, 2021, 20:17:05
-[187] Biber.pm:415> INFO - Reading 'build/Seminarna-Praca.bcf'
-[267] Biber.pm:952> INFO - Found 18 citekeys in bib section 0
-[328] Biber.pm:4334> INFO - Processing section 0
-[357] Biber.pm:4523> INFO - Looking for bibtex format file 'references.bib' for section 0
-[359] bibtex.pm:1682> INFO - LaTeX decoding ...
-[410] bibtex.pm:1494> INFO - Found BibTeX data source 'references.bib'
-[639] Utils.pm:395> WARN - month field 'November' in entry 'RFC2991' is not an integer - this will probably not sort properly.
-[660] UCollate.pm:68> INFO - Overriding locale 'sk-SK' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[660] UCollate.pm:68> INFO - Overriding locale 'sk-SK' defaults 'variable = shifted' with 'variable = non-ignorable'
-[660] Biber.pm:4162> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'sk-SK'
-[672] bbl.pm:651> INFO - Writing 'build/Seminarna-Praca.bbl' with encoding 'UTF-8'
-[680] bbl.pm:754> INFO - Output to build/Seminarna-Praca.bbl
-[680] Biber.pm:128> INFO - WARNINGS: 1
+[114] biber:330> INFO - === So apr 10, 2021, 11:48:48
+[133] Biber.pm:415> INFO - Reading 'build/Seminarna-Praca.bcf'
+[221] Biber.pm:952> INFO - Found 20 citekeys in bib section 0
+[250] Biber.pm:4334> INFO - Processing section 0
+[271] Biber.pm:4523> INFO - Looking for bibtex format file 'references.bib' for section 0
+[275] bibtex.pm:1682> INFO - LaTeX decoding ...
+[370] bibtex.pm:1494> INFO - Found BibTeX data source 'references.bib'
+[518] Utils.pm:395> WARN - month field 'August' in entry 'RFC5635' is not an integer - this will probably not sort properly.
+[526] Utils.pm:395> WARN - month field 'November' in entry 'RFC2991' is not an integer - this will probably not sort properly.
+[542] Utils.pm:395> WARN - month field 'April' in entry 'RFC2338' is not an integer - this will probably not sort properly.
+[567] UCollate.pm:68> INFO - Overriding locale 'sk-SK' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[567] UCollate.pm:68> INFO - Overriding locale 'sk-SK' defaults 'variable = shifted' with 'variable = non-ignorable'
+[567] Biber.pm:4162> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'sk-SK'
+[585] bbl.pm:651> INFO - Writing 'build/Seminarna-Praca.bbl' with encoding 'UTF-8'
+[596] bbl.pm:754> INFO - Output to build/Seminarna-Praca.bbl
+[610] Biber.pm:128> INFO - WARNINGS: 3
