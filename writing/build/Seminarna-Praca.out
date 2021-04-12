@@ -11,19 +11,21 @@
 \BOOKMARK [2][-]{subsection.2.3}{Ochrana spevnen\355m sietovej ochrany}{section.2}% 11
 \BOOKMARK [3][-]{subsubsection.2.3.1}{Remotely Triggered Black Hole}{subsection.2.3}% 12
 \BOOKMARK [3][-]{subsubsection.2.3.2}{IP Spoofing}{subsection.2.3}% 13
-\BOOKMARK [3][-]{subsubsection.2.3.3}{Rate limiting a Firewall na Linuxe}{subsection.2.3}% 14
+\BOOKMARK [3][-]{subsubsection.2.3.3}{Linux Netfilter}{subsection.2.3}% 14
 \BOOKMARK [1][-]{section.3}{\227k\341lovanie webov\375ch aplik\341ci\355}{}% 15
-\BOOKMARK [2][-]{subsection.3.1}{Redundancia ni\236\235\355ch vrstiev RM OSI}{section.3}% 16
-\BOOKMARK [2][-]{subsection.3.2}{Algoritmy vyva\236ovania z\341ta\236e}{section.3}% 17
-\BOOKMARK [2][-]{subsection.3.3}{Reverzn\351 proxy na vyva\236ovanie z\341ta\236e}{section.3}% 18
-\BOOKMARK [1][-]{section.4}{Monitorovanie webovej aplik\341cie}{}% 19
-\BOOKMARK [2][-]{subsection.4.1}{HTTP hlavicky}{section.4}% 20
-\BOOKMARK [2][-]{subsection.4.2}{Metriky}{section.4}% 21
-\BOOKMARK [2][-]{subsection.4.3}{Zabbix}{section.4}% 22
-\BOOKMARK [1][-]{section.5}{Simul\341cie \372tokov a z\341ta\236ov\351 testy}{}% 23
-\BOOKMARK [2][-]{subsection.5.1}{Siet na experimenty}{section.5}% 24
-\BOOKMARK [2][-]{subsection.5.2}{HPING na DoS \372toky z\341plavou}{section.5}% 25
-\BOOKMARK [2][-]{subsection.5.3}{Anal\375za prevedenia DoS \372toku z\341plavou}{section.5}% 26
-\BOOKMARK [2][-]{subsection.5.4}{ApacheBench z\341ta\236ov\351 testy na load balancer}{section.5}% 27
-\BOOKMARK [2][-]{subsection.5.5}{Slowhttptest Slowloris \372tok na load balancer}{section.5}% 28
-\BOOKMARK [1][-]{section.6}{Z\341ver}{}% 29
+\BOOKMARK [2][-]{subsection.3.1}{Algoritmy vyva\236ovania z\341ta\236e}{section.3}% 16
+\BOOKMARK [2][-]{subsection.3.2}{Redundancia ni\236\235\355ch vrstiev RM OSI}{section.3}% 17
+\BOOKMARK [2][-]{subsection.3.3}{Porovnanie HAProxy a NGINX}{section.3}% 18
+\BOOKMARK [3][-]{subsubsection.3.3.1}{Vyva\236ovanie z\341ta\236e}{subsection.3.3}% 19
+\BOOKMARK [3][-]{subsubsection.3.3.2}{Ochrana proti DDoS}{subsection.3.3}% 20
+\BOOKMARK [1][-]{section.4}{Monitorovanie webovej aplik\341cie}{}% 21
+\BOOKMARK [2][-]{subsection.4.1}{HTTP hlavicky}{section.4}% 22
+\BOOKMARK [2][-]{subsection.4.2}{Metriky}{section.4}% 23
+\BOOKMARK [2][-]{subsection.4.3}{Zabbix}{section.4}% 24
+\BOOKMARK [1][-]{section.5}{Simul\341cie \372tokov a z\341ta\236ov\351 testy}{}% 25
+\BOOKMARK [2][-]{subsection.5.1}{Siet na experimenty}{section.5}% 26
+\BOOKMARK [2][-]{subsection.5.2}{HPING na DoS \372toky z\341plavou}{section.5}% 27
+\BOOKMARK [2][-]{subsection.5.3}{Anal\375za prevedenia DoS \372toku z\341plavou}{section.5}% 28
+\BOOKMARK [2][-]{subsection.5.4}{ApacheBench z\341ta\236ov\351 testy na load balancer}{section.5}% 29
+\BOOKMARK [2][-]{subsection.5.5}{Slowhttptest Slowloris \372tok na load balancer}{section.5}% 30
+\BOOKMARK [1][-]{section.6}{Z\341ver}{}% 31

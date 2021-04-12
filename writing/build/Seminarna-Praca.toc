@@ -33,43 +33,65 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {2.3.2}IP Spoofing}{12}{subsubsection.2.3.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.3.3}Rate limiting a Firewall na Linuxe}{13}{subsubsection.2.3.3}%
+\contentsline {subsubsection}{\numberline {2.3.3}Linux Netfilter}{13}{subsubsection.2.3.3}%
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3}Škálovanie webových aplikácií}{13}{section.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1}Redundancia nižších vrstiev RM OSI}{14}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.1}Algoritmy vyvažovania záťaže}{14}{subsection.3.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Agregácia liniek}{14}{section*.5}%
+\contentsline {paragraph}{Round-Robin}{14}{section*.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Viaccestné smerovanie}{15}{section*.6}%
+\contentsline {paragraph}{Least Connections}{15}{section*.6}%
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Virtuálny smerovač}{15}{section*.7}%
+\contentsline {paragraph}{Least Time}{15}{section*.7}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2}Algoritmy vyvažovania záťaže}{16}{subsection.3.2}%
+\contentsline {paragraph}{Random}{15}{section*.8}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3}Reverzné proxy na vyvažovanie záťaže}{16}{subsection.3.3}%
+\contentsline {paragraph}{Hashing}{15}{section*.9}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4}Monitorovanie webovej aplikácie}{20}{section.4}%
+\contentsline {subsection}{\numberline {3.2}Redundancia nižších vrstiev RM OSI}{16}{subsection.3.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1}HTTP hlavičky}{20}{subsection.4.1}%
+\contentsline {paragraph}{Agregácia liniek}{16}{section*.10}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2}Metriky}{20}{subsection.4.2}%
+\contentsline {paragraph}{Viaccestné smerovanie}{16}{section*.11}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3}Zabbix}{21}{subsection.4.3}%
+\contentsline {paragraph}{Virtuálny smerovač}{17}{section*.12}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5}Simulácie útokov a záťažové testy}{22}{section.5}%
+\contentsline {paragraph}{DNS load balancing}{18}{section*.13}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.1}Sieť na experimenty}{22}{subsection.5.1}%
+\contentsline {subsection}{\numberline {3.3}Porovnanie HAProxy a NGINX}{18}{subsection.3.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2}HPING na DoS útoky záplavou}{22}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {3.3.1}Vyvažovanie záťaže}{19}{subsubsection.3.3.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3}Analýza prevedenia DoS útoku záplavou}{22}{subsection.5.3}%
+\contentsline {subsubsection}{\numberline {3.3.2}Ochrana proti DDoS}{19}{subsubsection.3.3.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4}ApacheBench záťažové testy na load balancer}{24}{subsection.5.4}%
+\contentsline {section}{\numberline {4}Monitorovanie webovej aplikácie}{21}{section.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.5}Slowhttptest Slowloris útok na load balancer}{24}{subsection.5.5}%
+\contentsline {subsection}{\numberline {4.1}HTTP hlavičky}{21}{subsection.4.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2}Metriky}{22}{subsection.4.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.3}Zabbix}{23}{subsection.4.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5}Simulácie útokov a záťažové testy}{23}{section.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.1}Sieť na experimenty}{23}{subsection.5.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.2}HPING na DoS útoky záplavou}{23}{subsection.5.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.3}Analýza prevedenia DoS útoku záplavou}{23}{subsection.5.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.4}ApacheBench záťažové testy na load balancer}{25}{subsection.5.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.5}Slowhttptest Slowloris útok na load balancer}{25}{subsection.5.5}%
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {6}Záver}{27}{section.6}%
+\babel@toc {slovak}{}
+\babel@toc {slovak}{}
+\babel@toc {slovak}{}
+\babel@toc {slovak}{}
+\babel@toc {slovak}{}
+\babel@toc {slovak}{}
 \babel@toc {slovak}{}
 \babel@toc {slovak}{}
 \babel@toc {slovak}{}

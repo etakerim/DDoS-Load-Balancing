@@ -428,6 +428,29 @@
       \field{title}{Protecting Your Core: Infrastructure Protection Access Control Lists}
       \field{year}{2008}
     \endentry
+    \entry{haproxy-ddos}{article}{}
+      \name{author}{1}{}{%
+        {{hash=6036b42c2a35240ca0ac5aae3def4ec9}{%
+           family={Assmann},
+           familyi={A\bibinitperiod},
+           given={Baptiste},
+           giveni={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{6036b42c2a35240ca0ac5aae3def4ec9}
+      \strng{fullhash}{6036b42c2a35240ca0ac5aae3def4ec9}
+      \strng{bibnamehash}{6036b42c2a35240ca0ac5aae3def4ec9}
+      \strng{authorbibnamehash}{6036b42c2a35240ca0ac5aae3def4ec9}
+      \strng{authornamehash}{6036b42c2a35240ca0ac5aae3def4ec9}
+      \strng{authorfullhash}{6036b42c2a35240ca0ac5aae3def4ec9}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{HAProxy Blog}
+      \field{note}{\url{https://www.haproxy.com/blog/use-a-load-balancer-as-a-first-row-of-defense-against-ddos/}}
+      \field{title}{Use a Load Balancer as a First Row of Defense Against DDOS}
+      \field{year}{2012}
+    \endentry
     \entry{csirt-hardening}{misc}{}
       \list{publisher}{1}{%
         {CSIRT.SK}%
@@ -438,6 +461,108 @@
       \field{note}{\url{https://www.csirt.gov.sk/doc/Hardened_v1.pdf}}
       \field{title}{Linux Hardening ({Príručka} administrátora)}
       \field{year}{2013}
+    \endentry
+    \entry{load-balance-in-distributed-system}{article}{}
+      \name{author}{5}{}{%
+        {{hash=e1bf0309e5d76090464098c2a4edba6b}{%
+           family={Soundarabai},
+           familyi={S\bibinitperiod},
+           given={Paulsingh},
+           giveni={P\bibinitperiod}}}%
+        {{hash=c56aca0bdad8d5ceb586e93a5ce3b2ec}{%
+           family={Sandhya},
+           familyi={S\bibinitperiod},
+           given={Rani},
+           giveni={R\bibinitperiod}}}%
+        {{hash=ecee44e03305405f0f8dba0a212b270f}{%
+           family={Sahai},
+           familyi={S\bibinitperiod},
+           given={Ritesh},
+           giveni={R\bibinitperiod}}}%
+        {{hash=df4e5b2763712b35cd7efb40e5960216}{%
+           family={K\bibnamedelima R},
+           familyi={K\bibinitperiod\bibinitdelim R\bibinitperiod},
+           given={Venugopal},
+           giveni={V\bibinitperiod}}}%
+        {{hash=d4428b9822e567c5a4d131e7eac7d487}{%
+           family={Patnaik},
+           familyi={P\bibinitperiod},
+           given={Lalit},
+           giveni={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{d01a3e5dc30f51c15d5e6937438430ce}
+      \strng{fullhash}{d01a3e5dc30f51c15d5e6937438430ce}
+      \strng{bibnamehash}{d01a3e5dc30f51c15d5e6937438430ce}
+      \strng{authorbibnamehash}{d01a3e5dc30f51c15d5e6937438430ce}
+      \strng{authornamehash}{d01a3e5dc30f51c15d5e6937438430ce}
+      \strng{authorfullhash}{d01a3e5dc30f51c15d5e6937438430ce}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{12}
+      \field{title}{COMPARATIVE STUDY ON LOAD BALANCING TECHNIQUES IN DISTRIBUTED SYSTEMS}
+      \field{volume}{6}
+      \field{year}{2012}
+    \endentry
+    \entry{haproxy-docs}{misc}{}
+      \field{sortinit}{4}
+      \field{sortinithash}{e071e0bcb44634fab398d68ad04e69f4}
+      \field{labeltitlesource}{title}
+      \field{note}{\url{http://cbonte.github.io/haproxy-dconv/}}
+      \field{title}{HAProxy documentation}
+      \field{year}{2021}
+    \endentry
+    \entry{LVS}{misc}{}
+      \field{sortinit}{4}
+      \field{sortinithash}{e071e0bcb44634fab398d68ad04e69f4}
+      \field{labeltitlesource}{title}
+      \field{note}{\url{http://www.linuxvirtualserver.org/docs/scheduling.html}}
+      \field{title}{Job Scheduling Algorithms in Linux Virtual Server}
+      \field{year}{2021}
+    \endentry
+    \entry{nginx-http-balancer}{misc}{}
+      \field{sortinit}{4}
+      \field{sortinithash}{e071e0bcb44634fab398d68ad04e69f4}
+      \field{labeltitlesource}{title}
+      \field{note}{\url{https://docs.nginx.com/nginx/admin-guide/load-balancer/}}
+      \field{title}{NGINX Load Balancer Guide}
+      \field{year}{2021}
+    \endentry
+    \entry{power-two-choices}{article}{}
+      \name{author}{3}{}{%
+        {{hash=95f9f942984856fd539a2782aae5be5a}{%
+           family={Richa},
+           familyi={R\bibinitperiod},
+           given={Andréa},
+           giveni={A\bibinitperiod}}}%
+        {{hash=4dbcb1c7060726deee27d97b4bf31321}{%
+           family={Mitzenmacher},
+           familyi={M\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=15687b493507ae0a594c834c2bf9ead8}{%
+           family={Sitaraman},
+           familyi={S\bibinitperiod},
+           given={Ramesh},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{8e8987f55e25dbb0ca38c8fe9f723dc9}
+      \strng{fullhash}{8e8987f55e25dbb0ca38c8fe9f723dc9}
+      \strng{bibnamehash}{8e8987f55e25dbb0ca38c8fe9f723dc9}
+      \strng{authorbibnamehash}{8e8987f55e25dbb0ca38c8fe9f723dc9}
+      \strng{authornamehash}{8e8987f55e25dbb0ca38c8fe9f723dc9}
+      \strng{authorfullhash}{8e8987f55e25dbb0ca38c8fe9f723dc9}
+      \field{sortinit}{4}
+      \field{sortinithash}{e071e0bcb44634fab398d68ad04e69f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{10}
+      \field{title}{The Power of Two Random Choices: A Survey of Techniques and Results}
+      \field{year}{2000}
+      \verb{doi}
+      \verb 10.1007/978-1-4615-0013-1_9
+      \endverb
     \endentry
     \entry{RFC2991}{report}{}
       \name{author}{2}{}{%
@@ -464,8 +589,8 @@
       \strng{authorbibnamehash}{ed06ede43e6773c9c46b3b0648c6c8a6}
       \strng{authornamehash}{ed06ede43e6773c9c46b3b0648c6c8a6}
       \strng{authorfullhash}{ed06ede43e6773c9c46b3b0648c6c8a6}
-      \field{sortinit}{3}
-      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{sortinit}{4}
+      \field{sortinithash}{e071e0bcb44634fab398d68ad04e69f4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{howpublished}{Internet Requests for Comments}
@@ -537,8 +662,8 @@
       \strng{authorbibnamehash}{ce53d860cee99adc00ca9ccd5a4eb994}
       \strng{authornamehash}{ce53d860cee99adc00ca9ccd5a4eb994}
       \strng{authorfullhash}{ce53d860cee99adc00ca9ccd5a4eb994}
-      \field{sortinit}{4}
-      \field{sortinithash}{e071e0bcb44634fab398d68ad04e69f4}
+      \field{sortinit}{5}
+      \field{sortinithash}{5dd416adbafacc8226114bc0202d5fdd}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{howpublished}{Internet Requests for Comments}
@@ -556,12 +681,38 @@
       \endverb
     \endentry
     \entry{keepalived-docs}{misc}{}
-      \field{sortinit}{4}
-      \field{sortinithash}{e071e0bcb44634fab398d68ad04e69f4}
+      \field{sortinit}{5}
+      \field{sortinithash}{5dd416adbafacc8226114bc0202d5fdd}
       \field{labeltitlesource}{title}
       \field{note}{\url{https://keepalived.readthedocs.io/en/latest/}}
       \field{title}{Keepalived User Guide}
       \field{year}{2021}
+    \endentry
+    \entry{server-load-balancing}{inbook}{}
+      \name{author}{1}{}{%
+        {{hash=01e7f4d1909cf337f9c18ed98bac50e6}{%
+           family={Bourke},
+           familyi={B\bibinitperiod},
+           given={Tony},
+           giveni={T\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {O'Reilly}%
+      }
+      \strng{namehash}{01e7f4d1909cf337f9c18ed98bac50e6}
+      \strng{fullhash}{01e7f4d1909cf337f9c18ed98bac50e6}
+      \strng{bibnamehash}{01e7f4d1909cf337f9c18ed98bac50e6}
+      \strng{authorbibnamehash}{01e7f4d1909cf337f9c18ed98bac50e6}
+      \strng{authornamehash}{01e7f4d1909cf337f9c18ed98bac50e6}
+      \strng{authorfullhash}{01e7f4d1909cf337f9c18ed98bac50e6}
+      \field{sortinit}{5}
+      \field{sortinithash}{5dd416adbafacc8226114bc0202d5fdd}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Server load balancing}
+      \field{year}{2001}
+      \field{pages}{3\bibrangedash 7}
+      \range{pages}{5}
     \endentry
   \enddatalist
 \endrefsection

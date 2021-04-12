@@ -373,7 +373,7 @@ logov.
 
 \textbf{Protokolové útoky} sa priživujú na zraniteľnosti v návrhu komunikačného protokolu na transportnej
 až aplikačnej vrstve OSI, ktoré spoliehajú na priebežné ukladanie stavových informácii o naviazaných
-reláciach. Rozšírené sú taktiky na zneužitie časovače stavového automatu protokolu TCP a príznakov v TCP 
+reláciach. Rozšírené sú taktiky na zneužitie časovačov stavového automatu protokolu TCP a príznakov v TCP 
 segmentoch, ktorými sa odosielateľ a prijímateľ dohadujú na priebehu výmeny správ. 
 
 Počas TCP SYN Flood je doručené také množstvo podnetov na otvorenie spojenia segmentami s príznakom SYN, 
@@ -381,7 +381,8 @@ ktoré vyústi v zaplnenie pamäte vyhradenie na uchovávanie aktívnych reláci
 zahajovaní TCP spojenia cez 3-way handshake a obdržaní SYN odoslať SYN+ACK a počkať stanovenú dobu. Timeout 
 býva dostatočný na to, aby dokázal útočník ponechať tabuľku relácií zaplnenú iba svojimi podvratnými 
 požiadavkami. Schodnou ochranou je zavedenie tzv. TCP Cookie. Systém po prijatí TCP SYN odošle TCP SYN+ACK a 
-nevytvorí v pamäti žiadnu reláciu \cite{csirt-ddos}. Po prijatí právoplatnej odpovede TCP ACK sa spätne dopočíta TCP sekvencia paketov a až vtedy sa zaháji spojenie. 
+nevytvorí v pamäti žiadnu reláciu \cite{csirt-ddos}. Po prijatí právoplatnej odpovede TCP ACK sa spätne 
+dopočíta TCP sekvencia paketov a až vtedy sa zaháji spojenie. 
 
 TCP RST útok sa zameriava na rušenie nadviazaných spojení medzi serverom a klientmi, kedy však je
 nutné poznať zdrojovú IP adresu klienta, pretože útočník háda začiatkom konverzácie náhodne započaté 
@@ -431,7 +432,7 @@ od 1,1 pri jednom A zázname (example.net), 2,75 v prípade troch AAAA záznamoc
 dokonca 3,5 (yahoo.com) pri siedmich štvor-áčkových záznamoch. Protokol DNSSEC ponúka
 cez otvorené rekurzívne resolvery až 30-násobnú amplifikáciu \cite{csirt-ddos}, 
 z dôvodu početnosti vrátených NS záznamov a digitálnych podpisov v DS a RRSIG záznamoch. 
-Uvedenými príkazmi sme objavili odpoveď s 24-násobným zväčšením a podobne iné domény dosahovali
+Nástrojom \verb|dig| sme objavili odpoveď s 24-násobným zväčšením a podobne iné domény dosahovali
 amplifikácie bežne v rozsahu 13 - 18-krát:
 \begin{lstlisting}
 dig +dnssec +trace opendns.com
@@ -444,7 +445,7 @@ konštatuje, že takmer 80\% všetkých DDoS útokov v treťom kvartáli 2019 bo
 V apríli 2019 bol zaznamenaný SYN Flood útok s prietokom až 580 miliónov paketov za sekundu. Vyskytujú
 sa hlavne multivektorové útoky, čím je ich zdolanie komplexnejšie. Zároveň dominovali útoky kratšie
 ako 10 minút, ktorých bolo 84\% zo zaznamenaných. Celkovo došlo k nárastu v počte nahlásených útokov
-o 241\% oproti rovnakom období predošlého roku. \cite{enisa-ddos}.
+o 241\% oproti rovnakému obdobiu predošlého roku. \cite{enisa-ddos}.
 
 \subsection{Ochrana spevnením sieťovej ochrany}
 Obranné mechanizmy na úspešné zvládnutie útokov odoprenia služby rozlišujeme primárne podľa
@@ -458,7 +459,7 @@ nad adekvátnym minimalizovaním dopadu hrozieb s nimi spojenými. Prakticky osv
 riešeniami sú \enquote{resource accounting}, čiže účtovanie a limitovanie počtu vyhradených spojení 
 pre každú IP adresu pristupujúcu k službe pri maximálnej frekvencii odpovedí od servera, alebo sa využíva 
 \enquote{resource muliplication}, kedy sú zdroje systému duplikované na viaceré zariadenia a prichádzajúca 
-záťaže je vyvažovaná medzi nimi.
+záťaž je vyvažovaná medzi nimi.
 
 \textbf{Reaktívne spôsoby} sa usilujú o zmiernenie útoku počas jeho konania. Pre automatizované
 riadenie defenzívy by mali byť obranné prvky schopné detekcie útoku odlíšením od typickej sieťovej 
@@ -494,21 +495,22 @@ router bgp 65535
     redistribute static route-map blackhole
 \end{lstlisting}
 Poskytovateľ pripojenia môže na podnet zablokovať premávku na obeť známej IP adresy
-cez pravidlo na spúšťacom routeri. Uvedená statická cesta musí byť po skončení odobratá zo spúšťacieho routera, ktorý rozpošle BGP route withdrawal svojim iBGP peerom:
+cez pravidlo na spúšťacom routeri. Uvedená statická cesta musí byť po skončení odobratá zo spúšťacieho 
+routera, ktorý rozpošle BGP route withdrawal svojim iBGP peerom:
 \begin{lstlisting}
 ip route 172.5.23.1 255.255.255.255 Null0 tag 66
 \end{lstlisting}
 
 \subsubsection{IP Spoofing}
-Na zabránenie spätnej väzby paketov vracajúcej sa naspäť botom útočníka, zvykne pri záplavových útokoch 
-vložiť do paketu sfalšovanú zdrojová adresa. Vychádza z potreby útočníka zostať v anonymite a prípadne 
+Na zabránenie spätnej väzby paketov vracajúcej sa naspäť botom útočníka, sa zvykne pri záplavových útokoch 
+vložiť do paketu sfalšovaná zdrojová adresa. Vychádza z potreby útočníka zostať v anonymite a prípadne 
 zmiasť bezpečnostnú obranu vzbudením dojmu, že nadmerná premávka pochádza od rozptýlených podnecovateľov. 
 Spoofing sa hodí u reflektorových útokov alebo v situáciach, kedy si útočník praje, aby bol vinený za 
 iniciátora určitý počítač. Prostredníctvom zapojenia Ingress a Egress filtrovania sú poskytovatelia 
 pripojenia na trase schopný zabrzdiť škodlivú premávky takmer v zárodku. Ukradnuté zdrojové adresy sa 
 pre navodenie dôveryhodnosti vyberajú z rozsahu verejne smerovateľných IP adries (RFC 1918, RFC 3330). 
 Privátne adresy sa totiž  štandardne zahadzujú na smerovačoch registrovaním príslušných ACL pravidiel ako 
-realizácia \textbf{Egress filtrovania} Skrátená ukážka odhodí pakety z jedného súkromného rozsahov a 
+realizácia \textbf{Egress filtrovania} Uvedená konfigurácia odhodí pakety zo súkromného rozsahu a 
 prepustí ostatné \cite{cisco-spoofing-rules}: 
 \begin{lstlisting}
 access-list 110 deny ip 192.168.0.0 0.0.255.255 any
@@ -516,7 +518,7 @@ access-list 110 permit ip any any
 \end{lstlisting}
 
 Podvrhnuté IP adresy sa rozlišujú podľa techniky ich selekcie. Najmenej sofistikovaný postup spočíva vo 
-vygenerovaní náhodného 32-bitového čísla, ktoré bude predstavovať spoofovanú zdrojovú adresu. 
+vygenerovaní náhodného 32-bitového čísla, ktoré predstavuje spoofovanú zdrojovú adresu. 
 Vymyslená IP adresa nesmie byť úplne svojvoľná, ale pochádzať z platných podsieti, pre ktoré router má 
 záznam v smerovacej tabuľke alebo sa môže nachádzať niekde po ceste k obeti. \textbf{Ingress filtrovanie}
 (RFC 2827) totiž povoľuje v striktnom režime smerovať iba pakety, pre ktoré existuje vo FIB (Forwarding 
@@ -527,19 +529,28 @@ cez ľubovoľné rozhranie smerovača:
 ip verify unicast reverse-path list           # Strict mode
 ip verify unicast source reachable-via any    # Loose mode
 \end{lstlisting}
-Naproti bežnej predstavy prevláda snaha o zúžitkovanie validných zdrojových adries botov, tam kde 
-je to uskutočniteľné \cite{ddos-anatomy-2004}.
+Naproti bežnej predstavy prevláda snaha o zúžitkovanie validných zdrojových adries agentov útočníka,
+tam kde je to uskutočniteľné \cite{ddos-anatomy-2004}.
 
-\subsubsection{Rate limiting a Firewall na Linuxe}
+\subsubsection{Linux Netfilter}
 Zníženie záťaže na systémové zdroje pridelené na tvorbu paketov odpovede je dosiahnuteľné cez 
-\emph{rate limiting}. Linux oplýva vrámci \emph{procfs} (\verb|/proc/sys/net/ipv4/|) premennými na 
-obmedzenie rýchlosti pri odpovedaní maskou zvolenými ICMP správami \verb|icmp_ratelimit|, 
+\emph{rate limiting}. Linux disponuje v rámci \emph{procfs} (\verb|/proc/sys/net/ipv4/|) premennými 
+na obmedzenie rýchlosti pri odpovedaní maskou zvolenými ICMP správami \verb|icmp_ratelimit|, 
 \verb|icmp_ratemask| a \verb|icmp_echo_ignore_broadcasts|\footnote{\url{https://
-man7.org/linux/man-pages/man7/icmp.7.html}}. Takisto sa odporúča ponechať pravidlá firewallu na najmenšej
-úrovni priepustnosti smerom dnu za každých okolností ako whitelist.
-Ak napríklad webová aplikácia beží na porte HTTPS/443 a administrácia vstupuje na server cez SSH/22 zo 
-stáleho rozsahu adries intranetu, môže jednoduchá konfigurácia firewallu vyzerá nasledovne 
-\cite{csirt-hardening}:
+man7.org/linux/man-pages/man7/icmp.7.html}}. Predvolene je frekvencia odpovedí na 
+ICMP Destination Unreachable 1 sekunda a ignorujú sa broadcastové správy. Proti SYN záplave sa
+systém zabezpečí cez \verb|/etc/sysctl.conf| povolením TCP cookies a limitovaním
+počtu otvorených, klientom nepotvrdených TCP spojení \cite{haproxy-ddos}:
+\begin{lstlisting}
+net.ipv4.tcp_syncookies = 1         # Aktivácia TCP SYN cookie
+net.ipv4.tcp_max_syn_backlog = 1024 # Maximálny počet nepotvrdených spojení
+net.ipv4.conf.all.rp_filter = 1     # Ingress filter (RPF) proti IP spoofingu  
+\end{lstlisting}
+
+Z bezpečnostného hľadiska sa tiež odporúča ponechať pravidlá firewallu na najmenšej úrovni priepustnosti 
+smerom dnu. Ak webová aplikácia beží na porte HTTPS/443 a 
+administrácia vstupuje na server cez SSH/22 zo stáleho rozsahu adries intranetu, môže jednoduchá 
+konfigurácia firewallu vyzerať nasledovne \cite{csirt-hardening}:
 \begin{lstlisting}
 # Pravidlá pre povolenie prichádzajúcej komunikácie cez SSH, HTTPS
 iptables --append INPUT --protocol tcp --dport 443 --jump ACCEPT
@@ -565,20 +576,77 @@ utesňujúc vzájomnú väzbu dielcov a očakávajúc ich nevyhnutnú vzájomnú
 údržba a kontrola systému, zachovanie konzistentnosti dát bez nutnosti navyše častí na
 zabezpečenie ich integrity. Zároveň sa to odráža na nižšej energetickej spotrebe voči 
 mnohým spoločne rovnako výkonným duplikátom. Všetko za cenu o poznanie vyšších obstarávacích nákladov tohto 
-kompaktného balíka s výhľadom na obmedzení rozsah pre upgrade, vytvárajúc jediný bod zlyhania pre prípadný 
+kompaktného balíka s výhľadom na obmedzený rozsah pre upgrade, vytvárajúc jediný bod zlyhania pre prípadný 
 celkový výpadok poskytovanej aplikácie.
 
-\textbf{Horizontálne škálovanie} je naproti vertikálnemu oveľa odolnejšie proti zlyhaniu, keďže sa spolieha 
-na viacero paralelne bežiacich zariadení. Komponenty sú lacnejšie a jednoduchšie na upgrade, 
-pretože pádom systému servera nepostihneme dostupnosť služby ako takej. Nevyhnutnosťou je spravidla 
-zosieťovanie a distribúcia záťaže úloh pomedzi uzly, čím sa zvyšuje oneskorenie a závislosť na externých 
-činiteľov a od prepájacích prvkoch.
+\textbf{Horizontálne škálovanie} je oproti vertikálnemu oveľa odolnejšie proti celkovému zlyhaniu služby, 
+keďže sa spolieha na viacero paralelne bežiace kópii aplikácie na separátnych zariadeniach. Komponenty sú 
+lacnejšie a jednoduchšie na upgrade. Nevyhnutnosťou je spravidla zosieťovanie a distribúcia záťaže úloh 
+pomedzi uzly. Zavedením prostredníka takouto reverznou proxy sa zvyšuje réžia pri nadväzovaní spojení 
+medzi klientom a serverom. Okrem toho rastie závislosť na externých prepájacích prvkoch a ich zabezpečení.
+
+\subsection{Algoritmy vyvažovania záťaže}
+Load balancing spočíva v rovnomernom optimálnom prerozdelení prichádzajúcich úloh 
+na spracovanie medzi všetky účastne entity \cite{load-balance-in-distributed-system}. 
+Výsledkom je simultánne vykonávanie viacerých požiadaviek, každá pôvodnou rýchlosťou limitovanou
+špecifickou pre každý komponent osve \cite{haproxy-docs}. Ideálnou symetrizáciou záťaže sa zvyšuje 
+priepustnosť a spoľahlivosť, naplno sa využívajú dostupné výpočtové zdroje, zvyšuje sa odolnosť proti chybám 
+a rastie stabilita služby. Úspešnosť nasadeného riešenia závisí od zapojenia vhodného algoritmu pre 
+konkrétny typ očakávaných pripojení. Najčastejšie sa vyplatí aplikovať dynamické algoritmy so za behu 
+upraviteľným váhovaním a riadením od centrálneho uzla - load balancer. Využívajú sa momentálne informácie o 
+sieťovej aktivite, čím dosahujú dobrý pomer medzi férovosťou a efektívnosťou.
+
+\paragraph{Round-Robin} prerozdeľuje objavujúce sa požiadavky postupne každému serveru z 
+rotujúceho zoznamu započnúc v náhodne zvolenom. Ak sa zariadenia líšia výkonnosťou je vážením dosiahnuteľné
+priradenie väčšej záťaže výkonnejším strojom. Priradením váh trojici serverov $A=4, B=3, C=2$ je dobrou
+permutáciou počas plánovacieho cyklu postupnosť $AABABCABC$  \cite{LVS}. Na server pripadne 
+množstvo spojení podľa určenej váhy podielom zo sumy všetkých váh: $W_k / \sum_i{W_i}$. Rôzny počet 
+pridelených požiadaviek sa môže prejavovať dynamická nerovnováha medzi servermi, keď je väčšina dopytov s 
+rozsiahlou odpoveďou presmerovaná na rovnaký uzol. Časová zložitosť výberu uzla na spracovanie
+je $\mathcal{O}(1)$, pretože sa vyberie ďalší pripravený v poradí.
+
+\paragraph{Least Connections} priradí požiadavku serveru s najmenším počtom aktívnych spojení. Medzi
+servermi s rovnakou záťažou sa môže aplikovať Round-Robin. Odporúča sa využiť v prípadoch, kedy bývajú
+spojenia rozlične dlho otvorené, pretože postupné prideľovanie neberie do úvahy rozdielne trvanie takýchto 
+relácií a tým sa môže dôjsť k nahromadeniu klientov na málo hostoch. Pri váženej verzii algoritmu, kde
+počet aktívnych spojení uzla je $C_i$ a a váha $W_i$, smeruje príchodzie spojenie na server $j$, taký že v 
+danom okamihu platí \cite{LVS}: $$\frac{C_j}{W_j} = \min_{1 \leq i \leq n}{\left\{\frac{C_i}{W_i}\right\}}$$
+Least Connections má časovú zložitosť $\mathcal{O}(n)$ od počtu serverov, pretože hľadá minimálnu
+dĺžku fronty spracúvaných požiadaviek, pre každý server. 
+
+\paragraph{Least Time} je menej častá dynamická stratégia, kedy sa vyberá server podľa najmenšieho počtu 
+aktívnych spojení a súčasne na základe najnižšej priemernej latencie vyrátanej z času trvania po prijatie
+prvého bajtu alebo kompletnej, či nekompletnej odpovede \cite{nginx-http-balancer}.
+
+\paragraph{Random} vylosuje na spracovanie požiadavky náhodný zo skupiny dostupných serverov, 
+čo môže viesť ku krátkodobému navýšeniu zaneprázdnenosti jediného servera, zatiaľčo
+ostatné sú nečinné. Priemerne sa však každej destinácii dostane rovnaký podiel klientov 
+\cite{load-balance-in-distributed-system}. Stratégia sa oplatí využívať v prípade rozsiahlejších 
+serverových fariem, kedy znižuje kladivový efekt na frekventovane pridávané a odoberané servery oproti
+odlišným metódam. Účinnou modifikáciou je náhodný výber dvoch serverov, z ktorý sa vyberie ten
+s menším počtom aktívnych spojení s Least Connections alebo Least Time. Namiesto priklonenia sa
+k absolútne najlepšej možnej voľbe pri nekompletnej plánovacej informácii sa algoritmus
+\enquote{Power of Two Choices} vyhýba horšej variante výberom lepšej možnosti z dvoch. S väčším počtom
+náhodných výberov konverguje práve k Least Connections \cite{power-two-choices} za cenu výkonnosti 
+vyvažovania, pretože sa blíži k vyhľadávaniu globálne najkratšej fronty.
+
+\paragraph{Hashing} sa uplatňuje pri voľbe servera na základe vlastností spojenia alebo hlavičky HTTP 
+požiadavky. Konzistentné hašovanie dokáže zaručiť, že pri zmene bežiacich serverov sa minimalizuje a 
+zrovnomerňuje počet spojení, ktoré budú zaradené na spracovanie inému serveru. Pri prerozdeľovaní 
+zahašovaním zdrojovej IP adresy sa klientovi dostáva odpovede zakaždým od rovnakého uzla pokým je v 
+prevádzke, čiže dokáže byť uchovaná perzistencia HTTP relácie s cookies. Tento prístup sa nazýva
+best-effort \emph{sticky session} \cite{haproxy-docs}, pretože sa klient akoby \enquote{prilepí} serveru
+z farmy a pokiaľ je to možné výhradne s ním komunikuje. Na druhej strane sa dá uplatniť hašovanie podľa 
+URI cieľa požiadavky alebo iného atribútu s dostatočnou variabilitou. Závisí od ponuky konkrétneho 
+nasadeného riešenia.
 
 \subsection{Redundancia nižších vrstiev RM OSI}
 Odolnosť sieťovej infraštruktúry proti poruchám a výpadkom aktívnych sieťových prvkov, s vedľajším
-rovnako dôležitým efektom navýšenia dátového prietoku komunikačných spojov, sa utužuje protokolmi
-agregácie liniek na spojovej vrstve, viaccestným smerovaním na sieťovej vrstve a
-virtuálnym smerovačom (IPVS) na transportnej vrstve.
+rovnako dôležitým efektom navýšenia dátového prietoku komunikačných spojov, sa utužuje vyvažovaním záťaže
+na nižších vrstvách modelu RM OSI rôznymi metódami. Agregáciou liniek na spojovej vrstve sa vyberá sieťový 
+prepoj zo skupiny, ktorým sa paket pošle. Viaccestným smerovaním na sieťovej vrstve sa rozhoduje medzi 
+trasami cez ktoré sériu paketov presmerovať. Virtuálny smerovač (IPVS) na transportnej vrstve určí
+aktívy uzol spomedzi klastera oslovený spoločnou IP adresou.
 
 \paragraph{Agregácia liniek} sa uplatňuje pokiaľ nestačí maximálna prenosová rýchlosť
 samotného jedného sieťového rozhrania a je nevýhodné, či dokonca nemožné vymeniť sieťovú kartu.
@@ -595,7 +663,7 @@ sieťovému zariadeniu vyjednanie automatického združenia liniek výmenou LACP
 Priebežnými keepalive správami kontroluje LACP priechodnosť spoju pre zamedzenie straty paketov
 v nefunkčnej linke a overuje chyby spôsobené nesprávnym fyzickým zapojením vznikajúcim prekrížením 
 kabeláže: \enquote{loopback links} alebo \enquote{split-trunk}. Prakticky sa na smerovači nastaví kanál do 
-ktorého sú pridané porty\footnote{\url{https://www.cisco.com/c/en/us/td/docs/ios/12_2sb/feature/guide/gigeth.html}}.
+ktorého sú pridané porty\footnote{\url{https://www.cisco.com/c/en/us/td/docs/ios/12_2sb/feature/guide/gigeth.html}}:
 \begin{lstlisting}
 interface port-channel 1
    ip address 192.168.0.1 255.255.255.0
@@ -662,185 +730,22 @@ vrrp_instance malina {       # VRRP inštancia
 }
 \end{lstlisting}
 
-\subsection{Algoritmy vyvažovania záťaže}
-% Load balancing algoritm comparaison (http://www.linuxvirtualserver.org/docs/scheduling.html)
-% Round Robin
-% Weighted Round Robin 
-% Least Connection
-% Weighted Least Connection
-% Destination Hashing
-% Source Hashing
-Load balancing” means an even distribution of the total
-load amongst all serving entities Load balancing is very essential in distributed
-computing systems to improve the quality of service by
-managing customer loads that are changing over time. The
-request demands of incoming requests are optimally
-distributed among available system resources to avoid
-resource bottlenecks as well as to fully utilize available
-resources [5]. Load balancing also provides horizontal
-scaling e.g., adding computing resources in order to address
-increased loads.
+\paragraph{DNS load balancing} je staršou technikou prerozdelenia záťaže, pričom obľúbenosť tkvie vo 
+výraznej jednoduchosti. Doménové meno služby je asociované s viacerými DNS A záznamami pre IPv4 adresy 
+alebo AAAA záznamami pre IPv6 adresy. Následne sa vykonáva statický algoritmus round-robin, ktorý
+klientom pri DNS dopyte preusporiada zoznam vrátených serverov a klient si vyberá prevažne prvý z nich. 
+Nevýhody sa prejavujú v nedostatočnej flexibilite v porovnaní s rovnomernosťou distribúcie záťaže, aká je 
+dosiahnuteľná serverovým load balancerom \cite{server-load-balancing}. 
 
-Styčný bod pre vybavenie žiadostí webových klientov je load balancer, ktorý sa snaží rovnomerne 
-prerozdeliť záťaž medzi skupinu serverov, ale celý systém sa stáva náchylným na jeho zlyhanie.
-Zdvojením load balancera do uzlov spolupracujúcich v klasteri je omnoho jednoduchšie poskytovať
-vysokú dostupnosť bez obáv o náhlu indispozíciu člena zoskupenia. 
-
-\subsection{Reverzné proxy na vyvažovanie záťaže}
-Reverzný proxy server je prostredníkom medzi klientami a veľmi sa pripodobňuje princípu obyčajného proxy servera, snažiacimi sa pristupovať k službe, ktorá
-býva rozložená na viacerých serveroch.
-
- cat /proc/sys/net/ipv4/icmp_ratelimit  1000  
-cat /proc/sys/net/ipv4/icmp_ratemask  6168 
-cat /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts 1
-
-
-% Úloha Reverzná proxy – pool serverov
-% DNS A záznamy (BIND config)
-% Load Balancer (13)
-	% Static Load Balancing Techniques
-		% Random Allocation  (rand
-		% Round-Robin Allocation
-		% Weighted Round-Robin Allocation
-	% Dynamic Load balancing Techniques
-		% Policies in Dynamic Load Balancing Algorithms
-		% Queue Based Dynamic Load Balancing Technique
-	% COMPARATIVE MEASURES
-		% Overhead Associated
-		% Fault Tolerant
-		% Reliability
-		% Stability
-		% Centralized or Decentralized
-		% Adaptability
-		% Cooperative
-		% Process Migration
-		% Resource Utilization
-		% Response time
- 	% Static Vs Dynamic Techniques
- 	% Haproxy (19): 
- 		% algorithm (42) - roundrobin, static-rr, leastconn, first, source, uri, url_param, random, hdr
-	% Nginx: algorithm - roundrobin, least_conn, ip_hash, hash, random (nie je odporúčaná)
-	% /etc/sysctl.conf (20):
-		% # Protection SYN flood
-		% net.ipv4.tcp_syncookies = 1
-		% net.ipv4.conf.all.rp_filter = 1
-		% net.ipv4.tcp_max_syn_backlog = 1024
-	% timeout http-request 5s (408 status)
-	
-
-% Limiting the number of connections per users
-\begin{lstlisting}
-# Table definition
-stick-table type ip size 100k expire 30s store conn_cur
-# Allow clean known IPs to bypass the filter
-tcp-request connection accept if { src -f /etc/haproxy/whitelist.lst }
-# Shut the new connection as long as the client has already 10 opened
-tcp-request connection reject if { src_conn_cur ge 10 }
-tcp-request connection track-sc1 src
-
-
-backend per_ip_rates
-    stick-table type ip size 1m expire 10m store http_req_rate(10s)
-frontend fe_mywebsite
-    bind *:80
-    http-request track-sc0 src table per_ip_rates if METH_POST
-    http-request deny deny_status 429 if { sc_http_req_rate(0) gt 100 }   % Limiting Request Rates
-    http-request silent-drop if { sc_http_req_rate(0) gt 100 }
-
-    timeout tarpit 5s   # abusers
-    http-request tarpit if { sc_http_req_rate(0) gt 100 }
-
-	timeout http-request 5s
-	option http-buffer-request
-	
-	# Using ACLs to Block Requests
-    http-request deny if HTTP_1.0
-    http-request deny if { req.hdr(user-agent) -i -m sub curl }
-    http-request deny if { req.hdr(user-agent) -i -m sub -f /etc/hapee-1.8/badagents.acl }
-    http-request deny unless { req.hdr(user-agent) -m found }
-
-	# Blacklist and Gray list
-	http-request deny if { src -f /etc/hapee-1.8/blacklist.acl }
-	http-request deny if { src -f /etc/hapee-1.8/greylist.acl } { sc_http_req_rate(0) gt 5 }
-
-    tcp-request content reject if { sc_conn_cur(0) gt 1 } || { sc_conn_rate(0) gt 5 }
-\end{lstlisting}
-% Limiting the connection rate per user
-\begin{lstlisting}
-# Table definition
-stick-table type ip size 100k expire 30s store conn_rate(3s)
-# Shut the new connection as long as the client has already 10 opened
-tcp-request connection reject if { src_conn_rate ge 10 }
-\end{lstlisting}
-% Limiting the HTTP request rate
-\begin{lstlisting}
-# Table definition
-f: 
-# Use General Purpose Couter (gpc) 0 in SC1 as a global abuse counter
-# Monitors the number of request sent by an IP over a period of 10 seconds
-stick-table type ip size 1m expire 10s store gpc0,http_req_rate(10s)
-tcp-request connection track-sc1 src
-tcp-request connection reject if { src_get_gpc0 gt 0 }
-b:
-# If the source IP sent 10 or more http request over the defined period,
-# flag the IP as abuser on the frontend
-acl abuse src_http_req_rate(ft_web) ge 10
-acl flag_abuser src_inc_gpc0(ft_web)
-tcp-request content reject if abuse flag_abuser
-\end{lstlisting}
-% Zdroj :21
-
- 
-% https://www.nginx.com/blog/mitigating-ddos-attacks-with-nginx-and-nginx-plus/ (23)
-% Limiting the Rate of Requests
-\begin{lstlisting}
-limit_req_zone $binary_remote_addr zone=one:10m rate=30r/m;
-server {
-    # ...
-    location /login.html {
-        limit_req zone=one;
-    # ...
-    }
-}
-\end{lstlisting}
-% Limiting the Number of Connections
-\begin{lstlisting}
-limit_conn_zone $binary_remote_addr zone=addr:10m;
-server {
-    # ...
-    location /store/ {
-        limit_conn addr 10;
-        # ...
-    }
-}
-\end{lstlisting}
-% Closing slow connections
-\begin{lstlisting}
-server {
-    client_body_timeout 5s;
-    client_header_timeout 5s;
-    # ...
-}
-\end{lstlisting}
-% Deny list IP
-\begin{lstlisting}
-location / {
-    deny 123.123.123.0/28;
-}
-\end{lstlisting}
-% Allow list IP
-\begin{lstlisting}
-location / {
-    allow 192.168.1.0/24;
-    deny all;
-}
-\end{lstlisting}
-
-% Porovnanie HAProxy a Nginx - základný config 
-% Pridanie sekcii konfigurácie a syntax side by side
+DNS vyvažovanie záťaže sa vyznačuje značnou nepredvídateľnosťou plánovania smerovania 
+sieťovej premávky z distribuovanej podstaty činenia rozhodnutí klientmi. Značným problémom je tiež DNS 
+caching, ktorého zámer je obmedzenie vyťažovania autoritatívnych DNS serverov resolvermi. Čas zneplatnenie 
+záznamu z cache býva výrazne dlhší ako je potrebné  na okamžité zachytenie výpadku alebo rozširovanie 
+kapacity serverovej farmy. DNS nerealizuje health-checks serverov a porucha spôsobí, že značné množstvo 
+požiadaviek sa stratí, kým sa DNS záznam stihne všade propagovať.
 
 \noindent\begin{minipage}{.48\textwidth}
-\begin{lstlisting}[caption=BIND9 nastavenie DNS zóny .home]
+\begin{lstlisting}[caption=BIND9: nastavenie DNS zóny .home]
 zone "home" {
     type master;
     file "/etc/bind/db.home";
@@ -855,6 +760,11 @@ website  IN  A  192.168.0.2
 \end{lstlisting}
 \end{minipage}
 
+\subsection{Porovnanie HAProxy a NGINX}
+Reverzný proxy server je prostredníkom medzi klientami a veľmi sa pripodobňuje princípu obyčajného proxy servera, snažiacimi sa pristupovať k službe, ktorá
+býva rozložená na viacerých serveroch.
+
+\subsubsection{Vyvažovanie záťaže}
 \noindent\begin{minipage}{.48\textwidth}
 \begin{lstlisting}[caption=HAProxy základná kostra nastavení]
 global
@@ -924,10 +834,101 @@ upstream website {
 \end{lstlisting}
 \end{minipage}
 
+\subsubsection{Ochrana proti DDoS}
+\begin{lstlisting}
+# Limiting the number of connections per users
+    stick-table type ip size 100k expire 30s store conn_cur
 
+    # Allow clean known IPs to bypass the filter
+    tcp-request connection accept if { src -f whitelist.lst }
+    # Shut the new connection as long as the client has already 10 opened
+    tcp-request connection reject if { src_conn_cur ge 10 }
+    tcp-request connection track-sc1 src
+ 
+# Limiting the connection rate per user
+   stick-table type ip size 100k expire 30s store conn_rate(3s)
+   # Shut the new connection as long as the client has already 10 opened
+   tcp-request connection reject if { src_conn_rate ge 10 }
+\end{lstlisting}
+
+\begin{lstlisting}
+backend per_ip_rates
+    stick-table type ip size 1m expire 10m store http_req_rate(10s)
+frontend fe_mywebsite
+    bind *:80
+    http-request track-sc0 src table per_ip_rates if METH_POST
+    http-request deny deny_status 429 if { sc_http_req_rate(0) gt 100 }   % Limiting Request Rates
+    http-request silent-drop if { sc_http_req_rate(0) gt 100 }
+
+    timeout tarpit 5s   # abusers
+    http-request tarpit if { sc_http_req_rate(0) gt 100 }
+
+	timeout http-request 5s
+	option http-buffer-request
+	
+	# Using ACLs to Block Requests
+    http-request deny if HTTP_1.0
+    http-request deny if { req.hdr(user-agent) -i -m sub curl }
+    http-request deny unless { req.hdr(user-agent) -m found }
+
+	# Blacklist and Gray list/ whitelist
+	http-request deny if { src -f blacklist.acl }
+	http-request deny if { src -f greylist.acl } { sc_http_req_rate(0) gt 5 }
+	tcp-request connection accept if { src -f /etc/haproxy/whitelist.lst }
+
+    tcp-request content reject if { sc_conn_cur(0) gt 1 } || { sc_conn_rate(0) gt 5 }
+\end{lstlisting}
+
+% Limiting the HTTP request rate
+\begin{lstlisting}
+# Table definition
+f: 
+# Use General Purpose Couter (gpc) 0 in SC1 as a global abuse counter
+# Monitors the number of request sent by an IP over a period of 10 seconds
+stick-table type ip size 1m expire 10s store gpc0,http_req_rate(10s)
+tcp-request connection track-sc1 src
+tcp-request connection reject if { src_get_gpc0 gt 0 }
+b:
+# If the source IP sent 10 or more http request over the defined period,
+# flag the IP as abuser on the frontend
+acl abuse src_http_req_rate(ft_web) ge 10
+acl flag_abuser src_inc_gpc0(ft_web)
+tcp-request content reject if abuse flag_abuser
+\end{lstlisting}
+% Zdroj :21
+
+ 
+% https://www.nginx.com/blog/mitigating-ddos-attacks-with-nginx-and-nginx-plus/ (23)
+\begin{lstlisting}
+# Limiting the Rate of Requests
+limit_req_zone $binary_remote_addr zone=one:10m rate=30r/m;
+
+# Limiting the Number of Connections
+limit_conn_zone $binary_remote_addr zone=addr:10m;
+
+# Closing slow connections
+client_body_timeout 5s;
+client_header_timeout 5s;
+
+location / {
+    limit_req zone=one;
+    limit_conn addr 10;
+}
+\end{lstlisting}
+
+\begin{lstlisting}
+# Deny list IP
+location / {
+    deny 123.123.123.0/28;
+}
+# Allow list IP
+location / {
+    allow 192.168.1.0/24;
+    deny all;
+}
+\end{lstlisting}
 
 \section{Monitorovanie webovej aplikácie}
-
 \begin{minipage}{.4\textwidth}
 \begin{lstlisting}
 <Location "/server-status">
@@ -959,6 +960,8 @@ location = /basic_status {
 \end{lstlisting}
 \end{minipage}
 
+
+
 \subsection{HTTP hlavičky}
 % Zamedzenie zobrazenia http hlavičiek o infraštruktúre (CSIRT-checklist)
 \begin{lstlisting}
@@ -968,11 +971,8 @@ location = /basic_status {
     SecServerSignature "PIB FIIT STU"
 </IfModule>
 \end{lstlisting}
-% pozri procfs
-% syn cookies do ddos časti
 
 \subsection{Metriky}
-% Syslog a Common Logfile Format
 \footnote{\url{https://www.haproxy.com/blog/introduction-to-haproxy-logging/}}
 \footnote{\url{https://docs.nginx.com/nginx/admin-guide/monitoring/logging/}}
 \begin{lstlisting}

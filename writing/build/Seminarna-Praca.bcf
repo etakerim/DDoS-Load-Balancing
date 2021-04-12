@@ -2183,12 +2183,22 @@
     <bcf:citekey order="34">cisco-rtbh</bcf:citekey>
     <bcf:citekey order="35">cisco-spoofing-rules</bcf:citekey>
     <bcf:citekey order="36">ddos-anatomy-2004</bcf:citekey>
-    <bcf:citekey order="37">csirt-hardening</bcf:citekey>
-    <bcf:citekey order="38">RFC2991</bcf:citekey>
-    <bcf:citekey order="39">RFC2991</bcf:citekey>
-    <bcf:citekey order="40">availability</bcf:citekey>
-    <bcf:citekey order="41">RFC2338</bcf:citekey>
-    <bcf:citekey order="42">keepalived-docs</bcf:citekey>
+    <bcf:citekey order="37">haproxy-ddos</bcf:citekey>
+    <bcf:citekey order="38">csirt-hardening</bcf:citekey>
+    <bcf:citekey order="39">load-balance-in-distributed-system</bcf:citekey>
+    <bcf:citekey order="40">haproxy-docs</bcf:citekey>
+    <bcf:citekey order="41">LVS</bcf:citekey>
+    <bcf:citekey order="42">LVS</bcf:citekey>
+    <bcf:citekey order="43">nginx-http-balancer</bcf:citekey>
+    <bcf:citekey order="44">load-balance-in-distributed-system</bcf:citekey>
+    <bcf:citekey order="45">power-two-choices</bcf:citekey>
+    <bcf:citekey order="46">haproxy-docs</bcf:citekey>
+    <bcf:citekey order="47">RFC2991</bcf:citekey>
+    <bcf:citekey order="48">RFC2991</bcf:citekey>
+    <bcf:citekey order="49">availability</bcf:citekey>
+    <bcf:citekey order="50">RFC2338</bcf:citekey>
+    <bcf:citekey order="51">keepalived-docs</bcf:citekey>
+    <bcf:citekey order="52">server-load-balancing</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">
