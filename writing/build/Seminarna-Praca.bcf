@@ -2199,6 +2199,12 @@
     <bcf:citekey order="50">RFC2338</bcf:citekey>
     <bcf:citekey order="51">keepalived-docs</bcf:citekey>
     <bcf:citekey order="52">server-load-balancing</bcf:citekey>
+    <bcf:citekey order="53">haproxy-docs</bcf:citekey>
+    <bcf:citekey order="54">nginx-http-balancer</bcf:citekey>
+    <bcf:citekey order="55">haproxy-docs</bcf:citekey>
+    <bcf:citekey order="56">haproxy-stick-tables</bcf:citekey>
+    <bcf:citekey order="57">nginx-rate-limiting</bcf:citekey>
+    <bcf:citekey order="58">nginx-rate-limiting</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">

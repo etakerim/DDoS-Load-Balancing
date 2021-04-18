@@ -714,6 +714,52 @@
       \field{pages}{3\bibrangedash 7}
       \range{pages}{5}
     \endentry
+    \entry{haproxy-stick-tables}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=9c02bd36dae747623f20e6eb6254e8a2}{%
+           family={Lavole},
+           familyi={L\bibinitperiod},
+           given={Chad},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{9c02bd36dae747623f20e6eb6254e8a2}
+      \strng{fullhash}{9c02bd36dae747623f20e6eb6254e8a2}
+      \strng{bibnamehash}{9c02bd36dae747623f20e6eb6254e8a2}
+      \strng{authorbibnamehash}{9c02bd36dae747623f20e6eb6254e8a2}
+      \strng{authornamehash}{9c02bd36dae747623f20e6eb6254e8a2}
+      \strng{authorfullhash}{9c02bd36dae747623f20e6eb6254e8a2}
+      \field{sortinit}{5}
+      \field{sortinithash}{5dd416adbafacc8226114bc0202d5fdd}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{HAProxy Blog}
+      \field{note}{\url{https://www.haproxy.com/blog/introduction-to-haproxy-stick-tables/}}
+      \field{title}{Introduction to HAProxy Stick Tables}
+      \field{year}{2018}
+    \endentry
+    \entry{nginx-rate-limiting}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=326034bb2b09cf300e7b2dc78e7d0629}{%
+           family={Rawdat},
+           familyi={R\bibinitperiod},
+           given={Amir},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{326034bb2b09cf300e7b2dc78e7d0629}
+      \strng{fullhash}{326034bb2b09cf300e7b2dc78e7d0629}
+      \strng{bibnamehash}{326034bb2b09cf300e7b2dc78e7d0629}
+      \strng{authorbibnamehash}{326034bb2b09cf300e7b2dc78e7d0629}
+      \strng{authornamehash}{326034bb2b09cf300e7b2dc78e7d0629}
+      \strng{authorfullhash}{326034bb2b09cf300e7b2dc78e7d0629}
+      \field{sortinit}{5}
+      \field{sortinithash}{5dd416adbafacc8226114bc0202d5fdd}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nginx Blog}
+      \field{note}{\url{https://www.nginx.com/blog/rate-limiting-nginx/}}
+      \field{title}{Rate Limiting with NGINX and NGINX Plus}
+      \field{year}{2017}
+    \endentry
   \enddatalist
 \endrefsection
 \endinput

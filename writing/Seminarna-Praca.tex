@@ -588,31 +588,31 @@ medzi klientom a serverom. Okrem toho rastie závislosť na externých prepájac
 \subsection{Algoritmy vyvažovania záťaže}
 Load balancing spočíva v rovnomernom optimálnom prerozdelení prichádzajúcich úloh 
 na spracovanie medzi všetky účastne entity \cite{load-balance-in-distributed-system}. 
-Výsledkom je simultánne vykonávanie viacerých požiadaviek, každá pôvodnou rýchlosťou limitovanou
-špecifickou pre každý komponent osve \cite{haproxy-docs}. Ideálnou symetrizáciou záťaže sa zvyšuje 
+Výsledkom je simultánne vykonávanie viacerých požiadaviek, každá vykonávaná pôvodnou rýchlosťou limitovanou
+špecifikami každého komponentu osve \cite{haproxy-docs}. Ideálnou symetrizáciou záťaže sa zvyšuje 
 priepustnosť a spoľahlivosť, naplno sa využívajú dostupné výpočtové zdroje, zvyšuje sa odolnosť proti chybám 
 a rastie stabilita služby. Úspešnosť nasadeného riešenia závisí od zapojenia vhodného algoritmu pre 
 konkrétny typ očakávaných pripojení. Najčastejšie sa vyplatí aplikovať dynamické algoritmy so za behu 
-upraviteľným váhovaním a riadením od centrálneho uzla - load balancer. Využívajú sa momentálne informácie o 
-sieťovej aktivite, čím dosahujú dobrý pomer medzi férovosťou a efektívnosťou.
+upraviteľným váhovaním a riadením od centrálneho uzla - load balancer. Tie berú do úvahy aj momentálne 
+informácie o usmerňovanej sieťovej premávke s dostatočne nízkou réžiou, čím dosahujú dobrý pomer medzi 
+férovosťou a efektívnosťou.
 
 \paragraph{Round-Robin} prerozdeľuje objavujúce sa požiadavky postupne každému serveru z 
 rotujúceho zoznamu započnúc v náhodne zvolenom. Ak sa zariadenia líšia výkonnosťou je vážením dosiahnuteľné
-priradenie väčšej záťaže výkonnejším strojom. Priradením váh trojici serverov $A=4, B=3, C=2$ je dobrou
-permutáciou počas plánovacieho cyklu postupnosť $AABABCABC$  \cite{LVS}. Na server pripadne 
-množstvo spojení podľa určenej váhy podielom zo sumy všetkých váh: $W_k / \sum_i{W_i}$. Rôzny počet 
+priradenie väčšej záťaže výkonnejším strojom. Napríklad pre priradenie váh trojici serverov $A=4, B=3, C=2$ 
+je ich dobrou permutáciou počas plánovacieho cyklu postupnosť $AABABCABC$  \cite{LVS}. Na server pripadne 
+množstvo spojení podľa určenej váhy podielom zo sumy všetkých váh: $W_k / \sum_i{W_i}$. Rôznym počtom 
 pridelených požiadaviek sa môže prejavovať dynamická nerovnováha medzi servermi, keď je väčšina dopytov s 
 rozsiahlou odpoveďou presmerovaná na rovnaký uzol. Časová zložitosť výberu uzla na spracovanie
-je $\mathcal{O}(1)$, pretože sa vyberie ďalší pripravený v poradí.
+je $\mathcal{O}(1)$, pretože sa vyberie ďalší v poradí zo zoznamu.
 
 \paragraph{Least Connections} priradí požiadavku serveru s najmenším počtom aktívnych spojení. Medzi
 servermi s rovnakou záťažou sa môže aplikovať Round-Robin. Odporúča sa využiť v prípadoch, kedy bývajú
 spojenia rozlične dlho otvorené, pretože postupné prideľovanie neberie do úvahy rozdielne trvanie takýchto 
 relácií a tým sa môže dôjsť k nahromadeniu klientov na málo hostoch. Pri váženej verzii algoritmu, kde
-počet aktívnych spojení uzla je $C_i$ a a váha $W_i$, smeruje príchodzie spojenie na server $j$, taký že v 
-danom okamihu platí \cite{LVS}: $$\frac{C_j}{W_j} = \min_{1 \leq i \leq n}{\left\{\frac{C_i}{W_i}\right\}}$$
+počet aktívnych spojení uzla je $C_i$ a a váha $W_i$, smeruje príchodzie spojenie na taký server $j$, že platí \cite{LVS}: $$\frac{C_j}{W_j} = \min_{1 \leq i \leq n}{\left\{\frac{C_i}{W_i}\right\}}$$
 Least Connections má časovú zložitosť $\mathcal{O}(n)$ od počtu serverov, pretože hľadá minimálnu
-dĺžku fronty spracúvaných požiadaviek, pre každý server. 
+dĺžku fronty spracúvaných požiadaviek od každého servera. 
 
 \paragraph{Least Time} je menej častá dynamická stratégia, kedy sa vyberá server podľa najmenšieho počtu 
 aktívnych spojení a súčasne na základe najnižšej priemernej latencie vyrátanej z času trvania po prijatie
@@ -635,7 +635,7 @@ požiadavky. Konzistentné hašovanie dokáže zaručiť, že pri zmene bežiaci
 zrovnomerňuje počet spojení, ktoré budú zaradené na spracovanie inému serveru. Pri prerozdeľovaní 
 zahašovaním zdrojovej IP adresy sa klientovi dostáva odpovede zakaždým od rovnakého uzla pokým je v 
 prevádzke, čiže dokáže byť uchovaná perzistencia HTTP relácie s cookies. Tento prístup sa nazýva
-best-effort \emph{sticky session} \cite{haproxy-docs}, pretože sa klient akoby \enquote{prilepí} serveru
+best-effort \emph{sticky session} \cite{haproxy-docs}, pretože sa klient akoby \enquote{prilepí} na server
 z farmy a pokiaľ je to možné výhradne s ním komunikuje. Na druhej strane sa dá uplatniť hašovanie podľa 
 URI cieľa požiadavky alebo iného atribútu s dostatočnou variabilitou. Závisí od ponuky konkrétneho 
 nasadeného riešenia.
@@ -646,7 +646,7 @@ rovnako dôležitým efektom navýšenia dátového prietoku komunikačných spo
 na nižších vrstvách modelu RM OSI rôznymi metódami. Agregáciou liniek na spojovej vrstve sa vyberá sieťový 
 prepoj zo skupiny, ktorým sa paket pošle. Viaccestným smerovaním na sieťovej vrstve sa rozhoduje medzi 
 trasami cez ktoré sériu paketov presmerovať. Virtuálny smerovač (IPVS) na transportnej vrstve určí
-aktívy uzol spomedzi klastera oslovený spoločnou IP adresou.
+aktívy uzol spomedzi klastera pod spoločnou IP adresou.
 
 \paragraph{Agregácia liniek} sa uplatňuje pokiaľ nestačí maximálna prenosová rýchlosť
 samotného jedného sieťového rozhrania a je nevýhodné, či dokonca nemožné vymeniť sieťovú kartu.
@@ -760,13 +760,44 @@ website  IN  A  192.168.0.2
 \end{lstlisting}
 \end{minipage}
 
-\subsection{Porovnanie HAProxy a NGINX}
-Reverzný proxy server je prostredníkom medzi klientami a veľmi sa pripodobňuje princípu obyčajného proxy servera, snažiacimi sa pristupovať k službe, ktorá
-býva rozložená na viacerých serveroch.
+\subsection{Reverzné proxy HAProxy a NGINX}
+Horizontálne škálovanie zabezpečuje spolu s vyvažovaním záťaže reverzný proxy server, ktorý je 
+transparentným pre klientov využívajúcich webovú službu. Nasadenie reverznej proxy ponúka množstvo výhod 
+týkajúcich sa schopnosti zrýchliť čas obratu prerozdelením požiadaviek, ich komprimovaním (gzip), 
+dešifrovaním (TLS) a cachovaním. Dokáže do istej miery ochrániť serverovú farmu pred DDoS útokmi s ACL rate 
+limiting. Netreba zabúdať, že proxy tvorí úzke hrdlo pre premávku a predstavuje 
+centrálny bod zlyhania, ak nie je duplikované.
 
+Obľúbenými open-source riešeniami pre load balancing na transportnej a aplikačnej vrstve sú softvérové
+balíky \verb|haproxy| a \verb|nginx|, ktorých konfiguráciu a výkonnosť porovnáme. \emph{HAProxy} počúva na 
+spojenia od klientov na ľubovoľnom počte \verb|frontend|, ktoré sú prepojené na zvolený \verb|backend|, 
+kde sú umiestnené definície serverov, ktoré majú byť k dispozícii. Medzi základné sekcie patria tiež 
+\verb|global| a \verb|defaults| určujúce správanie HAProxy daemona a nastavenia spoločné pre všetky
+frontend a backend sekcie.
+
+\emph{NGINX} konfigurácia pozostáva z dvoch hlavných blokov: \verb|events|, ktorý podmieňuje vlastnosti
+bežiaceho NGINX ako celku, a kontext \verb|http| obsahujúci direktívy podmieňujúce
+spracovanie HTTP(S) požiadaviek. Rozhranie pre pripájanie klientov tvoria virtuálne servery blokmi
+\verb|server|, ktoré okrem poskytovania statického a dynamického webového obsahu cez vnorené kontexty 
+\verb|location|, dokážu slúžiť ako proxy pre skupinu serverov zhromaždených v \verb|upstream| bloku.
+ 
 \subsubsection{Vyvažovanie záťaže}
+V konfiguračných súboroch oboch softvérových balíkov je najprv nutné nastaviť mód prevádzky na L7, 
+respektíve L4 load balancing, pre HAProxy s \verb|mode http|, respektíve \verb|mode tcp|, na NGINX 
+umiestnením serverov do kontextu \verb|http {}|, resp. \verb|stream {}|. V prevádzke sa nezaobídeme bez 
+schopnosti \emph{logging}, ktorá nám umožní vyhodnocovať stav load balancera v reálnom čase a zároveň 
+záznamy pre spätnú analýzu odohraných javov po incidente. 
+
+Zvýšenie bezpečnosti systému s HAProxy daemonom sa dosiahne zmenou koreňového adresáru cez príkaz
+\verb|chroot|, ktorý predvolene vytvorí symbolický odkaz z interného \verb|/dev/log| na systémový súbor 
+\verb|/var/log/haproxy.log|, kam s \verb|log| direktívou nastavíme preposielanie logov z lokálneho 
+zariadenia \verb|local0|. Destináciu pre logy na súborovom systému je zameniteľný za IP adresu alebo  
+socket \emph{syslog} servera štandardne na porte UDP/514. Pre NGINX podobne určíme cieľový súbor 
+prístupových \verb|access_log| a chybových záznamov \verb|error_log|. Možnosť využitia
+\emph{syslog} servera je samozrejmosťou: \verb|access_log syslog:server=192.168.1.1|.
+
 \noindent\begin{minipage}{.48\textwidth}
-\begin{lstlisting}[caption=HAProxy základná kostra nastavení]
+\begin{lstlisting}[caption=HAProxy mód prevádzky a logging]
 global
    log /dev/log local0
    chroot /var/lib/haproxy
@@ -778,7 +809,7 @@ defaults
 \end{lstlisting}
 \end{minipage}\hfill
 \begin{minipage}{.48\textwidth}
-\begin{lstlisting}[caption=NGINX základná kostra nastavení]
+\begin{lstlisting}[caption=NGINX mód prevádzky a logging]
 worker_processes auto;
 events {
    worker_connections 1024;
@@ -790,12 +821,18 @@ http {  # stream
 \end{lstlisting}
 \end{minipage}
 
+Aby proxy server reagoval na žiadosti klientov o otvorenie HTTP spojenia musí počúvať na porte 80 
+s direktívami \verb|bind *:80|, resp. \verb|listen 80;|. Následne sú všetky na port prichádzajúce 
+požiadavky presmerované na skupinu webových serverov, cez \verb|default_backend|, resp. \verb|proxy_pass|, 
+pričom aktivujeme vypĺňanie HTTP hlavičky \emph{Forwarded}, čím bude adresa pôvodného klienta 
+sprostredkovaná upstream serverom pre účely loggovania.
+
 \noindent\begin{minipage}{.48\textwidth}
 \begin{lstlisting}[caption=HAProxy: preposielanie požiadavok na pool serverov za reverznou proxy]
 frontend web
     bind *:80
     option forwardfor
-    default_backend webservers
+    default_backend website
 \end{lstlisting}
 \end{minipage}\hfill
 \begin{minipage}{.48\textwidth}
@@ -812,10 +849,24 @@ server {
 \end{lstlisting}
 \end{minipage}
 
+Algoritmus rozdelenia záťaže medzi webové servery určíme práve v pomenovanej sekcii \verb|backend|, resp.
+\verb|upstream|. Najčastejšie aplikované stratégie ako sú Round Robin, Least Connection a Hešovanie, podľa 
+zdroja alebo cieľa, sú podporované na HAProxy aj na NGINX. V HAProxy sa nachádzajú pod voľbami pre príkaz 
+\verb|balance| s pomenovaniami: \verb|roundrobin|, \verb|leastconn|, \verb|source|, \verb|uri|.
+\cite{haproxy-docs} NGINX predvolenie volí stratégiu Round Robin, ktorá sa dá ekvivalentne zmeniť na: 
+\verb|least_conn;| \verb|ip_hash;| alebo na \verb|hash $request_uri| \verb|consistent;| 
+\cite{nginx-http-balancer}.
+
+Serverom dokážeme obmedziť maximálny počet aktívnych spojení cez \verb|maxconn n|, kedy zvyšné budú čakať
+vo fronte čím sa zníži sa nápor na servery. Príznakom \verb|check| povolíme
+aktívne \emph{health checks}, alebo je umožnené dočasne vyradiť server z prevádzky priradením 
+stavu \verb|backup| alebo \verb|disabled|. Dokonca časovačom \verb|slow_start| zamedzíme nárazovej záťaži
+na uzol dopadajúcej v predurčenom intervale po jeho spustení.  Odlišné váhy pre rôzne výkonné servery 
+určíme s prepínačom \verb|weight n| \cite{haproxy-docs}.
 
 \noindent\begin{minipage}{.48\textwidth}
 \begin{lstlisting}[caption=HAProxy:  vyvažovanie záťaže najmenej spojení na trojicu HTTP serverov]
-backend webservers
+backend website
     balance leastconn
     server A 192.168.0.2:80
     server B 192.168.0.3:80
@@ -823,10 +874,10 @@ backend webservers
 \end{lstlisting}
 \end{minipage}\hfill
 \begin{minipage}{.48\textwidth}
-\begin{lstlisting}[caption=NGINX: vyvažovanie záťaže najmenej spojení na trojicu HTTP serverov] ]
-proxy_http_version 1.1;
+\begin{lstlisting}[caption=NGINX: vyvažovanie záťaže najmenej spojení na trojicu HTTP serverov]
 upstream website {
     least_conn;
+    proxy_http_version 1.1;
     server 192.168.0.2:80;
     server 192.168.0.3:80;
     server 192.168.0.4:80;
@@ -834,113 +885,171 @@ upstream website {
 \end{lstlisting}
 \end{minipage}
 
+\newpage
 \subsubsection{Ochrana proti DDoS}
-\begin{lstlisting}
-# Limiting the number of connections per users
-    stick-table type ip size 100k expire 30s store conn_cur
+Účinnou obranou proti škodlivo nadmernej sieťovej premávke, nielen voči útokom odoprenia služby, je 
+zúčtovanie počtu spojení, rýchlosti súsledných dopytov alebo podobné sledovanie vyhradenia proporcie
+dostupných zdrojov alokovaných na IP adresu, ako primárneho identifikátora klienta, aby
+sa zamedzilo ich vyčerpanie. Do zaznamenanie užívania prostriedkov sa zapájajú pravidlá na zámerné
+riadenia prístupu cez \emph{ACL}. 
 
-    # Allow clean known IPs to bypass the filter
-    tcp-request connection accept if { src -f whitelist.lst }
-    # Shut the new connection as long as the client has already 10 opened
-    tcp-request connection reject if { src_conn_cur ge 10 }
-    tcp-request connection track-sc1 src
- 
-# Limiting the connection rate per user
-   stick-table type ip size 100k expire 30s store conn_rate(3s)
-   # Shut the new connection as long as the client has already 10 opened
-   tcp-request connection reject if { src_conn_rate ge 10 }
+Najjednoduchšou technikou obrany proti zneužívateľom držiacim úmyselne  dlho otvorené spojenia s 
+nekompletnou správou je časovač, ktorého vypršaním sa spojenie automaticky uzavrie so stavovým kódom 408 - 
+\emph{Request Timeout} alebo 504 - \emph{Gateway Timeout}, ale to len vtedy ak nie je nekompletná správa 
+vložená do vyrovnávacej pamäte a rovno je odoslaná serveru za proxy.
+
+\noindent\begin{minipage}{.48\textwidth}
+\begin{lstlisting}[caption=HAProxy: timeout časovače]
+timeout connect 10s
+timeout client 30s
+timeout server 30s
+timeout http-request 5s
+option http-buffer-request
 \end{lstlisting}
-
-\begin{lstlisting}
-backend per_ip_rates
-    stick-table type ip size 1m expire 10m store http_req_rate(10s)
-frontend fe_mywebsite
-    bind *:80
-    http-request track-sc0 src table per_ip_rates if METH_POST
-    http-request deny deny_status 429 if { sc_http_req_rate(0) gt 100 }   % Limiting Request Rates
-    http-request silent-drop if { sc_http_req_rate(0) gt 100 }
-
-    timeout tarpit 5s   # abusers
-    http-request tarpit if { sc_http_req_rate(0) gt 100 }
-
-	timeout http-request 5s
-	option http-buffer-request
-	
-	# Using ACLs to Block Requests
-    http-request deny if HTTP_1.0
-    http-request deny if { req.hdr(user-agent) -i -m sub curl }
-    http-request deny unless { req.hdr(user-agent) -m found }
-
-	# Blacklist and Gray list/ whitelist
-	http-request deny if { src -f blacklist.acl }
-	http-request deny if { src -f greylist.acl } { sc_http_req_rate(0) gt 5 }
-	tcp-request connection accept if { src -f /etc/haproxy/whitelist.lst }
-
-    tcp-request content reject if { sc_conn_cur(0) gt 1 } || { sc_conn_rate(0) gt 5 }
-\end{lstlisting}
-
-% Limiting the HTTP request rate
-\begin{lstlisting}
-# Table definition
-f: 
-# Use General Purpose Couter (gpc) 0 in SC1 as a global abuse counter
-# Monitors the number of request sent by an IP over a period of 10 seconds
-stick-table type ip size 1m expire 10s store gpc0,http_req_rate(10s)
-tcp-request connection track-sc1 src
-tcp-request connection reject if { src_get_gpc0 gt 0 }
-b:
-# If the source IP sent 10 or more http request over the defined period,
-# flag the IP as abuser on the frontend
-acl abuse src_http_req_rate(ft_web) ge 10
-acl flag_abuser src_inc_gpc0(ft_web)
-tcp-request content reject if abuse flag_abuser
-\end{lstlisting}
-% Zdroj :21
-
- 
-% https://www.nginx.com/blog/mitigating-ddos-attacks-with-nginx-and-nginx-plus/ (23)
-\begin{lstlisting}
-# Limiting the Rate of Requests
-limit_req_zone $binary_remote_addr zone=one:10m rate=30r/m;
-
-# Limiting the Number of Connections
-limit_conn_zone $binary_remote_addr zone=addr:10m;
-
-# Closing slow connections
+\end{minipage}\hfill
+\begin{minipage}{.48\textwidth}
+\begin{lstlisting}[caption=NGINX: timeout časovače]
+proxy_connect_timeout 10s; 
+proxy_read_timeout 30s;
+proxy_send_timeout 30s; 
 client_body_timeout 5s;
 client_header_timeout 5s;
+\end{lstlisting}
+\end{minipage}
 
-location / {
-    limit_req zone=one;
-    limit_conn addr 10;
+Pokiaľ poznáme IP adresy známych narušovateľov môžeme z nich prístup zakázať, alebo naopak dovolíme
+pristupovať iba vyhradenému schválenému prefixu\footnote{\url{https://www.nginx.com/blog/mitigating-ddos-attacks-with-nginx-and-nginx-plus/}}. Riadiť prístup dokážeme taktiež špecificky
+pre zastaralú HTTP verziu 1.0, nepovolenú metódu PATCH, DELETE, či HTTP hlavičku, najčastejšie podľa 
+\emph{User Agent} s neprípustnou alebo neznámou hodnotou.
+
+\noindent\begin{minipage}{.48\textwidth}
+\begin{lstlisting}[caption=Haproxy: ACL pre zdrojové adresy]
+http-request deny if { 
+  src -f deny_list.lst 
+}
+tcp-request connection accept if { 
+  src 192.168.1.0/24
 }
 \end{lstlisting}
+\end{minipage}\hfill
+\begin{minipage}{.48\textwidth}
+\begin{lstlisting}[caption=NGINX: ACL pre zdrojové adresy]
+location / {   # Deny list IP
+  deny 123.123.123.0/28; 
+}          
+location / {   # Allow list IP
+  allow 192.168.1.0/24; deny all; 
+}
+\end{lstlisting}
+\end{minipage}
+
+\begin{lstlisting}[caption=HAProxy: Zablokovanie HTTP požiadavky podľa jej atribútov]
+http-request deny if HTTP_1.0                  # HTTP verzia 1.0
+acl valid_method method GET POST OPTION HEAD
+http-request deny if !valid_method             # Nepovolené HTTP metódy
+http-request deny if { req.hdr(user-agent) -i -m sub curl }  # User agent
+http-request deny unless { req.hdr(user-agent) -m found }
+\end{lstlisting}
+
+Aktívnou metódou je využitie vstavaných počítadiel s asociatívnymi tabuľkami, ktoré priraďujú ku kľúču,
+IP adrese, štatistiku počtu alebo frekvencie TCP spojení, resp. HTTP požiadaviek. HAProxy má na tento
+účel \enquote{stick tables}, ktoré sú nazvateľné po umiestnenie pod separátnu sekci \verb|backend|. Pri
+vytvorení určíme, čo do tabuľky bude ukladať, v našom prípade IPv4 adresy \verb|type ip| a vyhradíme miesto
+nad maximálny počet záznamov \verb|size 1m|, tomto prípade 1 milión. O čase po akom sa má odstrániť 
+nemodifikovaná položka určuje \verb|expire 10s|, čiže podrží najstarší záznam na 10 sekúnd. Argument za
+\verb|store| určuje ako hodnotu ku kľúču uložíme: počet HTTP požiadaviek v posuvnom časovom okne 
+\verb|http_req_rate(10s)|, počet spojení pre kľúč v tabuľke \verb|conn_cur|, \verb|conn_rate| 
+\cite{haproxy-stick-tables}. Počítadlá sú obnovené automaticky cez \verb|track-src0 src|.
+
+\begin{lstlisting}[caption=HAProxy: obmedzenie počtu otvorených spojení na IP adresu na 10 zároveň]
+stick-table type ip size 1m expire 10s store conn_cur
+tcp-request connection track-sc0 src
+tcp-request connection reject if { src_conn_cur ge 10 }
+\end{lstlisting}
+
+\begin{lstlisting}[caption=HAProxy: obmedzenie frekvencie pripojení na používateľa]
+stick-table type ip size 1m expire 30s store conn_rate(3s)
+tcp-request connection track-sc0 src
+tcp-request connection reject if { src_conn_rate ge 10 }
+\end{lstlisting}
+
+NGINX používa direktívu \verb|limit_req_zone|, ktorou sa pre zónu zdieľanej pamäte nastavia parametre
+limitovania požiadaviek, a príkazom \verb|limit_req| sa určí kontext, kde sa má obmedzovanie HTTP požiadaviek 
+algoritmom \emph{leaky bucket} aplikovať \cite{nginx-rate-limiting}. Analogicky s \verb|limit_conn_zone| sa 
+vyhradí priestor pre tabuľku pripojení a pre konkrétnu URI cestu limitujeme počet TCP spojení, napríklad na 
+10 spojení na IP adresu s \verb|limit_conn zone 10|. Premennou \verb|$binary_remote_addr| určíme, že bude za 
+kľúč považovať zdrojové IP adresy v binárnom tvare, čím ušetríme úložisko oproti obyčajnej
+\verb|$remote_addr|. Zónou zvolíme miesto vyhradené pre tabuľku, pričom stavové informácie pre približne 16 
+tisíc IP adries sa zmestia do megabajtu. Ak obmedzíme príchodzie spojenia na jedno za 100 ms s 
+\verb|rate=10r/s| a príde ďalšie v kratšom časovom intervale bude odmietnuté s kódom 503 - 
+\emph{Service Unavailable}, čo je nežiaduce v prípade, že sa aplikácia dopytuje nárazovo. 
+
+Atribútom \verb|burst=20| sa vytvorí front s 20 miestami pre spojenia prichádzajúce v rýchlejšom slede ako 
+umožňuje obmedzovač \cite{nginx-rate-limiting}. Nastanú situácie, kedy si nemôže dovoliť na odpoveď pre 
+legitímnu požiadavku čakať, len preto že bola umiestnená do fronty. Parameter \verb|nodelay| presmeruje 
+napríklad 20 simultánnych požiadaviek z IP adresy na server okamžite, ale označí front za zaplnený a uvoľní 
+sloty postupne podľa \verb|rate| časovača.
 
 \begin{lstlisting}
-# Deny list IP
-location / {
-    deny 123.123.123.0/28;
-}
-# Allow list IP
-location / {
-    allow 192.168.1.0/24;
-    deny all;
+limit_req_zone $binary_remote_addr zone=one:10m rate=10r/s;
+limit_conn_zone $binary_remote_addr zone=addr:10m;
+location / { 
+    limit_req zone=one burst=20 nodelay;  # 10 požiadaviek za sekundu
+    limit_conn addr 10;                   # 10 aktívnych spojení naraz
 }
 \end{lstlisting}
+
+\subsubsection{SSL Termination}
+Výmena nezašifrovaných HTTP správ sa na webe stáva ojedinelejšia, pretože zvýšené bezpečnostné
+nároky komunikácie a vynucovanie zabezpečeného TLS/SSL spojenia zo strany webových 
+prehliadačov\footnote{\url{https://security.googleblog.com/2018/02/a-secure-web-is-here-to-stay.html}} 
+spôsobili rapídny rozmach HTTPS protokolu v posledných rokoch. Dešifrovanie na strane servera prináša však 
+so sebou zvýšenú záťaž na spracovanie požiadavky, preto reverzné proxy umožňujú popri symetrizácii záťaže
+SSL premávku dešifrovať pred dosiahnutím webového servera a zašifrovať spätnú odpoveď klientovi - 
+\emph{TLS Offloading}\footnote{
+\url{https://www.haproxy.com/documentation/aloha/12-5/deployment-guides/tls-infrastructure/}}, 
+čím je SSL spojenie ukončené už na proxy. Hlavnou výhodou z pohľadu administrácie je 
+centralizovaný a konzistentný manažment TLS konfigurácie a súvisiacich mechanizmov. Predovšetkým sa 
+zjednodušuje redistribúcia certifikátov, keďže nemusia byť rozšírené na všetky uzly farmy. Okrem ukončenia 
+SSL môže load balancer figurovať v režime \emph{TLS Bridging}, čiže správu k serveru opätovne zašifruje
+pre medzikontrolu. Z pozície \emph{TLS pass-through} nenaruší šifrovaný kanál, ale k vyvažovaniu záťaže
+musí dochádzať na transportnej vrstve.
+
+Certifikát verejného kľúča by sme na produkčnú prevádzku nadobudnúť od certifikačnej autority 
+(napr. Let's Encrypt). Na účely testovanie alebo na použitie v uzavretej komunite môžeme vytvoriť
+certifikát podpísaný samým sebou - \emph{self-signed certificate} 
+
+\noindent\begin{lstlisting}[caption=OpenSSL požiadavka (CSR) na samo popísanie certifikátu X.509 so súkromným kľúčom RSA o dĺžke 4096 bitov a ročnou platnosťou, basicstyle=\ttfamily\scriptsize]
+openssl req -x509 -nodes -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365
+\end{lstlisting}
+
+HAProxy\footnote{\url{https://www.haproxy.com/blog/haproxy-ssl-termination/}} 
+a NGINX\footnote{\url{https://docs.nginx.com/nginx/admin-guide/security-controls/terminating-ssl-http/}}
+umožňujú označiť komunikáciu na otvorenom porte za \verb|ssl| a zahrnúť certifikát a cestu na disku k 
+súkromný kľúču určeného na dešifrovanie. U skupiny upstream serverov stačí, aby podporovali 
+nezabezpečený HTTP prenos.  
+ 
+\noindent\begin{minipage}{.48\textwidth}
+\begin{lstlisting}[caption=HAProxy: TLS termination]
+frontend:
+    bind *:443 ssl crt website.pem 
+backend:
+    server A 192.168.1.1:80
+\end{lstlisting}
+\end{minipage}\hfill
+\begin{minipage}{.48\textwidth}
+\begin{lstlisting}[caption=NGINX: TLS termination]
+server {
+    listen 443 ssl;
+    ssl_certificate cert.pem;
+    ssl_certificate_key key.pem; }
+\end{lstlisting}
+\end{minipage}
 
 \section{Monitorovanie webovej aplikácie}
-\begin{minipage}{.4\textwidth}
-\begin{lstlisting}
-<Location "/server-status">
-    SetHandler server-status
-    Require ip 127.0.0.1
-</Location>
-\end{lstlisting}
-\end{minipage}\newline
 
 
-\begin{minipage}{.3\textwidth}
-\centering
+\noindent\begin{minipage}{.48\textwidth}
 \begin{lstlisting}
 frontend stats
     bind *:8404
@@ -949,8 +1058,7 @@ frontend stats
     stats refresh 10s
 \end{lstlisting}
 \end{minipage}\hfill
-\begin{minipage}{.35\textwidth}
-\centering
+\begin{minipage}{.48\textwidth}
 \begin{lstlisting}
 location = /basic_status {
     stub_status; 
@@ -961,49 +1069,12 @@ location = /basic_status {
 \end{minipage}
 
 
-
-\subsection{HTTP hlavičky}
-% Zamedzenie zobrazenia http hlavičiek o infraštruktúre (CSIRT-checklist)
 \begin{lstlisting}
-<IfModule security2_module>
-    SecRuleEngine on
-    ServerTokens Min
-    SecServerSignature "PIB FIIT STU"
-</IfModule>
+<Location "/server-status">
+    SetHandler server-status
+    Require ip 127.0.0.1
+</Location>
 \end{lstlisting}
-
-\subsection{Metriky}
-\footnote{\url{https://www.haproxy.com/blog/introduction-to-haproxy-logging/}}
-\footnote{\url{https://docs.nginx.com/nginx/admin-guide/monitoring/logging/}}
-\begin{lstlisting}
-# Common Log Format
-192.168.0.2 - - [05/Apr/2021 13:45:20 +0200] "GET / HTTP/1.1" 200 1254
-
-# Apache Custom Log
-website.home:80 192.168.0.2 - - [05/Apr/2021 13:45:20.814 +0200] "GET / HTTP/1.1" 200 351 1254 "-"
-"Mozilla/5.0"
-
-LogFormat "%v:%p %h %l %u %{%d/%b/%Y %T}t.%{msec_frac}t %{%z}t %D \"%r\" %>s %I %O \"%{Referer}i\" \"%{User-Agent}i\"" custom
-<VirtualHost *:80>
-   DocumentRoot /var/www/html
-   CustomLog ${APACHE_LOG_DIR}/access.log custom
-</VirtualHost>
-
-
-# Nginx Custom TCP Log
-192.168.0.5 [05/Apr/2021:16:35:30 +0200] TCP 200 465 308 20.960 
-
-# Nginx Custom HTTP Log
-192.168.0.5 05/Apr/2021:13:32:15 +0200 "GET / HTTP/1.1" 200 192.168.0.3:80 1294 0.000 0.040 0.040
-
-log_format fmt '$remote_addr $time_local "$request" $status $upstream_addr $upstream_bytes_received $upstream_connect_time $upstream_header_time $upstream_response_time';
-
-log_format fmt '$remote_addr [$time_local] $protocol $status $bytes_sent $bytes_received $session_time';
-
-# HAProxy Log
-haproxy[2550]: 192.168.0.5:45152 [28/Mar/2021:18:07:58.798] web webservers/A 0/0/5/23/29 200 2862 - - ---- 9/9/8/8/0 0/0 "GET / HTTP/1.1"
-\end{lstlisting}
-
 
 \subsection{Zabbix}
 \begin{figure}[h!]
@@ -1052,6 +1123,41 @@ haproxy[2550]: 192.168.0.5:45152 [28/Mar/2021:18:07:58.798] web webservers/A 0/0
   		\includegraphics[width=\textwidth]{images/zabbix-macros.png}
 	\end{subfigure}
 \end{figure}
+
+\subsection{Logging}
+\footnote{\url{https://www.haproxy.com/blog/introduction-to-haproxy-logging/}}
+\footnote{\url{https://docs.nginx.com/nginx/admin-guide/monitoring/logging/}}
+\begin{lstlisting}[caption=Common Log Format]
+192.168.0.2 - - [05/Apr/2021 13:45:20 +0200] "GET / HTTP/1.1" 200 1254
+\end{lstlisting}
+
+\begin{lstlisting}[caption=Apache Custom Log Format]
+website.home:80 192.168.0.2 - - [05/Apr/2021 13:45:20.814 +0200] 
+    "GET / HTTP/1.1" 200 351 1254 "-" "Mozilla/5.0"
+
+LogFormat "%v:%p %h %l %u %{%d/%b/%Y %T}t.%{msec_frac}t %{%z}t 
+    %D \"%r\" %>s %I %O \"%{Referer}i\" \"%{User-Agent}i\"" custom
+
+<VirtualHost *:80>
+   DocumentRoot /var/www/html
+   CustomLog ${APACHE_LOG_DIR}/access.log custom
+</VirtualHost>
+\end{lstlisting}
+
+\begin{lstlisting}[caption=NGINX Custom TCP a HTTP Log]
+192.168.0.5 [05/Apr/2021:16:35:30 +0200] TCP 200 465 308 20.960 
+192.168.0.5 05/Apr/2021:13:32:15 +0200 "GET / HTTP/1.1" 200 192.168.0.3:80 1294 0.000 0.040 0.040
+
+log_format fmt '$remote_addr $time_local "$request" $status $upstream_addr $upstream_bytes_received $upstream_connect_time $upstream_header_time $upstream_response_time';
+log_format fmt '$remote_addr [$time_local] $protocol $status $bytes_sent $bytes_received $session_time';
+\end{lstlisting}
+
+\begin{lstlisting}[caption=HAProxy log]
+haproxy[2550]: 192.168.0.5:45152 [28/Mar/2021:18:07:58.798] 
+    web webservers/A 0/0/5/23/29 200 2862 - - ---- 9/9/8/8/0 0/0 "GET / HTTP/1.1"
+\end{lstlisting}
+
+
 
 \section{Simulácie útokov a záťažové testy}
 
@@ -1298,6 +1404,17 @@ sleep(10);
 	\end{subfigure}
 \end{figure}
 
+\subsubsection{HTTP hlavičky}
+% Zamedzenie zobrazenia http hlavičiek o infraštruktúre (CSIRT-checklist)
+\verb|server_tokens off;|
+\begin{lstlisting}
+<IfModule security2_module>
+    SecRuleEngine on
+    ServerTokens Min
+    SecServerSignature "PIB FIIT STU"
+</IfModule>
+\end{lstlisting}
+
 \section{Záver}
 % Pokrytie témy:
 	% analýza možností využitia loadbalancera (haproxy, nginx,...)
@@ -1307,7 +1424,7 @@ sleep(10);
 	% možnosti monitoringu loadbalancera (štatistiky, analýza logov, existencia rozšírení do monitorovacích 		systémov Zabbix)
 	% vykonanie záťažových testov(ab,...), vyhodnotenie nameraných hodnôt a efektu horizontálneho škálovania
 
-
+\newpage
 \printbibliography[title={Literatúra}]
 
 \end{document}

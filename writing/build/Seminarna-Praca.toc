@@ -59,33 +59,35 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {paragraph}{DNS load balancing}{18}{section*.13}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3}Porovnanie HAProxy a NGINX}{18}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.3}Reverzné proxy HAProxy a NGINX}{18}{subsection.3.3}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {3.3.1}Vyvažovanie záťaže}{19}{subsubsection.3.3.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.3.2}Ochrana proti DDoS}{19}{subsubsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.2}Ochrana proti DDoS}{21}{subsubsection.3.3.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4}Monitorovanie webovej aplikácie}{21}{section.4}%
+\contentsline {subsubsection}{\numberline {3.3.3}SSL Termination}{23}{subsubsection.3.3.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1}HTTP hlavičky}{21}{subsection.4.1}%
+\contentsline {section}{\numberline {4}Monitorovanie webovej aplikácie}{24}{section.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2}Metriky}{22}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.1}Zabbix}{24}{subsection.4.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3}Zabbix}{23}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.2}Logging}{24}{subsection.4.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5}Simulácie útokov a záťažové testy}{23}{section.5}%
+\contentsline {section}{\numberline {5}Simulácie útokov a záťažové testy}{26}{section.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.1}Sieť na experimenty}{23}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.1}Sieť na experimenty}{26}{subsection.5.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2}HPING na DoS útoky záplavou}{23}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.2}HPING na DoS útoky záplavou}{26}{subsection.5.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3}Analýza prevedenia DoS útoku záplavou}{23}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.3}Analýza prevedenia DoS útoku záplavou}{26}{subsection.5.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4}ApacheBench záťažové testy na load balancer}{25}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.4}ApacheBench záťažové testy na load balancer}{27}{subsection.5.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.5}Slowhttptest Slowloris útok na load balancer}{25}{subsection.5.5}%
+\contentsline {subsection}{\numberline {5.5}Slowhttptest Slowloris útok na load balancer}{27}{subsection.5.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6}Záver}{27}{section.6}%
+\contentsline {subsubsection}{\numberline {5.5.1}HTTP hlavičky}{29}{subsubsection.5.5.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6}Záver}{30}{section.6}%
 \babel@toc {slovak}{}
 \babel@toc {slovak}{}
 \babel@toc {slovak}{}
