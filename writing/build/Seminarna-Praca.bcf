@@ -2205,6 +2205,9 @@
     <bcf:citekey order="56">haproxy-stick-tables</bcf:citekey>
     <bcf:citekey order="57">nginx-rate-limiting</bcf:citekey>
     <bcf:citekey order="58">nginx-rate-limiting</bcf:citekey>
+    <bcf:citekey order="59">ssl-termination</bcf:citekey>
+    <bcf:citekey order="60">zabbix-monitoring</bcf:citekey>
+    <bcf:citekey order="61">common-log</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">

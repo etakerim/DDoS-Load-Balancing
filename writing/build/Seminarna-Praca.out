@@ -20,7 +20,7 @@
 \BOOKMARK [3][-]{subsubsection.3.3.2}{Ochrana proti DDoS}{subsection.3.3}% 20
 \BOOKMARK [3][-]{subsubsection.3.3.3}{SSL Termination}{subsection.3.3}% 21
 \BOOKMARK [1][-]{section.4}{Monitorovanie webovej aplik\341cie}{}% 22
-\BOOKMARK [2][-]{subsection.4.1}{Zabbix}{section.4}% 23
+\BOOKMARK [2][-]{subsection.4.1}{\227tatistiky v re\341lnom case}{section.4}% 23
 \BOOKMARK [2][-]{subsection.4.2}{Logging}{section.4}% 24
 \BOOKMARK [1][-]{section.5}{Simul\341cie \372tokov a z\341ta\236ov\351 testy}{}% 25
 \BOOKMARK [2][-]{subsection.5.1}{Siet na experimenty}{section.5}% 26
@@ -28,5 +28,4 @@
 \BOOKMARK [2][-]{subsection.5.3}{Anal\375za prevedenia DoS \372toku z\341plavou}{section.5}% 28
 \BOOKMARK [2][-]{subsection.5.4}{ApacheBench z\341ta\236ov\351 testy na load balancer}{section.5}% 29
 \BOOKMARK [2][-]{subsection.5.5}{Slowhttptest Slowloris \372tok na load balancer}{section.5}% 30
-\BOOKMARK [3][-]{subsubsection.5.5.1}{HTTP hlavicky}{subsection.5.5}% 31
-\BOOKMARK [1][-]{section.6}{Z\341ver}{}% 32
+\BOOKMARK [1][-]{section.6}{Z\341ver}{}% 31

@@ -760,6 +760,34 @@
       \field{title}{Rate Limiting with NGINX and NGINX Plus}
       \field{year}{2017}
     \endentry
+    \entry{ssl-termination}{misc}{}
+      \list{publisher}{1}{%
+        {HAProxy}%
+      }
+      \field{sortinit}{5}
+      \field{sortinithash}{5dd416adbafacc8226114bc0202d5fdd}
+      \field{labeltitlesource}{title}
+      \field{note}{\url{https://www.haproxy.com/documentation/aloha/12-5/deployment-guides/tls-infrastructure/}}
+      \field{title}{Infrastructure Layouts Involving TLS}
+      \field{year}{2021}
+    \endentry
+    \entry{zabbix-monitoring}{misc}{}
+      \field{sortinit}{6}
+      \field{sortinithash}{7851c86048328b027313775d8fbd2131}
+      \field{labeltitlesource}{title}
+      \field{note}{\url{https://www.zabbix.com/documentation/current/manual}}
+      \field{title}{Zabbix Manual}
+      \field{year}{2021}
+    \endentry
+    \entry{common-log}{misc}{}
+      \field{sortinit}{6}
+      \field{sortinithash}{7851c86048328b027313775d8fbd2131}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Apache}
+      \field{note}{\url{https://httpd.apache.org/docs/trunk/logs.html}}
+      \field{title}{Log Files}
+      \field{year}{2021}
+    \endentry
   \enddatalist
 \endrefsection
 \endinput

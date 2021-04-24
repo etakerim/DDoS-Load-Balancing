@@ -15,6 +15,8 @@
 \usepackage{subcaption}
 \usepackage{fancyvrb}
 \setstretch{1.25}
+\widowpenalty10000
+\clubpenalty10000
 \newsavebox\shield
 \renewcommand{\lstlistingname}{Kód}
 
@@ -885,7 +887,6 @@ upstream website {
 \end{lstlisting}
 \end{minipage}
 
-\newpage
 \subsubsection{Ochrana proti DDoS}
 Účinnou obranou proti škodlivo nadmernej sieťovej premávke, nielen voči útokom odoprenia služby, je 
 zúčtovanie počtu spojení, rýchlosti súsledných dopytov alebo podobné sledovanie vyhradenia proporcie
@@ -1006,14 +1007,12 @@ prehliadačov\footnote{\url{https://security.googleblog.com/2018/02/a-secure-web
 spôsobili rapídny rozmach HTTPS protokolu v posledných rokoch. Dešifrovanie na strane servera prináša však 
 so sebou zvýšenú záťaž na spracovanie požiadavky, preto reverzné proxy umožňujú popri symetrizácii záťaže
 SSL premávku dešifrovať pred dosiahnutím webového servera a zašifrovať spätnú odpoveď klientovi - 
-\emph{TLS Offloading}\footnote{
-\url{https://www.haproxy.com/documentation/aloha/12-5/deployment-guides/tls-infrastructure/}}, 
-čím je SSL spojenie ukončené už na proxy. Hlavnou výhodou z pohľadu administrácie je 
-centralizovaný a konzistentný manažment TLS konfigurácie a súvisiacich mechanizmov. Predovšetkým sa 
-zjednodušuje redistribúcia certifikátov, keďže nemusia byť rozšírené na všetky uzly farmy. Okrem ukončenia 
-SSL môže load balancer figurovať v režime \emph{TLS Bridging}, čiže správu k serveru opätovne zašifruje
-pre medzikontrolu. Z pozície \emph{TLS pass-through} nenaruší šifrovaný kanál, ale k vyvažovaniu záťaže
-musí dochádzať na transportnej vrstve.
+\emph{TLS Offloading} \cite{ssl-termination}, čím je SSL spojenie ukončené už na proxy. Hlavnou výhodou z 
+pohľadu administrácie je centralizovaný a konzistentný manažment TLS konfigurácie a súvisiacich mechanizmov. 
+Zjednodušuje sa predovšetkým redistribúcia certifikátov, keďže nemusia byť rozšírené na všetky uzly farmy. 
+Okrem ukončenia SSL môže load balancer figurovať v režime \emph{TLS bridging}, čiže správu k serveru 
+opätovne zašifruje po medzikontrole. Z pozície \emph{TLS pass-through} nenaruší šifrovaný kanál, ale k 
+vyvažovaniu záťaže musí dochádzať na transportnej vrstve.
 
 Certifikát verejného kľúča by sme na produkčnú prevádzku nadobudnúť od certifikačnej autority 
 (napr. Let's Encrypt). Na účely testovanie alebo na použitie v uzavretej komunite môžeme vytvoriť
@@ -1047,116 +1046,230 @@ server {
 \end{minipage}
 
 \section{Monitorovanie webovej aplikácie}
+Bezpečnostná politika ochrany pred útokmi odoprenia služby musí ideálne okrem prevencie
+konfiguráciou zariadení a serverov, schopnou ustať nápor požiadaviek ich rozložením v čase alebo
+zahadzovaním, zahrňovať aj reaktívne stratégie. Bez existencie monitorovacieho riešenia je
+takmer nemožné zabezpečiť vhodnú včasnú odpoveď na kybernetickú hrozbu alebo rýchlo odhaliť 
+závažné prevádzkové poruchy.
 
+\subsection{Štatistiky v reálnom čase}
+Obe porovnávané reverzné proxy na symetrizáciu záťaže, HAProxy a NGINX, disponujú modulmi, ktoré po 
+aktivovaní sprístupňujú pohľad na momentálnu a agregovanú sieťovú prevádzku prostredníctvom
+prehľadnej webstránky na nastaviteľnom URL koncovom bode. Cez ACL sa štandardne obmedzuje prístup
+k štatistikám iba vopred schváleným správcovským IP adresám alebo pre \emph{localhost}, odkiaľ
+sa údaje sprostredkujú ďalej.
 
 \noindent\begin{minipage}{.48\textwidth}
-\begin{lstlisting}
+\begin{lstlisting}[caption=HAProxy: štatistiky]
 frontend stats
     bind *:8404
     stats enable
     stats uri /stats
     stats refresh 10s
+    stats admin if LOCALHOST
 \end{lstlisting}
 \end{minipage}\hfill
 \begin{minipage}{.48\textwidth}
-\begin{lstlisting}
-location = /basic_status {
+\begin{lstlisting}[caption=NGINX: štatistiky]
+location = /stats  {
     stub_status; 
+    access_log off;
     allow 127.0.0.1;
     deny all;
 }
 \end{lstlisting}
 \end{minipage}
 
+HAProxy poskytuje pomerne súhrnný náhľad na aktivitu cez vstavanú palubnú dosku\footnote{
+\url{https://www.haproxy.com/blog/exploring-the-haproxy-stats-page/}}.
+Počítadlá sú rozdelené podľa rozhrania, respektíve pomenovaného bloku konfigurácie, pričom sa
+mierne odlišujú dostupné štatistiky pre \verb|frontend| a \verb|backend|. Zozbieravajú sa metriky ohľadom 
+tempa nadväzovania spojení, relácií a frekvencie obdržaných požiadaviek (\emph{Session rate}), a o 
+kumulatívnom množstve zahájených a nadviazaných relácii, či počte HTTP požiadaviek s ich rozčlením podľa 
+skupín stavových kódov (\emph{Sessions}). Okrem toho sa meria kvantita  prichádzajúcich a odchádzajúcich 
+bajtov (Bytes), počet odmietnutých požiadaviek alebo odpovedí zamedzením prístupu cez explicitné ACL 
+pravidlá (\emph{Denied}) a počet požiadaviek s chybovým výsledkom (\emph{Errors}). 
 
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{images/HAProxyStats.png}
+  \caption{HAProxy palubná doska prevádzkových štatistík}
+\end{figure}
+
+Sekcia \emph{Status} zhromažďuje rozvrhnutie a zdravia zaradených serverov, čiže terajší stav uzla, kedy 
+naposledy bol skontrolovaný a s akým výsledkom (\emph{LastChk}). Pre úplnosť sa dozvieme aplikované váhy 
+(\emph{Wght}), zaradenie medzi aktívne alebo záložné servery, počet neúspešných health checks (\emph{Chk}), 
+čas strávený vyradením z prevádzky (\emph{Dwntime}) a počet zmien stavu servera medzi \emph{up} a 
+\emph{down}. V časti Warnings pre \verb|backend| je odsledovateľný počet opakovaných pokusov o vybavenie 
+požiadavky a počet preplánovaní požiadavky po zlyhaní nadviazania spojenia so obslužným serverom, 
+ak boli také možnosť povolené. V stĺpci \emph{Queues} sa zobrazujú štatistiky o čakacích dobách požiadaviek 
+klientov, kým sa server sa uvoľní.
+
+NGINX, vo voľne prístupnej verzii, zobrazuje iba najzákladnejšie metriky o prijatých
+požiadavkách s modulom \emph{HTTP Stub Status}\footnote{
+\url{http://nginx.org/en/docs/http/ngx_http_stub_status_module.html}}. Dozvieme sa 
+aktuálny celkový počet otvorených spojení s klientmi a u koľkých z nich sú čítané hlavičky (\emph{reading}), 
+zapisované odpovede naspäť klientom (\emph{writing}), alebo ktoré spojenia nečinne čakajú na 
+požiadavky (\emph{waiting}). Zároveň sa akumuluje počet iniciovaných (\emph{requests}), akceptovaných 
+(\emph{accepted}) a vybavených (\emph{handled}) požiadaviek. Počas bezporuchovej prevádzky by si mal 
+zodpovedať počet prijatých a odbavených žiadostí:
+\newpage
+\begin{lstlisting}
+	Active Connections: 2
+	server accepts handled requests
+ 	 3 3 5
+	Reading: 0 Writing: 1 Waiting: 1
+\end{lstlisting}
+
+Pre webovú aplikáciu umiestnenú na webovom serveri \emph{Apache}, s ktorým môže vyvažovač záťaže nadväzovať
+spojenia, dokážeme získať detailné stavové informácie o rozložení požiadaviek medzi spracovateľské procesy a 
+zobraziť využitie systémových zdrojov. HTML stránka, generovaná modulom \verb|mod_status| pre akciu
+\verb|server-status|\footnote{\url{https://httpd.apache.org/docs/2.4/mod/mod_status.html}}, organizovane 
+poskytuje detaily o \emph{Worker} vláknach, konkrétne report početnosti podľa ich aktívnosti,
+typu spracúvanej úlohy naviazanej na príslušnú percentuálnu záťaž CPU. Modul dokáže zostaviť spriemerovaný 
+počet požiadaviek za sekundu a prechádzajúci prietok bajtov. Súčasne je dostupná varianta stavovej stránky 
+so strojovo-čitateľným zobrazím pre automatizovaný zber metrík. Prevedenie smerovania stavových informácií 
+na cestu \verb|/server-status|:
 \begin{lstlisting}
 <Location "/server-status">
     SetHandler server-status
     Require ip 127.0.0.1
 </Location>
 \end{lstlisting}
-
-\subsection{Zabbix}
-\begin{figure}[h!]
-	\centering
-	\begin{subfigure}[t]{.48\textwidth}
-  		\centering
-  		\includegraphics[width=\textwidth]{images/zabbix-host-config.png}
-	\end{subfigure}
-	\begin{subfigure}[t]{.48\textwidth}
-  		\centering
-  		\includegraphics[width=\textwidth]{images/zabbix-problems.png}
-	\end{subfigure}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=.7\textwidth]{images/Apache-Stats.png}
+  \caption{Stránka so stavovými metrikami webového servera Apache}
 \end{figure}
 
-\begin{figure}[h!]
+\paragraph{Monitorovacie riešenie Zabbix} umožňuje kolokáciu uvedených zozbieraných metrík z load balancera
+a webových serverov obohatenú o získané aktuálne prevádzkové vlastnosti prostredia uzlov v sieti
+a vyťaženie prostriedkov systému podľa priradených šablón. Obsahuje nástroje na organizáciu dát zo 
+sledovanej infraštruktúry, nepretržitú vizualizáciu zvolených veličín, za predpokladu dostupnosti 
+konkrétneho servera, a prispôsobiteľné úrovne varovania s výstrahami pre administrátorov cez emailové 
+notifikácie v prípade dosiahnutia nežiaducich alebo kritických hodnôt.
+\begin{figure}[h]
 	\centering
-	\begin{subfigure}[t]{.48\textwidth}
-  		\centering
-  		\includegraphics[width=\textwidth]{images/zabbix-dashboard.png}
-	\end{subfigure}
-	\begin{subfigure}[t]{.48\textwidth}
-  		\centering
-  		\includegraphics[width=\textwidth]{images/zabbix-eth.png}
-	\end{subfigure}
+  	\includegraphics[width=\textwidth]{images/zabbix-host-config.png}
+  	\caption{Webové rozhranie Zabbix servera so zoznamom monitorovaných zariadení}
 \end{figure}
 
-\begin{figure}[h!]
+Zabbix pozostáva z niekoľkých hlavných komponentov s podelenými zodpovednosťami \cite{zabbix-monitoring}.
+Centrálny prvok je zosobnený Zabbix serverom sústreďujúcim všetku konfiguráciu, štatistické a operatívne 
+dáta, ktoré si ukladá primárne do relačnej databázy MySQL alebo PostgreSQL\footnote{
+\url{https://www.zabbix.com/download}}. Súčasťou kompletného balíka je webové rozhranie pre priamočiary 
+prístup k nastaveniam a nameraným hodnotám a spravidla, ale nie nutne, sa nasadzuje na rovnaké fyzické 
+zariadenie ako Zabbix server. Na výber pre rozhranie sú webové servery Apache a NGINX. Zabbix server môže 
+byť pri zbere metrík podporený so Zabbix proxy pre zníženie náporu na rozsah zhromažďovacích dopytov. 
+
+Zabbix agenti sú nasadené na cieľové monitorované uzly, aby mohli efektívne sledovať prostriedky cez 
+systémové volania a odovzdávajú nameraný stav zdrojov Zabbix serveru alebo proxy podľa 
+\verb|zabbix_agent.conf|. Operácia dokáže prebiehať v dvoch odlišných režimoch: pri \emph{passive checks}
+si server periodicky sťahuje údajov z agentov. Náročnejšie na spracovanie sú \emph{active checks}, kedy
+si agent vypýta od servera zoznam sledovaných položiek a samostatne pravidelne posiela tieto údaje. Výmena 
+správ sa odohráva vo formáte JSON.
+
+Keď nastane potreba monitorovať veličinu dôležitú pre zabezpečenie fungovania služby, tak po nainštalovaní
+Zabbix servera s databázou a webovým rozhraním, nasadíme na záujmový hostiteľský systém Zabbix agent
+(medzi ďalšie možnosti patrí využitie protokolov a štandardov HTTP, SNMP, JMX, IMPI), kde pre pasívne 
+kontroly nastavíme adresu Zabbix servera. Na serveri pridáme vytvoríme nový \emph{Host} s ľubovoľným názvom, 
+ale presnou IP adresou  alebo doménovým menom agenta. V záložke \emph{Templates} podľa monitorovaného 
+softvérového balíka zvolíme zo širokej ponuky žiaducu šablónu podľa zamýšľaného módu zberu údajov. Na 
+korektné fungovanie skriptu šablóny je nutné nastaviť softvérový balík podľa pokynov v priloženej 
+dokumentácii k šablóne a v záložke \emph{Macros} upraviť nastavenia od nášho prípadu použitia. U HAProxy, 
+NGINX a Apache využíva Zabbix práve lokálne dostupnú URL pre štatistiky. Koncový uzol je nakoniec pridaný
+do zoznamu hostov a odteraz sa dostáva pod drobnohľadom jeho stav, ktorého výchylky sa zobrazujú
+v sekcii problémov.
+\begin{figure}[h]
+	\centering
+  	\includegraphics[width=\textwidth]{images/host-config.png}
+  	\caption{Základné nastavenia pri pridávaní nového hosta}
+\end{figure}
+
+\begin{figure}[h]
 	\centering
 	\begin{subfigure}[t]{\textwidth}
   		\centering
-  		\includegraphics[width=\textwidth]{images/zabbix-hosts.png}
+  		\includegraphics[width=0.9\textwidth]{images/zabbix-templates.png}
+  		\caption{Pridávanie šablón vybraných softvérových balíkov agentom}
 	\end{subfigure}
-	\vspace{0.5em}
 	\begin{subfigure}[t]{\textwidth}
   		\centering
-  		\includegraphics[width=\textwidth]{images/host-config.png}
+  		\includegraphics[width=0.9\textwidth]{images/zabbix-macros.png}
+  		\caption{Modifikácia hodnôt makier šablóny}
 	\end{subfigure}
-	\vspace{0.5em}
+	\caption{Postup pridávania nového hosta na monitorovanie}
+\end{figure}
+
+Skontrolovanie úspešnosti zhromaždenia hodnôt pre položky zo zariadenie môžeme uskutočniť na 
+podstránke \emph{Latest Data}, kde sa vyskytujú údaje pre všetky monitorované uzly
+z daného Zabbix servera zoskupené podľa použitých šablón. Zvolené metriky sa dajú prehľadne v 
+prispôsobiteľných grafoch na viacerých \emph{Dashboard} s meniteľným rozsahom zahrnutého
+historického vývoja.
+\begin{figure}[h]
+	\centering
+		\begin{subfigure}[t]{\textwidth}
+  		\centering
+  		\includegraphics[width=0.9\textwidth]{images/zabbix-eth-rpi2.png}
+	\end{subfigure}
+	\vspace{1em}
 	\begin{subfigure}[t]{\textwidth}
   		\centering
-  		\includegraphics[width=\textwidth]{images/zabbix-templates.png}
+  		\includegraphics[width=0.9\textwidth]{images/zabbix-dashboard.png}
 	\end{subfigure}
-	\vspace{0.5em}
-	\begin{subfigure}[t]{\textwidth}
-  		\centering
-  		\includegraphics[width=\textwidth]{images/zabbix-macros.png}
-	\end{subfigure}
+	\caption{Načítané a vizualizované metriky zozbierané od agentov}
 \end{figure}
 
 \subsection{Logging}
-\footnote{\url{https://www.haproxy.com/blog/introduction-to-haproxy-logging/}}
-\footnote{\url{https://docs.nginx.com/nginx/admin-guide/monitoring/logging/}}
-\begin{lstlisting}[caption=Common Log Format]
+Zaznamenávanie každej požiadavky webovému serveru s časovou pečiatkou a oddeliteľnými úrovňami závažnosti 
+je cennou pomôckou pri diagnostike problémov v prevádzke poskytovanej služby, na odhalenie bezpečných 
+prienikov, alebo na účely auditu. Ustálená textová podoba záznamov naprieč rozličnými webservermi 
+zjednodušuje ich analýzu a sumarizáciu existujúcimi všeobecne použiteľnými nástrojmi a posilňuje zachovanie 
+kompatibility pri softvérovej zmene v infraštruktúre. 
+
+Zaužívaným základným formátom logov je \textbf{Common Log Format}, vychádzajúci z prvých webových 
+serverov NCSA HTTPd, ktorého koncepty napomohol rozšíriť do povedomia Apache projekt. Záznam o prístupe
+(\emph{Access Log}) je uložený do súboru ako jeden riadok oddelený medzerami pozostávajúc zo siedmych
+atribútov: doménové meno alebo adresa klienta, identifikácia vzdialeného užívateľa podľa
+RFC 1413 - najčastejšie \enquote{-}, autentizované používateľské meno, dátum a čas požiadavky s časovou zónou 
+celé v hranatých zátvorkách, prvý riadok HTTP požiadavky v úvodzovkách, HTTP stavový kód odpovede, dĺžka tela 
+prenášaného dokumentu \cite{common-log}. 
+
+\begin{lstlisting}[caption=Ukážka záznamu v Common Log Format]
 192.168.0.2 - - [05/Apr/2021 13:45:20 +0200] "GET / HTTP/1.1" 200 1254
 \end{lstlisting}
 
-\begin{lstlisting}[caption=Apache Custom Log Format]
-website.home:80 192.168.0.2 - - [05/Apr/2021 13:45:20.814 +0200] 
-    "GET / HTTP/1.1" 200 351 1254 "-" "Mozilla/5.0"
+Štruktúra záznamov sa zvykne podľa potreby rozširovať vlastnými definíciami cez formátovacie špecifikátory
+a premenné poskytované v implementácii webového servera. Bežne sa Common Log zvykne dopĺňať o pole 
+\emph{Referer}, čiže stránku, z ktorej klient hlási, že bol odkázaný; \emph{User agent} predstavuje webový 
+prehliadač a platformu návštevníka webstránky a na koniec sa pridávajú v úvodzovkách \emph{Cookies} vo forme 
+kľúč = hodnota oddelené bodkočiarkami. Takto rozšírený formát sa nazýva \textbf{Combined Log Format}.
 
-LogFormat "%v:%p %h %l %u %{%d/%b/%Y %T}t.%{msec_frac}t %{%z}t 
-    %D \"%r\" %>s %I %O \"%{Referer}i\" \"%{User-Agent}i\"" custom
-
-<VirtualHost *:80>
-   DocumentRoot /var/www/html
-   CustomLog ${APACHE_LOG_DIR}/access.log custom
-</VirtualHost>
+\begin{lstlisting}[caption=Vlastný formát pre access log na webovom serveri Apache, basicstyle=\ttfamily\scriptsize]
+LogFormat "%h %l %u %t \"%r\" %>s %I %O \"%{Referer}i\" \"%{User-Agent}i\"" custom
+CustomLog ${APACHE_LOG_DIR}/access.log custom
 \end{lstlisting}
 
-\begin{lstlisting}[caption=NGINX Custom TCP a HTTP Log]
+Ohľadom load balancerov nás zaujíma presné časovanie požiadavky a delenie záťaže medzi webové servery. 
+
+
+\begin{lstlisting}[caption=NGINX vlastný TCP a HTTP Log, basicstyle=\ttfamily\scriptsize]
+log_format fmt '$remote_addr [$time_local] $protocol $status $bytes_sent $bytes_received $session_time';
 192.168.0.5 [05/Apr/2021:16:35:30 +0200] TCP 200 465 308 20.960 
-192.168.0.5 05/Apr/2021:13:32:15 +0200 "GET / HTTP/1.1" 200 192.168.0.3:80 1294 0.000 0.040 0.040
 
 log_format fmt '$remote_addr $time_local "$request" $status $upstream_addr $upstream_bytes_received $upstream_connect_time $upstream_header_time $upstream_response_time';
-log_format fmt '$remote_addr [$time_local] $protocol $status $bytes_sent $bytes_received $session_time';
+192.168.0.5 05/Apr/2021:13:32:15 +0200 "GET / HTTP/1.1" 200 192.168.0.3:80 1294 0.000 0.040 0.040
+
+access_log /var/log/nginx/access.log fmt;
 \end{lstlisting}
+
+\footnote{\url{https://www.haproxy.com/blog/introduction-to-haproxy-logging/}}
+\footnote{\url{https://docs.nginx.com/nginx/admin-guide/monitoring/logging/}}
 
 \begin{lstlisting}[caption=HAProxy log]
 haproxy[2550]: 192.168.0.5:45152 [28/Mar/2021:18:07:58.798] 
     web webservers/A 0/0/5/23/29 200 2862 - - ---- 9/9/8/8/0 0/0 "GET / HTTP/1.1"
 \end{lstlisting}
-
 
 
 \section{Simulácie útokov a záťažové testy}
@@ -1404,16 +1517,6 @@ sleep(10);
 	\end{subfigure}
 \end{figure}
 
-\subsubsection{HTTP hlavičky}
-% Zamedzenie zobrazenia http hlavičiek o infraštruktúre (CSIRT-checklist)
-\verb|server_tokens off;|
-\begin{lstlisting}
-<IfModule security2_module>
-    SecRuleEngine on
-    ServerTokens Min
-    SecServerSignature "PIB FIIT STU"
-</IfModule>
-\end{lstlisting}
 
 \section{Záver}
 % Pokrytie témy:
@@ -1425,6 +1528,7 @@ sleep(10);
 	% vykonanie záťažových testov(ab,...), vyhodnotenie nameraných hodnôt a efektu horizontálneho škálovania
 
 \newpage
+\pagenumbering{gobble}
 \printbibliography[title={Literatúra}]
 
 \end{document}

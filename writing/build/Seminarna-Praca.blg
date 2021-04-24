@@ -1,18 +1,18 @@
 [0] Config.pm:312> INFO - This is Biber 2.15
-[1] Config.pm:315> INFO - Logfile is 'build/Seminarna-Praca.blg'
-[132] biber:330> INFO - === Ne apr 18, 2021, 13:15:00
-[152] Biber.pm:415> INFO - Reading 'build/Seminarna-Praca.bcf'
-[251] Biber.pm:952> INFO - Found 29 citekeys in bib section 0
-[363] Biber.pm:4334> INFO - Processing section 0
-[387] Biber.pm:4523> INFO - Looking for bibtex format file 'references.bib' for section 0
-[391] bibtex.pm:1682> INFO - LaTeX decoding ...
-[511] bibtex.pm:1494> INFO - Found BibTeX data source 'references.bib'
-[662] Utils.pm:395> WARN - month field 'August' in entry 'RFC5635' is not an integer - this will probably not sort properly.
-[697] Utils.pm:395> WARN - month field 'November' in entry 'RFC2991' is not an integer - this will probably not sort properly.
-[717] Utils.pm:395> WARN - month field 'April' in entry 'RFC2338' is not an integer - this will probably not sort properly.
-[766] UCollate.pm:68> INFO - Overriding locale 'sk-SK' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[843] UCollate.pm:68> INFO - Overriding locale 'sk-SK' defaults 'variable = shifted' with 'variable = non-ignorable'
-[843] Biber.pm:4162> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'sk-SK'
-[876] bbl.pm:651> INFO - Writing 'build/Seminarna-Praca.bbl' with encoding 'UTF-8'
-[894] bbl.pm:754> INFO - Output to build/Seminarna-Praca.bbl
-[990] Biber.pm:128> INFO - WARNINGS: 3
+[0] Config.pm:315> INFO - Logfile is 'build/Seminarna-Praca.blg'
+[66] biber:330> INFO - === Ne apr 25, 2021, 00:20:52
+[79] Biber.pm:415> INFO - Reading 'build/Seminarna-Praca.bcf'
+[137] Biber.pm:952> INFO - Found 32 citekeys in bib section 0
+[150] Biber.pm:4334> INFO - Processing section 0
+[160] Biber.pm:4523> INFO - Looking for bibtex format file 'references.bib' for section 0
+[162] bibtex.pm:1682> INFO - LaTeX decoding ...
+[209] bibtex.pm:1494> INFO - Found BibTeX data source 'references.bib'
+[299] Utils.pm:395> WARN - month field 'August' in entry 'RFC5635' is not an integer - this will probably not sort properly.
+[322] Utils.pm:395> WARN - month field 'November' in entry 'RFC2991' is not an integer - this will probably not sort properly.
+[335] Utils.pm:395> WARN - month field 'April' in entry 'RFC2338' is not an integer - this will probably not sort properly.
+[369] UCollate.pm:68> INFO - Overriding locale 'sk-SK' defaults 'variable = shifted' with 'variable = non-ignorable'
+[369] UCollate.pm:68> INFO - Overriding locale 'sk-SK' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[369] Biber.pm:4162> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'sk-SK'
+[386] bbl.pm:651> INFO - Writing 'build/Seminarna-Praca.bbl' with encoding 'UTF-8'
+[397] bbl.pm:754> INFO - Output to build/Seminarna-Praca.bbl
+[397] Biber.pm:128> INFO - WARNINGS: 3
