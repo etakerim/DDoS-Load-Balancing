@@ -788,6 +788,29 @@
       \field{title}{Log Files}
       \field{year}{2021}
     \endentry
+    \entry{haproxy-logging}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=dacdd0926f0cfa631423ef33adf7aa75}{%
+           family={Mhedhbi},
+           familyi={M\bibinitperiod},
+           given={Moemen},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{dacdd0926f0cfa631423ef33adf7aa75}
+      \strng{fullhash}{dacdd0926f0cfa631423ef33adf7aa75}
+      \strng{bibnamehash}{dacdd0926f0cfa631423ef33adf7aa75}
+      \strng{authorbibnamehash}{dacdd0926f0cfa631423ef33adf7aa75}
+      \strng{authornamehash}{dacdd0926f0cfa631423ef33adf7aa75}
+      \strng{authorfullhash}{dacdd0926f0cfa631423ef33adf7aa75}
+      \field{sortinit}{6}
+      \field{sortinithash}{7851c86048328b027313775d8fbd2131}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{HAProxy Blog}
+      \field{note}{\url{https://www.haproxy.com/blog/introduction-to-haproxy-logging/}}
+      \field{title}{Introduction to HAProxy Logging}
+      \field{year}{2019}
+    \endentry
   \enddatalist
 \endrefsection
 \endinput

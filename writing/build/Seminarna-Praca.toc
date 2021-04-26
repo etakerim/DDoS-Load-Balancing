@@ -13,81 +13,83 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.2}Dôvody viktimizácie prevádzkovateľov}{2}{subsection.1.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {1.2.1}Teória rutinných aktivít}{3}{subsubsection.1.2.1}%
+\contentsline {subsubsection}{\numberline {1.2.1}Teória rutinných aktivít}{4}{subsubsection.1.2.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {1.2.2}Psychologická predeterminácia útočníka}{4}{subsubsection.1.2.2}%
+\contentsline {subsubsection}{\numberline {1.2.2}Psychologická predeterminácia útočníka}{5}{subsubsection.1.2.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2}Anatómia útokov Denial of Service}{5}{section.2}%
+\contentsline {section}{\numberline {2}Anatómia útokov Denial of Service}{6}{section.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.1}Botnet}{6}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.1}Botnet}{7}{subsection.2.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.1.1}Komunikácia s botmi}{6}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}Komunikácia s botmi}{7}{subsubsection.2.1.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.1.2}Šírenie replikáciou škodlivého kódu}{7}{subsubsection.2.1.2}%
+\contentsline {subsubsection}{\numberline {2.1.2}Šírenie replikáciou škodlivého kódu}{8}{subsubsection.2.1.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2}Klasifikácia typov DDoS útokov}{8}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.2}Klasifikácia typov DDoS útokov}{9}{subsection.2.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3}Ochrana spevnením sieťovej ochrany}{11}{subsection.2.3}%
+\contentsline {paragraph}{Volumetrické útoky}{10}{section*.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.3.1}Remotely Triggered Black Hole}{11}{subsubsection.2.3.1}%
+\contentsline {paragraph}{Protokolové útoky}{10}{section*.6}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.3.2}IP Spoofing}{12}{subsubsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3}Ochrana spevnením sieťovej ochrany}{13}{subsection.2.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.3.3}Linux Netfilter}{13}{subsubsection.2.3.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Remotely Triggered Black Hole}{13}{subsubsection.2.3.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3}Škálovanie webových aplikácií}{13}{section.3}%
+\contentsline {subsubsection}{\numberline {2.3.2}IP Spoofing}{14}{subsubsection.2.3.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1}Algoritmy vyvažovania záťaže}{14}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.3}Linux Netfilter}{15}{subsubsection.2.3.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Round-Robin}{14}{section*.5}%
+\contentsline {section}{\numberline {3}Škálovanie webových aplikácií}{16}{section.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Least Connections}{15}{section*.6}%
+\contentsline {subsection}{\numberline {3.1}Algoritmy vyvažovania záťaže}{16}{subsection.3.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Least Time}{15}{section*.7}%
+\contentsline {paragraph}{Round-Robin}{17}{section*.7}%
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Random}{15}{section*.8}%
+\contentsline {paragraph}{Least Connections}{17}{section*.8}%
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Hashing}{15}{section*.9}%
+\contentsline {paragraph}{Least Time}{17}{section*.9}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2}Redundancia nižších vrstiev RM OSI}{16}{subsection.3.2}%
+\contentsline {paragraph}{Random}{18}{section*.10}%
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Agregácia liniek}{16}{section*.10}%
+\contentsline {paragraph}{Hashing}{18}{section*.11}%
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Viaccestné smerovanie}{16}{section*.11}%
+\contentsline {subsection}{\numberline {3.2}Redundancia nižších vrstiev RM OSI}{19}{subsection.3.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Virtuálny smerovač}{17}{section*.12}%
+\contentsline {paragraph}{Agregácia liniek}{19}{section*.13}%
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{DNS load balancing}{18}{section*.13}%
+\contentsline {paragraph}{Viaccestné smerovanie}{19}{section*.14}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3}Reverzné proxy HAProxy a NGINX}{18}{subsection.3.3}%
+\contentsline {paragraph}{Virtuálny smerovač}{20}{section*.15}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.3.1}Vyvažovanie záťaže}{19}{subsubsection.3.3.1}%
+\contentsline {paragraph}{Virtual Router Redundancy Protocol}{21}{section*.16}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.3.2}Ochrana proti DDoS}{21}{subsubsection.3.3.2}%
+\contentsline {paragraph}{DNS load balancing}{21}{section*.17}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.3.3}SSL Termination}{23}{subsubsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3}Reverzné proxy HAProxy a NGINX}{22}{subsection.3.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4}Monitorovanie webovej aplikácie}{24}{section.4}%
+\contentsline {subsubsection}{\numberline {3.3.1}Vyvažovanie záťaže}{23}{subsubsection.3.3.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1}Štatistiky v reálnom čase}{24}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}Ochrana proti DDoS}{25}{subsubsection.3.3.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Monitorovacie riešenie Zabbix}{26}{section*.16}%
+\contentsline {subsubsection}{\numberline {3.3.3}SSL Termination}{27}{subsubsection.3.3.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2}Logging}{29}{subsection.4.2}%
+\contentsline {section}{\numberline {4}Monitorovanie webovej aplikácie}{28}{section.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5}Simulácie útokov a záťažové testy}{30}{section.5}%
+\contentsline {subsection}{\numberline {4.1}Štatistiky v reálnom čase}{28}{subsection.4.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.1}Sieť na experimenty}{30}{subsection.5.1}%
+\contentsline {paragraph}{Monitorovacie riešenie Zabbix}{30}{section*.20}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2}HPING na DoS útoky záplavou}{30}{subsection.5.2}%
+\contentsline {subsection}{\numberline {4.2}Logging}{33}{subsection.4.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3}Analýza prevedenia DoS útoku záplavou}{31}{subsection.5.3}%
+\contentsline {section}{\numberline {5}Simulácie útokov a záťažové testy}{35}{section.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4}ApacheBench záťažové testy na load balancer}{32}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.1}Analýza prevedenia DoS útokov}{37}{subsection.5.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.5}Slowhttptest Slowloris útok na load balancer}{32}{subsection.5.5}%
+\contentsline {subsection}{\numberline {5.2}Slowhttptest Slowloris útok}{41}{subsection.5.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6}Záver}{32}{section.6}%
+\contentsline {subsection}{\numberline {5.3}ApacheBench záťažové testy}{43}{subsection.5.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6}Záver}{45}{section.6}%
 \babel@toc {slovak}{}
 \babel@toc {slovak}{}
 \babel@toc {slovak}{}

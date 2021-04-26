@@ -23,9 +23,7 @@
 \BOOKMARK [2][-]{subsection.4.1}{\227tatistiky v re\341lnom case}{section.4}% 23
 \BOOKMARK [2][-]{subsection.4.2}{Logging}{section.4}% 24
 \BOOKMARK [1][-]{section.5}{Simul\341cie \372tokov a z\341ta\236ov\351 testy}{}% 25
-\BOOKMARK [2][-]{subsection.5.1}{Siet na experimenty}{section.5}% 26
-\BOOKMARK [2][-]{subsection.5.2}{HPING na DoS \372toky z\341plavou}{section.5}% 27
-\BOOKMARK [2][-]{subsection.5.3}{Anal\375za prevedenia DoS \372toku z\341plavou}{section.5}% 28
-\BOOKMARK [2][-]{subsection.5.4}{ApacheBench z\341ta\236ov\351 testy na load balancer}{section.5}% 29
-\BOOKMARK [2][-]{subsection.5.5}{Slowhttptest Slowloris \372tok na load balancer}{section.5}% 30
-\BOOKMARK [1][-]{section.6}{Z\341ver}{}% 31
+\BOOKMARK [2][-]{subsection.5.1}{Anal\375za prevedenia DoS \372tokov}{section.5}% 26
+\BOOKMARK [2][-]{subsection.5.2}{Slowhttptest Slowloris \372tok}{section.5}% 27
+\BOOKMARK [2][-]{subsection.5.3}{ApacheBench z\341ta\236ov\351 testy}{section.5}% 28
+\BOOKMARK [1][-]{section.6}{Z\341ver}{}% 29

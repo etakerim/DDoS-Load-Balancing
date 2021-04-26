@@ -35,27 +35,32 @@
 
 \geometry{
 	a4paper,
-	margin=2.5cm,
-	top=2.5cm,
-	bottom=2.5cm
+	top=2cm,
+	bottom=2.5cm,
+	left=3cm,
+    right=2cm
 }
 
 \begin{document}
 \begin{titlepage}
     \hspace{0pt}
     \centering
+    \large SLOVENSKÁ TECHNICKÁ UNIVERZITA V BRATISLAVE \\
+    \large FAKULTA INFORMATIKY A INFORMAČNÝCH TECHNOLÓGIÍ
+    \noindent\rule{\textwidth}{1pt}
     \vfill
-    \large Princípy informačnej bezpečnosti \\
-    \vspace{0.4cm}
+    \Large \textbf{Zvýšenie odolnosti webových aplikácií proti útokom typu DDoS, za pomoci horizontálneho  škálovania}\\
     \vspace{1cm}
-    \large \textbf{Zvýšenie odolnosti webových aplikácií proti útokom typu DDoS, 
-          \\za pomoci horizontálneho škálovania  \\}
-    \vspace{2.5cm}
-    \normalsize Miroslav Hájek \\[0.2cm]
-	Akademický rok: 2020 / 2021 \\[0.1cm]
-	Fakulta informatiky a informačných technológií, \\
-	Slovenská technická univerzita v Bratislave
+    \large \textbf{Správa z riešenia projektu}
     \vfill
+    \normalsize
+    \begin{flushleft}
+    \textbf{Predmet:}\quad Princípy informačnej bezpečnosti \\
+    \textbf{Vyučujúci:}\quad Ing. Michal Valiček \\
+    \textbf{Vypracoval:}\quad Miroslav Hájek \\
+	\textbf{Akademický rok:}\quad 2020 / 2021 \\
+	\textbf{Semester:}\quad Letný
+	\end{flushleft}
 \end{titlepage}
 
 
@@ -64,6 +69,7 @@
 \newpage
 \pagenumbering{arabic}
 \setcounter{page}{1}
+\setstretch{1.5}
 
 \section{Dostupnosť ako bezpečnostný atribút}
 Zabezpečenie nepretržitého prístupu k webovým službám je očakávanou a takmer nevyhnutnou požiadavkou pre 
@@ -361,7 +367,7 @@ Základné rozdelenie DDoS útokov spočíva v identifikácii ich primárneho ve
 býva zneprístupnená, buď vyčerpaním šírky prenosového pásma hrubou silou záplavy paketov, alebo
 vyplytvaním systémových prostriedkov sémantickým útokom na komunikačný protokol.
 
-\textbf{Volumetrické útoky} (veľkoobjemové útoky) saturujú kapacitu linky rozmanitou plejádou nálože. 
+\paragraph{Volumetrické útoky} (veľkoobjemové útoky) saturujú kapacitu linky rozmanitou plejádou nálože. 
 Spoločným menovateľom je technika flooding (záplava). Populárnou formou útoku je posielanie UDP datagramov 
 na náhodné porty s úmyslom zapríčiniť overovanie, či sú porty otvorené a spôsobiť reakciu 
 servera signalizačnými správami ICMP Destination port unreachable. So snahou donútiť systém, aby sa venoval 
@@ -373,7 +379,7 @@ neexistujúcu cestu okamžite vráti stavový kód rádu 400 pre  chybu klienta,
 musieť zaoberať spracovaním takejto požiadavky, len sa stáva jednoduchšie pozorovateľnou z prístupových 
 logov. 
 
-\textbf{Protokolové útoky} sa priživujú na zraniteľnosti v návrhu komunikačného protokolu na transportnej
+\paragraph{Protokolové útoky} sa priživujú na zraniteľnosti v návrhu komunikačného protokolu na transportnej
 až aplikačnej vrstve OSI, ktoré spoliehajú na priebežné ukladanie stavových informácii o naviazaných
 reláciach. Rozšírené sú taktiky na zneužitie časovačov stavového automatu protokolu TCP a príznakov v TCP 
 segmentoch, ktorými sa odosielateľ a prijímateľ dohadujú na priebehu výmeny správ. 
@@ -531,7 +537,7 @@ cez ľubovoľné rozhranie smerovača:
 ip verify unicast reverse-path list           # Strict mode
 ip verify unicast source reachable-via any    # Loose mode
 \end{lstlisting}
-Naproti bežnej predstavy prevláda snaha o zúžitkovanie validných zdrojových adries agentov útočníka,
+Naproti utkvelej predstave prevláda snaha o zúžitkovanie validných zdrojových adries agentov útočníka,
 tam kde je to uskutočniteľné \cite{ddos-anatomy-2004}.
 
 \subsubsection{Linux Netfilter}
@@ -553,12 +559,13 @@ Z bezpečnostného hľadiska sa tiež odporúča ponechať pravidlá firewallu n
 smerom dnu. Ak webová aplikácia beží na porte HTTPS/443 a 
 administrácia vstupuje na server cez SSH/22 zo stáleho rozsahu adries intranetu, môže jednoduchá 
 konfigurácia firewallu vyzerať nasledovne \cite{csirt-hardening}:
-\begin{lstlisting}
-# Pravidlá pre povolenie prichádzajúcej komunikácie cez SSH, HTTPS
+\begin{lstlisting}[caption=Pravidlá pre povolenie prichádzajúcej komunikácie cez SSH a HTTPS]
 iptables --append INPUT --protocol tcp --dport 443 --jump ACCEPT
 iptables --append INPUT --protocol tcp --dport 22 \ 
          --source 192.168.0.0/24 --jump ACCEPT
-# Politiky reťazí pravidiel sú zahodiť všetko okrem odchádzajúcich paketov
+\end{lstlisting}
+
+\begin{lstlisting}[caption=Politiky reťazí pravidiel sú zahodiť všetko okrem odchádzajúcich paketov]
 iptables --policy INPUT DROP
 iptables --policy FORWARD DROP
 iptables --policy OUTPUT ACCEPT
@@ -639,8 +646,27 @@ zahašovaním zdrojovej IP adresy sa klientovi dostáva odpovede zakaždým od r
 prevádzke, čiže dokáže byť uchovaná perzistencia HTTP relácie s cookies. Tento prístup sa nazýva
 best-effort \emph{sticky session} \cite{haproxy-docs}, pretože sa klient akoby \enquote{prilepí} na server
 z farmy a pokiaľ je to možné výhradne s ním komunikuje. Na druhej strane sa dá uplatniť hašovanie podľa 
-URI cieľa požiadavky alebo iného atribútu s dostatočnou variabilitou. Závisí od ponuky konkrétneho 
-nasadeného riešenia.
+URI cieľa požiadavky alebo iného atribútu s dostatočnou variabilitou.
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}[t]{\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/udp-flood.png}
+  		\caption{UDP záplava}
+	\end{subfigure}
+	\begin{subfigure}[t]{\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/icmp-ping.png}
+  		\caption{ICMP záplava}
+	\end{subfigure}
+	\begin{subfigure}[t]{\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/tcp-syn.png}
+  		\caption{TCP SYN záplava}
+	\end{subfigure}
+	\caption{Priebeh toku paketov záplavových DoS útokov z pcap záznamu vo Wireshark}
+\end{figure}
 
 \subsection{Redundancia nižších vrstiev RM OSI}
 Odolnosť sieťovej infraštruktúry proti poruchám a výpadkom aktívnych sieťových prvkov, s vedľajším
@@ -691,7 +717,7 @@ porovnania hašu identifikátoru toku s hranicami oblasti je zvolený next-hop. 
 štvrtine až polovici tokov. \emph{Highest Random Weight} počíta hash zakaždým zároveň z hlavičky paketu a
 kľúča pre next-hop. Zvolí sa ďalší skok s najvyšším výsledným číslom. Za väčšej časovej náročnosti
 sa mení pri pridaní alebo odobratí cesty, smer už len $1/N$ tokov. Cisco router využívajúci na smerovanie
-OSPFv2 uplatní ECMP jednoduchým nastavením\footnote{\url{https://www.techrepublic.com/article/how-to-configure-equal-cost-multi-path-in-ospf/}}:
+protokol OSPFv2 uplatní ECMP jednoduchým nastavením\footnote{\url{https://www.techrepublic.com/article/how-to-configure-equal-cost-multi-path-in-ospf/}}:
 \begin{lstlisting}
 router ospf 1
 maximum-paths 2
@@ -711,7 +737,7 @@ sa neplytvá žiadnymi zdrojmi a záloha je operatívna (Active) zároveň s pri
 Kontinuálna dostupnosť zachádza ešte ďalej so snahou zamaskovať akékoľvek časové prestoje spojené s 
 poruchou, či už zámernou krátkodobou vznikajúcou pri údržbe alebo vážnejšou zapríčinenou útokom.
 
-\emph{Virtual Router Redundancy Protocol} (VRRP) umožňuje súhru viacerých uzlov pôsobiacich ako VRRP 
+\paragraph{Virtual Router Redundancy Protocol} (VRRP) umožňuje súhru viacerých uzlov pôsobiacich ako VRRP 
 smerovače tvoriace jeden virtuálny router. Spoločne si volia zariadenie zodpovedné za zdieľanú vysoko 
 dostupnú IP adresu. Zariadenie vrámci klastera v roli master má najvyššiu prioritu a v pravidelných 
 intervaloch (najčastejšie 1 - 5 sekúnd) vysiela obežníkové správy \emph{VRRP Advertisiment} na multicastovú 
@@ -785,7 +811,7 @@ spracovanie HTTP(S) požiadaviek. Rozhranie pre pripájanie klientov tvoria virt
  
 \subsubsection{Vyvažovanie záťaže}
 V konfiguračných súboroch oboch softvérových balíkov je najprv nutné nastaviť mód prevádzky na L7, 
-respektíve L4 load balancing, pre HAProxy s \verb|mode http|, respektíve \verb|mode tcp|, na NGINX 
+respektíve L4 load balancing, pre HAProxy s \verb|mode http|, respektíve \verb|mode tcp| na NGINX, 
 umiestnením serverov do kontextu \verb|http {}|, resp. \verb|stream {}|. V prevádzke sa nezaobídeme bez 
 schopnosti \emph{logging}, ktorá nám umožní vyhodnocovať stav load balancera v reálnom čase a zároveň 
 záznamy pre spätnú analýzu odohraných javov po incidente. 
@@ -1113,7 +1139,7 @@ zapisované odpovede naspäť klientom (\emph{writing}), alebo ktoré spojenia n
 požiadavky (\emph{waiting}). Zároveň sa akumuluje počet iniciovaných (\emph{requests}), akceptovaných 
 (\emph{accepted}) a vybavených (\emph{handled}) požiadaviek. Počas bezporuchovej prevádzky by si mal 
 zodpovedať počet prijatých a odbavených žiadostí:
-\newpage
+
 \begin{lstlisting}
 	Active Connections: 2
 	server accepts handled requests
@@ -1156,8 +1182,8 @@ notifikácie v prípade dosiahnutia nežiaducich alebo kritických hodnôt.
 
 Zabbix pozostáva z niekoľkých hlavných komponentov s podelenými zodpovednosťami \cite{zabbix-monitoring}.
 Centrálny prvok je zosobnený Zabbix serverom sústreďujúcim všetku konfiguráciu, štatistické a operatívne 
-dáta, ktoré si ukladá primárne do relačnej databázy MySQL alebo PostgreSQL\footnote{
-\url{https://www.zabbix.com/download}}. Súčasťou kompletného balíka je webové rozhranie pre priamočiary 
+dáta, ktoré si ukladá primárne do relačnej databázy MySQL alebo PostgreSQL. 
+Súčasťou kompletného balíka je webové rozhranie pre priamočiary 
 prístup k nastaveniam a nameraným hodnotám a spravidla, ale nie nutne, sa nasadzuje na rovnaké fyzické 
 zariadenie ako Zabbix server. Na výber pre rozhranie sú webové servery Apache a NGINX. Zabbix server môže 
 byť pri zbere metrík podporený so Zabbix proxy pre zníženie náporu na rozsah zhromažďovacích dopytov. 
@@ -1190,12 +1216,12 @@ v sekcii problémov.
 	\centering
 	\begin{subfigure}[t]{\textwidth}
   		\centering
-  		\includegraphics[width=0.9\textwidth]{images/zabbix-templates.png}
+  		\includegraphics[width=\textwidth]{images/zabbix-templates.png}
   		\caption{Pridávanie šablón vybraných softvérových balíkov agentom}
 	\end{subfigure}
 	\begin{subfigure}[t]{\textwidth}
   		\centering
-  		\includegraphics[width=0.9\textwidth]{images/zabbix-macros.png}
+  		\includegraphics[width=\textwidth]{images/zabbix-macros.png}
   		\caption{Modifikácia hodnôt makier šablóny}
 	\end{subfigure}
 	\caption{Postup pridávania nového hosta na monitorovanie}
@@ -1210,31 +1236,31 @@ historického vývoja.
 	\centering
 		\begin{subfigure}[t]{\textwidth}
   		\centering
-  		\includegraphics[width=0.9\textwidth]{images/zabbix-eth-rpi2.png}
+  		\includegraphics[width=\textwidth]{images/zabbix-eth-rpi2.png}
 	\end{subfigure}
 	\vspace{1em}
 	\begin{subfigure}[t]{\textwidth}
   		\centering
-  		\includegraphics[width=0.9\textwidth]{images/zabbix-dashboard.png}
+  		\includegraphics[width=\textwidth]{images/zabbix-dashboard.png}
 	\end{subfigure}
 	\caption{Načítané a vizualizované metriky zozbierané od agentov}
 \end{figure}
 
 \subsection{Logging}
-Zaznamenávanie každej požiadavky webovému serveru s časovou pečiatkou a oddeliteľnými úrovňami závažnosti 
-je cennou pomôckou pri diagnostike problémov v prevádzke poskytovanej služby, na odhalenie bezpečných 
-prienikov, alebo na účely auditu. Ustálená textová podoba záznamov naprieč rozličnými webservermi 
+Zaznamenávanie každej požiadavky webovému serveru s časovou pečiatkou je cennou pomôckou pri diagnostike 
+problémov v prevádzke poskytovanej služby, na odhalenie bezpečných prienikov, alebo na účely auditu. 
+Podrobnosť výpisov sa obmedzuje najmenšou úrovňou závažnosti, ktorú je žiaduce zapísať. Základné stupne
+sú \emph{debug, info, warning, error}. Ustálená textová podoba záznamov naprieč rozličnými webservermi 
 zjednodušuje ich analýzu a sumarizáciu existujúcimi všeobecne použiteľnými nástrojmi a posilňuje zachovanie 
 kompatibility pri softvérovej zmene v infraštruktúre. 
 
-Zaužívaným základným formátom logov je \textbf{Common Log Format}, vychádzajúci z prvých webových 
+Zaužívaným východzím formátom logov je \textbf{Common Log Format}, uplatňujúci sa už u prvých webových 
 serverov NCSA HTTPd, ktorého koncepty napomohol rozšíriť do povedomia Apache projekt. Záznam o prístupe
-(\emph{Access Log}) je uložený do súboru ako jeden riadok oddelený medzerami pozostávajúc zo siedmych
+(\emph{Access Log}) je uložený v súbore ako jeden riadok oddelený medzerami pozostávajúc zo siedmych
 atribútov: doménové meno alebo adresa klienta, identifikácia vzdialeného užívateľa podľa
 RFC 1413 - najčastejšie \enquote{-}, autentizované používateľské meno, dátum a čas požiadavky s časovou zónou 
 celé v hranatých zátvorkách, prvý riadok HTTP požiadavky v úvodzovkách, HTTP stavový kód odpovede, dĺžka tela 
-prenášaného dokumentu \cite{common-log}. 
-
+prenášaného dokumentu \cite{common-log}.
 \begin{lstlisting}[caption=Ukážka záznamu v Common Log Format]
 192.168.0.2 - - [05/Apr/2021 13:45:20 +0200] "GET / HTTP/1.1" 200 1254
 \end{lstlisting}
@@ -1243,61 +1269,150 @@ prenášaného dokumentu \cite{common-log}.
 a premenné poskytované v implementácii webového servera. Bežne sa Common Log zvykne dopĺňať o pole 
 \emph{Referer}, čiže stránku, z ktorej klient hlási, že bol odkázaný; \emph{User agent} predstavuje webový 
 prehliadač a platformu návštevníka webstránky a na koniec sa pridávajú v úvodzovkách \emph{Cookies} vo forme 
-kľúč = hodnota oddelené bodkočiarkami. Takto rozšírený formát sa nazýva \textbf{Combined Log Format}.
+\enquote{kľúč = hodnota} oddelené bodkočiarkami. Takto rozšírený formát sa nazýva 
+\textbf{Combined Log Format}.
 
-\begin{lstlisting}[caption=Vlastný formát pre access log na webovom serveri Apache, basicstyle=\ttfamily\scriptsize]
+\begin{lstlisting}[caption=Vlastný formát pre access log na webovom serveri Apache, 
+basicstyle=\ttfamily\scriptsize]
 LogFormat "%h %l %u %t \"%r\" %>s %I %O \"%{Referer}i\" \"%{User-Agent}i\"" custom
 CustomLog ${APACHE_LOG_DIR}/access.log custom
 \end{lstlisting}
 
-Ohľadom load balancerov nás zaujíma presné časovanie požiadavky a delenie záťaže medzi webové servery. 
+Na odhalenie slabých článkov a úzkych hrdiel sa hodí softvérom vyvažovania záťaže sledovať
+metriky o sieťovej premávke týkajúce sa trvania a rozsahu správ, charakteristiky požiadaviek
+a odpovedí v podobe hlavičiek, stavových kódov a ich obsahu so zdôvodnením chýb vzniknutých pri
+odbavovaní \cite{haproxy-logging}. Zaujímavé sú taktiež plánovacie rozhodnutia load balancera ohľadom
+výberu serverov určených za spracovateľov. NGINX dokáže pre spojenie vyvažované na transportnej
+vrstve zaznamenať okrem stálych parametrov, ako sú adresa pôvodcu a časová pečiatka, trvanie
+nadviazanej relácie, v sekundách a milisekundovým rozlíšením, spolu s objemom prenesených bytov 
+oboma smermi. Vyvažovanie na aplikačnej vrstve vie zaznamenať adresu cieľového servera a časy
+v sekundách strávené pripájaním, čítaním hlavičiek upstream serverom a príjmom návratovej odpovede.
 
-
-\begin{lstlisting}[caption=NGINX vlastný TCP a HTTP Log, basicstyle=\ttfamily\scriptsize]
+\begin{lstlisting}[caption=NGINX: vlastná štruktúra TCP a HTTP Log, basicstyle=\ttfamily\scriptsize]
 log_format fmt '$remote_addr [$time_local] $protocol $status $bytes_sent $bytes_received $session_time';
-192.168.0.5 [05/Apr/2021:16:35:30 +0200] TCP 200 465 308 20.960 
-
-log_format fmt '$remote_addr $time_local "$request" $status $upstream_addr $upstream_bytes_received $upstream_connect_time $upstream_header_time $upstream_response_time';
-192.168.0.5 05/Apr/2021:13:32:15 +0200 "GET / HTTP/1.1" 200 192.168.0.3:80 1294 0.000 0.040 0.040
-
+log_format fmt '$remote_addr [$time_local] "$request" $status $upstream_addr $upstream_bytes_received $upstream_connect_time $upstream_header_time $upstream_response_time';
 access_log /var/log/nginx/access.log fmt;
 \end{lstlisting}
+\begin{lstlisting}[caption=NGINX záznamy z TCP a HTTP logov s vynechanou časovou pečiatkou]
+192.168.0.5 TCP 200 465 308 20.960 
+192.168.0.5 "GET / HTTP/1.1" 200 192.168.0.3:80 1294 0.000 0.040 0.040
+\end{lstlisting}
 
-\footnote{\url{https://www.haproxy.com/blog/introduction-to-haproxy-logging/}}
-\footnote{\url{https://docs.nginx.com/nginx/admin-guide/monitoring/logging/}}
-
-\begin{lstlisting}[caption=HAProxy log]
+HAProxy predvolene zapisuje všetky údaje potrebné na spätné trasovanie požiadaviek. S milisekundovou
+precíznosťou vidíme, z akého frontendu na ktorý server z backendu bolo spojenie smerované. Časovače
+pre HTTP mód vo formáte \verb|TR/Tw/Tc/Tr/Ta| sledujú postupne celkový čas obratu, čakanie vo fronte, 
+nadväzovanie TCP spojenia, čas odozvy servera a aktívny čas HTTP požiadavky \cite{haproxy-logging}.
+Nasledujú polia pre HTTP stavový kód, prenesené bajty a skratky pre neštandardne skončenú reláciu.
+Päť počítadiel oddelených lomkami hovorí o súbežných spojeniach spracúvaných HAProxy, keď bola relácia
+zaznamenaná. Dozvieme sa celkový počet spojení, z toho aktuálne smerované cez frontend, cez backend,
+aktívne na serveri alebo znovu opakovaných pokusov o vytvorenie relácie. Pred typom HTTP požiadavky
+sa nachádzajú dĺžky front čakajúcich požiadaviek.
+\begin{lstlisting}[caption=HAProxy: predvolený formát záznamov v logoch, basicstyle=\ttfamily\scriptsize]
 haproxy[2550]: 192.168.0.5:45152 [28/Mar/2021:18:07:58.798] 
     web webservers/A 0/0/5/23/29 200 2862 - - ---- 9/9/8/8/0 0/0 "GET / HTTP/1.1"
 \end{lstlisting}
 
-
 \section{Simulácie útokov a záťažové testy}
+Úlohou softvérových riešení na symetrizáciu sieťovej premávky ako sú \emph{HAProxy} a \emph{NGINX}
+je zvýšiť priepustnosť spracovania dopytov na webovú aplikáciu a zaistiť zlepšenie dostupnosti pod
+náporom oproti samostatne stojacemu webovému serveru akým je \emph{Apache}. 
 
-\subsection{Sieť na experimenty}
-\begin{figure}[h!]
+Experimentálne porovnáme silu útokov odoprenia služby dosiahnuteľnú z bežného osobného počítača nástrojom 
+\verb|hping| a zanalyzujeme vlastnú implementáciu škodlivého kódu v jazyku C (\verb|DoS.c|), 
+ktorý dokáže realizovať  záplavové útoky s UDP a TCP SYN paketmi alebo útoky aplikačnej úrovne Slowloris a 
+podvrhnúť zdrojovú IP adresu. Záťažovými testami \emph{ApacheBench} (\verb|ab|) na vlastnej HTML stránke 
+preskúmame  účinnosť a plánovanie vyvažovania záťaže s rastúcim počtom  fyzických uzlov pri výbere algoritmu 
+Round Robin alebo Least Connections naprieč riešeniami HAProxy a NGINX, na sieťových vrstvách L4 aj L7. Ďalej 
+sa pozrieme na priebeh útoku Slowloris s nástrojom \verb|slowhttptest| na webový server nezabezpečený 
+technikou obmedzovania rýchlosti relácií. Zámerom je získať ucelený pohľad na prevedenie najbežnejších typov 
+DoS útokov z pohľadu útočníka a poskytnúť ukážky správania sa load balancera pod 
+nadmernou intenzitou požiadaviek, čím zdôvodníme potrebu vyvažovania záťaže aspoň pre kritické aplikácie. 
+
+\begin{figure}[h]
 	\centering
 	\begin{subfigure}[t]{.48\textwidth}
   		\centering
   		\includegraphics[width=\textwidth]{images/topology.png}
   		\caption{Logická topológia}
+  		\label{net-ip}
 	\end{subfigure}
 	\begin{subfigure}[t]{.48\textwidth}
   		\centering
   		\includegraphics[width=\textwidth]{images/net.JPG}
   		\caption{Fyzická topológia}
+  		\label{net-fyzicky}
 	\end{subfigure}
 	\caption{Topológia izolovanej siete na experimenty}
 \end{figure}
 
-\subsection{HPING na DoS útoky záplavou}
-\begin{lstlisting}
-hping 192.168.0.2 --udp --flood
-hping 192.168.0.2 --icmp --flood  
-hping 192.168.0.2 --syn --flood --destport 80
-vnstat --traffic
+Na priblíženie sa reálnemu prostrediu, kde býva load balancer dedikovaným zariadením, a zároveň pre čo 
+najvyššiu mieru hermetickosti, vytvoríme na účely pokusov izolovanú počítačovú sieť. Nutno poznamenať, že 
+každý použitý počítač disponuje dvoma sieťovými rozhraniami, a síce pre Ethernet, ale tiež Wifi adaptérom s 
+pripojením na domácu sieť s internetovým pripojením pre doplnkový softvérový manažment. Spúšťanie
+útokov a testov uskutočníme z notebooku \emph{Lenovo ThinkPad E580} s Manjaro Linux spojeného cez 8-portový 
+gigabitový prepínač \emph{Zyxel} ku 3 počítačom \emph{Raspberry Pi} s distribúciou odvodenou od Debian Buster
+verzie z 11.1.2021. Medzi útočníkom a serverovou farmou dochádza priamo ku komunikácii iba
+cez konkrétne \emph{Raspberry Pi 3B} figurujúce ako vyvažovač záťaže a hlavný uzol skupiny. Konfigurácia
+prebieha cez protokol SSH. Na centralizovanú distribúciu IP adries podľa Obr. \ref{net-ip} slúži 
+\emph{ISC DHCP server} a lokálne doménové meno pre webovú stránku sprostredkúva \emph{BIND9 DNS server}, 
+ktorým sme overovali techniku \enquote{DNS load balancing}. Na Obr. \ref{net-fyzicky} sa ešte objavuje 
+predlžovacia šnúra na elektrické napájanie a externý monitor na odlaďovanie a vykonávanie meraní 
+na serveroch počas zahltenia siete.
+
+Pôvodne sa na extenzívne porovnanie algoritmov vyvažovania záťaže pripravovala aj skupina premenlivého
+množstva \emph{Docker} kontainerov webových serverov orchestrovaných cez \emph{Docker Compose}. Neskôr
+popísané záťažové testy sú uskutočniteľné pre väčší počet dostupných inštancii uzlov cez takto 
+definovanú virtuálnu sieť, pričom sa nevezmú do úvahy okolnosti spojené s fyzickými spojmi:
+
+\setstretch{1}
+\begin{lstlisting}[caption=Vyvažovanie Apache inštancii cez HAProxy v docker-compose.yml, 
+basicstyle=\ttfamily\scriptsize]
+version: '3'
+services:
+    balancer:
+        image: 'haproxy:latest'
+        ports:
+          - 80:80
+        volumes:
+          - ${PWD}/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    web-1:
+        image: 'php:7.3-apache'
+        volumes:
+            - ./website/:/var/www/html/
 \end{lstlisting}
-\begin{table}[h]
+\setstretch{1.5}
+
+\subsection{Analýza prevedenia DoS útokov}
+V skonštruovanej počítačovej sieti sme nástrojom \verb|hping| odmerali prietok paketov spôsobený
+bežným laptopom meraný cez monitor sieťovej premávky \verb|vnstat| spustením na serveri s adresou 
+192.168.0.2. HPing umožňuje prepínačmi príkazového riadka zostaviť pakety so žiadaným obsahom hlavičky pre 
+protokoly  ICMP, UDP a TCP a prepustiť ich z rozhranie útočníka v čo najväčšom množstve vyvolajúc záplavu.
+\begin{lstlisting}[caption=Príkazy na spustenie záplavových útokov a meranie]
+hping 192.168.0.2 --udp --flood                # UDP záplava na port 0
+hping 192.168.0.2 --icmp --flood               # ICMP Echo request záplava
+hping 192.168.0.2 --syn --flood --destport 80  # TCP SYN záplava na port 80
+hping 192.168.0.2 --syn --flood --spoof 192.168.0.10 # IP Spoofing
+vnstat --traffic                               # Meranie priemernej premávky
+\end{lstlisting}
+
+Z tabuľky č.\ref{dos-speeds} je patrné, že sa podarilo z celkovej teoretickej kapacity linky 100 Mbit/s,
+ohraničenej rýchlosťou sieťovej karty na Raspberry Pi, zahltiť najviac polovicu dátovým prietokom 
+do 55 Mbit/s spôsobeným 147 tisíc UDP paketmi za sekundu bez payloadu, každého v rámci dĺžky 42 bajtov. Navzdory najväčšiemu prítoku spôsobil UDP flood iba zníženie dostupnosti, kedy do 15 sekúnd sme sa zaručene 
+dočkali odpovede od webového servera.
+Správy sa posielali vždy na rovnaký port a Linux Netfilter limitoval premennou \verb|icmp_ratelimit|
+rozostup odpovedí ICMP Destination unreachable na minimálne 1 sekundu, preto nepozorujeme
+pomalšiu odozvu. Úplné zneprístupnenie služby v priebehu trvania útoku bolo dosiahnuté cez SYN Flood,
+kedy na server prišlo okolo 122 tisíc TCP segmentov za sekundu s dĺžkou 54 bajtov zaberajúc
+45 Mbit/s, ale na druhej stane bola pri nadviazaní relácií vyvolaný spätný prúd SYN+ACK segmentov s objemom
+2,9 Mbit/s, ktorý zamestnal časť systémových prostriedkov a dočasne sa zabrali voľné slotov v tabuľke spojení. 
+Dôkaz, že hrubá sila nepredstavuje jedinú použiteľnú metódu odoprenia služby uvádzame prenosové rýchlosti 
+útoku Slowloris (popísaného neskôr), ktorý je z pohľadu  útočníka rovnako schopný ako SYN flood za nižšej 
+generovanej obojsmernej komunikácie činiacej 140 kbit/s, čim sa výrazne znižujú šance na rýchle detegovanie a 
+rozpoznanie tejto škodlivej aktivity. Záplavy zvýšili oneskorenie ICMP Echo správ posielaných od klientom na 
+server z 1 ms, na priemerne 80 ms pri UDP flood a až na 320 ms pri SYN Flood, ako je čitateľné z grafov na 
+Obr.\ref{latency-graphs}.
+
+\begin{table}[h!]
 \def\arraystretch{1.4}%
 \begin{tabular}{|r|r|r|r|r|}
 \hline
@@ -1307,10 +1422,11 @@ ICMP Flood & 45,07           & 2,21            & 122483            & 5534       
 SYN Flood  & 45,09           & 2,87            & 122539            & 5118              \\ \hline
 Slowloris  & 0,14            & 0,13            & 175               & 170               \\ \hline
 \end{tabular}
-\caption{Dosiahnutá sila útokov s hping odmerané spriemerovaním 5 sekúnd premávky s vnstat na serveri na
-sieťovej linke s reálnou šírkou pásma 94.2 Mbit/s}
+\caption{Dosiahnutá sila útokov s hping odmerané spriemerovaním 5 sekúnd premávky s vnstat na
+sieťovej linke s reálnou šírkou pásma 94.2 Mbit/s odmeranou cez iperf}
+\label{dos-speeds}
 \end{table}
-Na náhodné porty 93 paketov/s, nevráti žiadne pakety pri spoofed ip (nevie cez arp nájsť cieľ)
+
 \begin{figure}[h!]
 	\centering
 	\begin{subfigure}[t]{.32\textwidth}
@@ -1325,17 +1441,51 @@ Na náhodné porty 93 paketov/s, nevráti žiadne pakety pri spoofed ip (nevie c
   		\centering
   		\includegraphics[width=\textwidth]{images/SYN-flood-graph.png}
 	\end{subfigure}
+	\caption{Latencia v sieti meraná príkazom: ping -D -U 192.168.0.2}
+	\label{latency-graphs}
 \end{figure}
 
-\subsection{Analýza prevedenia DoS útoku záplavou}
-\begin{lstlisting}
+Na overenie technickej priamočiarosti spáchania DoS útokov, a relatívnej jednoduchosti
+implementácie malvéru takéto druhu, sme sa pokúsili replikovať na základe dostupného zdrojového
+kódu pre \verb|hping|\footnote{\url{https://github.com/antirez/hping}} namerané charakteristiky 
+generovanej sieťovej premávky s vlastným skriptom. Keďže sme potrebovali vlastnoručne naplniť obsah hlavičiek
+paketov na sieťovej a transportnej vrstve bolo potrebné siahnuť po RAW socketoch, ktorými dokážeme posielať
+v podstate ľubovoľné zoskupenie bajtov. Následne cez \verb|setsockopt| vyžiadame príznakom \verb|IP_HDRINCL|,
+aby IP hlavička nebola doplnená automaticky operačným systémom.
+
+\begin{lstlisting}[caption=Otvorenie RAW Socket bez dopĺňania IP hlavičky, language=C]
+#include <sys/socket.h>
 int s = socket(AF_INET, SOCK_RAW, IPPROTO_RAW);
-strcpy(ifr.ifr_name, "enp3s0"); 
-ioctl(s, SIOCGIFINDEX, &ifr);
-setsockopt(s, SOL_SOCKET, SO_BINDTODEVICE, &ifr);
-setsockopt(s, IPPROTO_IP, IP_HDRINCL, (char *)&one, sizeof(one));
+setsockopt(s, IPPROTO_IP, IP_HDRINCL, &one, sizeof(one));
 \end{lstlisting}
-\begin{lstlisting}
+
+Samotný UDP datagram pre UDP Flood alebo TCP SYN segment pre SYN Flood je reprezentovaný ako pole
+bajtov, ktoré pretypovaním na ukazovateľ na knižničnú štruktúru \verb|iphdr| pre IP hlavičku, \verb|udphdr| 
+pre UDP hlavičku alebo \verb|tcphdr| pre TCP hlavičku naplníme požadovanými hodnotami ako sú náhodný zdrojový, 
+cieľový port a určené IP adresy a tiež vložíme do povinných polí prípustné hodnoty. Zhotovený paket
+v premennej \verb|buffer| pošleme obeti cez vyhradený súborový deskriptor socketu funkciou \verb|sendto()|.
+
+\begin{lstlisting}[caption=Poslanie UDP datagramov cez RAW Socket na Linuxe, language=C]
+#include <netinet/ip.h>
+#include <netinet/udp.h>
+
+char buffer[64];
+struct iphdr *ip = buffer;
+struct udphdr *udp = buffer + sizeof(struct iphdr);
+// Naplnenie štruktúr ...
+sendto(s, buffer, ip->tot_len, 0, (struct sockaddr *)&sin, sizeof(sin));
+\end{lstlisting}
+
+Dôvodom nezúžitkovania možnosti \verb|SOCK_DGRAM| pri vytváraní UDP socketu a tým pádom nutnosť
+manuálneho dopĺňania protokolových hlavičiek je vo flexibilite dovoľujúcej podvrhnutie zdrojovej
+IP adresy, čím presmerujeme spätnú väzbu odpovedí servera mimo útočníka. Ukážeme realizáciu 
+techniky IP Spoofing s generovaním náhodných adries z podsiete, ktorú určíme argumentom \verb|net|
+pre funkciu \verb|ip_random()|. Vyžaduje sa 32-bitové Big-endian číslo predstavujúce IPv4 adresu
+získateľné s \verb|inet_addr()|. Argument \verb|cidr| označuje CIDR prefix, z ktorého sa vytvorí
+sieťová maska. Invertovaná maska sa použije pri náhodnom generovaní bitov hosta a nakoniec sa
+celá adresa poskladá dohromady cez bitové OR operátory.
+
+\begin{lstlisting}[caption=Vytvorenie náhodnej IP adresy obmedzenej podsieťou]
 in_addr_t ip_random(in_addr_t net, int cidr)
 {
     in_addr_t net_mask = (~0 << (32 - cidr));
@@ -1345,21 +1495,180 @@ in_addr_t ip_random(in_addr_t net, int cidr)
     return htonl((ntohl(net) & net_mask) | target_host);
 }
 \end{lstlisting}
+
+Keďže po uvedenom zásahu do zdrojovej IP adresy nedokáže systémový protokolový zásobník
+priradiť MAC adresu rozhrania pôvodcu, pretože nemusí ísť dokonca ani o adresu dohľadateľnú
+cez protokol ARP, je potrebné Ethernet rozhranie explicitne pomenovať. Po skopírovaní názvu 
+do štruktúry \verb|ifreq| vyhľadáme index cez systémové volanie \verb|ioctl| a cez \verb|setsockopt| 
+a vlajku \verb|SO_BINDTODEVICE| napojíme socket na príslušné linkové rozhranie.
 \begin{lstlisting}
+strcpy(ifr.ifr_name, "enp3s0"); 
+ioctl(s, SIOCGIFINDEX, &ifr);
+setsockopt(s, SOL_SOCKET, SO_BINDTODEVICE, &ifr);
+\end{lstlisting}
+
+Narozdiel od záplavových útokov, kedy je myšlienkou zapratať sieť obete, spočíva útok Slowloris
+v obsadení všetkých nadviazateľných HTTP relácii s webovým serverom neukončením žiadnej požiadavky
+dvojicou nových riadkov ako ukladá protokol HTTP, ale pomalým posielaním stále ďalších podvodných
+hlavičiek. Vypršaním časovača na strane webservera sú spojenia pomaly uzatvárané s chybovým
+stavovým kódov, preto je nutné ich pravidelne obnovovať. Tentoraz nevieme podsunúť neplatnú adresu
+zdroja, pretože agent musí kompletne nadviazať TCP spojenie. 
+ 
+\begin{lstlisting}[caption=Odoslanie HTTP GET požiadavky s náhodným URL query parametrom]
 int s = socket(AF_INET, SOCK_STREAM, 0);
 connect(s, (struct sockaddr *)&victim, sizeof(victim))
-snprintf(buffer, LEN, "GET /?%d HTTP/1.1\r\n", randint(0, 1000));
+snprintf(buffer, LEN, "GET /?%d HTTP/1.1\r\n", rand() % 1000);
 send(s, buffer, strlen(buffer), 0);
 \end{lstlisting}
-\begin{lstlisting}
+
+\begin{lstlisting}[caption=Udržiavanie živosti relácie pravidelným posielaním nových dát]
 for (int i = 0; i < CNT; i++) {
     snprintf(buffer, BUF_LEN, "X-a: %d\r\n", randint(1, 50000));
-    send(sockets[i], buffer, strlen(buffer), 0);
-}
+    send(sockets[i], buffer, strlen(buffer), 0); }
 sleep(10);
 \end{lstlisting}
 
-\subsection{ApacheBench záťažové testy na load balancer}
+\subsection{Slowhttptest Slowloris útok}
+Dosiaľ sme sa zaoberali len vplyvom priepustnosti sieťového spojenia a obmedzeniami prostriedkov jedného
+servera. Teraz budeme zisťovať účinnosť horizotálneho škálovania inštancii statickej webovej stránky 
+fotogalérie (Obr.\ref{gallery-website} na webserveri Apache prístupnej cez vyvažovače záťaže HAProxy a NGINX, 
+ktoré vzájomne porovnáme. Sústredíme sa na priebehy útoku Slowloris pre infraštruktúru v rozdielnych 
+konfiguráciach. Ako základný test spustíme nástroj \verb|slowhttptest| bez akéhokoľvek load balancingu
+a pripojíme sa priamo na Apache, ktorý nám umožní meniť hodnoty keepalive časovačov a počtu spojení so 
+zdanlivo potenciálnymi vplyvom dostupnosti služby.
+
+\begin{figure}[h!]
+	\centering
+  	\includegraphics[width=0.7\textwidth]{images/website.png}
+  	\caption{HTML stránka fotogalérie na testovanie útokov}
+  	\label{gallery-website}
+\end{figure}
+
+Slowloris sme spustili pre cieľových 1000 spojení pridávajúc sa postupne tempom 50 nových relácií za sekundu
+a následné údaje sa posielali s 10 sekundovými prestávkami. Predpoklad, že zmenou premenných \verb|Timeout|,
+\verb|KeepAlive|, \verb|MaxKeepAliveRequests| alebo \verb|KeepAliveTimeout| výrazne ovplyvníme dostupnosť
+webového servera boli mylné. Ilustrácia priebehu experimentu je vynesená v grafoch na 
+Obr.\ref{apache-slowloris} pre keepalive timeout 1 a 30 sekúnd. Nad 480 súbežných pripojeniach sa stal
+server nedostupný, tým že nedokázal vrátiť klientovi obsah webstránky. Najviac Apache zvládol nadviazanie
+700 HTTP relácií zároveň, ostatné museli čakať na uvoľnenie slotov. Po 20 sekundách od začiatku testu
+začal server postupne zatvárať spojenia a k obnoveniu dostupnosti prišlo až pri 150 zvyšných aktívnych
+klientoch.
+
+\begin{lrbox}{\shield}
+\verb|slowhttptest -H -c 1000 -i 10 -r 50 -l 180 -g -o stat -u http://192.168.0.2/|
+\end{lrbox}
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}[t]{.48\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/Apache-slowhttptest-1s.png}
+	\end{subfigure}
+	\begin{subfigure}[t]{.48\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/Apache-slowhttptest-30s.png}
+	\end{subfigure}
+	\caption{Reakcia webového servera Apache na útok SlowLoris pri zmenách Keepalive timeout
+	na spojenie. MaxKeepAliveRequests=100, Timeout=300s \\ \usebox{\shield}}
+	\label{apache-slowloris}
+\end{figure}
+
+Predradením softvérového vyvažovača záťaže na aplikačnej vrstve webovému serveru sa môže z grafov
+na Obr.\ref{http-slowloris} zdať, že pri cieľovom počte 10000 spojení sa podarilo rapídne zlepšiť
+množstvo spojení dopadajúce na zníženie dostupnosti už len na jedinom uzle. HAProxy zvláda 2800
+súčasných relácii a NGINX až 4500 spojení. Pri bližšom pohľade do logov však zisťujeme, že všetky
+spojenia skončili na load balanceri a nikdy neboli prepojené na vzdialený webový server, pretože skončili
+so stavovým kódom 400 (Bad Request) alebo 408 (Request Timeout). HAProxy signalizuje značkou CR, že
+klient prerušil reláciu pred odoslaním úplnej požiadavky. Vnútorná infraštruktúra by bola týmto
+predsa len ochránená pred náporom bezvýznamných HTTP správ.
+
+\begin{lrbox}{\shield}
+\verb|slowhttptest -H -c 10000 -i 10 -r 200 -l 240 -g -o stat -u http://192.168.0.2/|
+\end{lrbox}
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}[t]{.48\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/Haproxy-1-http.png}
+	\end{subfigure}
+	\begin{subfigure}[t]{.48\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/Nginx-1-http.png}
+	\end{subfigure}
+	\caption{Porovnanie účinkov útoku Slowloris na počet aktívnych spojení a dostupnosť služby
+	pri L7 load balancingu na HAProxy a NGINX:\\ 		
+	\usebox{\shield}}
+	\label{http-slowloris}
+\end{figure}
+
+\begin{lstlisting}[caption=Skrátené záznamy z logov počas Slowloris pre HAProxy a NGINX v HTTP móde]
+web/<NOSRV> -1/-1/-1/-1/64642 400 187 CR-- 2000/2000/0/0/0 "<BADREQ>"
+192.168.0.5  "GET / HTTP/1.1" 408 - - - - -
+\end{lstlisting}
+
+Prepnutím do TCP režimu vyvažovania záťaže nie sú spojenia rušené load balancerom, pretože nemá
+poňatie čo predstavuje úplnú požiadavku a očakávateľne dosahujeme pri jednom uzle farmy podobných
+výsledkov ako samostatným webovým serverom s pridanou hodnotou radenia čakajúcich požiadaviek do front.
+HAProxy klesá kuriózne s rastúcim počtom uzlov rýchlosť terminácie spojení, čo sa dá vysvetliť zvýšením
+réžie presmerovaním na podradené servery. Horná hranica dostupnosti sa u oboch riešení nachádza v rozmedzí
+1033 - 1145 simultánne aktívnych spojení, pretože nastavený \verb|ulimit| obmedzoval počet otvorených 
+súborových deskriptorov vrátane socketov na 1024.
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}[t]{.32\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/haproxy-1-tcp.png}
+	\end{subfigure}
+	\begin{subfigure}[t]{.32\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/haproxy-2-tcp.png}
+	\end{subfigure}
+	\begin{subfigure}[t]{.32\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/haproxy-3-tcp.png}
+	\end{subfigure}
+	\begin{subfigure}[t]{.32\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/nginx-1-tcp.png}
+	\end{subfigure}
+	\begin{subfigure}[t]{.32\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/nginx-2-tcp.png}
+	\end{subfigure}
+	\begin{subfigure}[t]{.32\textwidth}
+  		\centering
+  		\includegraphics[width=\textwidth]{images/nginx-3-tcp.png}
+	\end{subfigure}
+	\caption{Porovnanie účinkov Slowloris pri L4 load balancingu na HAProxy a NGINX}
+\end{figure}
+
+\subsection{ApacheBench záťažové testy}
+Zatiaľ sa na demonštrovaných výsledkoch nepreukázal pravý význam vyvažovania záťaže a síce
+zvýšenie rýchlosti spracovania požiadaviek a pokles časov odozvy stránky pre klientov 
+skrátením doby obratu. V zostavenej izolovanej sieti sme zvyšovali počet backend, resp. upstream 
+uzlov v rozmedzí 1 až 3, z ktorých má HAProxy, resp. NGINX na výber pri vyvažovaní a zároveň sme
+sledovali dopad aplikovaného algoritmu podporovaných oboma riešeniami: Round Robin a Least Connections.
+Od notebooku testera (192.168.0.5) sme realizovali viacero obmien záťažových testov ApacheBench 
+(\verb|ab|) v kombináciach celkový počet spojení verzus paralelné relácie: 10/1, 100/10, 1000/100,
+10000/1000. Dohromady 48 reportov vypísaných nástrojom \verb|ab| (pre 2 load balancery, 3 uzly, 2 algoritmy,
+4 intenzity spojení) sa spracovalo a výsledky agregovali v Jupyter Notebook. Regulárnymi výrazmi sme
+vyfiltrovali z textových súborov hodnoty na relevantných riadkoch: \enquote{Requests per second}, v tabuľke 
+\enquote{Connection Times - Total} stĺpce \verb|mean| a \verb|[+/-sd]|.
+
+Intencie zlepšenia výkonnosti webovej aplikácie od počtu horizontálne škálovaných uzlov ilustrujú
+grafy pre 1000/100 spojení na Obr.\ref{ab-count} a Obr.\ref{ab-speed}. Počiatočných 400 spojení 
+zaznamenalo u oboch softvérových riešení nárast obsluhy. Algoritmom Round Robin (RR) o 18\% pridaním 
+druhého uzla a o 67\% s tretím uzlom v porovnaní so samostatne stojacim serverom. Least Connections (LC)
+dosahoval mierne lepšie štatistiky, kde prišlo k navýšeniu počtu spracovaných spojení o 48\% 
+s dvoma uzlami a o 86\% s troma, čo sa pri vyššom vyťažení služby dá považovať za významné zlepšenie.
+Ak berieme do úvahy 100000 spojení za podobných podmienok, tak s RR sú pri vyvažovaní medzi tri servere
+odbavené za 150 sekúnd, ale s LC len za 132 sekúnd. Obe reverzné proxy sa za zrealizovaných meraní prejavujú 
+navzájom veľmi podobne. Rastom počtu spracovaných požiadaviek za sekundu klesá priemerné trvanie na odpovede 
+klientom obdobným spôsobom. Z približne 235 ms v priemere na požiadavku sa dostávame pri troch 
+spolupracujúcich uzloch na 122 - 144 ms podľa použitého algoritmu, čím sa skracuje trvanie úlohy až o
+38\% - 48\%. Vysoká smerodajná odchýlka môže byť zapríčinená variabilným zahltením siete súbežnými 
+požiadavkami počas experimentu. Vyjadrené trendy v trvaní požiadaviek sa preto dajú brať nanajvýš orientačne.
+
 \begin{lrbox}{\shield}
 \verb|ab -n 1000 -c 100 http://192.168.0.2/|
 \end{lrbox}
@@ -1375,6 +1684,7 @@ sleep(10);
 	\end{subfigure}
 	\caption{Počet spracovaných požiadaviek za sekundu pre algoritmy vyvažovania 
 	záťaže podľa ApacheBench: \usebox{\shield}}
+	\label{ab-count}
 \end{figure}
 
 \begin{figure}[h!]
@@ -1390,7 +1700,11 @@ sleep(10);
 	\caption{
 		Priemerné trvanie požiadaviek pre algoritmy vyvažovania záťaže 
 		podľa ApacheBench: \usebox{\shield}}
+	\label{ab-speed}
 \end{figure}
+
+% Z logov sme vyčítanie plánovacie sekvencie - permutácie serverov
+
 
 \begin{lrbox}{\shield}
 \verb|ab -n 10 -c 1 http://192.168.0.2/|
@@ -1406,7 +1720,7 @@ sleep(10);
   		\includegraphics[width=\textwidth]{images/10-uzly-3.png}
 	\end{subfigure}
 	\caption{Markovove reťazce plánovania pridelenia uzlov na obsluhu požiadaviek
-	pri Round Robin aj Least Connections: \usebox{\shield}}
+	pri Round Robin a Least Connections: \usebox{\shield}}
 \end{figure}
 
 \begin{lrbox}{\shield}
@@ -1447,75 +1761,7 @@ sleep(10);
 \end{figure}
 
 
-\subsection{Slowhttptest Slowloris útok na load balancer}
-\begin{lrbox}{\shield}
-\verb|slowhttptest -H -c 1000 -i 10 -r 50 -l 180 -g -o stat -u http://192.168.0.2/|
-\end{lrbox}
-\begin{figure}[h!]
-	\centering
-	\begin{subfigure}[t]{.48\textwidth}
-  		\centering
-  		\includegraphics[width=\textwidth]{images/Apache-slowhttptest-1s.png}
-	\end{subfigure}
-	\begin{subfigure}[t]{.48\textwidth}
-  		\centering
-  		\includegraphics[width=\textwidth]{images/Apache-slowhttptest-30s.png}
-	\end{subfigure}
-	\caption{Reakcia webového servera Apache na útok SlowLoris pri zmenách Keepalive timeout
-	na spojenie: \\ \usebox{\shield}}
-\end{figure}
-\begin{lstlisting}
-  Timeout 300
-  KeepAlive On
-  MaxKeepAliveRequests 100
-  KeepAliveTimeout 5
-\end{lstlisting}
 
-\begin{lrbox}{\shield}
-\verb|slowhttptest -H -c 10000 -i 10 -r 200 -l 240 -g -o stat -u http://192.168.0.2/|
-\end{lrbox}
-\begin{figure}[h!]
-	\centering
-	\begin{subfigure}[t]{.48\textwidth}
-  		\centering
-  		\includegraphics[width=\textwidth]{images/Haproxy-1-http.png}
-	\end{subfigure}
-	\begin{subfigure}[t]{.48\textwidth}
-  		\centering
-  		\includegraphics[width=\textwidth]{images/Nginx-1-http.png}
-	\end{subfigure}
-	\caption{Porovnanie účinkov útoku Slowloris na počet aktívnych spojení a dostupnosť služby
-	pri L7 load balancingu na HAProxy a NGINX:\\ 		
-	\usebox{\shield}}
-\end{figure}
-
-\begin{figure}[h!]
-	\centering
-	\begin{subfigure}[t]{.32\textwidth}
-  		\centering
-  		\includegraphics[width=\textwidth]{images/haproxy-1-tcp.png}
-	\end{subfigure}
-	\begin{subfigure}[t]{.32\textwidth}
-  		\centering
-  		\includegraphics[width=\textwidth]{images/haproxy-2-tcp.png}
-	\end{subfigure}
-	\begin{subfigure}[t]{.32\textwidth}
-  		\centering
-  		\includegraphics[width=\textwidth]{images/haproxy-3-tcp.png}
-	\end{subfigure}
-	\begin{subfigure}[t]{.32\textwidth}
-  		\centering
-  		\includegraphics[width=\textwidth]{images/nginx-1-tcp.png}
-	\end{subfigure}
-	\begin{subfigure}[t]{.32\textwidth}
-  		\centering
-  		\includegraphics[width=\textwidth]{images/nginx-2-tcp.png}
-	\end{subfigure}
-	\begin{subfigure}[t]{.32\textwidth}
-  		\centering
-  		\includegraphics[width=\textwidth]{images/nginx-3-tcp.png}
-	\end{subfigure}
-\end{figure}
 
 
 \section{Záver}
@@ -1526,6 +1772,7 @@ sleep(10);
 	% zamedzenie inventarizácii architektúry (čo prezradia HTTP hlavičky?)
 	% možnosti monitoringu loadbalancera (štatistiky, analýza logov, existencia rozšírení do monitorovacích 		systémov Zabbix)
 	% vykonanie záťažových testov(ab,...), vyhodnotenie nameraných hodnôt a efektu horizontálneho škálovania
+	% porovnanie so zámerom
 
 \newpage
 \pagenumbering{gobble}

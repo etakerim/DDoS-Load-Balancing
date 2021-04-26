@@ -2208,6 +2208,8 @@
     <bcf:citekey order="59">ssl-termination</bcf:citekey>
     <bcf:citekey order="60">zabbix-monitoring</bcf:citekey>
     <bcf:citekey order="61">common-log</bcf:citekey>
+    <bcf:citekey order="62">haproxy-logging</bcf:citekey>
+    <bcf:citekey order="63">haproxy-logging</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">
