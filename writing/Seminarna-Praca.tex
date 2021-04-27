@@ -19,6 +19,8 @@
 \clubpenalty10000
 \newsavebox\shield
 \renewcommand{\lstlistingname}{Kód}
+\usepackage{titlesec}
+\newcommand{\sectionbreak}{\clearpage}
 
 \usepackage[style=iso-numeric,backend=biber]{biblatex}
 \addbibresource{references.bib}
@@ -69,7 +71,6 @@
 \newpage
 \pagenumbering{arabic}
 \setcounter{page}{1}
-\setstretch{1.5}
 
 \section{Dostupnosť ako bezpečnostný atribút}
 Zabezpečenie nepretržitého prístupu k webovým službám je očakávanou a takmer nevyhnutnou požiadavkou pre 
@@ -1380,7 +1381,7 @@ services:
         volumes:
             - ./website/:/var/www/html/
 \end{lstlisting}
-\setstretch{1.5}
+\setstretch{1.25}
 
 \subsection{Analýza prevedenia DoS útokov}
 V skonštruovanej počítačovej sieti sme nástrojom \verb|hping| odmerali prietok paketov spôsobený
@@ -1584,7 +1585,7 @@ predsa len ochránená pred náporom bezvýznamných HTTP správ.
 \begin{lrbox}{\shield}
 \verb|slowhttptest -H -c 10000 -i 10 -r 200 -l 240 -g -o stat -u http://192.168.0.2/|
 \end{lrbox}
-\begin{figure}[h!]
+\begin{figure}[h]
 	\centering
 	\begin{subfigure}[t]{.48\textwidth}
   		\centering
@@ -1613,7 +1614,7 @@ réžie presmerovaním na podradené servery. Horná hranica dostupnosti sa u ob
 1033 - 1145 simultánne aktívnych spojení, pretože nastavený \verb|ulimit| obmedzoval počet otvorených 
 súborových deskriptorov vrátane socketov na 1024.
 
-\begin{figure}[h!]
+\begin{figure}[h]
 	\centering
 	\begin{subfigure}[t]{.32\textwidth}
   		\centering
@@ -1643,7 +1644,7 @@ súborových deskriptorov vrátane socketov na 1024.
 \end{figure}
 
 \subsection{ApacheBench záťažové testy}
-Zatiaľ sa na demonštrovaných výsledkoch nepreukázal pravý význam vyvažovania záťaže a síce
+Na demonštrovaných výsledkoch sa zatiaľ nepreukázal pravý význam vyvažovania záťaže a síce
 zvýšenie rýchlosti spracovania požiadaviek a pokles časov odozvy stránky pre klientov 
 skrátením doby obratu. V zostavenej izolovanej sieti sme zvyšovali počet backend, resp. upstream 
 uzlov v rozmedzí 1 až 3, z ktorých má HAProxy, resp. NGINX na výber pri vyvažovaní a zároveň sme
@@ -1654,20 +1655,6 @@ Od notebooku testera (192.168.0.5) sme realizovali viacero obmien záťažových
 4 intenzity spojení) sa spracovalo a výsledky agregovali v Jupyter Notebook. Regulárnymi výrazmi sme
 vyfiltrovali z textových súborov hodnoty na relevantných riadkoch: \enquote{Requests per second}, v tabuľke 
 \enquote{Connection Times - Total} stĺpce \verb|mean| a \verb|[+/-sd]|.
-
-Intencie zlepšenia výkonnosti webovej aplikácie od počtu horizontálne škálovaných uzlov ilustrujú
-grafy pre 1000/100 spojení na Obr.\ref{ab-count} a Obr.\ref{ab-speed}. Počiatočných 400 spojení 
-zaznamenalo u oboch softvérových riešení nárast obsluhy. Algoritmom Round Robin (RR) o 18\% pridaním 
-druhého uzla a o 67\% s tretím uzlom v porovnaní so samostatne stojacim serverom. Least Connections (LC)
-dosahoval mierne lepšie štatistiky, kde prišlo k navýšeniu počtu spracovaných spojení o 48\% 
-s dvoma uzlami a o 86\% s troma, čo sa pri vyššom vyťažení služby dá považovať za významné zlepšenie.
-Ak berieme do úvahy 100000 spojení za podobných podmienok, tak s RR sú pri vyvažovaní medzi tri servere
-odbavené za 150 sekúnd, ale s LC len za 132 sekúnd. Obe reverzné proxy sa za zrealizovaných meraní prejavujú 
-navzájom veľmi podobne. Rastom počtu spracovaných požiadaviek za sekundu klesá priemerné trvanie na odpovede 
-klientom obdobným spôsobom. Z približne 235 ms v priemere na požiadavku sa dostávame pri troch 
-spolupracujúcich uzloch na 122 - 144 ms podľa použitého algoritmu, čím sa skracuje trvanie úlohy až o
-38\% - 48\%. Vysoká smerodajná odchýlka môže byť zapríčinená variabilným zahltením siete súbežnými 
-požiadavkami počas experimentu. Vyjadrené trendy v trvaní požiadaviek sa preto dajú brať nanajvýš orientačne.
 
 \begin{lrbox}{\shield}
 \verb|ab -n 1000 -c 100 http://192.168.0.2/|
@@ -1703,15 +1690,51 @@ požiadavkami počas experimentu. Vyjadrené trendy v trvaní požiadaviek sa pr
 	\label{ab-speed}
 \end{figure}
 
-% Z logov sme vyčítanie plánovacie sekvencie - permutácie serverov
 
+Intencie zlepšenia výkonnosti webovej aplikácie od počtu horizontálne škálovaných uzlov ilustrujú
+grafy pre 1000/100 spojení na Obr.\ref{ab-count} a Obr.\ref{ab-speed}. Počiatočných 400 spojení 
+zaznamenalo u oboch softvérových riešení nárast obsluhy. Algoritmom Round Robin (RR) o 18\% pridaním 
+druhého uzla a o 67\% s tretím uzlom v porovnaní so samostatne stojacim serverom. Least Connections (LC)
+dosahoval mierne lepšie štatistiky, kde prišlo k navýšeniu počtu spracovaných spojení o 48\% 
+s dvoma uzlami a o 86\% s troma, čo sa pri vyššom vyťažení služby dá považovať za významné zlepšenie.
+Ak berieme do úvahy 100000 spojení za podobných podmienok, tak s RR sú pri vyvažovaní medzi tri servere
+odbavené za 150 sekúnd, ale s LC len za 132 sekúnd. Obe reverzné proxy sa za zrealizovaných meraní prejavujú 
+navzájom veľmi podobne. Rastom počtu spracovaných požiadaviek za sekundu klesá priemerné trvanie na odpovede 
+klientom obdobným spôsobom. Z približne 235 ms v priemere na požiadavku sa dostávame pri troch 
+spolupracujúcich uzloch na 122 - 144 ms podľa použitého algoritmu, čím sa skracuje trvanie úlohy až o
+38\% - 48\%. Vysoká smerodajná odchýlka môže byť zapríčinená variabilným zahltením siete súbežnými 
+požiadavkami počas experimentu. Vyjadrené trendy v trvaní požiadaviek sa preto dajú brať nanajvýš orientačne.
+
+
+Diferenciu efektívnosti algoritmov RR a LC prisudzujeme väčšej informovanosti LC ohľadom
+momentálnych trvaní požiadaviek pri návrhu plánovacích rozhodnutí a nízky počet dostupných serverov, 
+čím sa stáva nájdenie najkratšej fronty takmer konštantnou operáciou. Súdiac z prednesenej
+domnienky musí byť prechodový diagram následnosti alokovaných uzlov pre LC nepredvídateľnejší, 
+avšak permutácia vychádzajúca z RR by mala mať zreteľný trend v poradí usporiadania uzlov.
+
+Po záťažových testoch \verb|ab| sme akumulované záznamy v \verb|haproxy.log| pomocným skriptom
+rozkúskovali do viacerých súborov s prahovým rozdielom medzi následnými časovými značkami činiacim
+1 sekundu. Manuálne sme odstránili nadbytočné oddelené čiastky logov, ktoré obsahovali prevažne
+stavové správy o reštarte HAProxy medzi zmenami konfigurácie. Súbory s korektným počtom riadkov
+podľa nastavenú počtu požiadaviek daného zátažového testu sme roztriedili do priečinkov podľa
+počtu uzlov za proxy a uplatneného algoritmu.
+
+Ďalším Python skriptom sme z medzerou oddelených atribútov loggov vytiahli 8. stĺpec s údajom o obslužnom 
+servery pre konkrétnu požiadavku a zo zachytenej skupiny regulárneho výrazu \verb|^\w+/([A-C])$| sme 
+zostavili permutáciu presmerovaní v rámci vyvažovania záťaže. Do štvorcovej prechodovej matice o rozmeroch $n 
+\times n$, kde $n$ je počet load balancových uzlov, sme umiestnili absolútne početnosti plánovacích prechodov 
+$S_k\rightarrow S_{k+1}$, kde $S$ označuje zvolený server v poradí. Na získanie aproximácie pravdepodobností
+stavových prechodov sme zúžitkovali vlastnosti stochastických matíc, že súčet pravdepodobností v riadku sa 
+rovná jednej. Pozíciu $i,j$ v matici preto z absolútnych početností získame: 
+$S_{i,j} / \sum_{j=1}^{n}{S_{i,j}}$. Výsledné matice reprezentujeme stavovým diagramom zodpovedajúceho
+Markovovho reťazca.
 
 \begin{lrbox}{\shield}
 \verb|ab -n 10 -c 1 http://192.168.0.2/|
 \end{lrbox}
 \begin{figure}[h!]
 	\centering
-	\begin{subfigure}[t]{.25\textwidth}
+	\begin{subfigure}[t]{.2\textwidth}
   		\centering
   		\includegraphics[width=\textwidth]{images/10-uzly-2.png}
 	\end{subfigure}
@@ -1721,7 +1744,19 @@ požiadavkami počas experimentu. Vyjadrené trendy v trvaní požiadaviek sa pr
 	\end{subfigure}
 	\caption{Markovove reťazce plánovania pridelenia uzlov na obsluhu požiadaviek
 	pri Round Robin a Least Connections: \usebox{\shield}}
+	\label{markov-ab-10}
 \end{figure}
+
+Automat na Obr.\ref{markov-ab-10} ukazuje, že 10 za sebou príchodzích relácií je striktne po porade 
+vyvažovaných na všetky dostupné serveri u RR aj LC. S väčším počtom súbežných spojení sa ukazuje odlišná 
+situácia. Dve zariadenia (Obr.\ref{markov-2}) ešte nezapríčiňujú výrazné vzájomné rozdiely medzi pravdepodobnostnými ohodnoteniami
+prechodov. Stále majorita požiadaviek (60 - 70\%) sa rozdistribuuje prísne sekvenčne, pričom
+pre zvyšných 30 - 40\% následných spojení sa plánovaním vyhradí ten istý server. Pri troch uzloch 
+(Obr.\ref{markov-3})
+sa v reťazci naplno prejavuje asymetria plánovania algoritmom LC. V diagrame pre RR zostáva patrný
+cyklus $A \rightarrow C \rightarrow B$ s ohodnoteniami hrán 51\%. V opačnom chode sa uskutoční z každého
+uzla okolo 37\% požiadaviek na server a najmenej z nich (12\%) sa pridelí tam isto. LC sa neprejavuje
+podobným vzorom správania sa, ani jednoznačnou postupnosťou pri rozložení spojení.
 
 \begin{lrbox}{\shield}
 \verb|ab -n 10000 -c 1000 http://192.168.0.2/|
@@ -1741,6 +1776,7 @@ požiadavkami počas experimentu. Vyjadrené trendy v trvaní požiadaviek sa pr
 	\caption{Markovove reťazce plánovania pridelenia uzlov na obsluhu požiadaviek
 	pri 2 koncových uzloch: \usebox{\shield}
 	}
+	\label{markov-2}
 \end{figure}
 
 \begin{figure}[h!]
@@ -1758,23 +1794,34 @@ požiadavkami počas experimentu. Vyjadrené trendy v trvaní požiadaviek sa pr
 	\caption{Markovove reťazce plánovania pridelenia uzlov na obsluhu požiadaviek
 	pri 3 koncových uzloch: \usebox{\shield}
 	}
+	\label{markov-3}
 \end{figure}
 
-
-
-
-
 \section{Záver}
-% Pokrytie témy:
-	% analýza možností využitia loadbalancera (haproxy, nginx,...)
-	% loadbalancer vs. stateless/statefull spojenia
-	% zabezpečenie loadbalancera voči známym typom útokov,
-	% zamedzenie inventarizácii architektúry (čo prezradia HTTP hlavičky?)
-	% možnosti monitoringu loadbalancera (štatistiky, analýza logov, existencia rozšírení do monitorovacích 		systémov Zabbix)
-	% vykonanie záťažových testov(ab,...), vyhodnotenie nameraných hodnôt a efektu horizontálneho škálovania
-	% porovnanie so zámerom
+Dostupnosť webových aplikácií a generálne informačných systémov sa radí medzi dôležité
+bezpečnostné aspekty produkčných riešení. Opísali sme rozličné metódy na zabezpečenie
+dostupnosti nielen vyvažovaním záťaže naprieč vrstvami sieťového modelu RM OSI, vzhľadom
+na najbežnejšie sa objavujúce úkazy v oblasti útokov odoprenia služby - DDoS. 
+Pozreli sme sa efekt horizontálneho škálovania, ako formu proaktívnej obrany. Venovali sme sa či už
+enumerácii algoritmov plánovania 
+load balancingu, ale aj praktickým porovnaním konfigurácie a zmeraním výkonnosti L4 a L7 
+load balancerov HAProxy a NGINX predradených webovému serveru Apache záťažovými testami ApacheBench a 
+SlowHTTPTest. Neopomenuli sme ani monitorovanie (Zabbix) a loggovanie ako stavebné piliere reaktívnych 
+stratégií obrany.
 
+V špecifikovanej predmetnej doméne sa podarilo významne pokryť hlavnú trojicu okruhov: 
+útoky odmietnutia služby, ochrana redundanciou aplikačných serverov a riadenie prístupu na stroje 
+za reverznou proxy. Z projektu sa oproti zámeru upustilo od preskúmania možností obmedzenia inventarizácie 
+infraštruktúry obmedzením veľavravných HTTP hlavičiek. Detailnejšie sme sa nevenovali stavovým spojeniam s 
+cookies cez load balancer. Pre finálny rozsah experimentov sme netestovali nástroje \emph{thc-ssl-dos} a 
+\emph{High Orbit Ion Cannon}. Druhý spomenutý však obsahuje funkcionalitu podobné mnohostrannejšiemu HPing. 
+
+Pokusy prebehli výlučne na zostavenej fyzickej počítačovej sieti pozostávajúcej len z troch uzlov.
+Zistenie limitu množstva serverov, z ktorých by mala farma sprostredkujúca web pozostávať, aby sa ešte
+dosiahol výhodný pomer náklady verzus výkon považujeme za najzaujímavejšie potenciálne
+rozšírenie práce.
 \newpage
+\setstretch{1}
 \pagenumbering{gobble}
 \printbibliography[title={Literatúra}]
 
