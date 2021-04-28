@@ -24,6 +24,6 @@
 \BOOKMARK [2][-]{subsection.4.2}{Logging}{section.4}% 24
 \BOOKMARK [1][-]{section.5}{Simul\341cie \372tokov a z\341ta\236ov\351 testy}{}% 25
 \BOOKMARK [2][-]{subsection.5.1}{Anal\375za prevedenia DoS \372tokov}{section.5}% 26
-\BOOKMARK [2][-]{subsection.5.2}{Slowhttptest Slowloris \372tok}{section.5}% 27
+\BOOKMARK [2][-]{subsection.5.2}{SlowHTTPTest Slowloris \372tok}{section.5}% 27
 \BOOKMARK [2][-]{subsection.5.3}{ApacheBench z\341ta\236ov\351 testy}{section.5}% 28
 \BOOKMARK [1][-]{section.6}{Z\341ver}{}% 29
